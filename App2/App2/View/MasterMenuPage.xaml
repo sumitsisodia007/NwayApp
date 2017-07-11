@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.View.MasterMenuPage">
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu"
+                     BackgroundColor="White">
+              
+                <StackLayout Spacing="10">
+                    
+                <StackLayout Padding="0,25,0,0">
+                <Image Source="logo" HeightRequest="120"/>
+                    <Frame HorizontalOptions="CenterAndExpand" Margin="0" BackgroundColor="#4472C4" Padding="0">
+                        <StackLayout Orientation="Horizontal" x:Name="stkMallName">
+                            <Label x:Name="C21" FontSize="17" Text="C21/MALHAR" TextColor="White" BackgroundColor="#4472C4" HeightRequest="25" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="C21_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="TI"  FontSize="17" Text="TI" TextColor="#4472C4" BackgroundColor="White" HeightRequest="25" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TI_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </Frame>
+                    <Label Text="abc@elensoft.com" TextColor="#4472C4" BackgroundColor="White" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <ListView x:Name="NavigationList"
+                  RowHeight="40"
+                  BackgroundColor="White"
+                  SeparatorVisibility="None"
+                  SeparatorColor="#4472C4"
+                  ItemSelected="NavigationList_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <!-- Main design for our menu items -->
+                                <StackLayout VerticalOptions="Start"
+                                 HorizontalOptions="FillAndExpand"
+                                 Padding="10,10,0,10"
+                                 Spacing="20">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <Image Source="{Binding Icon}"
+                                             WidthRequest="25"
+                                             HeightRequest="25"
+                                             VerticalOptions="Center" />
+
+                                        <Label Text="{Binding Title}"
+                                        FontSize="13"
+                                        VerticalOptions="Center"
+                                        TextColor="#5B5959"/>
+
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>
