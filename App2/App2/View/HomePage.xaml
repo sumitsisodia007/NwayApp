@@ -5,7 +5,64 @@
              Title="Home"
              BackgroundColor="White">
 
+    <StackLayout  Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+        <StackLayout Padding="0,20" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand" >
+            <StackLayout  Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
 
-  
+                <Frame x:Name="GridRec"   BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="1120" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13"/>
+                    </StackLayout>
+                </Frame>
 
+                <Frame x:Name="GridPay"   BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="1120" HeightRequest="22" BackgroundColor="#ED7D31"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+
+            <StackLayout  Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                <Frame x:Name="GridCas"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="1120" HeightRequest="22" BackgroundColor="#6DB040"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame x:Name="GridCon"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="1120" HeightRequest="22" BackgroundColor="#A5A5A5"  VerticalOptions="EndAndExpand"  FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+            <StackLayout BackgroundColor="Transparent" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                <Frame x:Name="GridExp"  BackgroundColor="White" HasShadow="True" HeightRequest="120" WidthRequest="90" Padding="0" >
+                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                        <Label Text="1120" HeightRequest="22" BackgroundColor="#FFD993"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame x:Name="GridInv"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="1120" HeightRequest="22" TextColor="White" BackgroundColor="Black"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="20">
+            <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="19"/>
+            <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
+
+        </StackLayout>
+    </StackLayout>
 </ContentPage>
