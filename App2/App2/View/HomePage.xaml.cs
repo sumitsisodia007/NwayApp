@@ -35,5 +35,10 @@ namespace App2.View
                 GridInv.WidthRequest = calcScreenWidth / 3;
             }
         }
+
+        private void Receivable_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new ReceivablePage());
+        }
     }
 }

@@ -1,10 +1,159 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="App2.View.PurchasePage">
+             x:Class="App2.View.PurchasePage"
+             Title="Parchase">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+        <StackLayout Padding="10,10,10,20" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
+            <StackLayout BackgroundColor="White">
+                
+           
+                <ScrollView Orientation="Horizontal" Padding="10">
+                    <StackLayout  Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                       <Frame x:Name="TotalGRN" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" OutlineColor="Black">
+                            <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                <Label Text="More Info" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame x:Name="TotalPur" HasShadow="True" BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                            <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                <Label Text="More Info" HeightRequest="22" BackgroundColor="#ED7D31"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </Frame>
+                       
+                        <Frame x:Name="TotalStock" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                            <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                <Label Text="More Info" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+               
+                <StackLayout VerticalOptions ="StartAndExpand" Orientation ="Vertical" HorizontalOptions ="FillAndExpand" Padding="0">
+                    <Label Text = "head"/>
+                        <BoxView BackgroundColor="#E8E8E8" HeightRequest="1"/>
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="StartAndExpand"
+                                     VerticalOptions="EndAndExpand"
+                                     HeightRequest="30"
+                                     BackgroundColor="White">
+
+                            <Label x:Name="lblIndent"  HorizontalOptions="StartAndExpand" Margin="0" TextColor="Black" FontSize="17" BackgroundColor="White" Text="Indent" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="Img1" HorizontalOptions="EndAndExpand" Margin="0" FontSize="17" BackgroundColor="White" TextColor="Black" Text="CANDIDATE" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer />
+                                </Label.GestureRecognizers>
+                            </Label>
+                           
+                        </StackLayout> 
+                        <BoxView BackgroundColor="#E8E8E8" HeightRequest="1"/>
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="StartAndExpand"
+                                     VerticalOptions="EndAndExpand"
+                                     HeightRequest="30"
+                                     Padding="0"
+                                     BackgroundColor="White">
+
+                            <Label x:Name="lblEnquary"  HorizontalOptions="StartAndExpand" Margin="0,0,1,0" TextColor="Black" FontSize="17" BackgroundColor="White" Text="Enquiry" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="Img2" HorizontalOptions="EndAndExpand" Margin="1,0,0,0" FontSize="17" BackgroundColor="White" TextColor="Black" Text="CANDIDATE" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                        <BoxView BackgroundColor="#E8E8E8" HeightRequest="1"/>
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="StartAndExpand"
+                                     VerticalOptions="EndAndExpand"
+                                     HeightRequest="30"
+                                     Padding="0"
+                                     BackgroundColor="White">
+
+                            <Label x:Name="lblQuatation"  HorizontalOptions="StartAndExpand" Margin="0,0,1,0" TextColor="Black" FontSize="17" BackgroundColor="White" Text="Quatation" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="Img3" HorizontalOptions="EndAndExpand" Margin="1,0,0,0" FontSize="17" BackgroundColor="White" TextColor="Black" Text="CANDIDATE" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                        <BoxView BackgroundColor="#E8E8E8" HeightRequest="1"/>
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="StartAndExpand"
+                                     VerticalOptions="EndAndExpand"
+                                     HeightRequest="30"
+                                     Padding="0"
+                                     BackgroundColor="White">
+
+                            <Label x:Name="lblPurOrder"  HorizontalOptions="StartAndExpand" Margin="0,0,1,0" TextColor="Black" FontSize="17" BackgroundColor="White" Text="Purchase Order" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="Img4" HorizontalOptions="EndAndExpand" Margin="1,0,0,0" FontSize="17" BackgroundColor="White" TextColor="Black" Text="CANDIDATE" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                        <BoxView BackgroundColor="#E8E8E8" HeightRequest="1"/>
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="StartAndExpand"
+                                     VerticalOptions="EndAndExpand"
+                                     HeightRequest="30"
+                                     Padding="0"
+                                     BackgroundColor="White">
+
+                            <Label x:Name="lblGNR"  HorizontalOptions="StartAndExpand" Margin="0,0,1,0" TextColor="Black" FontSize="17" BackgroundColor="White" Text="GNR" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="Img5" HorizontalOptions="EndAndExpand" Margin="1,0,0,0" FontSize="17" BackgroundColor="White" TextColor="Black" Text="CANDIDATE" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                        <BoxView BackgroundColor="#E8E8E8" HeightRequest="1"/>
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="StartAndExpand"
+                                     VerticalOptions="EndAndExpand"
+                                     HeightRequest="30"
+                                     Padding="0"
+                                     BackgroundColor="White">
+
+                            <Label x:Name="lblPurchase"  HorizontalOptions="StartAndExpand" Margin="0,0,1,0" TextColor="Black" FontSize="17" BackgroundColor="White" Text="Purchase" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label x:Name="Img6" HorizontalOptions="EndAndExpand" Margin="1,0,0,0" FontSize="17" BackgroundColor="White" TextColor="Black" Text="CANDIDATE" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"  >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                        <BoxView BackgroundColor="#E8E8E8" HeightRequest="1"/>
+                    </StackLayout>
+            </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

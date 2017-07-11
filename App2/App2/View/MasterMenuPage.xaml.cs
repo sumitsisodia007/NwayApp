@@ -37,7 +37,7 @@ namespace App2.View
             var page1 = new MasterPageItem() { Title = "Home", Icon = "home", TargetType = typeof(HomePage) };
             var page2 = new MasterPageItem() { Title = "Sales", Icon = "sales", TargetType = typeof(HomePage) };
             var page3 = new MasterPageItem() { Title = "Account", Icon = "inr", TargetType = typeof(HomePage) };
-            var page4 = new MasterPageItem() { Title = "Purchase", Icon = "purch", TargetType = typeof(HomePage) };
+            var page4 = new MasterPageItem() { Title = "Purchase", Icon = "purch", TargetType = typeof(PurchasePage) };
             var page5 = new MasterPageItem() { Title = "Human Resource", Icon = "hr", TargetType = typeof(HomePage) };
             var page6 = new MasterPageItem() { Title = "Approvels", Icon = "thumbs_up", TargetType = typeof(HomePage) };
             var page8 = new MasterPageItem() { Title = "Setting", Icon = "setting", TargetType = typeof(HomePage) };

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.View.ReceivablePage"
+             xmlns:local="clr-namespace:App2.CustomRenderer"
+             BackgroundColor="#A3C1E5"
+             Title="Receivable">
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <local:MyEntry  FontSize="15" BackgroundColor="White" 
+                            Placeholder="Select Party"
+                            HorizontalOptions="FillAndExpand" 
+                            TextColor="Black"
+                            Margin="5,2"
+							HeightRequest="40"/>
+            <Image Source="logo"
+                   Aspect="AspectFit"
+                   HeightRequest="180" />
+                <StackLayout>
+                    <Label Text="Today Collaction(Notification)" HorizontalOptions="CenterAndExpand" FontSize="17"/>
+                    <StackLayout>
+                        <ListView x:Name="listView" Header="TEST HEADER">
+                          
+                            <ListView.HeaderTemplate >
+                                <DataTemplate>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Party"/>
+                                        <Label Text="Pre Outstanding"/>
+                                        <Label Text="Today Receipt"/>
+                                        <Label Text="Cur. Outstanding"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </ListView.HeaderTemplate>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Party"/>
+                                        <Label Text="Pre Outstanding"/>
+                                        <Label Text="Today Receipt"/>
+                                        <Label Text="Cur. Outstanding"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </StackLayout>
+            
+        </StackLayout>
+    </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

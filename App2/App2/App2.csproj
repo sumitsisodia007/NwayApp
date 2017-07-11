@@ -56,6 +56,9 @@
     <Compile Include="View\PurchasePage.xaml.cs">
       <DependentUpon>PurchasePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ReceivablePage.xaml.cs">
+      <DependentUpon>ReceivablePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainPage.xaml">
@@ -101,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\PurchasePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\ReceivablePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

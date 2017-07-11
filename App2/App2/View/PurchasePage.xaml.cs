@@ -15,6 +15,20 @@ namespace App2.View
         public PurchasePage()
         {
             InitializeComponent();
+            if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+            {
+                var calcScreenWidth = Application.Current.MainPage.Width;
+                var calcScreenHieght = Application.Current.MainPage.Height;
+
+                lblPurchase.WidthRequest =
+                lblIndent.WidthRequest =
+                lblEnquary.WidthRequest =
+                lblQuatation.WidthRequest =
+                lblPurOrder.WidthRequest =
+                lblGNR.WidthRequest = calcScreenWidth / 2 ;
+                    
+                TotalStock.WidthRequest =TotalGRN.WidthRequest =TotalPur.WidthRequest =calcScreenWidth / 2;
+            }
         }
     }
 }

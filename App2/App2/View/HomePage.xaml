@@ -9,10 +9,21 @@
         <StackLayout Padding="0,20" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand" >
             <StackLayout  Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
 
-                <Frame x:Name="GridRec"   BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                <Frame x:Name="GridRec" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
                     <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                        <Label Text="1120" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13"/>
+                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Receivable_Tapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label Text="1120" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Receivable_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Receivable_Tapped"/>
+                        </StackLayout.GestureRecognizers>
                     </StackLayout>
                 </Frame>
 
