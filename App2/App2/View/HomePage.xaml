@@ -4,7 +4,24 @@
              x:Class="App2.View.HomePage"
              Title="Home"
              BackgroundColor="White">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Refresh">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_fan" Android="icon_fan" />
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        <ToolbarItem Text="Refresh">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_fan" Android="icon_fan" />
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        <ToolbarItem Text="Refresh">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_fan" Android="icon_fan" />
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
     <StackLayout  Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
         <StackLayout Padding="0,20" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand" >
             <StackLayout  Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >

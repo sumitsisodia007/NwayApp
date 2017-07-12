@@ -5,49 +5,147 @@
              xmlns:local="clr-namespace:App2.CustomRenderer"
              BackgroundColor="#A3C1E5"
              Title="Receivable">
-    <ContentPage.Content>
-        <ScrollView>
+        <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            
-            <local:MyEntry  FontSize="15" BackgroundColor="White" 
+            <ScrollView>
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <local:MyEntry  FontSize="15" BackgroundColor="White" 
                             Placeholder="Select Party"
                             HorizontalOptions="FillAndExpand" 
                             TextColor="Black"
                             Margin="5,2"
 							HeightRequest="40"/>
-            <Image Source="logo"
+                    <Image Source="logo"
                    Aspect="AspectFit"
                    HeightRequest="180" />
-                <StackLayout>
-                    <Label Text="Today Collaction(Notification)" HorizontalOptions="CenterAndExpand" FontSize="17"/>
-                    <StackLayout>
-                        <ListView x:Name="listView" Header="TEST HEADER">
-                          
-                            <ListView.HeaderTemplate >
-                                <DataTemplate>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Party"/>
-                                        <Label Text="Pre Outstanding"/>
-                                        <Label Text="Today Receipt"/>
-                                        <Label Text="Cur. Outstanding"/>
+                    <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                        <Label Text="Today Collaction(Notification)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="15"/>
+                        <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
+                            <ListView x:Name="listView"
+                              RowHeight="40"
+                              HeightRequest="200"
+                              BackgroundColor="White"
+                              SeparatorVisibility="None"
+                              SeparatorColor="#4472C4">
+                                <ListView.Header>
+                                    <StackLayout Padding="0" Orientation="Horizontal" BackgroundColor="#A3C1E5">
+                                        <local:BorderEntry x:Name="HeadPary" TextColor="Black" IsEnabled="False"  FontSize="18" Placeholder="Party" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="70"/>
+                                        <local:BorderEntry x:Name="HeadPout" TextColor="Black" IsEnabled="False"  FontSize="18" Text="Pre &#xA; Outstanding" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="70"/>
+                                        <local:BorderEntry x:Name="HeadTrec" TextColor="Black" IsEnabled="False"  FontSize="18" Text="Today &#xA; Receipt" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="70"/>
+                                        <local:BorderEntry x:Name="HeadCout" TextColor="Black" IsEnabled="False"  FontSize="18" Text="Cur &#10; Outstanding" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="70"/>
                                     </StackLayout>
-                                </DataTemplate>
-                            </ListView.HeaderTemplate>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Party"/>
-                                        <Label Text="Pre Outstanding"/>
-                                        <Label Text="Today Receipt"/>
-                                        <Label Text="Cur. Outstanding"/>
+                                </ListView.Header>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <!-- Main design for our menu items -->
+                                            <StackLayout VerticalOptions="Start"
+                                                     HorizontalOptions="FillAndExpand">
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0">
+
+                                                    <local:BorderEntry x:Name="HParty" IsEnabled="False"  FontSize="18" Text="{Binding Party}" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="{Binding txtWidth}">
+                                                        <Entry.GestureRecognizers>
+                                                            <TapGestureRecognizer  />
+                                                        </Entry.GestureRecognizers>
+                                                    </local:BorderEntry>
+
+                                                    <local:BorderEntry  x:Name="txtPout" IsEnabled="False" FontSize="18" Text="{Binding Pre_Outstanding}" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="{Binding txtWidth}">
+                                                        <Entry.GestureRecognizers>
+                                                            <TapGestureRecognizer />
+                                                        </Entry.GestureRecognizers>
+                                                    </local:BorderEntry>
+
+                                                    <local:BorderEntry x:Name="txtTrec" IsEnabled="False" FontSize="18" Text="{Binding Today_Receipt}" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="{Binding txtWidth}">
+                                                        <Entry.GestureRecognizers>
+                                                            <TapGestureRecognizer />
+                                                        </Entry.GestureRecognizers>
+                                                    </local:BorderEntry>
+
+                                                    <local:BorderEntry x:Name="txtCout" IsEnabled="False"  FontSize="18" Text="{Binding Cur_Outstanding}" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="{Binding txtWidth}">
+                                                        <Entry.GestureRecognizers>
+                                                            <TapGestureRecognizer />
+                                                        </Entry.GestureRecognizers>
+                                                    </local:BorderEntry>
+                                                </StackLayout>
+
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                        </Frame>
+                    </StackLayout>
+               
+                    <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                    <Label Text="Today OutStanding" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="15"/>
+                    <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
+                        <ListView x:Name="MainList"
+                              RowHeight="40"
+                                  HeightRequest="200"
+                              BackgroundColor="White"
+                              SeparatorVisibility="None"
+                              SeparatorColor="#4472C4">
+                                <ListView.Header>
+                                    <StackLayout Orientation="Horizontal" BackgroundColor="#A3C1E5">
+                                        <local:BorderEntry  TextColor="Black" IsEnabled="False"  FontSize="18" Placeholder="Party" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="70"/>
+                                        <local:BorderEntry  TextColor="Black" IsEnabled="False"  FontSize="18" Text="Pre &#xA; Outstanding" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="70"/>
+                                        <local:BorderEntry  TextColor="Black" IsEnabled="False"  FontSize="18" Text="Today &#xA; Receipt" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="70"/>
+                                        <local:BorderEntry  TextColor="Black" IsEnabled="False"  FontSize="18" Text="Cur &#10; Outstanding" HorizontalOptions="FillAndExpand" HeightRequest="40" WidthRequest="70"/>
                                     </StackLayout>
+                                </ListView.Header>
+                                <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <!-- Main design for our menu items -->
+                                        <StackLayout VerticalOptions="Start"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     Padding="0"
+                                                     Spacing="0">
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0">
+                                                <local:BorderEntry  IsEnabled="False"  FontSize="18" Text="{Binding Party}" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                                                    <Entry.GestureRecognizers>
+                                                        <TapGestureRecognizer  />
+                                                    </Entry.GestureRecognizers>
+                                                </local:BorderEntry>
+
+                                                <local:BorderEntry IsEnabled="False" FontSize="18" Text="{Binding Pre_Outstanding}" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                                                    <Entry.GestureRecognizers>
+                                                        <TapGestureRecognizer />
+                                                    </Entry.GestureRecognizers>
+                                                </local:BorderEntry>
+
+                                                <local:BorderEntry IsEnabled="False" FontSize="18" Text="{Binding Today_Receipt}" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                                                    <Entry.GestureRecognizers>
+                                                        <TapGestureRecognizer />
+                                                    </Entry.GestureRecognizers>
+                                                </local:BorderEntry>
+
+                                                <local:BorderEntry IsEnabled="False"  FontSize="18" Text="{Binding Cur_Outstanding}" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                                                    <Entry.GestureRecognizers>
+                                                        <TapGestureRecognizer />
+                                                    </Entry.GestureRecognizers>
+                                                </local:BorderEntry>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                    </StackLayout>
+
+                    </Frame>
                 </StackLayout>
-            
+                
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="23">
+                <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="25"/>
+                <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
+
+            </StackLayout>
         </StackLayout>
-    </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -36,9 +36,17 @@ namespace App2.View
             }
         }
 
-        private void Receivable_Tapped(object sender, EventArgs e)
+        private  void Receivable_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new ReceivablePage());
+            try
+            {
+                 Navigation.PushModalAsync(new ReceivablePage());
+            }
+            catch (Exception ex)
+            {
+                
+            }
+          
         }
     }
 }

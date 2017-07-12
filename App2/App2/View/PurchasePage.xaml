@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:App2.CustomRenderer"
              x:Class="App2.View.PurchasePage"
              Title="Parchase">
     <ContentPage.Content>
@@ -68,11 +69,19 @@
                                     <TapGestureRecognizer  />
                                 </Label.GestureRecognizers>
                             </Label>
-                            <Label x:Name="Img2" HorizontalOptions="EndAndExpand" Margin="1,0,0,0" FontSize="17" BackgroundColor="White" TextColor="Black" Text="CANDIDATE" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"  >
+                            <local:CurvedCornersLabel Text="this is a rounded Label"
+                                                      HorizontalTextAlignment="Center"
+                                                      VerticalTextAlignment="Center"
+                                                      FontSize="14.5"
+                                                      HeightRequest="30"
+                                                      CurvedBackgroundColor="#0040ff"
+                                                      TextColor="White"
+                                                      CurvedCornerRadius="15"
+                                                      x:Name="Img2">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer />
                                 </Label.GestureRecognizers>
-                            </Label>
+                            </local:CurvedCornersLabel>
                         </StackLayout>
                         <BoxView BackgroundColor="#E8E8E8" HeightRequest="1"/>
                         <StackLayout Orientation="Horizontal"
