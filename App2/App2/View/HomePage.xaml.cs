@@ -38,15 +38,32 @@ namespace App2.View
 
         private  void Receivable_Tapped(object sender, EventArgs e)
         {
-            try
-            {
-                 Navigation.PushModalAsync(new ReceivablePage());
-            }
-            catch (Exception ex)
-            {
-                
-            }
-          
+            Navigation.PushModalAsync(new ReceivablePage());
+        }
+
+        private void Payable_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new PayablePage());
+        }
+
+        private void CashFlow_Tapped(object sender, EventArgs e)
+        {
+            DisplayAlert("Message", "Comming Soon", "ok");
+        }
+
+        private void Elect_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new Ele_CunsPage());
+        }
+
+        private void Expired_Tapped(object sender, EventArgs e)
+        {
+            DisplayAlert("Message", "Comming Soon", "ok");
+        }
+
+        private void Canceled_Tapped(object sender, EventArgs e)
+        {
+            DisplayAlert("Message", "Comming Soon", "ok");
         }
     }
 }

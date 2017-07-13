@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:local="clr-namespace:App2.CustomRenderer"
+             x:Class="App2.View.PayableChart"
+             Title="Receivable Chart"
+             BackgroundColor="#ED7D31">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ScrollView>
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <local:MyEntry  FontSize="15" BackgroundColor="White" 
+                            Placeholder="Select Party"
+                            HorizontalOptions="FillAndExpand" 
+                            TextColor="Black"
+                            Margin="5,2"
+							HeightRequest="40"/>
+                    <Image Source="logo"
+                   Aspect="AspectFit"
+                   HeightRequest="180" />
+                    <StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                        <Label Text="ESIC PAYABLE ACCOUNT(Monthly Ledger)" HorizontalOptions="CenterAndExpand" 
+                               TextColor="Black" HorizontalTextAlignment="Center" FontSize="18"/>
+                        <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
+                            <ListView x:Name="listView"
+                              RowHeight="40"
+                              HeightRequest="200"
+                              BackgroundColor="White"
+                              SeparatorVisibility="None"
+                              SeparatorColor="#4472C4">
+                                <ListView.Header>
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+
+                                        <Label x:Name="LblSu" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Month" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+
+                                        <Label x:Name="LblMn" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Dr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+
+                                        <Label x:Name="LblTu" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Cr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+
+
+                                        <Label x:Name="LblWe" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Balance" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+
+                                    </StackLayout>
+                                </ListView.Header>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <!-- Main design for our menu items -->
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer  />
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer />
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer />
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer />
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                        </Frame>
+                    </StackLayout>
+
+              
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="23">
+                <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="25"/>
+                <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

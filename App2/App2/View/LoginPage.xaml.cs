@@ -39,13 +39,19 @@ namespace App2.View
 
         private void btnLogin_Clicked(object sender, EventArgs e)
         {
-            _login.Username = "elensoft";// txtFName.Text;
-            _login.Password = "123";// txtPass.Text;
+           // btnLogin.IsEnabled = true;
+            _Loading.IsRunning = true;
+            _login.Username =  txtFName.Text;
+            _login.Password = txtPass.Text;
             _login.DeviceID = "12345";// StaticMethods.getDeviceidentifier();
             _login.Firebasetoken = "asdgasdggshgdj";
             _login.Tagtype = "signin";
-            //api.postLogin(_login);
-            Navigation.PushModalAsync(new MasterMenuPage());
+
+            ResponseModel rs = api.postLogin(_login);
+            if (rs.Error == "False")
+            {
+                Navigation.PushModalAsync(new MasterMenuPage());
+            }
         }
     }
 }

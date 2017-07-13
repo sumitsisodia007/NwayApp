@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="App2.View.ReceivablePage"
-             xmlns:local="clr-namespace:App2.CustomRenderer"
-             BackgroundColor="#A3C1E5"
-             Title="Receivable">
-    
-        <ContentPage.Content>
+             x:Class="App2.View.PayablePage"
+               xmlns:local="clr-namespace:App2.CustomRenderer"
+             BackgroundColor="#ED7D31"
+             Title="Payable">
+    <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <ScrollView>
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -21,48 +20,32 @@
                    HeightRequest="180" />
                     <StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-                        <Label Text="Today Collaction(Notification)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19"/>
+                        <Label Text="Today Payment(SETTING amount) (NOTIFICATION)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19" HorizontalTextAlignment="Center"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                             <ListView x:Name="listView"
-                              RowHeight="40"
-                              HeightRequest="200"
-                              BackgroundColor="White"
-                              SeparatorVisibility="None"
-                              SeparatorColor="#4472C4">
+                                      RowHeight="40"
+                                      HeightRequest="200"
+                                      BackgroundColor="White"
+                                      SeparatorVisibility="None"
+                                      SeparatorColor="#4472C4">
                                 <ListView.Header>
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
 
-                                        <Label x:Name="LblSu" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer  />
-                                            </Label.GestureRecognizers>
-                                        </Label>
+                                        <Label x:Name="LblSu" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
 
-                                        <Label x:Name="LblMn" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Pre Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer />
-                                            </Label.GestureRecognizers>
-                                        </Label>
+                                        <Label x:Name="LblMn" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
 
-                                        <Label x:Name="LblTu" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Today Receipt" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer />
-                                            </Label.GestureRecognizers>
-                                        </Label>
+                                        <Label x:Name="LblTu" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Today Paid" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
 
-                                        <Label x:Name="LblWe" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer />
-                                            </Label.GestureRecognizers>
-                                        </Label>
+                                        <Label x:Name="LblWe" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                        
                                     </StackLayout>
                                 </ListView.Header>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <!-- Main design for our menu items -->
                                             <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
@@ -98,51 +81,33 @@
 
                         </Frame>
                     </StackLayout>
-               
+
                     <StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
 
-                    <Label Text="Today OutStanding" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="19"/>
-                    <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
+                        <Label Text="Today Payable" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="19"/>
+                        <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                             <ListView x:Name="List1"
                                       RowHeight="40"
                                       HeightRequest="200"
                                       BackgroundColor="White"
                                       SeparatorVisibility="None"
-                                      SeparatorColor="#4472C4">
+                                      >
                                 <ListView.Header>
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                        <Label  BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Site Name" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                        <Label  BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Total Dr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                        <Label  BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Total Cr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                        <Label BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Balance" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
 
-                                        <Label  BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer  />
-                                            </Label.GestureRecognizers>
-                                        </Label>
-
-                                        <Label  BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Pre Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer />
-                                            </Label.GestureRecognizers>
-                                        </Label>
-
-                                        <Label  BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Today Receipt" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer />
-                                            </Label.GestureRecognizers>
-                                        </Label>
-
-                                        <Label BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer />
-                                            </Label.GestureRecognizers>
-                                        </Label>
                                     </StackLayout>
                                 </ListView.Header>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <!-- Main design for our menu items -->
+                                            
+        
                                             <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
@@ -177,8 +142,8 @@
                             </ListView>
 
                         </Frame>
+                    </StackLayout>
                 </StackLayout>
-               </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="23">
                 <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="25"/>
@@ -186,5 +151,6 @@
 
             </StackLayout>
         </StackLayout>
+  
     </ContentPage.Content>
 </ContentPage>

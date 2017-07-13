@@ -18,27 +18,27 @@ namespace App2.APIService
         public ResponseModel postLogin(LoginMdl lgmdl)
         {
             ResponseModel response_model = new ResponseModel();
-            StringContent content;
             try
             {
                 var RestURL = BaseURL + "index.php";
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(RestURL);
-                
-                JObject j = new JObject();
-                j.Add("username", lgmdl.Username);
-                j.Add("password", lgmdl.Password);
-                j.Add("firebasetoken", lgmdl.Firebasetoken);
-                j.Add("device_id", lgmdl.DeviceID);
-                j.Add("tagtype", lgmdl.Tagtype);
 
-                var json = JsonConvert.SerializeObject(j);
-                content = new StringContent(json, Encoding.UTF8, "application/json");
+              
+                var values = new Dictionary<string, string>
+                {
+                    { "username", lgmdl.Username},
+                    { "password", lgmdl.Password },
+                    { "firebasetoken", lgmdl.Firebasetoken},
+                    { "device_id", lgmdl.DeviceID},
+                    { "tagtype", lgmdl.Tagtype}
+                };
 
-                HttpResponseMessage response = client.PostAsync(RestURL, content).Result; // Blocking call!
+                var content = new FormUrlEncodedContent(values);
+
+                var response = client.PostAsync(RestURL, content).Result; // Blocking call!
                 if (response.IsSuccessStatusCode)
                 {
-
                     // Parse the response body. Blocking!
                     var dataObjects = response.Content.ReadAsStringAsync().Result;
                     JObject jObj = JObject.Parse(dataObjects);
@@ -59,7 +59,7 @@ namespace App2.APIService
             }
             finally
             {
-                content = null;
+                //content = null;
             }
             return response_model;
         }

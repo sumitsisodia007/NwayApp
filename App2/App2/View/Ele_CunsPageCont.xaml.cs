@@ -9,31 +9,29 @@ using Xamarin.Forms.Xaml;
 
 namespace App2.View
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ReceivablePage : ContentPage
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class Ele_CunsPageCont : ContentPage
     {
         public List<PartyDetails> _receivablList { get; set; }
         public double _Width = 0;
-        public ReceivablePage()
-        {
-            InitializeComponent();
+        public Ele_CunsPageCont ()
+		{
+			InitializeComponent ();
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
                 var calcScreenHieght = Application.Current.MainPage.Height;
-               
-                    LblMn.WidthRequest=
-                    LblSu.WidthRequest=
-                    LblTu.WidthRequest=
-                    LblWe.WidthRequest = _Width = calcScreenWidth / 4-20;
+                LblTh.WidthRequest =
+                LblMn.WidthRequest =
+                LblSu.WidthRequest =
+                LblTu.WidthRequest =
+                LblWe.WidthRequest = _Width = calcScreenWidth / 4 - 20;
             }
-           TodayCollationList();
-            
-           
+            TodayCollationList();
         }
-        public  void TodayCollationList()
+        public void TodayCollationList()
         {
-            
+
             _receivablList = new List<PartyDetails>();
             try
             {
@@ -53,17 +51,7 @@ namespace App2.View
 
         private void Row_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new ReceivableChart());
+            //Navigation.PushModalAsync(new PayableChart());
         }
-    }
-
-
-    public class PartyDetails
-    {
-        public string Party { get; set; }
-        public string Pre_Outstanding { get; set; }
-        public string Today_Receipt { get; set; }
-        public string Cur_Outstanding { get; set; }
-        public double txtWidth { get; set; }
     }
 }

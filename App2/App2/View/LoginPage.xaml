@@ -56,9 +56,10 @@
 
                 <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20" Orientation="Vertical" Padding="16,0,16,0">
                     <Button x:Name="btnLogin" BackgroundColor="#4472C4"  FontSize="17"  HorizontalOptions="CenterAndExpand" Text="LOGIN" FontAttributes="Bold" TextColor="White" Clicked="btnLogin_Clicked"/>
+            <ActivityIndicator x:Name="_Loading" IsRunning="False" />    
                 </StackLayout>
-          
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="20">
+       
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="20">
             <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="19"/>
                 <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
             
