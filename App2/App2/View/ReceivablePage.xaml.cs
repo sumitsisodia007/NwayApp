@@ -13,7 +13,7 @@ namespace App2.View
     public partial class ReceivablePage : ContentPage
     {
         public List<PartyDetails> _receivablList { get; set; }
-        public double txtWidth { get; set; }
+        public double _Width = 0;
         public ReceivablePage()
         {
             InitializeComponent();
@@ -21,8 +21,11 @@ namespace App2.View
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
                 var calcScreenHieght = Application.Current.MainPage.Height;
-                txtWidth = calcScreenWidth / 4;
-                
+               
+                LblMn.WidthRequest=
+                    LblSu.WidthRequest=
+                    LblTu.WidthRequest=
+                    LblWe.WidthRequest = _Width = calcScreenWidth / 4-20;
             }
            CallList();
             
@@ -34,11 +37,11 @@ namespace App2.View
             _receivablList = new List<PartyDetails>();
             try
             {
-                _receivablList.Add(new PartyDetails { Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
-                _receivablList.Add(new PartyDetails { Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
-                _receivablList.Add(new PartyDetails { Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
-                _receivablList.Add(new PartyDetails { Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
-                _receivablList.Add(new PartyDetails { Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
+                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold  30 seconds" });
+                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for  seconds" });
+                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 " });
+                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "for 30 seconds" });
+                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
                 listView.ItemsSource = _receivablList;
             }
             catch (Exception ex)
@@ -47,12 +50,20 @@ namespace App2.View
 
             }
         }
+
+        private void Row_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new ReceivableChart());
+        }
     }
-   public class PartyDetails
+
+
+    public class PartyDetails
     {
         public string Party { get; set; }
         public string Pre_Outstanding { get; set; }
         public string Today_Receipt { get; set; }
         public string Cur_Outstanding { get; set; }
+        public double txtWidth { get; set; }
     }
 }
