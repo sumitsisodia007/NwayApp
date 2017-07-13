@@ -24,14 +24,13 @@ namespace App2.APIService
                 var RestURL = BaseURL + "index.php";
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(RestURL);
-
+                
                 JObject j = new JObject();
                 j.Add("username", lgmdl.Username);
                 j.Add("password", lgmdl.Password);
                 j.Add("firebasetoken", lgmdl.Firebasetoken);
                 j.Add("device_id", lgmdl.DeviceID);
                 j.Add("tagtype", lgmdl.Tagtype);
-              
 
                 var json = JsonConvert.SerializeObject(j);
                 content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -43,12 +42,12 @@ namespace App2.APIService
                     // Parse the response body. Blocking!
                     var dataObjects = response.Content.ReadAsStringAsync().Result;
                     JObject jObj = JObject.Parse(dataObjects);
-                    response_model.Message = jObj["data"]["message"].ToString();
-                    response_model.Error = jObj["data"]["error"].ToString();
-                    response_model.FullName= jObj["data"]["full_name"].ToString();
-                    response_model.User_Id = jObj["data"]["user_id"].ToString();
-                    response_model.Min_Receipt_Amt = jObj["data"]["min_receipt_amount"].ToString();
-                    response_model.Notification_Day_Count = jObj["data"]["notification_day_count"].ToString();
+                    response_model.Message = jObj["message"].ToString();
+                    response_model.Error = jObj["error"].ToString();
+                    response_model.FullName= jObj["full_name"].ToString();
+                    response_model.User_Id = jObj["user_id"].ToString();
+                    response_model.Min_Receipt_Amt = jObj["min_receipt_amount"].ToString();
+                    response_model.Notification_Day_Count = jObj["notification_day_count"].ToString();
                     response_model.TagType = jObj["tagtype"].ToString();
                     
                 }

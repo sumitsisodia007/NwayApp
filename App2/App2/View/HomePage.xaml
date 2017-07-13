@@ -22,17 +22,26 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     
-    <StackLayout  Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-        <StackLayout Padding="0,20" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand" >
-            <StackLayout  Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+    <StackLayout  Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+        <StackLayout Padding="0,20" Orientation="Vertical" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand" >
+            
+            <StackLayout  Orientation="Horizontal" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
 
-                <Frame x:Name="GridRec" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                <Frame x:Name="GridRec" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" >
                     <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Receivable_Tapped" />
-                            </Image.GestureRecognizers>
-                        </Image>
+                        <StackLayout Orientation="Vertical"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                            <Image Source="icon_money" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Receivable_Tapped" />
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                            <Label Text="Receivable" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="13">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Receivable_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
                         <Label Text="1120" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Receivable_Tapped"/>
@@ -44,42 +53,78 @@
                     </StackLayout>
                 </Frame>
 
-                <Frame x:Name="GridPay"   BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                <Frame x:Name="GridPay"   BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" >
                     <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <StackLayout Orientation="Vertical"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                            <Image Source="icon_card_pay" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Text="Payable" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
                         <Label Text="1120" HeightRequest="22" BackgroundColor="#ED7D31"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                 </Frame>
 
             </StackLayout>
 
-            <StackLayout  Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                <Frame x:Name="GridCas"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+            <StackLayout  Orientation="Horizontal" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                <Frame x:Name="GridCas"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" >
                     <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <StackLayout Orientation="Vertical"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                            <Image Source="icon_cash" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Text="Cash Flow" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
                         <Label Text="1120" HeightRequest="22" BackgroundColor="#6DB040"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                 </Frame>
 
-                <Frame x:Name="GridCon"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                <Frame x:Name="GridCon"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" >
                     <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <StackLayout Orientation="Vertical"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                            <Image Source="icon_bulb" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Text="Elec. Cunsuption" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"    VerticalOptions="StartAndExpand" FontSize="13">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
                         <Label Text="1120" HeightRequest="22" BackgroundColor="#A5A5A5"  VerticalOptions="EndAndExpand"  FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                 </Frame>
 
             </StackLayout>
-            <StackLayout BackgroundColor="Transparent" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                <Frame x:Name="GridExp"  BackgroundColor="White" HasShadow="True" HeightRequest="120" WidthRequest="90" Padding="0" >
+      
+            <StackLayout Spacing="20" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                <Frame x:Name="GridExp"  BackgroundColor="White" HasShadow="True" HeightRequest="120" WidthRequest="90" Padding="1" >
                     <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                        <StackLayout Orientation="Vertical"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                            <Image Source="icon_loading" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Text="Expired Soon" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  VerticalOptions="StartAndExpand" FontSize="13">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
                         <Label Text="1120" HeightRequest="22" BackgroundColor="#FFD993"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                 </Frame>
 
-                <Frame x:Name="GridInv"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                <Frame x:Name="GridInv"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" >
                     <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <StackLayout Orientation="Vertical"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                            <Image Source="icon_cancel" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Text="Invoice Canceled" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"   VerticalOptions="StartAndExpand" FontSize="13">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
                         <Label Text="1120" HeightRequest="22" TextColor="White" BackgroundColor="Black"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                 </Frame>
