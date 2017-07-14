@@ -47,8 +47,8 @@ namespace App2.View
             _login.Firebasetoken = "asdgasdggshgdj";
             _login.Tagtype = "signin";
 
-            ResponseModel rs = api.postLogin(_login);
-            if (rs.Error == "False")
+          //  ResponseModel rs = api.postLogin(_login);
+            //if (rs.Error == "False")
             {
                 Navigation.PushModalAsync(new MasterMenuPage());
             }

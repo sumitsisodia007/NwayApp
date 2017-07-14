@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.View.Account"
+             xmlns:local="clr-namespace:App2.CustomRenderer"
+             BackgroundColor="White"
+             Title="Account">
+    <ContentPage.Content>
+        <StackLayout  BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ScrollView>
+                <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
+                    <StackLayout BackgroundColor="White">
+                        <ScrollView Orientation="Horizontal" Padding="10">
+                            <StackLayout  Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                <Frame x:Name="TotalGRN" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" OutlineColor="Black">
+                                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="More Info" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame x:Name="TotalPur" HasShadow="True" BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="More Info" HeightRequest="22" BackgroundColor="#ED7D31"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame x:Name="TotalStock" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="More Info" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </ScrollView>
+                        <StackLayout HorizontalOptions="FillAndExpand" >
+                            <Label Text="Cash Flow" FontSize="17" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                            <Frame BackgroundColor="White" Padding="2" >
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5" Padding="0">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                                        <Frame x:Name="FramFrom" BackgroundColor="Black" OutlineColor="Black" Padding="1" HeightRequest="25" VerticalOptions="CenterAndExpand">
+                                            <StackLayout Orientation="Horizontal" BackgroundColor="White" Spacing="3" HorizontalOptions="FillAndExpand">
+                                                <Image Source="icon_cal"  HeightRequest="20" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                <Label Text="From Date" TextColor="Black" BackgroundColor="White" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                        </Frame>
+                                        <Frame x:Name="FramTo" BackgroundColor="Black" OutlineColor="Black" Padding="1" HeightRequest="25" VerticalOptions="CenterAndExpand">
+                                            <StackLayout  Orientation="Horizontal" BackgroundColor="White" Spacing="3"  HorizontalOptions="FillAndExpand">
+                                                <Image Source="icon_cal"  HeightRequest="20" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                <Label Text="To Date" TextColor="Black" BackgroundColor="White" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                        </Frame>
+                                        <local:CurvedCornersLabel x:Name="btnShow"
+                                                          Text="  Show  "
+                                                      HorizontalTextAlignment="Center"
+                                                      VerticalTextAlignment="Center"
+                                                      FontSize="14.5"
+                                                      HeightRequest="30"
+                                                      CurvedBackgroundColor="#F39C12"
+                                                      TextColor="White"
+                                                          CurvedCornerRadius="6"/>
+                                    </StackLayout>
+                                    <Frame BackgroundColor="White" Padding="2">
+                                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" >
+
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label x:Name="LblSu" BackgroundColor="#BABABA" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Inflow" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="#BABABA" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Account" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label   BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Total" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                                <Label   BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="0.00" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label   BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Balance" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="0.00" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame BackgroundColor="White" Padding="2">
+                                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" >
+
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label  BackgroundColor="#BABABA" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Outflow" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="#BABABA" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Account" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label   BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Total" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                                <Label   BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="0.00" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label   BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Balance" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="0.00" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </Frame>
+                            <Label Text="Company Overflow" FontSize="17" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                            <Frame BackgroundColor="White" Padding="2" >
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5" Padding="0">
+                                    <Frame  BackgroundColor="Black" OutlineColor="Black" Padding="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" >
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label  BackgroundColor="#55D5F4" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Inflow" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="#55D5F4" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Account" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label  BackgroundColor="#E2E2E2" HorizontalOptions="FillAndExpand" FontSize="18" Text="Building Material"  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="#E2E2E2" HorizontalOptions="FillAndExpand" FontSize="18" Text="0.00" TextColor="Black" HorizontalTextAlignment="End"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label  BackgroundColor="#E2E2E2" HorizontalOptions="FillAndExpand" FontSize="18" Text="Direct Expenses"  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="#E2E2E2" HorizontalOptions="FillAndExpand" FontSize="18" Text="0.00" TextColor="Black" HorizontalTextAlignment="End"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label  BackgroundColor="#E2E2E2" HorizontalOptions="FillAndExpand" FontSize="18" Text="Building Material"  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="#E2E2E2" HorizontalOptions="FillAndExpand" FontSize="18" Text="0.00" TextColor="Black" HorizontalTextAlignment="End"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                            <BoxView BackgroundColor="Black" HeightRequest="1"/>
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand" FontSize="18" Text="Grand Total"  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand" FontSize="18" Text="0.00" TextColor="Black" HorizontalTextAlignment="End"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                            <BoxView BackgroundColor="Black" HeightRequest="1"/>
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label  BackgroundColor="#BABABA" HorizontalOptions="FillAndExpand" FontSize="18" Text="Indirect Income"  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="#BABABA" HorizontalOptions="FillAndExpand" FontSize="18" Text="0.00" TextColor="Black" HorizontalTextAlignment="End"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                            <BoxView BackgroundColor="Black" HeightRequest="1"/>
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label  BackgroundColor="#BABABA" HorizontalOptions="FillAndExpand" FontSize="18" Text="Net Loss"  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="#BABABA" HorizontalOptions="FillAndExpand" FontSize="18" Text="0.00" TextColor="Black" HorizontalTextAlignment="End"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                            <BoxView BackgroundColor="Black" HeightRequest="1"/>
+                                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand" FontSize="18" Text="Grand Total"  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center" />
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand" FontSize="18" Text="0.00" TextColor="Black" HorizontalTextAlignment="End"  VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="23" Padding="0,5">
+                <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="23" WidthRequest="70"/>
+                <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

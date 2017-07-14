@@ -53,6 +53,9 @@
     <Compile Include="Model\ResponseModel.cs" />
     <Compile Include="NativeMathods\StaticMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Account.xaml.cs">
+      <DependentUpon>Account.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Ele_CunsPage.xaml.cs">
       <DependentUpon>Ele_CunsPage.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\Ele_CunsPageCont.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\Account.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
