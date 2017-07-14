@@ -4,7 +4,8 @@
              x:Class="App2.View.ReceivablePage"
              xmlns:local="clr-namespace:App2.CustomRenderer"
              BackgroundColor="#A3C1E5"
-             Title="Receivable">
+             Title="Receivable"
+            >
     
         <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

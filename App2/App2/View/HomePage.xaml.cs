@@ -15,6 +15,7 @@ namespace App2.View
         public HomePage()
         {
             InitializeComponent();
+          
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
@@ -38,13 +39,17 @@ namespace App2.View
 
         private  void Receivable_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new ReceivablePage());
+            Navigation.PushAsync(new ReceivablePage());
         }
 
-        private void Payable_Tapped(object sender, EventArgs e)
+        private  void Payable_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new PayablePage());
-        }
+           // NavigationPage.SetHasNavigationBar(new PayablePage(), false);
+
+             Navigation.PushAsync(new PayablePage());
+            
+           // NavigationPage.SetHasNavigationBar(new PayablePage(), true);
+            }
 
         private void CashFlow_Tapped(object sender, EventArgs e)
         {
@@ -53,7 +58,7 @@ namespace App2.View
 
         private void Elect_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new Ele_CunsPage());
+            Navigation.PushAsync(new Ele_CunsPage());
         }
 
         private void Expired_Tapped(object sender, EventArgs e)
@@ -64,6 +69,6 @@ namespace App2.View
         private void Canceled_Tapped(object sender, EventArgs e)
         {
             DisplayAlert("Message", "Comming Soon", "ok");
-        }
+        }  
     }
 }

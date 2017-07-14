@@ -21,11 +21,7 @@ namespace App2.View
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
                 var calcScreenHieght = Application.Current.MainPage.Height;
-                LblTh.WidthRequest =
-                LblMn.WidthRequest =
-                LblSu.WidthRequest =
-                LblTu.WidthRequest =
-                LblWe.WidthRequest = _Width = calcScreenWidth / 4 - 20;
+                 _Width = calcScreenWidth / 4 - 20;
             }
             TodayCollationList();
         }
@@ -35,6 +31,11 @@ namespace App2.View
             _receivablList = new List<PartyDetails>();
             try
             {
+                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold  30 seconds" });
+                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for  seconds" });
+                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 " });
+                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "for 30 seconds" });
+                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
                 _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold  30 seconds" });
                 _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for  seconds" });
                 _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 " });
@@ -52,6 +53,11 @@ namespace App2.View
         private void Row_Tapped(object sender, EventArgs e)
         {
             //Navigation.PushModalAsync(new PayableChart());
+        }
+
+        private void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
+        {
+            
         }
     }
 }

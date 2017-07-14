@@ -17,6 +17,8 @@ namespace App2.View
         public Ele_CunsPage ()
 		{
 			InitializeComponent ();
+            //this.Title = "ATHLETE";
+            //NavigationPage.SetHasBackButton(this, true);
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;

@@ -17,6 +17,8 @@ namespace App2.View
         public ReceivablePage()
         {
             InitializeComponent();
+            this.Title = "ATHLETE";
+            NavigationPage.SetHasBackButton(this, true);
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
@@ -53,7 +55,7 @@ namespace App2.View
 
         private void Row_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new ReceivableChart());
+           // Navigation.PushModalAsync(new ReceivableChart());
         }
     }
 
