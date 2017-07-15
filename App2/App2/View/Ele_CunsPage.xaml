@@ -22,7 +22,6 @@
                            Aspect="AspectFit"
                            HeightRequest="180" />
                     <StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-
                         <Label Text="Last Consumption(NOTIFICATION)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19" HorizontalTextAlignment="Center"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                             <ListView x:Name="listView"
@@ -34,14 +33,10 @@
                                 <ListView.Header>
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
-                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
-
+                                                 Spacing="0"  BackgroundColor="Black">
                                         <Label x:Name="LblSu" BackgroundColor="#A5A5A5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-
                                         <Label x:Name="LblMn" BackgroundColor="#A5A5A5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-
                                         <Label x:Name="LblTu" BackgroundColor="#A5A5A5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Today Paid" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-
                                         <Label x:Name="LblWe" BackgroundColor="#A5A5A5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
 
                                     </StackLayout>
@@ -51,7 +46,7 @@
                                         <ViewCell>
                                             <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
-                                                 Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                 Spacing="0" BackgroundColor="Black">
 
                                                 <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Party}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                                     <Label.GestureRecognizers>

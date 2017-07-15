@@ -1,4 +1,6 @@
-﻿using System;
+﻿using App2.APIService;
+using App2.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,8 @@ namespace App2.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+        LoginMdl _login = new LoginMdl();
+        API api=new API();
         public HomePage()
         {
             InitializeComponent();
@@ -27,7 +31,7 @@ namespace App2.View
                 GridCas.HeightRequest =
                 GridCon.HeightRequest =
                 GridExp.HeightRequest =
-                GridInv.HeightRequest = calcScreenHieght / 5;
+                GridInv.HeightRequest = calcScreenHieght / 4;
                 GridRec.WidthRequest =
                 GridPay.WidthRequest =
                 GridCas.WidthRequest =
@@ -69,6 +73,18 @@ namespace App2.View
         private void Canceled_Tapped(object sender, EventArgs e)
         {
             DisplayAlert("Message", "Comming Soon", "ok");
-        }  
+        }
+
+        private void Notification_Clicked(object sender, EventArgs e)
+        {
+
+            _login.Username = "";// txtFName.Text;
+            _login.Password = "";// txtPass.Text;
+            _login.DeviceID = "12345";// StaticMethods.getDeviceidentifier();
+            _login.Firebasetoken = "asdgasdggshgdj";
+            _login.Tagtype = "signin";
+            api.PostNotification(_login);
+
+        }
     }
 }

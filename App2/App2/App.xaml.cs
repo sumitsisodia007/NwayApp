@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App2.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace App2
         {
             InitializeComponent();
 
-            MainPage = new App2.View.LoginPage();
+            MainPage = new LoginPage ();
         }
 
         protected override void OnStart()

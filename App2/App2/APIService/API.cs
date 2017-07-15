@@ -13,7 +13,7 @@ namespace App2.APIService
    public class API
     {
         public readonly string BaseURL = "http://192.168.1.2/enway_real/webservice/";
-		//Sumit HOme Commit
+
         #region Login
         public ResponseModel postLogin(LoginMdl lgmdl)
         {
@@ -64,6 +64,90 @@ namespace App2.APIService
             return response_model;
         }
         #endregion
+        
+        #region PostNotification
+        public ResponseModel PostNotification(LoginMdl lgmdl)
+        {
+            ResponseModel response_model = new ResponseModel();
+            Notifications _notifications = null;
+            NotificationDate _notificationdate = null;
+                Tags _tags = null;
+            List<Notifications> _listnotification= new List<Notifications>();
+            List<NotificationDate> _listnotification_dates = new List<NotificationDate>();
+            List<Tags> _listtag = new List<Tags>();
+            try
+            {
+                var RestURL = BaseURL + "index.php";
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(RestURL);
 
+
+                var values = new Dictionary<string, string>
+                {
+                    { "user_id", "1"},
+                    { "device_id", "123"},
+                    { "company_name", "CENTURY 21 TOWN PLANNERS PVT. LTD."},
+                    { "party_id", "7875"},
+                    { "tagtype", "notifications"}
+                };
+
+                var content = new FormUrlEncodedContent(values);
+
+                var response = client.PostAsync(RestURL, content).Result; // Blocking call!
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body. Blocking!
+                    var dataObjects = response.Content.ReadAsStringAsync().Result;
+                    JObject jObj = JObject.Parse(dataObjects);
+                    //_nlistmdl.Error = jObj["error"].ToString();
+                    //_nlistmdl.TagType = jObj["tagtype"].ToString();
+                    response_model.Error = jObj["error"].ToString();
+                    response_model.TagType = jObj["tagtype"].ToString();
+                    _notificationdate = new NotificationDate();
+                    _tags = new Tags();
+                    _notifications = new Notifications();
+                    foreach (var data in jObj["list"])
+                    {   
+                        _notificationdate.Date = (data["date"].ToString());
+                        _notificationdate.NotCount = (data["notcount"].ToString());
+                        
+                    }
+                    foreach (var data1 in jObj["tags"])
+                    {
+                        _tags.Tag = (data1["tag"].ToString());
+                        _tags.NotCount = (data1["notcount"].ToString());
+
+
+                    }
+                    foreach (var data2 in jObj["notifications"])
+                    {
+                        _notifications.Amount_received = (data2["amount_received"].ToString());
+                        _notifications.Company_name = (data2["company_name"].ToString());
+                        _notifications.Current_outstanding = (data2["current_outstanding"].ToString());
+                        _notifications.Information_type = (data2["information_type"].ToString());
+                        _notifications.Party_id = (data2["party_id"].ToString());
+                        _notifications.Party_name = (data2["party_name"].ToString());
+                        _notifications.Party_outstanding = (data2["party_outstanding"].ToString());
+                        _notifications.Site_id = (data2["site_id"].ToString());
+                        _notifications.Site_name = (data2["site_name"].ToString());
+                        _notifications.Tagtype = (data2["tagtype"].ToString());
+                    }
+                    _listtag.Add(_tags);
+                    _listnotification_dates.Add(_notificationdate);
+                    _listnotification.Add(_notifications);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                // StaticMethods.AndroidSnackBar(e.Message);
+            }
+            finally
+            {
+                //content = null;
+            }
+            return response_model;
+        }
+        #endregion
     }
 }
