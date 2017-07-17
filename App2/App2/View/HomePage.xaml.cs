@@ -67,7 +67,7 @@ namespace App2.View
 
         private void Expired_Tapped(object sender, EventArgs e)
         {
-            DisplayAlert("Message", "Comming Soon", "ok");
+            Navigation.PushAsync(new ExpiredSoon());
         }
 
         private void Canceled_Tapped(object sender, EventArgs e)

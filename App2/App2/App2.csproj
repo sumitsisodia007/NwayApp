@@ -42,6 +42,8 @@
     <Compile Include="CustomRenderer\BorderEntry.cs" />
     <Compile Include="CustomRenderer\CurvedCornersLabel.cs" />
     <Compile Include="CustomRenderer\MyEntry.cs" />
+    <Compile Include="ExpandableListView\Food.cs" />
+    <Compile Include="ExpandableListView\FoodGroup.cs" />
     <Compile Include="Interface\IAndroidMethods.cs" />
     <Compile Include="Interface\IIosMethods.cs" />
     <Compile Include="ListTable\ReceivableList.cs" />
@@ -63,6 +65,9 @@
     <Compile Include="View\Ele_CunsPageCont.xaml.cs">
       <DependentUpon>Ele_CunsPageCont.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ExpiredSoon.xaml.cs">
+      <DependentUpon>ExpiredSoon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -71,6 +76,9 @@
     </Compile>
     <Compile Include="View\MasterMenuPage.xaml.cs">
       <DependentUpon>MasterMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NotificationSetting.xaml.cs">
+      <DependentUpon>NotificationSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PayableChart.xaml.cs">
       <DependentUpon>PayableChart.xaml</DependentUpon>
@@ -103,7 +111,7 @@
       <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
-      <HintPath>..\..\..\..\OfficeProject\PostureApp\PostureApp\packages\System.Net.Http.4.1.0\lib\net46\System.Net.Http.dll</HintPath>
+      <HintPath>..\..\..\Project\SportsConn Latest\SportsConn Latest\SportsConn Latest\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
@@ -180,6 +188,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\Account.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\NotificationSetting.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\ExpiredSoon.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
