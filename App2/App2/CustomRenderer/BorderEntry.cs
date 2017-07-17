@@ -9,5 +9,6 @@ namespace App2.CustomRenderer
 {
     public class BorderEntry : Entry
     {
+
     }
 }
