@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App2.ExpandableListView
 {
-   public class Food
+    public class Food
     {
         public string Name { get; set; }
         public string Description { get; set; }

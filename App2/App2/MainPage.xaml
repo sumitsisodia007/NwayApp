@@ -5,12 +5,12 @@
              x:Class="App2.MainPage">
 
     <StackLayout>
-        <ListView x:Name="GroupView"
-                                     GroupDisplayBinding="{Binding Title}"
-                                      RowHeight="75"
-                                      GroupShortNameBinding="{Binding ShortName}"
-                                      IsGroupingEnabled="True">
-            
+        <ListView x:Name="GroupedView"
+                  GroupDisplayBinding="{Binding Title}"
+                  RowHeight="75"
+                  GroupShortNameBinding="{Binding ShortName}"
+                  IsGroupingEnabled="True">
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ImageCell Text="{Binding Name}"
@@ -20,11 +20,13 @@
                                TextColor="Red"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            
+            
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal"
-                                                 HorizontalOptions="FillAndExpand">
+                                     HorizontalOptions="FillAndExpand">
 
                             <Button  Image="{Binding StateIcon}"
                                      BackgroundColor="Transparent"
@@ -35,13 +37,14 @@
                                      CommandParameter="{Binding .}"/>
                             <Label  FontSize="15" 
                                     Text="{Binding TitleWithCount}"
-                                    TextColor="#005569"
-                                    VerticalOptions="CenterAndExpand"/>
+                                    TextColor="Black"
+                                    VerticalOptions="EndAndExpand"/>
 
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>
+            
         </ListView>
 
     </StackLayout>

@@ -1,7 +1,9 @@
-﻿using App2.ExpandableListView;
+﻿
+using App2.ExpandableListView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,46 +15,45 @@ namespace App2
     {
         private ObservableCollection<FoodGroup> _allGroups;
         private ObservableCollection<FoodGroup> _expandedGroups;
+
         public MainPage()
         {
             InitializeComponent();
             try
             {
-                _allGroups = new ObservableCollection<FoodGroup>();
                 _allGroups = FoodGroup.All;
-                UpdateListCounted();
+                UpdateListContent();
             }
             catch (Exception ex)
             {
                 
             }
-            
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            int selectIndex = _expandedGroups.IndexOf(
-                ((FoodGroup)((Button)sender).CommandParameter));
-            _allGroups[selectIndex].Expanded = !_allGroups[selectIndex].Expanded;
+            int selectedIndex = _expandedGroups.IndexOf(
+               ((FoodGroup)((Button)sender).CommandParameter));
+            _allGroups[selectedIndex].Expanded = !_allGroups[selectedIndex].Expanded;
+            UpdateListContent();
 
         }
-        private void UpdateListCounted()
+        private void UpdateListContent()
         {
             _expandedGroups = new ObservableCollection<FoodGroup>();
-            foreach(FoodGroup group in _allGroups)
+            foreach (FoodGroup group in _allGroups)
             {
-                FoodGroup new_group = new FoodGroup(group.Title, group.ShortName, group.Expanded);
-                new_group.FoodCount = group.Count;
+                FoodGroup newGroup = new FoodGroup(group.Title, group.ShortName, group.Expanded);
                 if (group.Expanded)
                 {
-                    foreach(Food food in group)
+                    foreach (Food food in group)
                     {
-                        new_group.Add(food);
+                        newGroup.Add(food);
                     }
-                }_expandedGroups.Add(new_group);
-
+                }
+                _expandedGroups.Add(newGroup);
             }
-            GroupView.ItemsSource = _expandedGroups;
+            GroupedView.ItemsSource = _expandedGroups;
         }
     }
 }

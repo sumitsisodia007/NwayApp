@@ -15,6 +15,7 @@ namespace App2.APIService
         //http://www.compliancestudio.io/blog/xamarin-forms-expandable-listview
         //https://github.com/Kimserey/AccordionView
         //http://www.redbitdev.com/cross-platform-animations-using-xamarin-forms/
+        //https://github.com/ScienceSoft-Inc/ScnSideMenu
 
         public readonly string BaseURL = "http://192.168.1.2/enway_real/webservice/";
 
@@ -74,12 +75,14 @@ namespace App2.APIService
         {
             ResponseModel _response_model = new ResponseModel();
             List<NotificationListMdl> response_model = new List<NotificationListMdl>();
-            Notifications _notifications = null;
+            Receipt_Paid_Notifications _notifications = null;
+            Cancelletion_Notifications _cancelletion_notifications = null;
             NotificationDate _notificationdate = null;
             Tags _tags = null;
 
-            List<Notifications> _listnotification = new List<Notifications>();
+            List<Receipt_Paid_Notifications> _listnotification = new List<Receipt_Paid_Notifications>();
             List<NotificationDate> _listnotification_dates = new List<NotificationDate>();
+            List<Cancelletion_Notifications> _list_cancelletion = new List<Cancelletion_Notifications>();
             List<Tags> _listtag = new List<Tags>();
             try
             {
@@ -108,7 +111,7 @@ namespace App2.APIService
                     _response_model.TagType = jObj["tagtype"].ToString();
                     _notificationdate = new NotificationDate();
                     _tags = new Tags();
-                    _notifications = new Notifications();
+                    _notifications = new Receipt_Paid_Notifications();
                     foreach (var data in jObj["list"])
                     {
                         _notificationdate = new NotificationDate();
@@ -121,11 +124,28 @@ namespace App2.APIService
                             _tags.NotCount = (data1["notcount"].ToString());
                             _tags.TotalAmt = (data1["total_amount"].ToString());
 
-                            try
-                            {
+                            if (_tags.Tag == "invoice_cancelletion")
+                                {
+                                    foreach (var data2 in data1["notifications"])
+                                    {
+                                        _cancelletion_notifications= new Cancelletion_Notifications();
+                                        _cancelletion_notifications.Invoice_code = (data2["invoice_code"].ToString());
+                                        _cancelletion_notifications.Invoice_date = (data2["invoice_date"].ToString());
+                                        _cancelletion_notifications.Customer_id= (data2["customer_name"].ToString());
+                                        _cancelletion_notifications.Customer_name= (data2["customer_id"].ToString());
+                                        _cancelletion_notifications.Cancelled_by = (data2["cancelled_by"].ToString());
+                                        _cancelletion_notifications.Cancelled_by_id = (data2["cancelled_by_id"].ToString());
+                                        _cancelletion_notifications.Information_type = (data2["information_type"].ToString());
+                                        _cancelletion_notifications.Tagtype = (data2["tagtype"].ToString());
+                                   
+                                    _list_cancelletion.Add(_cancelletion_notifications);
+                                    }                              
+                                }
+                            else
+                                {
                                 foreach (var data2 in data1["notifications"])
                                 {
-                                    _notifications = new Notifications();
+                                    _notifications = new Receipt_Paid_Notifications();
                                     _notifications.Amount_received = (data2["amount_received"].ToString());
                                     _notifications.Company_name = (data2["company_name"].ToString());
                                     _notifications.Current_outstanding = (data2["current_outstanding"].ToString());
@@ -138,18 +158,13 @@ namespace App2.APIService
                                     _notifications.Tagtype = (data2["tagtype"].ToString());
                                     _listnotification.Add(_notifications);
                                 }
-                                _listtag.Add(_tags);
                             }
-                            catch (Exception ex)
-                            {
-                                
-                            }
+                            _listtag.Add(_tags);
                         }
 
-                        _listnotification_dates.Add(_notificationdate);
+                         _listnotification_dates.Add(_notificationdate);
+                        }    
                     }
-
-                }
 
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
-﻿using App2.View;
+﻿using App2.ExpandableListView;
+using App2.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace App2
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()

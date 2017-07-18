@@ -35,12 +35,8 @@
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
 
                                         <Label x:Name="LblSu" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Month" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-
                                         <Label x:Name="LblMn" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Dr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-
                                         <Label x:Name="LblTu" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Cr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-
-
                                         <Label x:Name="LblWe" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Balance" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
 
                                     </StackLayout>
