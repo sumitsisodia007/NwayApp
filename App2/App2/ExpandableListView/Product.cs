@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace App2.ExpandableListView
 {
-    public class Food
+    public class Product
     {
         public string Name { get; set; }
-        public bool IsVisible { get; set; }
-        //public string Description { get; set; }
-        //public string Icon { get; set; }
 
+        public bool IsVisible { get; set; }
     }
 }

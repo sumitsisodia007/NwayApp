@@ -2,32 +2,77 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.View.Expand"
-             BackgroundColor="Gray">
-    <StackLayout Orientation="Horizontal"
-                                                 HorizontalOptions="FillAndExpand"
-                                                 Spacing="0" BackgroundColor="Black">
+             BackgroundColor="Gray"
+             xmlns:local="clr-namespace:App2.ExpandableListView">
+   
+    <!--
+    <ContentPage.BindingContext>
+        <viewModels:Main/>
+    </ContentPage.BindingContext>
 
-        <Label  BackgroundColor="Red" HorizontalOptions="FillAndExpand"  FontSize="18" Text="fgndl" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-            </Label.GestureRecognizers>
-        </Label>
-    </StackLayout>
-    <!--<ContentPage.Content>
-        <StackLayout>
-            <ListView x:Name="ReferencesNew" ItemsSource="{Binding ParentItems}">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="Goldenrod" Padding="20">
+            
+            <ListView  ItemsSource="{Binding ParentItems}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ListView  ItemsSource="{Binding ChildItems}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <TextCell Text="{Binding ChildTitle}" Detail="{Binding ChildSubTitle }"/>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                        <StackLayout BackgroundColor="Goldenrod" Padding="20">
+                            <TextCell Text="{Binding ChildTitle}" Detail="{Binding ChildSubTitle }"/>
+                            <StackLayout BackgroundColor="Goldenrod" Padding="20">
+                                <ListView  ItemsSource="{Binding ChildItems}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextCell Text="{Binding ChildTitle}" Detail="{Binding ChildSubTitle }"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </StackLayout>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-    </ContentPage.Content>-->
+    </ContentPage.Content>
+    -->
+
+    <ContentPage.BindingContext>
+        <local:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <ListView ItemsSource="{Binding Products}"
+              HasUnevenRows="True"
+              ItemTapped="ListView_OnItemTapped"
+              Margin="0,80"
+              BackgroundColor="Silver">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Padding="20">
+                        <Label Text="{Binding .Name}"
+                               TextColor="Navy"
+                               FontSize="30"/>
+                        <StackLayout IsVisible="{Binding IsVisible}"
+                                     Orientation="Horizontal"
+                                     Margin="0,30,0,0">
+                            <Button Text="Details"
+                                    BackgroundColor="DarkGreen"
+                                    TextColor="White"
+                                    WidthRequest="80"
+                                    FontSize="12" />
+                            <Button Text="Edit"
+                                    BackgroundColor="DodgerBlue"
+                                    TextColor="White"
+                                    WidthRequest="80"
+                                    FontSize="12"/>
+                            <Button Text="Delete"
+                                    BackgroundColor="DarkRed"
+                                    TextColor="White"
+                                    WidthRequest="80"
+                                    FontSize="12" />
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

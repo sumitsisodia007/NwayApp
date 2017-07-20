@@ -2,51 +2,75 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:App2"
-             x:Class="App2.MainPage">
+             x:Class="App2.MainPage"
+             Title="Notification">
 
-    <StackLayout>
-        <ListView x:Name="GroupedView"
-                  GroupDisplayBinding="{Binding Title}"
-                  RowHeight="75"
-                  GroupShortNameBinding="{Binding ShortName}"
-                  IsGroupingEnabled="True">
+    <ContentPage.Content>
 
+
+        <ListView  x:Name="GroupedView"
+                    GroupDisplayBinding="{Binding Title}"
+                    RowHeight="75"
+                    GroupShortNameBinding="{Binding ShortName}"
+                    IsGroupingEnabled="true">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ImageCell Text="{Binding Name}"
-                               Detail="{Binding Description}"
-                               ImageSource="{Binding Icon}"
-                               Height="75"
-                               TextColor="Red"/>
+                    <ViewCell>
+                      
+                        <!--<ImageCell Text="{Binding Name}"
+                                Detail="{Binding Description}"
+                                ImageSource="{Binding Icon}"
+                                Height="75"
+                                TextColor="#005569"/>-->
+                        <StackLayout Padding="0">
+                            <Label Text="{Binding Name}"
+                               TextColor="Navy"
+                               FontSize="24"/>
+                            <StackLayout IsVisible="True"
+                                     Orientation="Horizontal"
+                                     Margin="0">
+                                <Button Text="Details"
+                                    BackgroundColor="DarkGreen"
+                                    TextColor="White"
+                                    WidthRequest="80"
+                                    FontSize="12" />
+                                <Button Text="Edit"
+                                    BackgroundColor="DodgerBlue"
+                                    TextColor="White"
+                                    WidthRequest="80"
+                                    FontSize="12"/>
+                                <Button Text="Delete"
+                                    BackgroundColor="DarkRed"
+                                    TextColor="White"
+                                    WidthRequest="80"
+                                    FontSize="12" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            
-            
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal"
-                                     HorizontalOptions="FillAndExpand">
-
-                            <Button  Image="{Binding StateIcon}"
-                                     BackgroundColor="Transparent"
-                                     BorderColor="Transparent"
-                                     BorderWidth="0"
-                                     FontSize="18"
-                                     Clicked="Button_Clicked"
-                                     CommandParameter="{Binding .}"/>
-                            <Label  FontSize="15" 
-                                    Text="{Binding TitleWithCount}"
-                                    TextColor="Black"
-                                    VerticalOptions="EndAndExpand"/>
-
+                        <StackLayout Orientation="Horizontal" Padding="5,5,5,5" BackgroundColor="#E2F5F9">
+                            
+                            <Label Text="{Binding TitleWithItemCount}" 
+                                     TextColor="#005569"
+                                     FontSize="15"
+                                     VerticalOptions="Center"/>
+                            <Button Image="{Binding StateIcon}"
+                                    HorizontalOptions="EndAndExpand"
+                                      BackgroundColor="Transparent"
+                                      BorderColor="Transparent"
+                                      BorderWidth="0"
+                                      Clicked="HeaderTapped" 
+                                      CommandParameter="{Binding .}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>
-            
         </ListView>
 
-    </StackLayout>
 
+    </ContentPage.Content>
 </ContentPage>

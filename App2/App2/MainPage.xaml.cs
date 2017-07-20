@@ -19,31 +19,37 @@ namespace App2
         public MainPage()
         {
             InitializeComponent();
+            _allGroups = FoodGroup.All;
+            UpdateListContent();
+        }
+
+        private void HeaderTapped(object sender, EventArgs args)
+        {
             try
             {
-                _allGroups = FoodGroup.All;
+                int selectedIndex = _expandedGroups.IndexOf(
+                ((FoodGroup)((Button)sender).CommandParameter));
+                _allGroups[selectedIndex].Expanded = !_allGroups[selectedIndex].Expanded;
                 UpdateListContent();
             }
             catch (Exception ex)
             {
-                
+
+                DisplayAlert("Message", ex.Message, "OK");
             }
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            int selectedIndex = _expandedGroups.IndexOf(
-               ((FoodGroup)((Button)sender).CommandParameter));
-            _allGroups[selectedIndex].Expanded = !_allGroups[selectedIndex].Expanded;
-            UpdateListContent();
-
-        }
         private void UpdateListContent()
         {
+            try
+            {
             _expandedGroups = new ObservableCollection<FoodGroup>();
             foreach (FoodGroup group in _allGroups)
             {
+                //Create new FoodGroups so we do not alter original list
                 FoodGroup newGroup = new FoodGroup(group.Title, group.ShortName, group.Expanded);
+                //Add the count of food items for Lits Header Titles to use
+                newGroup.FoodCount = group.Count;
                 if (group.Expanded)
                 {
                     foreach (Food food in group)
@@ -54,6 +60,12 @@ namespace App2
                 _expandedGroups.Add(newGroup);
             }
             GroupedView.ItemsSource = _expandedGroups;
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Message", ex.Message, "OK");
+            }
+           
         }
     }
 }

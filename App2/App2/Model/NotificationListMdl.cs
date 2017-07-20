@@ -11,22 +11,21 @@ namespace App2.Model
         public string TagType { get; set; }
         public string Error { get; set; }
         public List<NotificationDate> _notification_dates { get; set; }
-        public List<Tags> _tag { get; set; }
-        public List<Receipt_Paid_Notifications> _notification { get; set; }
-        public List<Cancelletion_Notifications> _Cancellation { get; set; }
     }
 
    public class NotificationDate
     {
         public string Date{ get; set; }
         public string NotCount{ get; set; }
-
+        public List<Tags> _tag { get; set; }
     }
     public class Tags
     {
         public string Tag{ get; set; }
         public string NotCount{ get; set; }
         public string TotalAmt { get; set; }
+        public List<Receipt_Paid_Notifications> _notification { get; set; }
+        public List<Cancelletion_Notifications> _Cancellation { get; set; }
     }
     public class Receipt_Paid_Notifications
     {
@@ -51,6 +50,5 @@ namespace App2.Model
         public string Cancelled_by_id { get; set; }
         public string Information_type { get; set; }
         public string Tagtype { get; set; }
-        
     }
 }

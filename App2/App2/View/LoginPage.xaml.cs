@@ -43,7 +43,7 @@ namespace App2.View
             _Loading.IsRunning = true;
             _login.Username =  txtFName.Text;
             _login.Password = txtPass.Text;
-            _login.DeviceID = "12345";// StaticMethods.getDeviceidentifier();
+            _login.DeviceID =  StaticMethods.getDeviceidentifier();
             _login.Firebasetoken = "asdgasdggshgdj";
             _login.Tagtype = "signin";
 

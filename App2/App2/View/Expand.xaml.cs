@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App2.ExpandableListView;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,11 @@ namespace App2.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Expand : ContentPage
 	{
-		public Expand ()
+        
+        public Expand ()
 		{
 			InitializeComponent ();
-            
-		}
+        }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
@@ -25,47 +26,18 @@ namespace App2.View
             //if (callback != null)
             //    callback.Invoke();
         }
-    }
-
-    public class YourViewModel
-    {
-        //This is for Parent List
-        private List<ParentListClass> _parentItems;
-        public List<ParentListClass> ParentItems
+        private void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            get { return _parentItems; }
-            set { _parentItems = value; }
+            var product = e.Item as Product;
+            var vm = BindingContext as MainViewModel;
+            vm?.ShowOrHidePoducts(product);
         }
-
-        public YourViewModel()
-        {
-            //ParentItems=new List<ParentListClass>
-            //{
-            //    new ParentListClass{ChildItems=,}
-            //}
-        }
+        //private void ListViewFood_OnItemTapped(object sender, ItemTappedEventArgs e)
+        //{
+        //    var product = e.Item as Food;
+        //    var vm = BindingContext as MainViewModel;
+        //    vm?.ShowOrHideFoods(product);
+        //}
     }
-
-    public class ParentListClass
-    {
-        public string ParentTitle { get; set; }
-
-        //This is for child List
-        public List<ChildListClass> ChildItems { get; set; }
-        public ParentListClass()
-        {
-            ChildItems = new List<ChildListClass>
-            {
-                new ChildListClass{ChildSubTitle="Amit" ,ChildTitle="A"},
-                new ChildListClass{ChildSubTitle="Amit" ,ChildTitle="A"},
-                new ChildListClass{ChildSubTitle="Amit" ,ChildTitle="A"},
-            };
-        }
-    }
-
-    public class ChildListClass
-    {
-        public string ChildTitle { get; set; }
-        public string ChildSubTitle { get; set; }
-    }
+    
 }

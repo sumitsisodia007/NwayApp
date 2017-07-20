@@ -44,6 +44,8 @@
     <Compile Include="CustomRenderer\MyEntry.cs" />
     <Compile Include="ExpandableListView\Food.cs" />
     <Compile Include="ExpandableListView\FoodGroup.cs" />
+    <Compile Include="ExpandableListView\MainViewModel.cs" />
+    <Compile Include="ExpandableListView\Product.cs" />
     <Compile Include="Interface\IAndroidMethods.cs" />
     <Compile Include="Interface\IIosMethods.cs" />
     <Compile Include="ListTable\ReceivableList.cs" />
@@ -207,7 +209,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\Expand.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

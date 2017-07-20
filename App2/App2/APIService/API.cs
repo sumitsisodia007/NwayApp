@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -10,12 +11,9 @@ using System.Threading.Tasks;
 
 namespace App2.APIService
 {
-   public class API
+    public class API
     {
-        //http://www.compliancestudio.io/blog/xamarin-forms-expandable-listview
-        //https://github.com/Kimserey/AccordionView
-        //http://www.redbitdev.com/cross-platform-animations-using-xamarin-forms/
-        //https://github.com/ScienceSoft-Inc/ScnSideMenu
+        
 
         public readonly string BaseURL = "http://192.168.1.2/enway_real/webservice/";
 
@@ -29,7 +27,7 @@ namespace App2.APIService
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(RestURL);
 
-              
+
                 var values = new Dictionary<string, string>
                 {
                     { "username", lgmdl.Username},
@@ -49,18 +47,18 @@ namespace App2.APIService
                     JObject jObj = JObject.Parse(dataObjects);
                     response_model.Message = jObj["message"].ToString();
                     response_model.Error = jObj["error"].ToString();
-                    response_model.FullName= jObj["full_name"].ToString();
+                    response_model.FullName = jObj["full_name"].ToString();
                     response_model.User_Id = jObj["user_id"].ToString();
                     response_model.Min_Receipt_Amt = jObj["min_receipt_amount"].ToString();
                     response_model.Notification_Day_Count = jObj["notification_day_count"].ToString();
                     response_model.TagType = jObj["tagtype"].ToString();
-                    
+
                 }
 
             }
             catch (Exception ex)
             {
-               // StaticMethods.AndroidSnackBar(e.Message);
+                // StaticMethods.AndroidSnackBar(e.Message);
             }
             finally
             {
@@ -71,19 +69,19 @@ namespace App2.APIService
         #endregion
 
         #region PostNotification
-        public List<NotificationListMdl> PostNotification(LoginMdl lgmdl)
+        public ObservableCollection<NotificationListMdl> PostNotification(LoginMdl lgmdl)
         {
             ResponseModel _response_model = new ResponseModel();
-            List<NotificationListMdl> response_model = new List<NotificationListMdl>();
+            ObservableCollection<NotificationListMdl> response_model = new ObservableCollection<NotificationListMdl>();
             Receipt_Paid_Notifications _notifications = null;
             Cancelletion_Notifications _cancelletion_notifications = null;
             NotificationDate _notificationdate = null;
             Tags _tags = null;
 
-            List<Receipt_Paid_Notifications> _listnotification = new List<Receipt_Paid_Notifications>();
-            List<NotificationDate> _listnotification_dates = new List<NotificationDate>();
-            List<Cancelletion_Notifications> _list_cancelletion = new List<Cancelletion_Notifications>();
-            List<Tags> _listtag = new List<Tags>();
+            ObservableCollection<Receipt_Paid_Notifications> _listnotification = new ObservableCollection<Receipt_Paid_Notifications>();
+            ObservableCollection<NotificationDate> _listnotification_dates = new ObservableCollection<NotificationDate>();
+            ObservableCollection<Cancelletion_Notifications> _list_cancelletion = new ObservableCollection<Cancelletion_Notifications>();
+            ObservableCollection<Tags> _listtag = new ObservableCollection<Tags>();
             try
             {
                 var RestURL = BaseURL + "index.php";
@@ -117,54 +115,53 @@ namespace App2.APIService
                         _notificationdate = new NotificationDate();
                         _notificationdate.Date = (data["date"].ToString());
                         _notificationdate.NotCount = (data["notcount"].ToString());
+                        _listnotification_dates.Add(_notificationdate);
                         foreach (var data1 in data["tags"])
                         {
                             _tags = new Tags();
                             _tags.Tag = (data1["tag"].ToString());
                             _tags.NotCount = (data1["notcount"].ToString());
                             _tags.TotalAmt = (data1["total_amount"].ToString());
-
-                            if (_tags.Tag == "invoice_cancelletion")
-                                {
-                                    foreach (var data2 in data1["notifications"])
-                                    {
-                                        _cancelletion_notifications= new Cancelletion_Notifications();
-                                        _cancelletion_notifications.Invoice_code = (data2["invoice_code"].ToString());
-                                        _cancelletion_notifications.Invoice_date = (data2["invoice_date"].ToString());
-                                        _cancelletion_notifications.Customer_id= (data2["customer_name"].ToString());
-                                        _cancelletion_notifications.Customer_name= (data2["customer_id"].ToString());
-                                        _cancelletion_notifications.Cancelled_by = (data2["cancelled_by"].ToString());
-                                        _cancelletion_notifications.Cancelled_by_id = (data2["cancelled_by_id"].ToString());
-                                        _cancelletion_notifications.Information_type = (data2["information_type"].ToString());
-                                        _cancelletion_notifications.Tagtype = (data2["tagtype"].ToString());
-                                   
-                                    _list_cancelletion.Add(_cancelletion_notifications);
-                                    }                              
-                                }
-                            else
-                                {
-                                foreach (var data2 in data1["notifications"])
-                                {
-                                    _notifications = new Receipt_Paid_Notifications();
-                                    _notifications.Amount_received = (data2["amount_received"].ToString());
-                                    _notifications.Company_name = (data2["company_name"].ToString());
-                                    _notifications.Current_outstanding = (data2["current_outstanding"].ToString());
-                                    _notifications.Information_type = (data2["information_type"].ToString());
-                                    _notifications.Party_id = (data2["party_id"].ToString());
-                                    _notifications.Party_name = (data2["party_name"].ToString());
-                                    _notifications.Party_outstanding = (data2["party_outstanding"].ToString());
-                                    _notifications.Site_id = (data2["site_id"].ToString());
-                                    _notifications.Site_name = (data2["site_name"].ToString());
-                                    _notifications.Tagtype = (data2["tagtype"].ToString());
-                                    _listnotification.Add(_notifications);
-                                }
-                            }
                             _listtag.Add(_tags);
-                        }
 
-                         _listnotification_dates.Add(_notificationdate);
-                        }    
+                            //if (_tags.Tag == "invoice_cancelletion")
+                            //{
+                            //    foreach (var data2 in data1["notifications"])
+                            //    {
+                            //        _cancelletion_notifications = new Cancelletion_Notifications();
+                            //        _cancelletion_notifications.Invoice_code = (data2["invoice_code"].ToString());
+                            //        _cancelletion_notifications.Invoice_date = (data2["invoice_date"].ToString());
+                            //        _cancelletion_notifications.Customer_id = (data2["customer_name"].ToString());
+                            //        _cancelletion_notifications.Customer_name = (data2["customer_id"].ToString());
+                            //        _cancelletion_notifications.Cancelled_by = (data2["cancelled_by"].ToString());
+                            //        _cancelletion_notifications.Cancelled_by_id = (data2["cancelled_by_id"].ToString());
+                            //        _cancelletion_notifications.Information_type = (data2["information_type"].ToString());
+                            //        _cancelletion_notifications.Tagtype = (data2["tagtype"].ToString());
+
+                            //        _list_cancelletion.Add(_cancelletion_notifications);
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    foreach (var data2 in data1["notifications"])
+                            //    {
+                            //        _notifications = new Receipt_Paid_Notifications();
+                            //        _notifications.Amount_received = (data2["amount_received"].ToString());
+                            //        _notifications.Company_name = (data2["company_name"].ToString());
+                            //        _notifications.Current_outstanding = (data2["current_outstanding"].ToString());
+                            //        _notifications.Information_type = (data2["information_type"].ToString());
+                            //        _notifications.Party_id = (data2["party_id"].ToString());
+                            //        _notifications.Party_name = (data2["party_name"].ToString());
+                            //        _notifications.Party_outstanding = (data2["party_outstanding"].ToString());
+                            //        _notifications.Site_id = (data2["site_id"].ToString());
+                            //        _notifications.Site_name = (data2["site_name"].ToString());
+                            //        _notifications.Tagtype = (data2["tagtype"].ToString());
+                            //        _listnotification.Add(_notifications);
+                            //    }
+                            //}
+                        }
                     }
+                }
 
             }
             catch (Exception ex)
