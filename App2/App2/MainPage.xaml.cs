@@ -19,7 +19,7 @@ namespace App2
         public MainPage()
         {
             InitializeComponent();
-            _allGroups = FoodGroup.All;
+            _allGroups = FoodGroup.Groups;
             UpdateListContent();
         }
 
@@ -66,6 +66,27 @@ namespace App2
                 DisplayAlert("Message", ex.Message, "OK");
             }
            
+        }
+        private void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+
+            Food food = (Food)e.Item;
+            if (food.IsVisible == false)
+            {
+               
+                food.IsVisible = true; UpdateListContent();
+            }
+            else
+            {
+                food.IsVisible = false; UpdateListContent();
+            }
+            //var viewModel = (MyViewModel)cell.BindingContext;
+
+            //Xamarin.Forms.StackLayout img = (Xamarin.Forms.StackLayout)sender;
+            //Xamarin.Forms.st objFileImageSource = (Xamarin.Forms.FileImageSource)img.Source;
+            //var product = e.Item as Product;
+            //var vm = BindingContext as MainViewModel;
+            //vm?.ShowOrHidePoducts(product);
         }
     }
 }

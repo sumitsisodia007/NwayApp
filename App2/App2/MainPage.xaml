@@ -6,13 +6,13 @@
              Title="Notification">
 
     <ContentPage.Content>
-
-
         <ListView  x:Name="GroupedView"
                     GroupDisplayBinding="{Binding Title}"
-                    RowHeight="75"
+                    RowHeight="80"
+                   HasUnevenRows="True"
                     GroupShortNameBinding="{Binding ShortName}"
-                    IsGroupingEnabled="true">
+                    IsGroupingEnabled="true"
+                   ItemTapped="ListView_OnItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -22,28 +22,21 @@
                                 ImageSource="{Binding Icon}"
                                 Height="75"
                                 TextColor="#005569"/>-->
-                        <StackLayout Padding="0">
+                        <StackLayout Padding="20,0,0,0">
                             <Label Text="{Binding Name}"
                                TextColor="Navy"
                                FontSize="24"/>
-                            <StackLayout IsVisible="True"
+                            <StackLayout BackgroundColor="Beige"
+                                Padding="20,0,0,0"
+                                IsVisible="{Binding IsVisible}"
                                      Orientation="Horizontal"
                                      Margin="0">
-                                <Button Text="Details"
-                                    BackgroundColor="DarkGreen"
-                                    TextColor="White"
-                                    WidthRequest="80"
-                                    FontSize="12" />
-                                <Button Text="Edit"
-                                    BackgroundColor="DodgerBlue"
-                                    TextColor="White"
-                                    WidthRequest="80"
-                                    FontSize="12"/>
                                 <Button Text="Delete"
-                                    BackgroundColor="DarkRed"
-                                    TextColor="White"
+                                    BackgroundColor="White"
+                                    TextColor="Black"
                                     WidthRequest="80"
-                                    FontSize="12" />
+                                    FontSize="12"
+                                        HorizontalOptions="FillAndExpand"/>
                             </StackLayout>
                         </StackLayout>
                     </ViewCell>

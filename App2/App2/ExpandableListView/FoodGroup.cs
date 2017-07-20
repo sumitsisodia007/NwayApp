@@ -45,9 +45,9 @@ namespace App2.ExpandableListView
             Expanded = expanded;
         }
 
-        public  ObservableCollection<FoodGroup> Groups { private set; get; }
+        public static ObservableCollection<FoodGroup> Groups { private set; get; }
        
-        public FoodGroup()
+        static FoodGroup()
         { 
             Groups = new ObservableCollection<FoodGroup>{
                 new FoodGroup("Carbohydrates","C"){
@@ -108,9 +108,9 @@ namespace App2.ExpandableListView
 
         private void UpdateFoods(Food food)
         {
-            var index = Groups.IndexOf(food);
-            Groups.Remove(food);
-            Groups.Insert(index, food);
+            //var index = Groups.IndexOf(food);
+            //Groups.Remove(food);
+            //Foods.Insert(index, food);
         }
     }
 }
