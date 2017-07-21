@@ -9,7 +9,8 @@
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <ScrollView>
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <local:MyEntry  FontSize="15" BackgroundColor="White" 
+                    <local:MyEntry  FontSize="15"
+                                    BackgroundColor="White" 
                             Placeholder="Select Party"
                             HorizontalOptions="FillAndExpand" 
                             TextColor="Black"

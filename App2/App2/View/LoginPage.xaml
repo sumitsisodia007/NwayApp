@@ -55,7 +55,21 @@
                 </StackLayout>
 
                 <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20" Orientation="Vertical" Padding="16,0,16,0">
-                    <Button x:Name="btnLogin" BackgroundColor="#4472C4"  FontSize="17"  HorizontalOptions="CenterAndExpand" Text="LOGIN" FontAttributes="Bold" TextColor="White" Clicked="btnLogin_Clicked"/>
+                <local:CurvedCornersLabel x:Name="Img1" Text="Login"
+                                                      HorizontalTextAlignment="Center"
+                                                      VerticalTextAlignment="Center"
+                                                      FontSize="17"
+                                                      HeightRequest="40"
+                                                      CurvedBackgroundColor="#4472C4"
+                                                      TextColor="White"
+                                                      CurvedCornerRadius="10"
+                                                      FontAttributes="Bold"
+                                          WidthRequest="100">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="btnLogin_Clicked" />
+                    </Label.GestureRecognizers>
+                </local:CurvedCornersLabel>
+                <!--<Button x:Name="btnLogin" BackgroundColor="#4472C4"   TextColor="White" Clicked="btnLogin_Clicked"/>-->
             <ActivityIndicator x:Name="_Loading" IsRunning="False" />    
                 </StackLayout>
        

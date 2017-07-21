@@ -17,6 +17,7 @@ namespace App2.View
         public Expand ()
 		{
 			InitializeComponent ();
+           
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)

@@ -58,6 +58,7 @@
     <Compile Include="Model\ResponseModel.cs" />
     <Compile Include="NativeMathods\StaticMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ViewModelObject.cs" />
     <Compile Include="View\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
@@ -81,6 +82,9 @@
     </Compile>
     <Compile Include="View\MasterMenuPage.xaml.cs">
       <DependentUpon>MasterMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NotificationCont.xaml.cs">
+      <DependentUpon>NotificationCont.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\NotificationSetting.xaml.cs">
       <DependentUpon>NotificationSetting.xaml</DependentUpon>
@@ -210,7 +214,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModel\" />
+    <EmbeddedResource Include="View\NotificationCont.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\Expand.xaml">

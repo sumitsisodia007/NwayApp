@@ -8,17 +8,17 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh" Clicked="Notification_Clicked">
             <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_notifications" Android="icon_fan" />
+                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_notification" Android="icon_notification" />
             </ToolbarItem.Icon>
         </ToolbarItem>
         <ToolbarItem Text="Refresh">
             <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_fan" Android="icon_fan" />
+                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_notification" Android="icon_notification" />
             </ToolbarItem.Icon>
         </ToolbarItem>
         <ToolbarItem Text="Refresh">
             <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_fan" Android="icon_fan" />
+                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_notification" Android="icon_notification" />
             </ToolbarItem.Icon>
         </ToolbarItem>
     </ContentPage.ToolbarItems>

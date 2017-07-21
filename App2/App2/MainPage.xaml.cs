@@ -1,5 +1,6 @@
 ﻿
 using App2.ExpandableListView;
+using App2.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -74,11 +75,13 @@ namespace App2
             if (food.IsVisible == false)
             {
                
-                food.IsVisible = true; UpdateListContent();
+                food.IsVisible = true;
+                UpdateListContent();
             }
             else
             {
-                food.IsVisible = false; UpdateListContent();
+                food.IsVisible = false;
+                UpdateListContent();
             }
             //var viewModel = (MyViewModel)cell.BindingContext;
 
@@ -87,6 +90,11 @@ namespace App2
             //var product = e.Item as Product;
             //var vm = BindingContext as MainViewModel;
             //vm?.ShowOrHidePoducts(product);
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new NotificationCont());
         }
     }
 }

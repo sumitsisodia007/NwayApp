@@ -1,5 +1,6 @@
 ﻿using App2.APIService;
 using App2.Model;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -44,36 +45,46 @@ namespace App2.ExpandableListView
             ShortName = shortName;
             Expanded = expanded;
         }
+        //public System.Collections.Generic.List<Description> MyProperty { get; set; }
+
+       public static List<Description> list1 = new List<Description>();
+       
 
         public static ObservableCollection<FoodGroup> Groups { private set; get; }
        
         static FoodGroup()
-        { 
+        {
+            list1.Add(new Description { MyProperty="Sumit"});
+            list1.Add(new Description { MyProperty = "Amit" });
+            list1.Add(new Description { MyProperty = "Ankit" });
+            list1.Add(new Description { MyProperty = "Pawan" });
+
             Groups = new ObservableCollection<FoodGroup>{
                 new FoodGroup("Carbohydrates","C"){
-                    new Food { Name = "pasta", IsVisible = false,  },
-                    new Food { Name = "potato", IsVisible = false,},
-                    new Food { Name = "bread",  IsVisible = false,},
-                    new Food { Name = "rice", IsVisible = false, },
+                    new Food { Name = "pasta", IsVisible = false,Obj_MyProperty=list1 },
+                    new Food { Name = "potato", IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "bread",  IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "rice", IsVisible = false, Obj_MyProperty=list1},
                 },
                 new FoodGroup("Fruits","F"){
-                    new Food { Name = "apple", IsVisible = false,},
-                    new Food { Name = "banana",  IsVisible = false,},
-                    new Food { Name = "pear", IsVisible = false, },
+                    new Food { Name = "apple", IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "banana",  IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "pear", IsVisible = false, Obj_MyProperty=list1},
                 },
                 new FoodGroup("Vegetables","V"){
-                    new Food { Name = "carrot", IsVisible = false,},
-                    new Food { Name = "green bean",  IsVisible = false,},
-                    new Food { Name = "broccoli",  IsVisible = false,},
-                    new Food { Name = "peas",  IsVisible = false,},
+                    new Food { Name = "carrot", IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "green bean",  IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "broccoli",  IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "peas",  IsVisible = false,Obj_MyProperty=list1},
                 },
                 new FoodGroup("Dairy","D"){
-                    new Food { Name = "Milk", IsVisible = false, },
-                    new Food { Name = "Cheese", IsVisible = false,},
-                    new Food { Name = "Ice Cream", IsVisible = false,},
+                    new Food { Name = "Milk", IsVisible = false,  Obj_MyProperty=list1},
+                    new Food { Name = "Cheese", IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "Ice Cream", IsVisible = false,Obj_MyProperty=list1},
 
                 } };
         }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -112,5 +123,6 @@ namespace App2.ExpandableListView
             //Groups.Remove(food);
             //Foods.Insert(index, food);
         }
+        
     }
 }

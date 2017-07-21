@@ -31,12 +31,28 @@
                                 IsVisible="{Binding IsVisible}"
                                      Orientation="Horizontal"
                                      Margin="0">
-                                <Button Text="Delete"
+                                <StackLayout Padding="20,0,0,0">
+                                    <Label Text="{Binding Obj_MyProperty}"
+                                        TextColor="Navy"
+                                        FontSize="24"/>
+                                </StackLayout>
+                                <!--<Button Text="{Binding Obj_MyProperty}"
+                                                            BackgroundColor="White"
+                                                            TextColor="Black"
+                                                            WidthRequest="80"
+                                                            FontSize="12"
+                                                          Clicked="Button_Clicked"
+                                                            HorizontalOptions="FillAndExpand"/>-->
+                                             
+                                   
+                                   
+              
+                                <!--<Button Text="{Binding Description}"
                                     BackgroundColor="White"
                                     TextColor="Black"
                                     WidthRequest="80"
                                     FontSize="12"
-                                        HorizontalOptions="FillAndExpand"/>
+                                        HorizontalOptions="FillAndExpand"/>-->
                             </StackLayout>
                         </StackLayout>
                     </ViewCell>
