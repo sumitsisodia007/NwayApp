@@ -40,8 +40,7 @@
     </ContentPage.BindingContext>
 
     <ListView x:Name="MainList"
-        ItemsSource="{Binding _Outerdata}"
-              >
+        ItemsSource="{Binding _Outerdata}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <StackLayout >

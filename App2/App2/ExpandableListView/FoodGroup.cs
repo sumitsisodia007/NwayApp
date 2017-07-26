@@ -47,18 +47,21 @@ namespace App2.ExpandableListView
         }
         //public System.Collections.Generic.List<Description> MyProperty { get; set; }
 
-       public static List<Description> list1 = new List<Description>();
+
        
+        
 
         public static ObservableCollection<FoodGroup> Groups { private set; get; }
-       
+        public static List<Description> description { private set; get; }
+        public static List<Description> list1 = new List<Description>();
+
         static FoodGroup()
         {
-            list1.Add(new Description { MyProperty="Sumit"});
+            list1.Add(new Description { MyProperty = "Sumit"});
             list1.Add(new Description { MyProperty = "Amit" });
             list1.Add(new Description { MyProperty = "Ankit" });
             list1.Add(new Description { MyProperty = "Pawan" });
-
+            description = list1;
             Groups = new ObservableCollection<FoodGroup>{
                 new FoodGroup("Carbohydrates","C"){
                     new Food { Name = "pasta", IsVisible = false,Obj_MyProperty=list1 },
@@ -81,8 +84,8 @@ namespace App2.ExpandableListView
                     new Food { Name = "Milk", IsVisible = false,  Obj_MyProperty=list1},
                     new Food { Name = "Cheese", IsVisible = false,Obj_MyProperty=list1},
                     new Food { Name = "Ice Cream", IsVisible = false,Obj_MyProperty=list1},
-
-                } };
+                }
+            };
         }
 
 

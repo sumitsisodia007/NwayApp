@@ -16,5 +16,10 @@ namespace App2.View
         {
             InitializeComponent();
         }
+        public NotificationCont(string name)
+        {
+            InitializeComponent();
+            this.Title = name;
+        }
     }
 }

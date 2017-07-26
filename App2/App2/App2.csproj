@@ -48,7 +48,6 @@
     <Compile Include="ExpandableListView\Product.cs" />
     <Compile Include="Interface\IAndroidMethods.cs" />
     <Compile Include="Interface\IIosMethods.cs" />
-    <Compile Include="ListTable\ReceivableList.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

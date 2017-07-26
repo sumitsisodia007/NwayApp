@@ -70,31 +70,35 @@ namespace App2
         }
         private void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-
+            
             Food food = (Food)e.Item;
-            if (food.IsVisible == false)
-            {
-               
-                food.IsVisible = true;
-                UpdateListContent();
-            }
-            else
-            {
-                food.IsVisible = false;
-                UpdateListContent();
-            }
-            //var viewModel = (MyViewModel)cell.BindingContext;
+          
+            //if (food.IsVisible == false)
+            //{
 
-            //Xamarin.Forms.StackLayout img = (Xamarin.Forms.StackLayout)sender;
-            //Xamarin.Forms.st objFileImageSource = (Xamarin.Forms.FileImageSource)img.Source;
-            //var product = e.Item as Product;
-            //var vm = BindingContext as MainViewModel;
-            //vm?.ShowOrHidePoducts(product);
+            //    food.IsVisible = true;
+            //    UpdateListContent();
+            //}
+            //else
+            //{
+            //    food.IsVisible = false;
+            //    UpdateListContent();
+            //}
+            Navigation.PushAsync(new Expand(food.Name));
+            //for (var i = 0; i < 10; i++)
+            //{
+            //    stackName.Children.Add(new Label() { Text = "label"+i,TextColor=Color.Black });
+                
+            //}
+           
         }
+        
 
         private void Button_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new NotificationCont());
         }
+
+        
     }
 }

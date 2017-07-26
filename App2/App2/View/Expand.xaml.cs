@@ -13,7 +13,12 @@ namespace App2.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Expand : ContentPage
 	{
-        
+        public Expand(string name)
+        {
+            InitializeComponent();
+            this.Title = name;
+        }
+
         public Expand ()
 		{
 			InitializeComponent ();
