@@ -63,27 +63,25 @@ namespace App2.ExpandableListView
             list1.Add(new Description { MyProperty = "Pawan" });
             description = list1;
             Groups = new ObservableCollection<FoodGroup>{
-                new FoodGroup("Carbohydrates","C"){
-                    new Food { Name = "pasta", IsVisible = false,Obj_MyProperty=list1 },
-                    new Food { Name = "potato", IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "bread",  IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "rice", IsVisible = false, Obj_MyProperty=list1},
+                new FoodGroup("22-Jul-2017","C"){
+                    new Food { Name = "Paid:8 /Total Amount:3,54,897.00", IsVisible = false,Obj_MyProperty=list1 },
+                    new Food { Name = "Invoice Cancelled:2", IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "Receipt:8 /Total Amount:4,897.00", IsVisible = false, Obj_MyProperty=list1},
                 },
-                new FoodGroup("Fruits","F"){
-                    new Food { Name = "apple", IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "banana",  IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "pear", IsVisible = false, Obj_MyProperty=list1},
+                new FoodGroup("21-Jul-2017","F"){
+                    new Food { Name = "Receipt:8 /Total Amount:4,897.00", IsVisible = false,Obj_MyProperty=list1},
+                   new Food { Name = "Paid:8 /Total Amount:1,04,897.00", IsVisible = false, Obj_MyProperty=list1},
                 },
-                new FoodGroup("Vegetables","V"){
-                    new Food { Name = "carrot", IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "green bean",  IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "broccoli",  IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "peas",  IsVisible = false,Obj_MyProperty=list1},
+                new FoodGroup("20-Jul-2017","V"){
+                    new Food { Name = "Invoice Cancelled:2", IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "Receipt:6 /Total Amount:2,17,897.00",  IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "Paid:8 /Total Amount:2,85,897.00",  IsVisible = false,Obj_MyProperty=list1},
+                    
                 },
-                new FoodGroup("Dairy","D"){
-                    new Food { Name = "Milk", IsVisible = false,  Obj_MyProperty=list1},
-                    new Food { Name = "Cheese", IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "Ice Cream", IsVisible = false,Obj_MyProperty=list1},
+                new FoodGroup("19-Jul-2017","D"){
+                    new Food { Name = "Receipt:8 /Total Amount:17,897.00", IsVisible = false,  Obj_MyProperty=list1},
+                    new Food { Name = "Paid:8 /Total Amount:54,897.00", IsVisible = false,Obj_MyProperty=list1},
+                    new Food { Name = "Invoice Cancelled:2", IsVisible = false,Obj_MyProperty=list1},
                 }
             };
         }

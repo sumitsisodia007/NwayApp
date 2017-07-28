@@ -17,7 +17,7 @@ namespace App2.APIService
     {
         
 
-        public readonly string BaseURL = "http://192.168.1.2/enway_real/webservice/";
+        public readonly string RestURL = "http://192.168.1.2/enway_real/webservice/index.php";
 
         #region Login
         public ResponseModel postLogin(LoginMdl lgmdl)
@@ -25,7 +25,7 @@ namespace App2.APIService
             ResponseModel response_model = new ResponseModel();
             try
             {
-                var RestURL = BaseURL + "index.php";
+               //var RestURL = BaseURL + "index.php";
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(RestURL);
 
@@ -71,7 +71,7 @@ namespace App2.APIService
         #endregion
 
         #region PostNotification
-        public ObservableCollection<NotificationListMdl> PostNotification(LoginMdl lgmdl)
+        public NotificationListMdl PostNotification(LoginMdl lgmdl)
         {
             ResponseModel _response_model = new ResponseModel();
 
@@ -91,7 +91,7 @@ namespace App2.APIService
             
             try
             {
-                var RestURL = BaseURL + "index.php";
+                
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(RestURL);
 
@@ -112,9 +112,10 @@ namespace App2.APIService
                 {
                     var result = response.Content.ReadAsStringAsync().Result;
                     JObject jObj = JObject.Parse(result);
+                    //NotificationListMdl jsonResponse = JsonSerializer.Deserialize<NotificationListMdl>(jObj);
                     //IList<NotificationListMdl.TestCases> tTestCases = JsonConvert.DeserializeObject<List<NotificationListMdl.TestCases>>(result);
-                    //List<NotificationListMdl.TestCases> tTestCases = JsonConvert.DeserializeObject<List<NotificationListMdl.TestCases>>(result);
-                   _response_model.Error = jObj["error"].ToString();
+                    //List<NotificationListMdl> tTestCases = JsonConvert.DeserializeObject<List<NotificationListMdl>>(result);
+                    _response_model.Error = jObj["error"].ToString();
                     _response_model.TagType = jObj["tagtype"].ToString();
 
                     foreach (var data in jObj["list"])
@@ -129,7 +130,7 @@ namespace App2.APIService
                             _tags.Tag = (data1["tag"].ToString());
                             _tags.TagNotCount = (data1["notcount"].ToString());
                             _tags.TotalAmt = (data1["total_amount"].ToString());
-                            _tags.Date = (data["date"].ToString());
+                            //_tags.Date = (data["date"].ToString());
                             _listtag.Add(_tags);
                             if (_tags.Tag == "invoice_cancelletion")
                             {
@@ -145,7 +146,7 @@ namespace App2.APIService
                                     _cancel_notifications.CancelCancelled_by_id = (data2["cancelled_by_id"].ToString());
                                     _cancel_notifications.CancelInformation_type = (data2["information_type"].ToString());
                                     _cancel_notifications.CancelTagtype = (data2["tagtype"].ToString());
-                                    _cancel_notifications.Date = (data["date"].ToString());
+                                   // _cancel_notifications.Date = (data["date"].ToString());
                                     _list_cancelletion.Add(_cancel_notifications);
                                 }
                             }
@@ -165,7 +166,7 @@ namespace App2.APIService
                                     _Receipt_notifications.Site_id = (data2["site_id"].ToString());
                                     _Receipt_notifications.Site_name = (data2["site_name"].ToString());
                                     _Receipt_notifications.Tagtype = (data2["tagtype"].ToString());
-                                    _Receipt_notifications.Date = (data["date"].ToString());
+                                   // _Receipt_notifications.Date = (data["date"].ToString());
                                     _list_receipt.Add(_Receipt_notifications);
                                 }
                             }
@@ -185,7 +186,7 @@ namespace App2.APIService
                                     _Paid_notifications.Site_id = (data2["site_id"].ToString());
                                     _Paid_notifications.Site_name = (data2["site_name"].ToString());
                                     _Paid_notifications.Tagtype = (data2["tagtype"].ToString());
-                                    _Paid_notifications.Date = (data["date"].ToString());
+                                   // _Paid_notifications.Date = (data["date"].ToString());
                                     _list_paid.Add(_Paid_notifications);
                                 }
                             }
@@ -205,7 +206,7 @@ namespace App2.APIService
                                     _invoice_notifications.Tagtype = (data2["invoice_date"].ToString());
                                     _invoice_notifications.Tagtype = (data2["converted_to"].ToString());
                                     _invoice_notifications.Tagtype = (data2["event_date"].ToString());
-                                    _invoice_notifications.Date = (data["date"].ToString());
+                                   // _invoice_notifications.Date = (data["date"].ToString());
                                     _list_invoice.Add(_invoice_notifications);
                                 }
                             }
@@ -226,7 +227,7 @@ namespace App2.APIService
         }
         #endregion
 
-        #region Recievable Tabel
+        #region Recievable TodayCollection Tabel
         public List<ReceivableMdl> ReceivableTable()
         {
             ResponseModel response_model = new ResponseModel();
@@ -234,17 +235,15 @@ namespace App2.APIService
             ReceivableMdl recmdl=null;
             try
             {
-                var RestURL = BaseURL + "index.php";
+               
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(RestURL);
-
-
                 var values = new Dictionary<string, string>
                 {
                     { "user_id", "1"},
                     { "device_id", "32132"},
                     { "company_name", "CENTURY 21 TOWN PLANNERS PVT. LTD."},
-                    { "party_id", "4274"},
+                    //{ "party_id", "4274"},
                     { "tagtype", "receivable_outstanding"}
                 };
 
@@ -268,6 +267,7 @@ namespace App2.APIService
                         recmdl.Balance= (data["balance"].ToString());
                         recmdl.txtWidth= calcScreenWidth / 4 - 20;
                         list_recmdl.Add(recmdl);
+
 
                     }
 

@@ -20,11 +20,18 @@ namespace App2
         /// Second List
         /// </summary>
         public List<ABCDemo> _receivablList { get; set; }
-        public double _Width = 500;
+        public double _Width = 0;
 
         public MainPage()
         {
             InitializeComponent();
+            if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+            {
+                var calcScreenWidth = Application.Current.MainPage.Width;
+                var calcScreenHieght = Application.Current.MainPage.Height;
+                _Width = calcScreenWidth / 3;
+                
+            }
             _allGroups = FoodGroup.Groups;
             UpdateListContent();
         }
@@ -49,36 +56,35 @@ namespace App2
         {
             try
             {
-            _expandedGroups = new ObservableCollection<FoodGroup>();
-            foreach (FoodGroup group in _allGroups)
-            {
-                //Create new FoodGroups so we do not alter original list
-                FoodGroup newGroup = new FoodGroup(group.Title, group.ShortName, group.Expanded);
-                //Add the count of food items for Lits Header Titles to use
-                newGroup.FoodCount = group.Count;
-                if (group.Expanded)
+                _expandedGroups = new ObservableCollection<FoodGroup>();
+                foreach (FoodGroup group in _allGroups)
                 {
-                    foreach (Food food in group)
+                    //Create new FoodGroups so we do not alter original list
+                    FoodGroup newGroup = new FoodGroup(group.Title, group.ShortName, group.Expanded);
+                    //Add the count of food items for Lits Header Titles to use
+                    newGroup.FoodCount = group.Count;
+                    if (group.Expanded)
                     {
-                        newGroup.Add(food);
+                        foreach (Food food in group)
+                        {
+                            newGroup.Add(food);
+                        }
                     }
+                    _expandedGroups.Add(newGroup);
                 }
-                _expandedGroups.Add(newGroup);
-            }
-            GroupedView.ItemsSource = _expandedGroups;
+                GroupedView.ItemsSource = _expandedGroups;
             }
             catch (Exception ex)
             {
                 DisplayAlert("Message", ex.Message, "OK");
             }
-           
+
         }
-        
+
         private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            
-            Food food = (Food)e.Item;
 
+            Food food = (Food)e.Item;
             //if (food.IsVisible == false)
             //{
 
@@ -96,15 +102,17 @@ namespace App2
             await this.ScaleTo(1, 50, Easing.CubicIn);
             TodayCollationList();
         }
-       
+
         void OnOKButtonClicked(object sender, EventArgs args)
         {
             overlay.IsVisible = false;
-           
+
         }
 
-        void OnCancelButtonClicked(object sender, EventArgs args)
+       async void OnCancelButtonClicked(object sender, EventArgs args)
         {
+            await overlay.ScaleTo(0.95, 50, Easing.CubicOut);
+            await overlay.ScaleTo(1, 50, Easing.CubicIn);
             overlay.IsVisible = false;
         }
 
@@ -115,35 +123,34 @@ namespace App2
             _receivablList = new List<ABCDemo>();
             try
             {
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
-                _receivablList.Add(new ABCDemo {MyProperty= "Hold for  seconds" });
-                _receivablList.Add(new ABCDemo {MyProperty= "Hold for 30 " });
-                _receivablList.Add(new ABCDemo {MyProperty= "for 30 seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty="Sumit" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold for  seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold for 30 " });
-                _receivablList.Add(new ABCDemo { MyProperty = "for 30 seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold for  seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold for 30 " });
-                _receivablList.Add(new ABCDemo { MyProperty = "for 30 seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Sumit" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold for  seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold for 30 " });
-                _receivablList.Add(new ABCDemo { MyProperty = "for 30 seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold for  seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold for 30 " });
-                _receivablList.Add(new ABCDemo { MyProperty = "for 30 seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Sumit" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold for  seconds" });
-                _receivablList.Add(new ABCDemo { MyProperty = "Hold for 30 " });
-                _receivablList.Add(new ABCDemo { MyProperty = "for 30 seconds" });
-
-                _receivablList.Add(new ABCDemo { MyProperty = "Sumit" });
+                _receivablList.Add(new ABCDemo { Amount = 50000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+                _receivablList.Add(new ABCDemo { Amount = 250000.00, txtWidth = _Width, MyProperty = "KEHWMS ENGINEERING PVT. LTD." });
+                _receivablList.Add(new ABCDemo { Amount = 520000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+                _receivablList.Add(new ABCDemo { Amount = 5000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
+                _receivablList.Add(new ABCDemo { Amount = 10000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
+                _receivablList.Add(new ABCDemo { Amount = 750000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
+                _receivablList.Add(new ABCDemo { Amount = 250000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+                _receivablList.Add(new ABCDemo { Amount = 45000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+                _receivablList.Add(new ABCDemo { Amount = 33000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
+                _receivablList.Add(new ABCDemo { Amount = 17000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
+                _receivablList.Add(new ABCDemo { Amount = 19000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+                _receivablList.Add(new ABCDemo { Amount = 25000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
+                _receivablList.Add(new ABCDemo { Amount = 37000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
+                _receivablList.Add(new ABCDemo { Amount = 89000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
+                _receivablList.Add(new ABCDemo { Amount = 73000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+                _receivablList.Add(new ABCDemo { Amount = 65000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
+                _receivablList.Add(new ABCDemo { Amount = 56000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
+                _receivablList.Add(new ABCDemo { Amount = 49000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+                _receivablList.Add(new ABCDemo { Amount = 81000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
+                _receivablList.Add(new ABCDemo { Amount = 10000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+                _receivablList.Add(new ABCDemo { Amount = 69000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+                _receivablList.Add(new ABCDemo { Amount = 67000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
+                _receivablList.Add(new ABCDemo { Amount = 70000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+                _receivablList.Add(new ABCDemo { Amount = 50000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+                _receivablList.Add(new ABCDemo { Amount = 12000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
+                _receivablList.Add(new ABCDemo { Amount = 32000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+                _receivablList.Add(new ABCDemo { Amount = 27000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+                _receivablList.Add(new ABCDemo { Amount = 57000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
                 MainlistView.ItemsSource = _receivablList;
             }
             catch (Exception ex)
@@ -152,9 +159,16 @@ namespace App2
 
             }
         }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            DisplayAlert("Message","Comming Soon","OK");
+        }
     }
     public class ABCDemo
     {
         public string MyProperty { get; set; }
+        public double Amount { get; set; }
+        public double txtWidth { get; set; }
     }
 }

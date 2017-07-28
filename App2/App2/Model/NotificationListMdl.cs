@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,18 +10,22 @@ namespace App2.Model
 {
     public class NotificationListMdl
     {
+        public TestCases _test { get; set; }
+    }
         public class TestCases
         {
             public string TagType { get; set; }
             public string Error { get; set; }
-            public string Message { get; set; }
+            [JsonProperty("list")]
             public ObservableCollection<NotificationDate> ListNotificationDate { get; set; }
+            public string Message { get; set; }
         }
     
         public class NotificationDate
         {
             public string Date { get; set; }
             public string NotCount { get; set; }
+            [JsonProperty("tags")]
             public ObservableCollection<Tags> ListTags { get; set; }
         }
 
@@ -29,11 +34,15 @@ namespace App2.Model
             public string Tag { get; set; }
             public string TagNotCount { get; set; }
             public string TotalAmt { get; set; }
-            public string Date { get; set; }
-            public ObservableCollection<Receipt_Notifications> List_Receipt { get; set; }
-            public ObservableCollection<Cancelletion_Notifications> List_Cancellation { get; set; }
-            public ObservableCollection<Paid_Notifications> List_Paid { get; set; }
-            public ObservableCollection<Invoice_Event> List_Invoice { get; set; }
+        //  public string Date { get; set; }
+        [JsonProperty("notifications")]
+        public ObservableCollection<Receipt_Notifications> List_Receipt { get; set; }
+        [JsonProperty("notifications")]
+        public ObservableCollection<Cancelletion_Notifications> List_Cancellation { get; set; }
+        [JsonProperty("notifications")]
+        public ObservableCollection<Paid_Notifications> List_Paid { get; set; }
+        [JsonProperty("notifications")]
+        public ObservableCollection<Invoice_Event> List_Invoice { get; set; }
         }
 
         public class Receipt_Notifications
@@ -48,7 +57,7 @@ namespace App2.Model
             public string Current_outstanding { get; set; }
             public string Tagtype { get; set; }
             public string Information_type { get; set; }
-            public string Date { get; set; }
+         //   public string Date { get; set; }
         }
 
         public class Paid_Notifications
@@ -63,7 +72,7 @@ namespace App2.Model
             public string Current_outstanding { get; set; }
             public string Tagtype { get; set; }
             public string Information_type { get; set; }
-            public string Date { get; set; }
+           // public string Date { get; set; }
         }
 
         public class Cancelletion_Notifications
@@ -76,7 +85,7 @@ namespace App2.Model
             public string CancelCancelled_by_id { get; set; }
             public string CancelInformation_type { get; set; }
             public string CancelTagtype { get; set; }
-            public string Date { get; set; }
+           // public string Date { get; set; }
         }
 
         public class Invoice_Event
@@ -92,7 +101,7 @@ namespace App2.Model
             public string Invoce_Date { get; set; }
             public string Converted_To { get; set; }
             public string Event_Date { get; set; }
-             public string Date { get; set; }
+            // public string Date { get; set; }
         }
-    }
+   
 }

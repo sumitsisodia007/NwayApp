@@ -20,39 +20,34 @@
                     <Image Source="logo"
                            Aspect="AspectFit"
                            HeightRequest="180" />
-                    <StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-
-                        <Label Text="Today OutStanding" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19"/>
+                    <StackLayout x:Name="stkTodayCollection" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="True">
+                        <Label Text="Today Collection(Notification)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                             <ListView x:Name="listView"
-                              RowHeight="40"
-                              HeightRequest="200"
-                              BackgroundColor="White"
-                              SeparatorVisibility="None"
-                              SeparatorColor="#4472C4">
+                                      RowHeight="40"
+                                      HeightRequest="200"
+                                      BackgroundColor="White"
+                                      SeparatorVisibility="None"
+                                      SeparatorColor="#4472C4">
                                 <ListView.Header>
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
-
                                         <Label x:Name="LblH1" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer  />
                                             </Label.GestureRecognizers>
                                         </Label>
-
                                         <Label x:Name="LblH2" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Pre Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer />
                                             </Label.GestureRecognizers>
                                         </Label>
-
                                         <Label x:Name="LblH3" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Today Receipt" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer />
                                             </Label.GestureRecognizers>
                                         </Label>
-
                                         <Label x:Name="LblH4" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer />
@@ -100,12 +95,11 @@
 
                         </Frame>
                     </StackLayout>
-               
-                    <!--
-                    <StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
 
+
+                    <StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
                     <Label Text="Today OutStanding" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="19"/>
-                    <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
+                        <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                             <ListView x:Name="List1"
                                       RowHeight="40"
                                       HeightRequest="200"
@@ -145,8 +139,6 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            -->
-                    <!--
                                             <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
@@ -181,8 +173,8 @@
                             </ListView>
 
                         </Frame>
-                </StackLayout>-->
-              
+                    </StackLayout>
+
                 </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="23">
