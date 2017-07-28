@@ -16,6 +16,11 @@ namespace App2
     {
         private ObservableCollection<FoodGroup> _allGroups;
         private ObservableCollection<FoodGroup> _expandedGroups;
+        /// <summary>
+        /// Second List
+        /// </summary>
+        public List<ABCDemo> _receivablList { get; set; }
+        public double _Width = 500;
 
         public MainPage()
         {
@@ -68,11 +73,12 @@ namespace App2
             }
            
         }
-        private void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
+        
+        private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             
             Food food = (Food)e.Item;
-          
+
             //if (food.IsVisible == false)
             //{
 
@@ -84,21 +90,71 @@ namespace App2
             //    food.IsVisible = false;
             //    UpdateListContent();
             //}
-            Navigation.PushAsync(new Expand(food.Name));
-            //for (var i = 0; i < 10; i++)
-            //{
-            //    stackName.Children.Add(new Label() { Text = "label"+i,TextColor=Color.Black });
-                
-            //}
+            overlay.IsVisible = true;
+            lblName.Text = food.Name;
+            await this.ScaleTo(0.95, 50, Easing.CubicOut);
+            await this.ScaleTo(1, 50, Easing.CubicIn);
+            TodayCollationList();
+        }
+       
+        void OnOKButtonClicked(object sender, EventArgs args)
+        {
+            overlay.IsVisible = false;
            
         }
-        
 
-        private void Button_Clicked(object sender, EventArgs e)
+        void OnCancelButtonClicked(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new NotificationCont());
+            overlay.IsVisible = false;
         }
 
-        
+        //SecondListview fill
+        public void TodayCollationList()
+        {
+
+            _receivablList = new List<ABCDemo>();
+            try
+            {
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
+                _receivablList.Add(new ABCDemo {MyProperty= "Hold for  seconds" });
+                _receivablList.Add(new ABCDemo {MyProperty= "Hold for 30 " });
+                _receivablList.Add(new ABCDemo {MyProperty= "for 30 seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty="Sumit" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold for  seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold for 30 " });
+                _receivablList.Add(new ABCDemo { MyProperty = "for 30 seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold for  seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold for 30 " });
+                _receivablList.Add(new ABCDemo { MyProperty = "for 30 seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Sumit" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold for  seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold for 30 " });
+                _receivablList.Add(new ABCDemo { MyProperty = "for 30 seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold for  seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold for 30 " });
+                _receivablList.Add(new ABCDemo { MyProperty = "for 30 seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Sumit" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold  30 seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold for  seconds" });
+                _receivablList.Add(new ABCDemo { MyProperty = "Hold for 30 " });
+                _receivablList.Add(new ABCDemo { MyProperty = "for 30 seconds" });
+
+                _receivablList.Add(new ABCDemo { MyProperty = "Sumit" });
+                MainlistView.ItemsSource = _receivablList;
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+        }
+    }
+    public class ABCDemo
+    {
+        public string MyProperty { get; set; }
     }
 }

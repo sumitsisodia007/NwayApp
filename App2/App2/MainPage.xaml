@@ -5,78 +5,142 @@
              x:Class="App2.MainPage"
              Title="Notification">
 
-    <ContentPage.Content>
-        <ListView  x:Name="GroupedView"
+  
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                 AbsoluteLayout.LayoutFlags="All">
+            <ListView  x:Name="GroupedView"
                     GroupDisplayBinding="{Binding Title}"
                     RowHeight="80"
                    HasUnevenRows="True"
                     GroupShortNameBinding="{Binding ShortName}"
                     IsGroupingEnabled="true"
                    ItemTapped="ListView_OnItemTapped">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                      
-                        <!--<ImageCell Text="{Binding Name}"
-                                Detail="{Binding Description}"
-                                ImageSource="{Binding Icon}"
-                                Height="75"
-                                TextColor="#005569"/>-->
-                        <StackLayout Padding="20,0,0,0">
-                            <Label Text="{Binding Name}"
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="20,0,0,0" >
+                                <Label Text="{Binding Name}"
                                TextColor="Navy"
                                FontSize="24"/>
-                            <StackLayout BackgroundColor="Beige"
-                                Padding="20,0,0,0"
+                                <!--<StackLayout BackgroundColor="Beige"
+                                Padding="20,0,0,0" 
                                 IsVisible="{Binding IsVisible}"
                                      Orientation="Horizontal"
                                      Margin="0">
-                                <Label Text="{Binding Obj_MyProperty}"
+                                    <Label Text="{Binding Obj_MyProperty}"
                                         TextColor="Navy"
                                         FontSize="24"/>
-                       
-                                <!--<Button Text="{Binding Obj_MyProperty}"
-                                                            BackgroundColor="White"
-                                                            TextColor="Black"
-                                                            WidthRequest="80"
-                                                            FontSize="12"
-                                                          Clicked="Button_Clicked"
-                                                            HorizontalOptions="FillAndExpand"/>-->
-                                   
-              
-                                <!--<Button Text="{Binding Description}"
-                                    BackgroundColor="White"
-                                    TextColor="Black"
-                                    WidthRequest="80"
-                                    FontSize="12"
-                                        HorizontalOptions="FillAndExpand"/>-->
+                                </StackLayout>-->
+                                
                             </StackLayout>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="5,5,5,5" BackgroundColor="#E2F5F9">
-                            
-                            <Label Text="{Binding TitleWithItemCount}" 
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="5,5,5,5" BackgroundColor="#E2F5F9">
+
+                                <!--<Label Text="{Binding TitleWithItemCount}" 
                                      TextColor="#005569"
                                      FontSize="15"
-                                     VerticalOptions="Center"/>
-                            <Button Image="{Binding StateIcon}"
-                                    HorizontalOptions="EndAndExpand"
-                                      BackgroundColor="Transparent"
-                                      BorderColor="Transparent"
-                                      BorderWidth="0"
-                                      Clicked="HeaderTapped" 
-                                      CommandParameter="{Binding .}"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
-        </ListView>
+                                     VerticalOptions="Center"/>-->
+                                
+                                <Button Image="{Binding StateIcon}"
+                                        Text="{Binding TitleWithItemCount}"
+                                        HorizontalOptions="FillAndExpand"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        BorderWidth="0"
+                                        Clicked="HeaderTapped" 
+                                        CommandParameter="{Binding .}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+            </ListView>
+            </StackLayout>
 
 
-    </ContentPage.Content>
+            <ContentView x:Name="overlay"
+                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                 AbsoluteLayout.LayoutFlags="All"
+                 IsVisible="False"
+                 Padding="100, 0,0,0"
+                 BackgroundColor="Transparent" Opacity="0.8">
+            <Frame BackgroundColor="Black" Opacity="0.9" Padding="0" Margin="0"> 
+                <StackLayout Orientation="Vertical" 
+                               BackgroundColor="Black" 
+                               Opacity="1"
+                               WidthRequest="400" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="FillAndExpand" >
+                    <Label x:Name="lblNotificationType" BackgroundColor="Black" Font="24,Bold" TextColor="White" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="Notification" />
+                    <Label x:Name="lblName" BackgroundColor="Black" Font="20,Bold" TextColor="White" HorizontalOptions="Fill" HorizontalTextAlignment="Center" Text="Add a Player" />
+
+                    <ListView x:Name="MainlistView"
+                            
+                              HasUnevenRows="True"
+                              
+                              BackgroundColor="Gray"
+                              SeparatorVisibility="None"
+                              SeparatorColor="#4472C4">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Vertical"
+                                                 VerticalOptions="FillAndExpand" Spacing="0">
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                  BackgroundColor="Black">
+
+                                        <Label BackgroundColor="Black" HorizontalOptions="Start"  FontSize="15" Text="{Binding MyProperty}" TextColor="White" HorizontalTextAlignment="Start" />
+                                        <Label BackgroundColor="Black" HorizontalOptions="EndAndExpand"  FontSize="15" Text="{Binding MyProperty}" TextColor="White" HorizontalTextAlignment="End" />
+                                            
+                                        </StackLayout>
+                                        <BoxView BackgroundColor="White" HeightRequest="1"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <!--<Entry x:Name="EnteredName" 
+                           Placeholder="Player Name" 
+                           TextColor="Black" 
+                           VerticalOptions="CenterAndExpand" 
+                           HorizontalOptions="Center" 
+                           WidthRequest="250" />-->
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                        <Button Text="Cancel" 
+                                  VerticalOptions="CenterAndExpand"
+                                  HorizontalOptions="Center"
+                                  Clicked="OnCancelButtonClicked"
+                                     BackgroundColor="Black" FontSize="18" TextColor="White"
+                                    FontAttributes="Bold"
+                                   
+                                    Opacity="1"/>
+
+                        <Button Text="OK" 
+                                 BackgroundColor="Black" FontSize="18" TextColor="White"
+                                FontAttributes="Bold"
+                                
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="Center"
+                                Clicked="OnOKButtonClicked"
+                               
+                                Opacity="1"/>
+                    </StackLayout>
+
+                </StackLayout>  
+            </Frame>
+
+            </ContentView>
+
+        </AbsoluteLayout>
+        
+   
 </ContentPage>

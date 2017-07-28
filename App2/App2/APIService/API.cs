@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 using static App2.Model.NotificationListMdl;
 
 namespace App2.APIService
@@ -225,5 +226,63 @@ namespace App2.APIService
         }
         #endregion
 
+        #region Recievable Tabel
+        public List<ReceivableMdl> ReceivableTable()
+        {
+            ResponseModel response_model = new ResponseModel();
+            List<ReceivableMdl> list_recmdl = new List<ReceivableMdl>();
+            ReceivableMdl recmdl=null;
+            try
+            {
+                var RestURL = BaseURL + "index.php";
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(RestURL);
+
+
+                var values = new Dictionary<string, string>
+                {
+                    { "user_id", "1"},
+                    { "device_id", "32132"},
+                    { "company_name", "CENTURY 21 TOWN PLANNERS PVT. LTD."},
+                    { "party_id", "4274"},
+                    { "tagtype", "receivable_outstanding"}
+                };
+
+                var content = new FormUrlEncodedContent(values);
+
+                var response = client.PostAsync(RestURL, content).Result; // Blocking call!
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body. Blocking!
+                    var dataObjects = response.Content.ReadAsStringAsync().Result;
+                    JObject jObj = JObject.Parse(dataObjects);
+                    response_model.Error = jObj["error"].ToString();
+                    response_model.TagType = jObj["tagtype"].ToString();
+                    var calcScreenWidth = Application.Current.MainPage.Width;
+                    foreach (var data in jObj["list"])
+                    {
+                        recmdl = new ReceivableMdl();
+                        recmdl.Perticular= (data["perticular"].ToString());
+                        recmdl.Total_Due = (data["total_due"].ToString());
+                        recmdl.Receive = (data["receive"].ToString());
+                        recmdl.Balance= (data["balance"].ToString());
+                        recmdl.txtWidth= calcScreenWidth / 4 - 20;
+                        list_recmdl.Add(recmdl);
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                // StaticMethods.AndroidSnackBar(e.Message);
+            }
+            finally
+            {
+                //content = null;
+            }
+            return list_recmdl;
+        }
+        #endregion
     }
 }

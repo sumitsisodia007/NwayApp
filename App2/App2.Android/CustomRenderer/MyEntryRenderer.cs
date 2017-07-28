@@ -13,6 +13,7 @@ using Xamarin.Forms;
 using App2.CustomRenderer;
 using App2.Droid.CustomRenderer;
 using Xamarin.Forms.Platform.Android;
+using App2.View;
 
 [assembly: ExportRenderer(typeof(MyEntry), typeof(MyEntryRenderer))]
 namespace App2.Droid.CustomRenderer
@@ -27,8 +28,10 @@ namespace App2.Droid.CustomRenderer
             {
                 Control.SetBackgroundColor(global::Android.Graphics.Color.Transparent);
                 Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
-                //if (ForgotPasswordPage.flag == 1)
-                //    Control.Gravity = Android.Views.GravityFlags.Center;
+                if (ReceivablePage.flag == 1)
+                    Control.Gravity = Android.Views.GravityFlags.Center;
+                else if (PayablePage.flag == 1)
+                    Control.Gravity = Android.Views.GravityFlags.Center;
             }
         }
     }

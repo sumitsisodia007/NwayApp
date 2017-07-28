@@ -18,11 +18,11 @@
                             Margin="5,2"
 							HeightRequest="40"/>
                     <Image Source="logo"
-                   Aspect="AspectFit"
-                   HeightRequest="180" />
+                           Aspect="AspectFit"
+                           HeightRequest="180" />
                     <StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-                        <Label Text="Today Collaction(Notification)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19"/>
+                        <Label Text="Today OutStanding" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                             <ListView x:Name="listView"
                               RowHeight="40"
@@ -35,25 +35,25 @@
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
 
-                                        <Label x:Name="LblSu" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                        <Label x:Name="LblH1" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer  />
                                             </Label.GestureRecognizers>
                                         </Label>
 
-                                        <Label x:Name="LblMn" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Pre Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                        <Label x:Name="LblH2" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Pre Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer />
                                             </Label.GestureRecognizers>
                                         </Label>
 
-                                        <Label x:Name="LblTu" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Today Receipt" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                        <Label x:Name="LblH3" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Today Receipt" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer />
                                             </Label.GestureRecognizers>
                                         </Label>
 
-                                        <Label x:Name="LblWe" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                        <Label x:Name="LblH4" BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer />
                                             </Label.GestureRecognizers>
@@ -69,25 +69,25 @@
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
 
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Party}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Perticular}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="Row_Tapped" />
                                                     </Label.GestureRecognizers>
                                                 </Label>
 
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Pre_Outstanding}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Total_Due}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="Row_Tapped" />
                                                     </Label.GestureRecognizers>
                                                 </Label>
 
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Today_Receipt}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Receive}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="Row_Tapped" />
                                                     </Label.GestureRecognizers>
                                                 </Label>
 
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Cur_Outstanding}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Balance}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="Row_Tapped" />
                                                     </Label.GestureRecognizers>
@@ -101,6 +101,7 @@
                         </Frame>
                     </StackLayout>
                
+                    <!--
                     <StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
 
                     <Label Text="Today OutStanding" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="19"/>
@@ -116,25 +117,25 @@
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
 
-                                        <Label  BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                        <Label  BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer  />
                                             </Label.GestureRecognizers>
                                         </Label>
 
-                                        <Label  BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Pre Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                        <Label  BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Pre Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer />
                                             </Label.GestureRecognizers>
                                         </Label>
 
-                                        <Label  BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Today Receipt" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                        <Label  BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Today Receipt" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer />
                                             </Label.GestureRecognizers>
                                         </Label>
 
-                                        <Label BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                        <Label BackgroundColor="#A3C1E5" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer />
                                             </Label.GestureRecognizers>
@@ -144,30 +145,31 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <!-- Main design for our menu items -->
+                                            -->
+                    <!--
                                             <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
 
-                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer  />
                                                     </Label.GestureRecognizers>
                                                 </Label>
 
-                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer />
                                                     </Label.GestureRecognizers>
                                                 </Label>
 
-                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer />
                                                     </Label.GestureRecognizers>
                                                 </Label>
 
-                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
+                                                <Label  BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Tu" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer />
                                                     </Label.GestureRecognizers>
@@ -179,8 +181,9 @@
                             </ListView>
 
                         </Frame>
+                </StackLayout>-->
+              
                 </StackLayout>
-               </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="23">
                 <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="25"/>

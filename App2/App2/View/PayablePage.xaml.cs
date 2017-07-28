@@ -14,11 +14,11 @@ namespace App2.View
     {
         public List<PartyDetails> _receivablList { get; set; }
         public double _Width = 0;
+        public static int flag = 0;
         public PayablePage ()
 		{
 			InitializeComponent ();
-            this.Title = "ATHLETE";
-            NavigationPage.SetHasBackButton(this, true);
+            flag = 1;
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
