@@ -83,7 +83,7 @@ namespace App2.View
             _login.DeviceID = "12345";// StaticMethods.getDeviceidentifier();
             _login.Firebasetoken = "asdgasdggshgdj";
             _login.Tagtype = "signin";
-            api.PostNotification(_login);
+            api.PostNotification();
             Navigation.PushAsync(new MainPage());
         }
     }

@@ -1,5 +1,6 @@
 ﻿
 using App2.ExpandableListView;
+using App2.Model;
 using App2.View;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace App2
         public List<ABCDemo> _receivablList { get; set; }
         public double _Width = 0;
 
+        public ObservableCollection<NotificationListMdl> _NotificationListMdl;
         public MainPage()
         {
             InitializeComponent();
@@ -30,7 +32,6 @@ namespace App2
                 var calcScreenWidth = Application.Current.MainPage.Width;
                 var calcScreenHieght = Application.Current.MainPage.Height;
                 _Width = calcScreenWidth / 3;
-                
             }
             _allGroups = FoodGroup.Groups;
             UpdateListContent();
@@ -109,7 +110,7 @@ namespace App2
 
         }
 
-       async void OnCancelButtonClicked(object sender, EventArgs args)
+        async void OnCancelButtonClicked(object sender, EventArgs args)
         {
             await overlay.ScaleTo(0.95, 50, Easing.CubicOut);
             await overlay.ScaleTo(1, 50, Easing.CubicIn);
@@ -119,7 +120,7 @@ namespace App2
         //SecondListview fill
         public void TodayCollationList()
         {
-
+           
             _receivablList = new List<ABCDemo>();
             try
             {
