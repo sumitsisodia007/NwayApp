@@ -1,4 +1,5 @@
 ﻿
+using App2.APIService;
 using App2.ExpandableListView;
 using App2.Model;
 using App2.View;
@@ -17,6 +18,7 @@ namespace App2
     {
         private ObservableCollection<FoodGroup> _allGroups;
         private ObservableCollection<FoodGroup> _expandedGroups;
+        NotificationListMdl _notificationModel;
         /// <summary>
         /// Second List
         /// </summary>
@@ -33,7 +35,28 @@ namespace App2
                 var calcScreenHieght = Application.Current.MainPage.Height;
                 _Width = calcScreenWidth / 3;
             }
-            _allGroups = FoodGroup.Groups;
+            API api = new API();
+            _notificationModel = api.PostNotification();
+
+
+            ObservableCollection<FoodGroup> food = new ObservableCollection<FoodGroup>();
+
+
+            foreach (var item in _notificationModel.ListNotificationDate)
+            {
+                FoodGroup group = new FoodGroup(item.Date + " (" + item.NotCount + ")");
+
+                foreach (var item2 in item.ListTags)
+                {
+                    group.Add(new Food() { Name = item2.Tag, Description = item.Date });
+                }
+
+                food.Add(group);
+            }
+
+
+
+            _allGroups = food;
             UpdateListContent();
         }
 
@@ -99,9 +122,10 @@ namespace App2
             //}
             overlay.IsVisible = true;
             lblName.Text = food.Name;
+            TodayCollationList(food);
             await this.ScaleTo(0.95, 50, Easing.CubicOut);
             await this.ScaleTo(1, 50, Easing.CubicIn);
-            TodayCollationList();
+            
         }
 
         void OnOKButtonClicked(object sender, EventArgs args)
@@ -118,47 +142,63 @@ namespace App2
         }
 
         //SecondListview fill
-        public void TodayCollationList()
+        public void TodayCollationList(Food food)
         {
-           
             _receivablList = new List<ABCDemo>();
-            try
+
+            var notification =   _notificationModel.ListNotificationDate.Where(o => o.Date == food.Description).ToList();
+
+            foreach (var item in notification)
             {
-                _receivablList.Add(new ABCDemo { Amount = 50000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
-                _receivablList.Add(new ABCDemo { Amount = 250000.00, txtWidth = _Width, MyProperty = "KEHWMS ENGINEERING PVT. LTD." });
-                _receivablList.Add(new ABCDemo { Amount = 520000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
-                _receivablList.Add(new ABCDemo { Amount = 5000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
-                _receivablList.Add(new ABCDemo { Amount = 10000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
-                _receivablList.Add(new ABCDemo { Amount = 750000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
-                _receivablList.Add(new ABCDemo { Amount = 250000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
-                _receivablList.Add(new ABCDemo { Amount = 45000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
-                _receivablList.Add(new ABCDemo { Amount = 33000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
-                _receivablList.Add(new ABCDemo { Amount = 17000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
-                _receivablList.Add(new ABCDemo { Amount = 19000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
-                _receivablList.Add(new ABCDemo { Amount = 25000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
-                _receivablList.Add(new ABCDemo { Amount = 37000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
-                _receivablList.Add(new ABCDemo { Amount = 89000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
-                _receivablList.Add(new ABCDemo { Amount = 73000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
-                _receivablList.Add(new ABCDemo { Amount = 65000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
-                _receivablList.Add(new ABCDemo { Amount = 56000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
-                _receivablList.Add(new ABCDemo { Amount = 49000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
-                _receivablList.Add(new ABCDemo { Amount = 81000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
-                _receivablList.Add(new ABCDemo { Amount = 10000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
-                _receivablList.Add(new ABCDemo { Amount = 69000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
-                _receivablList.Add(new ABCDemo { Amount = 67000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
-                _receivablList.Add(new ABCDemo { Amount = 70000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
-                _receivablList.Add(new ABCDemo { Amount = 50000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
-                _receivablList.Add(new ABCDemo { Amount = 12000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
-                _receivablList.Add(new ABCDemo { Amount = 32000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
-                _receivablList.Add(new ABCDemo { Amount = 27000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
-                _receivablList.Add(new ABCDemo { Amount = 57000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+                foreach (var item2 in item.ListTags)
+                {
+                    foreach (var item3 in item2.Notification)
+                    {
+                        _receivablList.Add(new ABCDemo { Amount = item3.Amount_received, txtWidth = _Width, MyProperty = item3.Customer_name });
+                    }
+                }
+                
+            }
+
+
+
+            //try
+            //{
+            //    _receivablList.Add(new ABCDemo { Amount = 50000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+            //    _receivablList.Add(new ABCDemo { Amount = 250000.00, txtWidth = _Width, MyProperty = "KEHWMS ENGINEERING PVT. LTD." });
+            //    _receivablList.Add(new ABCDemo { Amount = 520000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+            //    _receivablList.Add(new ABCDemo { Amount = 5000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
+            //    _receivablList.Add(new ABCDemo { Amount = 10000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
+            //    _receivablList.Add(new ABCDemo { Amount = 750000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
+            //    _receivablList.Add(new ABCDemo { Amount = 250000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+            //    _receivablList.Add(new ABCDemo { Amount = 45000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+            //    _receivablList.Add(new ABCDemo { Amount = 33000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
+            //    _receivablList.Add(new ABCDemo { Amount = 17000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
+            //    _receivablList.Add(new ABCDemo { Amount = 19000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+            //    _receivablList.Add(new ABCDemo { Amount = 25000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
+            //    _receivablList.Add(new ABCDemo { Amount = 37000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
+            //    _receivablList.Add(new ABCDemo { Amount = 89000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
+            //    _receivablList.Add(new ABCDemo { Amount = 73000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+            //    _receivablList.Add(new ABCDemo { Amount = 65000.00, txtWidth = _Width, MyProperty = "SATGURU OIL PVR. LTD." });
+            //    _receivablList.Add(new ABCDemo { Amount = 56000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
+            //    _receivablList.Add(new ABCDemo { Amount = 49000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+            //    _receivablList.Add(new ABCDemo { Amount = 81000.00, txtWidth = _Width, MyProperty = "JE ELECTRICAL" });
+            //    _receivablList.Add(new ABCDemo { Amount = 10000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+            //    _receivablList.Add(new ABCDemo { Amount = 69000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+            //    _receivablList.Add(new ABCDemo { Amount = 67000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
+            //    _receivablList.Add(new ABCDemo { Amount = 70000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+            //    _receivablList.Add(new ABCDemo { Amount = 50000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+            //    _receivablList.Add(new ABCDemo { Amount = 12000.00, txtWidth = _Width, MyProperty = "BOMBAY HARDWARE" });
+            //    _receivablList.Add(new ABCDemo { Amount = 32000.00, txtWidth = _Width, MyProperty = "PUJAB WATER SUPPLIERS INDORE" });
+            //    _receivablList.Add(new ABCDemo { Amount = 27000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
+            //    _receivablList.Add(new ABCDemo { Amount = 57000.00, txtWidth = _Width, MyProperty = "RASNIDHI KUMAR & BROS" });
                 MainlistView.ItemsSource = _receivablList;
-            }
-            catch (Exception ex)
-            {
+            //}
+            //catch (Exception ex)
+            //{
 
 
-            }
+            //}
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -169,7 +209,7 @@ namespace App2
     public class ABCDemo
     {
         public string MyProperty { get; set; }
-        public double Amount { get; set; }
+        public string Amount { get; set; }
         public double txtWidth { get; set; }
     }
 }

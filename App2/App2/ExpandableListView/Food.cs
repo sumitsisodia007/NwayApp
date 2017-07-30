@@ -11,7 +11,7 @@ namespace App2.ExpandableListView
     {
         public string Name { get; set; }
         public bool IsVisible { get; set; }
-        //public string Description { get; set; }
+        public string Description { get; set; }
         public List<Description> Obj_MyProperty { get; set; }
 
     }

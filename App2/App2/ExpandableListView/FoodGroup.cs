@@ -39,7 +39,7 @@ namespace App2.ExpandableListView
             get { return Expanded ? "Expand_up.png" : "Expand_down.png"; }
         }
 
-        public FoodGroup(string title, string shortName, bool expanded = false)
+        public FoodGroup(string title, string shortName = "", bool expanded = false)
         {
             Title = title;
             ShortName = shortName;
@@ -48,42 +48,60 @@ namespace App2.ExpandableListView
         //public System.Collections.Generic.List<Description> MyProperty { get; set; }
 
 
-       
-        
 
-        public static ObservableCollection<FoodGroup> Groups { private set; get; }
-        public static List<Description> description { private set; get; }
+
+
+        public static ObservableCollection<FoodGroup> Groups {  set; get; }
+        public static List<Description> description {  set; get; }
         public static List<Description> list1 = new List<Description>();
 
-        static FoodGroup()
+        public static ObservableCollection<FoodGroup> FoodGroups()
         {
-            list1.Add(new Description { MyProperty = "Sumit"});
-            list1.Add(new Description { MyProperty = "Amit" });
-            list1.Add(new Description { MyProperty = "Ankit" });
-            list1.Add(new Description { MyProperty = "Pawan" });
-            description = list1;
-            Groups = new ObservableCollection<FoodGroup>{
-                new FoodGroup("22-Jul-2017","C"){
-                    new Food { Name = "Paid:8 /Total Amount:3,54,897.00", IsVisible = false,Obj_MyProperty=list1 },
-                    new Food { Name = "Invoice Cancelled:2", IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "Receipt:8 /Total Amount:4,897.00", IsVisible = false, Obj_MyProperty=list1},
-                },
-                new FoodGroup("21-Jul-2017","F"){
-                    new Food { Name = "Receipt:8 /Total Amount:4,897.00", IsVisible = false,Obj_MyProperty=list1},
-                   new Food { Name = "Paid:8 /Total Amount:1,04,897.00", IsVisible = false, Obj_MyProperty=list1},
-                },
-                new FoodGroup("20-Jul-2017","V"){
-                    new Food { Name = "Invoice Cancelled:2", IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "Receipt:6 /Total Amount:2,17,897.00",  IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "Paid:8 /Total Amount:2,85,897.00",  IsVisible = false,Obj_MyProperty=list1},
-                    
-                },
-                new FoodGroup("19-Jul-2017","D"){
-                    new Food { Name = "Receipt:8 /Total Amount:17,897.00", IsVisible = false,  Obj_MyProperty=list1},
-                    new Food { Name = "Paid:8 /Total Amount:54,897.00", IsVisible = false,Obj_MyProperty=list1},
-                    new Food { Name = "Invoice Cancelled:2", IsVisible = false,Obj_MyProperty=list1},
+
+            API api = new API();
+            NotificationListMdl mode = api.PostNotification();
+
+
+            ObservableCollection<FoodGroup> food = new ObservableCollection<FoodGroup>();
+
+
+            foreach (var item in mode.ListNotificationDate)
+            {
+                FoodGroup group = new FoodGroup(item.Date, item.NotCount);
+
+                foreach (var item2 in item.ListTags)
+                {
+                    group.Add(new Food() { Name = item2.Tag });
                 }
-            };
+            }
+
+            Groups = food;
+
+            return Groups;
+
+
+            //Groups = new ObservableCollection<FoodGroup>{
+            //    new FoodGroup("22-Jul-2017","C"){
+            //        new Food { Name = "Paid:8 /Total Amount:3,54,897.00", IsVisible = false,Obj_MyProperty=list1 },
+            //        new Food { Name = "Invoice Cancelled:2", IsVisible = false,Obj_MyProperty=list1},
+            //        new Food { Name = "Receipt:8 /Total Amount:4,897.00", IsVisible = false, Obj_MyProperty=list1},
+            //    },
+            //    new FoodGroup("21-Jul-2017","F"){
+            //        new Food { Name = "Receipt:8 /Total Amount:4,897.00", IsVisible = false,Obj_MyProperty=list1},
+            //       new Food { Name = "Paid:8 /Total Amount:1,04,897.00", IsVisible = false, Obj_MyProperty=list1},
+            //    },
+            //    new FoodGroup("20-Jul-2017","V"){
+            //        new Food { Name = "Invoice Cancelled:2", IsVisible = false,Obj_MyProperty=list1},
+            //        new Food { Name = "Receipt:6 /Total Amount:2,17,897.00",  IsVisible = false,Obj_MyProperty=list1},
+            //        new Food { Name = "Paid:8 /Total Amount:2,85,897.00",  IsVisible = false,Obj_MyProperty=list1},
+
+            //    },
+            //    new FoodGroup("19-Jul-2017","D"){
+            //        new Food { Name = "Receipt:8 /Total Amount:17,897.00", IsVisible = false,  Obj_MyProperty=list1},
+            //        new Food { Name = "Paid:8 /Total Amount:54,897.00", IsVisible = false,Obj_MyProperty=list1},
+            //        new Food { Name = "Invoice Cancelled:2", IsVisible = false,Obj_MyProperty=list1},
+            //    }
+            //};
         }
 
 
@@ -124,6 +142,6 @@ namespace App2.ExpandableListView
             //Groups.Remove(food);
             //Foods.Insert(index, food);
         }
-        
+
     }
 }
