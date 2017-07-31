@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace App2.Model
 {
+
         public class NotificationListMdl
         {
             public string TagType { get; set; }
@@ -16,7 +17,6 @@ namespace App2.Model
             public ObservableCollection<NotificationDate> ListNotificationDate { get; set; }
             public string Message { get; set; }
         }
-       
     
         public class NotificationDate
         {
@@ -31,11 +31,11 @@ namespace App2.Model
             public string Tag { get; set; }
             public string NotCount { get; set; }
             public string Total_Amount { get; set; }
-       
             [JsonProperty("notifications")]
             public ObservableCollection<Notification> Notification { get; set; }
            
         }
+
         public class Notification
         {
             //Cancellation
@@ -56,14 +56,14 @@ namespace App2.Model
             public string Party_outstanding { get; set; }
             public string Amount_received { get; set; }
             public string Current_outstanding { get; set; }
-
             //Invoice event
             public string Invoce_Code { get; set; }
             public string Invoce_Date { get; set; }
             public string Converted_To { get; set; }
             public string Event_Date { get; set; }
-           
-        }   
+            //Filter Date
+            public string Filter_Date { get; set; }
+    }   
 
      
 }

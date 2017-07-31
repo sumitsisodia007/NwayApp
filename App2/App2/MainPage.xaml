@@ -5,33 +5,33 @@
              x:Class="App2.MainPage"
              Title="Notification">
 
-  
-        <AbsoluteLayout>
-            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                  AbsoluteLayout.LayoutFlags="All">
             <ListView  x:Name="GroupedView"
                     GroupDisplayBinding="{Binding Title}"
                     RowHeight="80"
-                   HasUnevenRows="True"
+                    HasUnevenRows="True"
                     GroupShortNameBinding="{Binding ShortName}"
                     IsGroupingEnabled="true"
                    ItemTapped="ListView_OnItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="20,0,0,0" >
+                            <StackLayout Padding="20,0,0,0" Orientation="Horizontal">
                                 <Label Text="{Binding Name}"
-                               TextColor="Navy"
-                               FontSize="20"/>
-                                <!--<StackLayout BackgroundColor="Beige"
-                                Padding="20,0,0,0" 
-                                IsVisible="{Binding IsVisible}"
-                                     Orientation="Horizontal"
-                                     Margin="0">
-                                    <Label Text="{Binding Obj_MyProperty}"
-                                        TextColor="Navy"
-                                        FontSize="24"/>
-                                </StackLayout>-->
+                                       TextColor="Navy"
+                                       FontSize="15"
+                                       HorizontalOptions="StartAndExpand"/>
+                                <Label Text="{Binding TagNotCount}"
+                                       TextColor="Navy"
+                                       FontSize="15"
+                                       HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="{Binding Tag_Amount, StringFormat='&#x20b9;{0:N}'}"
+                                       TextColor="Navy"
+                                       FontSize="15"
+                                       HorizontalOptions="EndAndExpand"/>
                                 
                             </StackLayout>
                         </ViewCell>
@@ -40,19 +40,16 @@
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" Padding="5,5,5,5" BackgroundColor="#E2F5F9">
+                            <StackLayout Orientation="Horizontal" Padding="0" Spacing="0" BackgroundColor="#E2F5F9" Margin="0">
 
-                                <!--<Label Text="{Binding TitleWithItemCount}" 
-                                     TextColor="#005569"
-                                     FontSize="15"
-                                     VerticalOptions="Center"/>-->
-                                
                                 <Button Image="{Binding StateIcon}"
                                         Text="{Binding TitleWithItemCount}"
                                         HorizontalOptions="FillAndExpand"
                                         BackgroundColor="Transparent"
                                         BorderColor="Transparent"
                                         BorderWidth="0"
+                                        FontSize="13"
+                                        Margin="0"
                                         Clicked="HeaderTapped" 
                                         CommandParameter="{Binding .}"/>
                             </StackLayout>
@@ -60,21 +57,21 @@
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
             </ListView>
-            </StackLayout>
+        </StackLayout>
 
 
-            <ContentView x:Name="overlay"
+        <ContentView x:Name="overlay"
                  AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                  AbsoluteLayout.LayoutFlags="All"
                  IsVisible="False"
                
                  BackgroundColor="Transparent" Opacity="0.8">
-            <Frame BackgroundColor="Black" Opacity="0.9" Padding="0" Margin="0"> 
+            <Frame BackgroundColor="Black" Opacity="0.9" Padding="0" Margin="0">
                 <StackLayout Orientation="Vertical" 
                                BackgroundColor="Black" 
                                Opacity="1"
                                WidthRequest="400" 
-                               HorizontalOptions="Center" 
+                               HorizontalOptions="FillAndExpand" 
                                VerticalOptions="FillAndExpand" >
                     <Label x:Name="lblNotificationType" BackgroundColor="Black" Font="24,Bold" TextColor="White" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="&#x20b9; Notification" />
                     <Label x:Name="lblName" BackgroundColor="Black" Font="20,Bold" TextColor="White" HorizontalOptions="Fill" HorizontalTextAlignment="Center" Text="Add a Player" />
@@ -89,13 +86,13 @@
                                 <ViewCell>
                                     <StackLayout Orientation="Vertical"
                                                  VerticalOptions="FillAndExpand" Spacing="0">
-                                    <StackLayout Orientation="Horizontal"
+                                        <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                   BackgroundColor="Black">
 
-                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="Black" HorizontalOptions="Start"  FontSize="15" Text="{Binding MyProperty}" TextColor="White" HorizontalTextAlignment="Start" />
+                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="Black" HorizontalOptions="Start"  FontSize="15" Text="{Binding Party_Name}" TextColor="White" HorizontalTextAlignment="Start" />
                                             <Label WidthRequest="{Binding txtWidth}" BackgroundColor="Black" HorizontalOptions="EndAndExpand"  FontSize="15" Text="{Binding Amount, StringFormat='&#x20b9;{0:N}'}" TextColor="White" HorizontalTextAlignment="End" />
-                                            
+
                                         </StackLayout>
                                         <BoxView BackgroundColor="White" HeightRequest="1"/>
                                         <StackLayout.GestureRecognizers>
@@ -106,39 +103,21 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-
-                    <!--<Entry x:Name="EnteredName" 
-                           Placeholder="Player Name" 
-                           TextColor="Black" 
-                           VerticalOptions="CenterAndExpand" 
-                           HorizontalOptions="Center" 
-                           WidthRequest="250" />-->
-
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-
-                        <!--<Button Text="Cancel" 
-                                  VerticalOptions="CenterAndExpand"
-                                  HorizontalOptions="Center"
-                                  Clicked="OnCancelButtonClicked"
-                                     BackgroundColor="Black" FontSize="18" TextColor="White"
-                                    FontAttributes="Bold"
-                                   
-                                    Opacity="1"/>-->
-
                         <Button Text="OK" 
                                  BackgroundColor="Black" FontSize="18" TextColor="White"
                                 FontAttributes="Bold"
                                 VerticalOptions="CenterAndExpand"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="CenterAndExpand"
                                 Clicked="OnOKButtonClicked"/>
                     </StackLayout>
 
-                </StackLayout>  
+                </StackLayout>
             </Frame>
 
-            </ContentView>
+        </ContentView>
+       
+    </AbsoluteLayout>
 
-        </AbsoluteLayout>
-        
-   
+
 </ContentPage>

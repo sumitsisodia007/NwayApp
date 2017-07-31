@@ -91,24 +91,19 @@ namespace App2.APIService
                 };
 
                 var content = new FormUrlEncodedContent(values);
-
                 var response = client.PostAsync(RestURL, content).Result; // Blocking call!
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = response.Content.ReadAsStringAsync().Result;
-                    JObject jObj = JObject.Parse(result);
-                     jsonResponse = JsonConvert.DeserializeObject<NotificationListMdl>(result);
+                    var jsonresult = response.Content.ReadAsStringAsync().Result;
+                    JObject jObj = JObject.Parse(jsonresult);
+                     jsonResponse = JsonConvert.DeserializeObject<NotificationListMdl>(jsonresult);
                 }
             }
             catch (Exception ex)
             {
-                // StaticMethods.AndroidSnackBar(e.Message);
+               
             }
-            finally
-            {
-                //content = null;
-            }
-            return jsonResponse;//list_response_model;
+            return jsonResponse;
         }
         #endregion
 
@@ -152,8 +147,6 @@ namespace App2.APIService
                         recmdl.Balance= (data["balance"].ToString());
                         recmdl.txtWidth= calcScreenWidth / 4 - 20;
                         list_recmdl.Add(recmdl);
-
-
                     }
 
                 }
@@ -162,11 +155,44 @@ namespace App2.APIService
             {
                 // StaticMethods.AndroidSnackBar(e.Message);
             }
-            finally
-            {
-                //content = null;
-            }
             return list_recmdl;
+        }
+        #endregion
+
+        #region Payable TodayCollection Tabel
+        public PayableNotificationMdl PayableTable()
+        {
+            PayableNotificationMdl response_model = new PayableNotificationMdl();
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(RestURL);
+                var values = new Dictionary<string, string>
+                {
+                    { "user_id", "1"},
+                    { "device_id", "32132"},
+                    { "company_name", "CENTURY 21 TOWN PLANNERS PVT. LTD."},
+                    //{ "party_id", "4274"},
+                    { "tagtype", "payable_outstanding"}
+                };
+
+                var content = new FormUrlEncodedContent(values);
+
+                var response = client.PostAsync(RestURL, content).Result; // Blocking call!
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body. Blocking!
+                    var jsonresult = response.Content.ReadAsStringAsync().Result;
+                    JObject jObj = JObject.Parse(jsonresult);
+                    response_model = JsonConvert.DeserializeObject<PayableNotificationMdl>(jsonresult);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                // StaticMethods.AndroidSnackBar(e.Message);
+            }
+            return response_model;
         }
         #endregion
     }

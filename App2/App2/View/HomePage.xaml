@@ -22,9 +22,10 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-
+   
     <StackLayout  Orientation="Vertical" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-        <StackLayout Padding="0,15" Orientation="Vertical" Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+      <ScrollView> 
+          <StackLayout Padding="0,15" Orientation="Vertical" Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
 
             <StackLayout  Orientation="Horizontal" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
 
@@ -222,9 +223,12 @@
 
             </StackLayout>
         </StackLayout>
+       </ScrollView> 
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="20">
             <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="19"/>
             <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
         </StackLayout>
     </StackLayout>
+    
+    
 </ContentPage> 
