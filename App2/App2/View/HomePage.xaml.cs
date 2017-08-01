@@ -16,6 +16,7 @@ namespace App2.View
     {
         LoginMdl _login = new LoginMdl();
         API api=new API();
+        
         public HomePage()
         {
             InitializeComponent();
@@ -24,8 +25,7 @@ namespace App2.View
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
                 var calcScreenHieght = Application.Current.MainPage.Height;
-
-
+                
                 GridRec.HeightRequest =
                 GridPay.HeightRequest =
                 GridCas.HeightRequest =
@@ -38,17 +38,19 @@ namespace App2.View
                 GridCon.WidthRequest =
                 GridExp.WidthRequest =
                 GridInv.WidthRequest = calcScreenWidth / 3;
+                
             }
         }
 
         private  void Receivable_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new ReceivablePage());
+            Navigation.PushAsync(new PayablePage(lblReceive.Text));
         }
 
         private  void Payable_Tapped(object sender, EventArgs e)
         {
-             Navigation.PushAsync(new PayablePage());
+
+             Navigation.PushAsync(new PayablePage(lblPay.Text));
         }
 
         private void CashFlow_Tapped(object sender, EventArgs e)

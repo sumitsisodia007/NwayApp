@@ -26,9 +26,7 @@
     <StackLayout  Orientation="Vertical" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
       <ScrollView> 
           <StackLayout Padding="0,15" Orientation="Vertical" Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-
             <StackLayout  Orientation="Horizontal" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-
                 <Frame x:Name="GridRec" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black">
                     <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                         <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >

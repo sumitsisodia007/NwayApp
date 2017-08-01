@@ -46,6 +46,7 @@
     <Compile Include="ExpandableListView\FoodGroup.cs" />
     <Compile Include="ExpandableListView\MainViewModel.cs" />
     <Compile Include="ExpandableListView\Product.cs" />
+    <Compile Include="Helper\EnumMaster.cs" />
     <Compile Include="Interface\IAndroidMethods.cs" />
     <Compile Include="Interface\IIosMethods.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -53,6 +54,7 @@
     </Compile>
     <Compile Include="Model\LoginMdl.cs" />
     <Compile Include="Model\MasterPageItem.cs" />
+    <Compile Include="Model\NavigationMdl.cs" />
     <Compile Include="Model\NotificationListMdl.cs" />
     <Compile Include="Model\PayableNotificationMdl.cs" />
     <Compile Include="Model\ReceivableMdl.cs" />
@@ -116,11 +118,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\portable-net45+wp80+win8+wpa81\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
-      <HintPath>..\..\..\Project\SportsConn Latest\SportsConn Latest\SportsConn Latest\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
+      <HintPath>D:\OfficeProject\Final Project\SportsConn Latest\SportsConn Latest\SportsConn Latest\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>

@@ -7,6 +7,7 @@ using Foundation;
 using UIKit;
 using App2.iOS.DependencyService;
 using App2.Interface;
+using BigTed;
 
 [assembly: Xamarin.Forms.Dependency(typeof(IosMethods))]
 namespace App2.iOS.DependencyService
@@ -24,19 +25,19 @@ namespace App2.iOS.DependencyService
             return id;
         }
 
-       
-        //public void ShowToast(string msg)
-        //{
-        //    BTProgressHUD.ShowToast(msg, ProgressHUD.MaskType.Black, false, 2000);
-        //}
-        //public void ShowLoader()
-        //{
-        //    BTProgressHUD.Show();
-        //}
-        //public void DismissLoader()
-        //{
-        //    BTProgressHUD.Dismiss();
-        //}
+
+        public void ShowToast(string msg)
+        {
+            BTProgressHUD.ShowToast(msg, ProgressHUD.MaskType.Black, false, 2000);
+        }
+        public void ShowLoader()
+        {
+            BTProgressHUD.Show();
+        }
+        public void DismissLoader()
+        {
+            BTProgressHUD.Dismiss();
+        }
         //public void SaveLocalData(UserModel um)
         //{
         //    try

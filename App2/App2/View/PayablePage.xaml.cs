@@ -25,26 +25,71 @@ namespace App2.View
         API api = new API();
 
         NavigationMdl navmdl;
-        public PayablePage ()
+        public PayablePage()
+        {
+            InitializeComponent();
+        }
+       public PayablePage (string title)
 		{
 			InitializeComponent ();
+            this.Title = title;
             navmdl = new NavigationMdl();
             navmdl.User_id = "";
-            navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
             navmdl.Device_id = "32132";
             navmdl.Company_name = EnumMaster.C21_MALHAR;
-            _payable = api.PayableTable(navmdl);
+            
+            if (title == "Receivable")
+            {
+                PredefinedReceived();
+                navmdl.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING;
+            }
+            else
+            {
+                PredefinedPaid();
+                navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
+            }
 
+            _payable = api.PayableTable(navmdl);
             ShowPayableTodayDetail toady_notification = new ShowPayableTodayDetail();            
             flag = 1;
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
                 var calcScreenHieght = Application.Current.MainPage.Height;
-                LblMn.WidthRequest =LblSu.WidthRequest =LblTu.WidthRequest =LblWe.WidthRequest = _Width = calcScreenWidth / 4 - 10;
+                lblparty.WidthRequest =lbloutstanding.WidthRequest =lblTodayReceipt.WidthRequest =lblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
             }
             ShowPaybleToday();
             ShowTotalPayble();
+        }
+        private void PredefinedPaid()
+        {
+            lblFirstTitle.Text = EnumMaster.LblPaidFirstTitle;
+            lblSecoundTitle.Text = EnumMaster.LblPaidSecoundTitle;
+            lblparty.Text = EnumMaster.LblPaidReceivedParty;
+            lbloutstanding.Text = EnumMaster.LblPaidOutstanding;
+            lblTodayReceipt.Text = EnumMaster.LblPaidTodayPaid;
+            lblCurOutstanding.Text = EnumMaster.LblPaidCurOutstanding;
+            lblSiteName.Text = EnumMaster.LblPaidSiteName;
+            lblTotalDr.Text = EnumMaster.LblPaidTotaleDr;
+            lblTotalCr.Text = EnumMaster.LblPaidTotaleCr;
+            lblBalance.Text = EnumMaster.LblPaidReceivedBalance;
+            this.BackgroundColor = Color.FromHex("#ED7D31");
+            lblparty.BackgroundColor = lbloutstanding.BackgroundColor = lblTodayReceipt.BackgroundColor = lblCurOutstanding.BackgroundColor = lblSiteName.BackgroundColor = lblTotalDr.BackgroundColor = lblTotalCr.BackgroundColor = lblBalance.BackgroundColor = Color.FromHex("#ED7D31");
+        }
+        private void PredefinedReceived()
+        {
+            lblFirstTitle.Text = EnumMaster.LblReceivedFirstTitle;
+            lblSecoundTitle.Text = EnumMaster.LblReceivedSecoundTitle;
+            lblparty.Text = EnumMaster.LblPaidReceivedParty;
+            lbloutstanding.Text = EnumMaster.LblReceivedOutstanding;
+            lblTodayReceipt.Text = EnumMaster.LblReceivedTodayPaid;
+            lblCurOutstanding.Text = EnumMaster.LblReceivedCurOutstanding;
+            lblSiteName.Text = EnumMaster.LblReceivedSiteName;
+            lblTotalDr.Text = EnumMaster.LblReceivedTotaleDr;
+            lblTotalCr.Text = EnumMaster.LblReceivedTotaleCr;
+            lblBalance.Text = EnumMaster.LblPaidReceivedBalance;
+            this.BackgroundColor = Color.FromHex("#A3C1E5");
+            lblparty.BackgroundColor = lbloutstanding.BackgroundColor = lblTodayReceipt.BackgroundColor = lblCurOutstanding.BackgroundColor = lblSiteName.BackgroundColor = lblTotalDr.BackgroundColor = lblTotalCr.BackgroundColor = lblBalance.BackgroundColor = Color.FromHex("#A3C1E5");
         }
 
         public void ShowPaybleToday()

@@ -10,9 +10,9 @@ namespace App2.Interface
     {
 
         string GetIdentifier();
-        //void ShowToast(string msg);
-        //void ShowLoader();
-        //void DismissLoader();
+        void ShowToast(string msg);
+        void ShowLoader();
+        void DismissLoader();
         //UserModel RetriveLocalData();
         //void SaveLocalData(UserModel um);
         //void DeleteLocalData();

@@ -19,8 +19,7 @@
                    Aspect="AspectFit"
                    HeightRequest="180" />
                     <StackLayout x:Name="stktodaypayable" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-
-                        <Label Text="Today Payment(SETTING amount) (NOTIFICATION)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19" HorizontalTextAlignment="Center"/>
+                        <Label x:Name="lblFirstTitle" Text="Today Payment(SETTING amount) (NOTIFICATION)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19" HorizontalTextAlignment="Center"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                             <ListView x:Name="list_today_payble"
                                       RowHeight="40"
@@ -33,12 +32,10 @@
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
-
-                                        <Label x:Name="LblSu" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label x:Name="LblMn" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label x:Name="LblTu" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Today Paid" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label x:Name="LblWe" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        
+                                        <Label x:Name="lblparty" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                        <Label x:Name="lbloutstanding" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                        <Label x:Name="lblTodayReceipt" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Today Paid" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                        <Label x:Name="lblCurOutstanding" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
                                     </StackLayout>
                                 </ListView.Header>
                                 <ListView.ItemTemplate>
@@ -62,7 +59,7 @@
 
                     <StackLayout x:Name="stktotalpayable" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
 
-                        <Label Text="Today Payable" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="19"/>
+                        <Label x:Name="lblSecoundTitle" Text="Today Payable" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="19"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                             <ListView x:Name="list_totalpayble"
                                       RowHeight="40"
@@ -74,51 +71,29 @@
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
-                                        <Label WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Site Name" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Total Dr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Total Cr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Balance" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-
+                                        <Label x:Name="lblSiteName" WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Site Name" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                        <Label x:Name="lblTotalDr"   WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Total Dr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                        <Label x:Name="lblTotalCr"   WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Total Cr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                        <Label x:Name="lblBalance"    WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Balance" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
                                     </StackLayout>
                                 </ListView.Header>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            
-        
                                             <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
+                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Site_name}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Total_dr}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Total_cr}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Balance}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
 
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Show_Site_name}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                                    <Label.GestureRecognizers>
-                                                        <TapGestureRecognizer  />
-                                                    </Label.GestureRecognizers>
-                                                </Label>
 
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Show_Total_dr}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                                    <Label.GestureRecognizers>
-                                                        <TapGestureRecognizer />
-                                                    </Label.GestureRecognizers>
-                                                </Label>
-
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Show_Total_cr}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                                    <Label.GestureRecognizers>
-                                                        <TapGestureRecognizer />
-                                                    </Label.GestureRecognizers>
-                                                </Label>
-
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Show_Balance}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  >
-                                                    <Label.GestureRecognizers>
-                                                        <TapGestureRecognizer />
-                                                    </Label.GestureRecognizers>
-                                                </Label>
                                             </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
-
                         </Frame>
                     </StackLayout>
                 </StackLayout>

@@ -12,6 +12,7 @@ using Android.Widget;
 using App2.Droid.DependencyService;
 using App2.Interface;
 using Xamarin.Forms;
+using Android.Graphics.Drawables;
 
 [assembly: Xamarin.Forms.Dependency(typeof(AndroidMethods))]
 namespace App2.Droid.DependencyService
@@ -24,12 +25,12 @@ namespace App2.Droid.DependencyService
             var id = Android.OS.Build.Serial;
             return id;
         }
-        /*
+        
         public void ShowToast(string msg)
         {
             Toast.MakeText(Forms.Context, msg, ToastLength.Long).Show();
         }
-        public void SaveLocalData(UserModel um)
+        /*public void SaveLocalData(UserModel um)
         {
             try
             {
@@ -107,7 +108,7 @@ namespace App2.Droid.DependencyService
                 return um;
             }
 
-        }
+        }*/
         public void ShowLoader()
         {
             d = new Dialog(Forms.Context);
@@ -121,6 +122,6 @@ namespace App2.Droid.DependencyService
         {
             if (d != null)
                 d.Dismiss();
-        }*/
+        }
     }
 }

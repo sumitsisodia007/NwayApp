@@ -39,7 +39,7 @@ namespace App2.View
 
         private void btnLogin_Clicked(object sender, EventArgs e)
         {
-           // btnLogin.IsEnabled = true;
+            StaticMethods.ShowLoader();
             _Loading.IsRunning = true;
             _login.Username =  txtFName.Text;
             _login.Password = txtPass.Text;
@@ -47,11 +47,12 @@ namespace App2.View
             _login.Firebasetoken = "asdgasdggshgdj";
             _login.Tagtype = "signin";
 
-            //ResponseModel rs = api.postLogin(_login);
-           // if (rs.Error == "False")
+            ResponseModel rs = api.postLogin(_login);
+            if (rs.Error == "False")
             {
                 Navigation.PushModalAsync(new MasterMenuPage());
             }
+            StaticMethods.DismissLoader();
         }
     }
 }
