@@ -19,14 +19,10 @@ namespace App2.Model
         public string Message { get; set; }
     }
     public class Payablelistmdl
-    {
-       
+    {  
         public string Site_name { get; set; }
-       
         public string Total_dr { get; set; }
-       
         public string Total_cr { get; set; }
-       
         public string Balance { get; set; }
     }
 

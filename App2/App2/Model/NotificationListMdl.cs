@@ -57,12 +57,9 @@ namespace App2.Model
             public string Amount_received { get; set; }
             public string Current_outstanding { get; set; }
             //Invoice event
-            public string Invoce_Code { get; set; }
-            public string Invoce_Date { get; set; }
             public string Converted_To { get; set; }
             public string Event_Date { get; set; }
-            //Filter Date
-            public string Filter_Date { get; set; }
+           
     }   
 
      

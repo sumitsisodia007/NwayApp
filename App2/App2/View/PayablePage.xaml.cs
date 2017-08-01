@@ -1,4 +1,5 @@
 ﻿using App2.APIService;
+using App2.Helper;
 using App2.Model;
 using System;
 using System.Collections.Generic;
@@ -22,21 +23,30 @@ namespace App2.View
         public List<PayableNotificationMdl> _payablenotificationdata { get; set; }
         PayableNotificationMdl _payable;
         API api = new API();
+
+        NavigationMdl navmdl;
         public PayablePage ()
 		{
 			InitializeComponent ();
-             _payable = api.PayableTable();
+            navmdl = new NavigationMdl();
+            navmdl.User_id = "";
+            navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
+            navmdl.Device_id = "32132";
+            navmdl.Company_name = EnumMaster.C21_MALHAR;
+            _payable = api.PayableTable(navmdl);
+
+            ShowPayableTodayDetail toady_notification = new ShowPayableTodayDetail();            
             flag = 1;
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
                 var calcScreenHieght = Application.Current.MainPage.Height;
-
                 LblMn.WidthRequest =LblSu.WidthRequest =LblTu.WidthRequest =LblWe.WidthRequest = _Width = calcScreenWidth / 4 - 10;
             }
             ShowPaybleToday();
             ShowTotalPayble();
         }
+
         public void ShowPaybleToday()
         {
             _payableshowlist = new List<ShowPayableTodayDetail>();
@@ -46,7 +56,7 @@ namespace App2.View
                 {
                     foreach (var item3 in item2.Notification)
                     {
-                        _payableshowlist.Add(new ShowPayableTodayDetail() { txtWidth = _Width, Show_Pay_Party = item3.Party_name, Show_Pay_Outstanding = item3.Party_outstanding, Show_Amount_Received = item3.Amount_received, Show_Cur_Outstanding = item3.Current_outstanding });
+                        _payableshowlist.Add(new ShowPayableTodayDetail() {Show_Party_Id=item3.Party_id, txtWidth = _Width, Show_Pay_Party = item3.Party_name, Show_Pay_Outstanding = item3.Party_outstanding, Show_Amount_Received = item3.Amount_received, Show_Cur_Outstanding = item3.Current_outstanding });
                     }
                 }
             }
@@ -64,9 +74,16 @@ namespace App2.View
             list_totalpayble.ItemsSource = _showpayabletotalpayblelist;
         }
 
-        private void Row_Tapped(object sender, EventArgs e)
+        private void list_today_payble_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Navigation.PushModalAsync(new PayableChart());
+            navmdl = new NavigationMdl();
+            ShowPayableTodayDetail toady_notification = (ShowPayableTodayDetail)e.Item;
+            navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
+            navmdl.Party_id = toady_notification.Show_Party_Id;
+            navmdl.Device_id = "32132";
+            navmdl.Company_name = EnumMaster.C21_MALHAR;
+            //navmdl.User_id=toady_notification.u
+            Navigation.PushAsync(new PayableChart(navmdl));
         }
     }
     public class ShowPayableTodayDetail
@@ -75,6 +92,7 @@ namespace App2.View
         public string Show_Pay_Outstanding { get; set; }
         public string Show_Amount_Received { get; set; }
         public string Show_Cur_Outstanding { get; set; }
+        public string Show_Party_Id { get; set; }
         public double txtWidth { get; set; }
     }
     public class ShowPayableTotalPayble

@@ -48,12 +48,8 @@ namespace App2.View
 
         private  void Payable_Tapped(object sender, EventArgs e)
         {
-           // NavigationPage.SetHasNavigationBar(new PayablePage(), false);
-
              Navigation.PushAsync(new PayablePage());
-            
-           // NavigationPage.SetHasNavigationBar(new PayablePage(), true);
-            }
+        }
 
         private void CashFlow_Tapped(object sender, EventArgs e)
         {

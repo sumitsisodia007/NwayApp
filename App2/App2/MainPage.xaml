@@ -19,17 +19,17 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="20,0,0,0" Orientation="Horizontal">
+                            <StackLayout Padding="20,0" Orientation="Horizontal">
                                 <Label Text="{Binding Name}"
-                                       TextColor="Navy"
+                                       TextColor="Black"
                                        FontSize="15"
                                        HorizontalOptions="StartAndExpand"/>
                                 <Label Text="{Binding TagNotCount}"
-                                       TextColor="Navy"
+                                       TextColor="Black"
                                        FontSize="15"
                                        HorizontalOptions="CenterAndExpand"/>
                                 <Label Text="{Binding Tag_Amount, StringFormat='&#x20b9;{0:N}'}"
-                                       TextColor="Navy"
+                                       TextColor="Black"
                                        FontSize="15"
                                        HorizontalOptions="EndAndExpand"/>
                                 
@@ -58,13 +58,10 @@
                 </ListView.GroupHeaderTemplate>
             </ListView>
         </StackLayout>
-
-
         <ContentView x:Name="overlay"
                  AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                  AbsoluteLayout.LayoutFlags="All"
                  IsVisible="False"
-               
                  BackgroundColor="Transparent" Opacity="0.8">
             <Frame BackgroundColor="Black" Opacity="0.9" Padding="0" Margin="0">
                 <StackLayout Orientation="Vertical" 
@@ -80,6 +77,7 @@
                               HasUnevenRows="True"                              
                               BackgroundColor="Gray"
                               SeparatorVisibility="None"
+                              ItemTapped="MainlistView_ItemTapped"
                               SeparatorColor="#4472C4">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -90,14 +88,12 @@
                                                  HorizontalOptions="FillAndExpand"
                                                   BackgroundColor="Black">
 
-                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="Black" HorizontalOptions="Start"  FontSize="15" Text="{Binding Party_Name}" TextColor="White" HorizontalTextAlignment="Start" />
-                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="Black" HorizontalOptions="EndAndExpand"  FontSize="15" Text="{Binding Amount, StringFormat='&#x20b9;{0:N}'}" TextColor="White" HorizontalTextAlignment="End" />
+                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="Black" HorizontalOptions="Start"  FontSize="15" Text="{Binding show_party_name_customer_name}" TextColor="White" HorizontalTextAlignment="Start" />
+                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="Black" HorizontalOptions="EndAndExpand"  FontSize="15" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="White" HorizontalTextAlignment="End" />
 
                                         </StackLayout>
                                         <BoxView BackgroundColor="White" HeightRequest="1"/>
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                                        </StackLayout.GestureRecognizers>
+                                       
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

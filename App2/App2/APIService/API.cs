@@ -1,4 +1,5 @@
 ﻿using App2.Model;
+using App2.View;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -91,7 +92,7 @@ namespace App2.APIService
                 };
 
                 var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync(RestURL, content).Result; // Blocking call!
+                var response = client.PostAsync(RestURL, content).Result; 
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
@@ -129,7 +130,7 @@ namespace App2.APIService
 
                 var content = new FormUrlEncodedContent(values);
 
-                var response = client.PostAsync(RestURL, content).Result; // Blocking call!
+                var response = client.PostAsync(RestURL, content).Result; 
                 if (response.IsSuccessStatusCode)
                 {
                     // Parse the response body. Blocking!
@@ -160,25 +161,27 @@ namespace App2.APIService
         #endregion
 
         #region Payable TodayCollection Tabel
-        public PayableNotificationMdl PayableTable()
+        public PayableNotificationMdl PayableTable(NavigationMdl td_ntf)
         {
             PayableNotificationMdl response_model = new PayableNotificationMdl();
             try
             {
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(RestURL);
+
                 var values = new Dictionary<string, string>
-                {
-                    { "user_id", "1"},
-                    { "device_id", "32132"},
-                    { "company_name", "CENTURY 21 TOWN PLANNERS PVT. LTD."},
-                    //{ "party_id", "4274"},
-                    { "tagtype", "payable_outstanding"}
-                };
+                        {
+                            { "user_id", "1"},
+                            { "device_id", td_ntf.Device_id},
+                            { "company_name", td_ntf.Company_name},
+                            { "party_id", td_ntf.Party_id},
+                            { "tagtype", td_ntf.Tag_type}
+                        };
+               
 
                 var content = new FormUrlEncodedContent(values);
 
-                var response = client.PostAsync(RestURL, content).Result; // Blocking call!
+                var response = client.PostAsync(RestURL, content).Result; 
                 if (response.IsSuccessStatusCode)
                 {
                     // Parse the response body. Blocking!

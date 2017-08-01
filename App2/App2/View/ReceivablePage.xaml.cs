@@ -22,6 +22,7 @@ namespace App2.View
             InitializeComponent();
             flag = 1;
             _receivable = api.ReceivableTable();
+
             listView.ItemsSource = _receivable;
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {

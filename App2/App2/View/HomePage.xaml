@@ -38,7 +38,7 @@
                                 </Image.GestureRecognizers>
                             </Image>
 
-                            <Label Text="Receivable" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="13">
+                            <Label x:Name="lblReceive" Text="Receivable" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="13">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Receivable_Tapped"/>
                                 </Label.GestureRecognizers>
@@ -66,7 +66,7 @@
                                     <TapGestureRecognizer Tapped="Payable_Tapped" />
                                 </Image.GestureRecognizers>
                             </Image>
-                            <Label Text="Payable" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
+                                <Label x:Name="lblPay" Text="Payable" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Payable_Tapped"/>
                                 </Label.GestureRecognizers>
@@ -101,7 +101,7 @@
                                     <TapGestureRecognizer Tapped="CashFlow_Tapped" />
                                 </Image.GestureRecognizers>
                             </Image>
-                            <Label Text="Cash Flow" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
+                                <Label x:Name="lblcashflow" Text="Cash Flow" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="CashFlow_Tapped"/>
                                 </Label.GestureRecognizers>
@@ -132,7 +132,7 @@
                                     <TapGestureRecognizer Tapped="Elect_Tapped" />
                                 </Image.GestureRecognizers>
                             </Image>
-                            <Label Text="Elec. Cunsuption" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"    VerticalOptions="StartAndExpand" FontSize="13">
+                                <Label x:Name="lblEleCun" Text="Elec. Cunsuption" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"    VerticalOptions="StartAndExpand" FontSize="13">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Elect_Tapped" />
                                 </Label.GestureRecognizers>
@@ -166,7 +166,7 @@
                                     <TapGestureRecognizer Tapped="Expired_Tapped" />
                                 </Image.GestureRecognizers>
                             </Image>
-                            <Label Text="Expired Soon" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  VerticalOptions="StartAndExpand" FontSize="13">
+                                <Label x:Name="lblExpir" Text="Expired Soon" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  VerticalOptions="StartAndExpand" FontSize="13">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Expired_Tapped"/>
                                 </Label.GestureRecognizers>
@@ -198,7 +198,7 @@
                                     <TapGestureRecognizer Tapped="Canceled_Tapped" />
                                 </Image.GestureRecognizers>
                             </Image>
-                            <Label Text="Invoice Canceled" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"   VerticalOptions="StartAndExpand" FontSize="13">
+                                <Label x:Name="lblInvoiceCancel" Text="Invoice Canceled" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"   VerticalOptions="StartAndExpand" FontSize="13">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Canceled_Tapped"/>
                                 </Label.GestureRecognizers>

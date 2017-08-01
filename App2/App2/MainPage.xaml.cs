@@ -23,10 +23,10 @@ namespace App2
         /// Second List
         /// </summary>
         public List<NotificationShow> _receivablList { get; set; }
-        public List<NotificationShow> _receiva { get; set; }
         public double _Width = 0;
 
         public ObservableCollection<NotificationListMdl> _NotificationListMdl;
+
         public MainPage()
         {
             InitializeComponent();
@@ -36,13 +36,10 @@ namespace App2
                 var calcScreenHieght = Application.Current.MainPage.Height;
                 _Width = calcScreenWidth / 3;
             }
-
             API api = new API();
             _notificationModel = api.PostNotification();
 
-
             ObservableCollection<FoodGroup> food = new ObservableCollection<FoodGroup>();
-
 
             foreach (var item in _notificationModel.ListNotificationDate)
             {
@@ -122,7 +119,6 @@ namespace App2
         public void TodayCollationList(Food food)
         {
             _receivablList = new List<NotificationShow>();
-            _receiva = new List<NotificationShow>();
             var notification = _notificationModel.ListNotificationDate.Where(o => o.Date == food.Tag_date).ToList();
            
             foreach (var item in notification)
@@ -131,38 +127,54 @@ namespace App2
                 {
                     foreach (var item3 in item2.Notification)
                     { 
-                        _receivablList.Add(new NotificationShow { Amount = item3.Amount_received, txtWidth = _Width, Party_Name = item3.Party_name, Filter_Tag = item2.Tag,Filter_Date=item.Date});
-                        //if (item2.Tag == "paid" )
-                        //{
-                        //    _receivablList.OfType<NotificationShow>().Where(s => s.Filter_Tag== item2.Tag  && s.Filter_Date==item.Date);
-                        //    _receiva.Add(new NotificationShow { Amount = item3.Amount_received, txtWidth = _Width, Party_Name = item3.Party_name, Filter_Tag = item2.Tag, Filter_Date = item.Date });
-                        //    // _receivablList.Clear();
-
-                        //}
-                        //else if(item2.Tag == "receipt")
-                        //{
-
-                        //    _receivablList.OfType<NotificationShow>().Where(s => s.Filter_Tag == item2.Tag && s.Filter_Date == item.Date);
-                        //    //_receivablList.Clear();
-                        //}
+                       
+                        if (lblName.Text == "paid" && item2.Tag == "paid" && item.Date == food.Tag_date)
+                        {
+                            _receivablList.Add(new NotificationShow
+                            {
+                                show_amount_received = item3.Amount_received,
+                                txtWidth = _Width,
+                                show_party_name_customer_name = item3.Party_name,
+                                show_party_id_invoice_id=item3.Party_id
+                            });
+                        }
+                       else if (item2.Tag == "receipt" && lblName.Text == "receipt" && item.Date == food.Tag_date)
+                        {
+                            _receivablList.Add(new NotificationShow
+                            {
+                                show_amount_received = item3.Amount_received,
+                                txtWidth = _Width,
+                                show_party_name_customer_name = item3.Party_name,
+                                show_party_id_invoice_id = item3.Party_id
+                            });
+                        }
+                       else if (item2.Tag == "invoice_cancelletion" && lblName.Text == "invoice_cancelletion" && item.Date == food.Tag_date)
+                        {
+                            _receivablList.Add(new NotificationShow
+                            {
+                                txtWidth = _Width,
+                                show_party_name_customer_name = item3.Customer_name,
+                                show_amount_received = item3.Invoice_code,
+                                show_party_id_invoice_id=item3.Customer_id,
+                            });
+                        }
                     }
                 }
-
             }
             MainlistView.ItemsSource = _receivablList;
         }
-
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+       
+        private void MainlistView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            DisplayAlert("Message", "Comming Soon", "OK");
+            NotificationShow nav_next_api = (NotificationShow)e.Item;
         }
     }
     public class NotificationShow
     {
-        public string Party_Name { get; set; }
-        public string Amount { get; set; }
-        public string Filter_Tag{ get; set; }
-        public string Filter_Date { get; set; }
+        public string show_party_name_customer_name { get; set; }
+        public string show_amount_received { get; set; }
+        public string show_party_id_invoice_id{ get; set; }
+       // public string show_invoice_code { get; set; }
         public double txtWidth { get; set; }
     }
 }
