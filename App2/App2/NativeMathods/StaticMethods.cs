@@ -25,7 +25,7 @@ namespace App2.NativeMathods
             }
             return strDeviceIdentifier;
         }
-
+        /*
         public static void ShowToast(string msg)
         {
             Device.BeginInvokeOnMainThread(() =>
@@ -67,7 +67,7 @@ namespace App2.NativeMathods
 
         }
         
-        /*
+        
         public static UserModel GetLocalSavedData()
         {
             UserModel um = null;

@@ -109,11 +109,11 @@ namespace App2.APIService
         #endregion
 
         #region Recievable TodayCollection Tabel
-        public List<ReceivableMdl> ReceivableTable()
+        public List<ReceivableNotificationMdl> ReceivableTable()
         {
             ResponseModel response_model = new ResponseModel();
-            List<ReceivableMdl> list_recmdl = new List<ReceivableMdl>();
-            ReceivableMdl recmdl=null;
+            List<ReceivableNotificationMdl> list_recmdl = new List<ReceivableNotificationMdl>();
+            ReceivableNotificationMdl recmdl=null;
             try
             {
                
@@ -141,7 +141,7 @@ namespace App2.APIService
                     var calcScreenWidth = Application.Current.MainPage.Width;
                     foreach (var data in jObj["list"])
                     {
-                        recmdl = new ReceivableMdl();
+                        recmdl = new ReceivableNotificationMdl();
                         recmdl.Perticular= (data["perticular"].ToString());
                         recmdl.Total_Due = (data["total_due"].ToString());
                         recmdl.Receive = (data["receive"].ToString());
@@ -187,6 +187,7 @@ namespace App2.APIService
                     // Parse the response body. Blocking!
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
                     JObject jObj = JObject.Parse(jsonresult);
+
                     response_model = JsonConvert.DeserializeObject<PayableNotificationMdl>(jsonresult);
 
                 }

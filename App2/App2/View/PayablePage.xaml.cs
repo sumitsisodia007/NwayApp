@@ -113,8 +113,14 @@ namespace App2.View
             _showpayabletotalpayblelist = new List<ShowPayableTotalPayble>();
             foreach (var item in _payable.ListPayablemdl)
             {
-                _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name= item.Site_name, Show_Balance= item.Balance, Show_Total_cr= item.Total_cr, Show_Total_dr= item.Total_dr});
-             
+                if (lblSiteName.Text != "Particular")
+                {
+                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = item.Site_name, Show_Balance = item.Balance, Show_Total_cr = item.Total_cr, Show_Total_dr = item.Total_dr });
+                }
+                else
+                {
+                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = item.Perticular, Show_Balance = item.Balance, Show_Total_cr = item.Total_Due, Show_Total_dr = item.Receive });
+                }
             }
             list_totalpayble.ItemsSource = _showpayabletotalpayblelist;
         }
@@ -123,11 +129,14 @@ namespace App2.View
         {
             navmdl = new NavigationMdl();
             ShowPayableTodayDetail toady_notification = (ShowPayableTodayDetail)e.Item;
-            navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
+           
             navmdl.Party_id = toady_notification.Show_Party_Id;
             navmdl.Device_id = "32132";
             navmdl.Company_name = EnumMaster.C21_MALHAR;
-            //navmdl.User_id=toady_notification.u
+            navmdl.Party_Name = toady_notification.Show_Pay_Party;
+            if (this.Title== "Receivable")
+            { navmdl.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING; }
+            else { navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING; }
             Navigation.PushAsync(new PayableChart(navmdl));
         }
     }
@@ -140,6 +149,7 @@ namespace App2.View
         public string Show_Party_Id { get; set; }
         public double txtWidth { get; set; }
     }
+
     public class ShowPayableTotalPayble
     {
         public string Show_Site_name { get; set; }

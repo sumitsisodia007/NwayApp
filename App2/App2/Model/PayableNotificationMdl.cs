@@ -19,7 +19,14 @@ namespace App2.Model
         public string Message { get; set; }
     }
     public class Payablelistmdl
-    {  
+    {
+        [JsonProperty("perticular")]
+        public string Perticular { get; set; }
+        [JsonProperty("total_due")]
+        public string Total_Due { get; set; }
+        [JsonProperty("receive")]
+        public string Receive { get; set; }
+
         public string Site_name { get; set; }
         public string Total_dr { get; set; }
         public string Total_cr { get; set; }

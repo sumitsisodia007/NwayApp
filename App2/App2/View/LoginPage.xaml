@@ -6,55 +6,49 @@
              BackgroundColor="White">
     <ScrollView >
         <StackLayout  Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0,20,0,0"  >
-        <StackLayout Padding="20,20" Spacing="13">
-            <Label  Text ="Nway Construction ERP"  TextColor="Black" FontSize="13" HorizontalOptions="Center" />
-            <Image x:Name="ImgLogo" 
+            <StackLayout Padding="20,20" Spacing="13">
+                <Label  Text ="Nway Construction ERP"  TextColor="Black" FontSize="13" HorizontalOptions="Center" />
+                <Image x:Name="ImgLogo" 
                        Source="logo"
                        Aspect="AspectFit" 
                        HeightRequest="150"
                        WidthRequest="150"
                        Margin="0"
-                       
                        HorizontalOptions="CenterAndExpand"
                        VerticalOptions="CenterAndExpand" />
-            <Label  Text ="Enter Email ID &amp; Password"  TextColor="Gray" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
-        </StackLayout>
-        <StackLayout VerticalOptions="Start" HorizontalOptions="Center"  Spacing="0" Orientation="Horizontal" Padding="0">
-                    <Label x:Name ="lblMessage" Text ="" IsVisible ="false" TextColor="Red" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
-                </StackLayout>
-                <Frame Margin="20,0" Padding="20,0">
+                <Label  Text ="Enter Email ID &amp; Password"  TextColor="Gray" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
+            </StackLayout>
+            <StackLayout VerticalOptions="Start" HorizontalOptions="Center"  Spacing="0" Orientation="Horizontal" Padding="0">
+                <Label x:Name ="lblMessage" Text ="" IsVisible ="false" TextColor="Red" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
+            </StackLayout>
+            <Frame Margin="20,0" Padding="20,0">
                 <StackLayout>
-              
+
                     <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Horizontal" Padding="0">
-                            <Image Source="e_mail" Aspect="AspectFit" />
-                            <local:MyEntry x:Name="txtFName" FontSize="15"  FontFamily="SF UI Display"  PlaceholderColor="#E8E8E8"
+                        <Image Source="e_mail" Aspect="AspectFit" />
+                        <local:MyEntry x:Name="txtFName" FontSize="15"  FontFamily="SF UI Display"  PlaceholderColor="#E8E8E8"
 							Placeholder="USER NAME" HorizontalOptions="FillAndExpand" TextColor="Black"
 							HeightRequest="40">
                         </local:MyEntry>
                     </StackLayout>
                     <BoxView BackgroundColor="#E8E8E8" HeightRequest="1"/>
-              
                     <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Horizontal" Padding="0">
-                            <Image Source="lock" Aspect="AspectFit" />
-                            <local:MyEntry  HeightRequest="40" FontFamily="SF UI Display" PlaceholderColor="#E8E8E8"	x:Name="txtPass" 
+                        <Image Source="lock" Aspect="AspectFit" />
+                        <local:MyEntry  HeightRequest="40" FontFamily="SF UI Display" PlaceholderColor="#E8E8E8"	x:Name="txtPass" 
 						 FontSize="15" IsPassword="true" Placeholder="Password" TextColor="Black" HorizontalOptions="FillAndExpand">
                         </local:MyEntry>
                         <Image Source="icon_eye_off" Aspect="AspectFit" x:Name="signupPassshow">
                             <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="txtPassRecognizer_Tapped" />
+                                <TapGestureRecognizer Tapped="txtPassRecognizer_Tapped" />
                             </Image.GestureRecognizers>
                         </Image>
                     </StackLayout>
-               
                 </StackLayout>
-               
-                </Frame>
-
-                <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="10" Padding="14,0">
-                    <Label x:Name ="lblPassError" IsVisible ="false" TextColor="#9B9B9B" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
-                </StackLayout>
-
-                <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20" Orientation="Vertical" Padding="16,0,16,0">
+            </Frame>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="10" Padding="14,0">
+                <Label x:Name ="lblPassError" IsVisible ="false" TextColor="#9B9B9B" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
+            </StackLayout>
+            <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20" Orientation="Vertical" Padding="16,0,16,0">
                 <local:CurvedCornersLabel x:Name="Img1" Text="Login"
                                                       HorizontalTextAlignment="Center"
                                                       VerticalTextAlignment="Center"
@@ -69,15 +63,12 @@
                         <TapGestureRecognizer Tapped="btnLogin_Clicked" />
                     </Label.GestureRecognizers>
                 </local:CurvedCornersLabel>
-                <!--<Button x:Name="btnLogin" BackgroundColor="#4472C4"   TextColor="White" Clicked="btnLogin_Clicked"/>-->
-            <ActivityIndicator x:Name="_Loading" IsRunning="False" />    
-                </StackLayout>
-       
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="20">
-            <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="19"/>
+                <ActivityIndicator x:Name="_Loading" IsRunning="False" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="20">
+                <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="19"/>
                 <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
-            
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
     </ScrollView>
 </ContentPage>

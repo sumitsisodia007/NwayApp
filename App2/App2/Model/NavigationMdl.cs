@@ -13,5 +13,6 @@ namespace App2.Model
         public string Device_id { get; set; }
         public string Tag_type { get; set; }
         public string Party_id { get; set; }
+        public string Party_Name { get; set; }
     }
 }

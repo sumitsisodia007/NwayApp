@@ -10,14 +10,14 @@
             <ScrollView>
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <local:MyEntry  FontSize="15" BackgroundColor="White" 
-                            Placeholder="Select Party"
-                            HorizontalOptions="FillAndExpand" 
-                            TextColor="Black"
-                            Margin="5,2"
-							HeightRequest="40"/>
+                                    Placeholder="Select Party"
+                                    HorizontalOptions="FillAndExpand" 
+                                    TextColor="Black"
+                                    Margin="5,2"
+							        HeightRequest="40"/>
                     <Image Source="logo"
-                   Aspect="AspectFit"
-                   HeightRequest="180" />
+                           Aspect="AspectFit"
+                           HeightRequest="180" />
                     <StackLayout x:Name="stktodaypayable" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <Label x:Name="lblFirstTitle" Text="Today Payment(SETTING amount) (NOTIFICATION)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19" HorizontalTextAlignment="Center"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">

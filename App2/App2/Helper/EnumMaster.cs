@@ -12,13 +12,14 @@ namespace App2.Helper
         public static readonly string RECEIVABLE_OUTSTANDING = "receivable_outstanding";
         public static readonly string C21_MALHAR= "CENTURY 21 TOWN PLANNERS PVT. LTD.";
 
+        public static readonly string LblChartTitle= "(Monthly Ledger)";
 
         public static readonly string LblReceivedFirstTitle= "Today Collection(Notification)";
         public static readonly string LblReceivedSecoundTitle = "Today OutStanding";
         public static readonly string LblReceivedOutstanding= "Pre Outstanding";
         public static readonly string LblReceivedTodayPaid= "Today Receipt";
         public static readonly string LblReceivedCurOutstanding= "Cur. Outstanding";
-        public static readonly string LblReceivedSiteName = ".Particular";
+        public static readonly string LblReceivedSiteName = "Particular";
         public static readonly string LblReceivedTotaleDr = "Total Due";
         public static readonly string LblReceivedTotaleCr = "Receive";
         public static readonly string LblPaidFirstTitle = "Today Payment(SETTING amount) (NOTIFICATION)";

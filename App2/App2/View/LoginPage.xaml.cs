@@ -37,22 +37,25 @@ namespace App2.View
 
         }
 
-        private void btnLogin_Clicked(object sender, EventArgs e)
+        private async void btnLogin_Clicked(object sender, EventArgs e)
         {
-            StaticMethods.ShowLoader();
+            ResponseModel rs=new ResponseModel();
+            _Loading.Color = Color.FromHex("#4472C4");
             _Loading.IsRunning = true;
-            _login.Username =  txtFName.Text;
-            _login.Password = txtPass.Text;
-            _login.DeviceID =  StaticMethods.getDeviceidentifier();
+            _login.Username = "sumit";//  txtFName.Text;
+            _login.Password = "1";// txtPass.Text;
+            _login.DeviceID = StaticMethods.getDeviceidentifier();
             _login.Firebasetoken = "asdgasdggshgdj";
             _login.Tagtype = "signin";
-
-            ResponseModel rs = api.postLogin(_login);
-            if (rs.Error == "False")
+            await Task.Run( () =>
             {
-                Navigation.PushModalAsync(new MasterMenuPage());
+                rs=  api.postLogin(_login);
+            });
+            if (rs.Error=="False")
+            {
+              await  Navigation.PushModalAsync(new MasterMenuPage());
             }
-            StaticMethods.DismissLoader();
+            _Loading.IsRunning = false;
         }
     }
 }

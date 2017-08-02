@@ -9,11 +9,11 @@ namespace App2.Interface
     public interface IAndroidMethods
     {
         string GetIdentifier();
-        void ShowToast(string msg);
+       // void ShowToast(string msg);
         //UserModel RetriveLocalData();
         //void SaveLocalData(UserModel um);
         //void DeleteLocalData();
-        void ShowLoader();
-        void DismissLoader();
+        //void ShowLoader();
+        //void DismissLoader();
     }
 }

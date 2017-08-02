@@ -14,7 +14,7 @@ namespace App2.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ReceivablePage : ContentPage
     {
-        public List<ReceivableMdl> _receivable { get; set; }
+        public List<ReceivableNotificationMdl> _receivable { get; set; }
         API api = new API();
         public static int flag = 0;
         public ReceivablePage()
