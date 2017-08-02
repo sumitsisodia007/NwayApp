@@ -10,7 +10,9 @@ namespace App2.ExpandableListView
     public class FoodGroup : ObservableCollection<Food>, INotifyPropertyChanged
     {
         private bool _expanded;
-        public string Title { get; set; }       
+        public string Title { get; set; }
+        public string ShortName { get; set; }
+
         public string TitleWithItemCount
         {
             get { return string.Format(Title); }
@@ -34,9 +36,10 @@ namespace App2.ExpandableListView
             get { return Expanded ? "Expand_up.png" : "Expand_down.png"; }
         }
 
-        public FoodGroup(string title, bool expanded = false)
+        public FoodGroup(string title,string shortname, bool expanded = false)
         {
             Title = title;
+            ShortName = shortname;
             Expanded = expanded;
         }
      
@@ -49,7 +52,7 @@ namespace App2.ExpandableListView
             ObservableCollection<FoodGroup> food = new ObservableCollection<FoodGroup>();
             foreach (var item in mode.ListNotificationDate)
             {
-                FoodGroup group = new FoodGroup(item.Date);
+                FoodGroup group = new FoodGroup(item.Date,"D");
 
                 foreach (var item2 in item.ListTags)
                 {

@@ -9,12 +9,14 @@
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <ScrollView>
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <local:MyEntry  FontSize="15" BackgroundColor="White" 
+                    <StackLayout BackgroundColor="White" Padding="10,0">
+                        <local:MyEntry  FontSize="15" BackgroundColor="White" 
                             Placeholder="Select Party"
                             HorizontalOptions="FillAndExpand" 
                             TextColor="Black"
                             Margin="5,2"
 							HeightRequest="40"/>
+                    </StackLayout>
                     <Image Source="logo"
                            Aspect="AspectFit"
                            HeightRequest="180" />

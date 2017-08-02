@@ -82,7 +82,14 @@ namespace App2.View
             _login.Firebasetoken = "asdgasdggshgdj";
             _login.Tagtype = "signin";
             //api.PostNotification();
-            Navigation.PushAsync(new MainPage());
+            try
+            {
+                Navigation.PushAsync(new MainPage());
+            }
+            catch (Exception ex)
+            {
+            }
+            
         }
     }
 }
