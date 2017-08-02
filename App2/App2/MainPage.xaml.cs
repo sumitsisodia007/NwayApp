@@ -43,7 +43,7 @@ namespace App2
 
             foreach (var item in _notificationModel.ListNotificationDate)
             {
-                FoodGroup group = new FoodGroup(item.Date + " (" + item.NotCount + ")");
+                FoodGroup group = new FoodGroup(item.Date + " (" + item.NotCount + ")","D");
 
                 foreach (var item2 in item.ListTags)
                 {
@@ -80,7 +80,7 @@ namespace App2
                 foreach (FoodGroup group in _allGroups)
                 {
                     //Create new FoodGroups so we do not alter original list
-                    FoodGroup newGroup = new FoodGroup(group.Title, group.Expanded);
+                    FoodGroup newGroup = new FoodGroup(group.Title,"D", group.Expanded);
                     //Add the count of food items for Lits Header Titles to use
                     if (group.Expanded)
                     {

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "643700095016",
+    "firebase_url": "https://xamarinfcm-6961b.firebaseio.com",
+    "project_id": "xamarinfcm-6961b",
+    "storage_bucket": "xamarinfcm-6961b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643700095016:android:3e33428f116e12d7",
+        "android_client_info": {
+          "package_name": "com.elensoft.xamarin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643700095016-30f20qrasg3ndaibmdjj17a2mtd9ctqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkf9Q4AbZmMWlZ9BdpA3N6YASrd-DsA84"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
