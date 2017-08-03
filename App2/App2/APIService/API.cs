@@ -18,7 +18,8 @@ namespace App2.APIService
     {
         
 
-        public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
+        //public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
+        public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
 
         #region Login
         public ResponseModel postLogin(LoginMdl lgmdl)
@@ -59,7 +60,7 @@ namespace App2.APIService
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 // StaticMethods.AndroidSnackBar(e.Message);
             }
@@ -100,7 +101,7 @@ namespace App2.APIService
                      jsonResponse = JsonConvert.DeserializeObject<NotificationListMdl>(jsonresult);
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                
             }
@@ -152,7 +153,7 @@ namespace App2.APIService
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 // StaticMethods.AndroidSnackBar(e.Message);
             }
@@ -192,7 +193,7 @@ namespace App2.APIService
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 // StaticMethods.AndroidSnackBar(e.Message);
             }

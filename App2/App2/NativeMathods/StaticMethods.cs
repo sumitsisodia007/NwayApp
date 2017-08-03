@@ -25,6 +25,19 @@ namespace App2.NativeMathods
             }
             return strDeviceIdentifier;
         }
+        public static string getTokan()
+        {
+            string strDeviceIdentifier = "";
+            if (Device.OS == TargetPlatform.iOS)
+            {
+              //  strDeviceIdentifier = DependencyService.Get<IIosMethods>().GetIdentifier();
+            }
+            else
+            {
+                strDeviceIdentifier =  DependencyService.Get<IAndroidMethods>().GetTokan();
+            }
+            return strDeviceIdentifier;
+        }
         /*
         public static void ShowToast(string msg)
         {

@@ -30,6 +30,11 @@ namespace App2.Droid.DependencyService
         {
             Toast.MakeText(Forms.Context, msg, ToastLength.Long).Show();
         }
+        public string GetTokan()
+        {
+            var id = MyFirebaseIIDService.RegistrationID;
+            return id;
+        }
         /*public void SaveLocalData(UserModel um)
         {
             try

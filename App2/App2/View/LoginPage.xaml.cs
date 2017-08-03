@@ -1,4 +1,5 @@
 ﻿using App2.APIService;
+using App2.Interface;
 using App2.Model;
 using App2.NativeMathods;
 using System;
@@ -44,8 +45,8 @@ namespace App2.View
             _Loading.IsRunning = true;
             _login.Username = "sumit";//  txtFName.Text;
             _login.Password = "1";// txtPass.Text;
-            _login.DeviceID = StaticMethods.getDeviceidentifier();
-            _login.Firebasetoken = "asdgasdggshgdj";
+            _login.DeviceID = "123456";// StaticMethods.getDeviceidentifier();
+            _login.Firebasetoken =  StaticMethods.getTokan();//"asdgasdggshgdj";
             _login.Tagtype = "signin";
             await Task.Run( () =>
             {

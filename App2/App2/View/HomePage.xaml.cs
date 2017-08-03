@@ -76,10 +76,10 @@ namespace App2.View
         private void Notification_Clicked(object sender, EventArgs e)
         {
 
-            _login.Username = "";// txtFName.Text;
-            _login.Password = "";// txtPass.Text;
+            _login.Username = "sumit";// txtFName.Text;
+            _login.Password = "1";// txtPass.Text;
             _login.DeviceID = "12345";// StaticMethods.getDeviceidentifier();
-            _login.Firebasetoken = "asdgasdggshgdj";
+            _login.Firebasetoken = "cq9_AqsQW1w:APA91bHRiZM2TKb3qUuf3T1NCEviyg6vPJ6K-wu7DBdkHhn8AF2oPmKsTnqtT8TdVGknGQRNDFyiqNXf_MvHXgw4gkcHDGfxSR5mUdCRuz_rtqQpqF5PoteZFvu8p8tObdckvFgZvTbi";
             _login.Tagtype = "signin";
             //api.PostNotification();
             try

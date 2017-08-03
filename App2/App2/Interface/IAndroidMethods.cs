@@ -9,6 +9,7 @@ namespace App2.Interface
     public interface IAndroidMethods
     {
         string GetIdentifier();
+        string GetTokan();
        // void ShowToast(string msg);
         //UserModel RetriveLocalData();
         //void SaveLocalData(UserModel um);

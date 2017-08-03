@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "643700095016",
-    "firebase_url": "https://xamarinfcm-6961b.firebaseio.com",
-    "project_id": "xamarinfcm-6961b",
-    "storage_bucket": "xamarinfcm-6961b.appspot.com"
+    "project_number": "600793544961",
+    "firebase_url": "https://erpmall-7266e.firebaseio.com",
+    "project_id": "erpmall-7266e",
+    "storage_bucket": "erpmall-7266e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:643700095016:android:3e33428f116e12d7",
+        "mobilesdk_app_id": "1:600793544961:android:4bc6062187e73b0f",
         "android_client_info": {
-          "package_name": "com.elensoft.xamarin"
+          "package_name": "com.cwd.nwayconstructionerp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "643700095016-30f20qrasg3ndaibmdjj17a2mtd9ctqk.apps.googleusercontent.com",
+          "client_id": "600793544961-pungt7de6fqqbu3fk9sg9hgmajb2a789.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cwd.nwayconstructionerp",
+            "certificate_hash": "7b83839939951c6940f78e45204d50781d5ae384"
+          }
+        },
+        {
+          "client_id": "600793544961-6g3k3gkvacc4t5ekn159i55en27d72dt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAkf9Q4AbZmMWlZ9BdpA3N6YASrd-DsA84"
+          "current_key": "AIzaSyBBeAlK_h2RyfV_gFYR6F8UBiRWN9hDv70"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600793544961-6g3k3gkvacc4t5ekn159i55en27d72dt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

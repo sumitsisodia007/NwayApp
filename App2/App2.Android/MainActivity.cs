@@ -1,11 +1,10 @@
-﻿using System;
-
+﻿
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Android.Util;
+using Firebase.Iid;
+using System.Threading.Tasks;
 
 namespace App2.Droid
 {
@@ -18,7 +17,11 @@ namespace App2.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-
+            Task.Run(() => {
+                var instanceid = FirebaseInstanceId.Instance;
+                instanceid.DeleteInstanceId();
+               // Log.Debug("TAG", "{0} {1}", instanceid.Token, instanceid.GetToken(this.GetString(Resource.String.gcm_defaultSenderId), Firebase.Messaging.FirebaseMessaging.InstanceIdScope));
+            });
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }

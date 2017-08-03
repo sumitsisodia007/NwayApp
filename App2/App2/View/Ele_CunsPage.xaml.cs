@@ -44,7 +44,7 @@ namespace App2.View
                 _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
                 listView.ItemsSource = _receivablList;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
 

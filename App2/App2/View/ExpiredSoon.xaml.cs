@@ -44,7 +44,7 @@ namespace App2.View
                 ListViewMain.ItemsSource= _receivablList;
                 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
 
