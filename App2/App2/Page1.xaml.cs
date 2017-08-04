@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,27 +13,13 @@ namespace App2
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page1 : ContentPage
     {
+        bool isListSelected = false;
         public Page1()
         {
             InitializeComponent();
+           
         }
-        void OnButtonClicked(object sender, EventArgs args)
-        {
-            EnteredName.Text = string.Empty;
-            overlay.IsVisible = true;
-            EnteredName.Focus();
-        }
-
-        void OnOKButtonClicked(object sender, EventArgs args)
-        {
-            overlay.IsVisible = false;
-
-            DisplayAlert("Result", string.Format("You entered {0}", EnteredName.Text), "OK");
-        }
-
-        void OnCancelButtonClicked(object sender, EventArgs args)
-        {
-            overlay.IsVisible = false;
-        }
+       
+       
     }
 }

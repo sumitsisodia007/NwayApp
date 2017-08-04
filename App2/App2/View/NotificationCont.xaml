@@ -2,10 +2,54 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.View.NotificationCont"
+              xmlns:local="clr-namespace:App2.CustomRenderer"
              Title="Notification">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+        <StackLayout x:Name="Mainstk" Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" Padding="0,10,0,0">
+                <Label Text="*Location" TextColor="#000000" FontSize="16" FontFamily="PT Sans Narrow" />
+                <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Horizontal" Margin="0,5,0,0">
+                    <local:MyEntry x:Name="txtauto" FontSize="15"
+                                  TextChanged="Location_TextChanged"
+                                   Focused="Location_focused"
+                                   Unfocused="Location_Unfocused" 
+                                    BackgroundColor="White" 
+                            Placeholder="Select Party"
+                            HorizontalOptions="FillAndExpand" 
+                            TextColor="Black"
+                            Margin="5,2"
+							HeightRequest="40"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="txtLocation_Focus" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <Image x:Name="imgclearlocation" Source="close" IsVisible="false" HorizontalOptions="End" Margin="0,-25,5,11">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="btnClearLocation" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <ListView x:Name="Location_listview" SeparatorVisibility="None" SeparatorColor="Black" HasUnevenRows="true" 
+                          ItemTapped="Location_ItemTabbed" VerticalOptions="FillAndExpand" 
+                          HorizontalOptions="FillAndExpand" IsVisible="false">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="#FFFFFF" Spacing="0">
+                                        <BoxView BackgroundColor="#E8E8E8" HeightRequest="0.5" />
+                                        <StackLayout Orientation="Horizontal" Padding="0" Spacing="0">
+                                            <BoxView WidthRequest="0.5" BackgroundColor="#E8E8E8" VerticalOptions="FillAndExpand" HorizontalOptions="Start" Margin="0" />
+                                            <Label Margin="10,0,0,0" Text="{Binding Party_Name}" WidthRequest="{Binding txtWidth}" FontAttributes="None" FontSize="18" FontFamily="PT Sans Narrow" VerticalTextAlignment="Center" />
+                                            <BoxView WidthRequest="0.5" BackgroundColor="#E8E8E8" VerticalOptions="FillAndExpand" HorizontalOptions="EndAndExpand" Margin="0" />
+                                        </StackLayout>
+                                        <BoxView HeightRequest="0.5" BackgroundColor="#E8E8E8" />
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

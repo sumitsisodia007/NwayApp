@@ -17,20 +17,20 @@ namespace App2.View
     {
         public List<ShowPayableTodayDetail> _payableshowlist { get; set; }
         public List<ShowPayableTotalPayble> _showpayabletotalpayblelist { get; set; }
+        public List<PayableNotificationMdl> _payablenotificationdata { get; set; }
+        NavigationMdl navmdl;
+        PayableNotificationMdl _payable;
         public double _Width = 0;
         public static int flag = 0;
-
-        public List<PayableNotificationMdl> _payablenotificationdata { get; set; }
-        PayableNotificationMdl _payable;
         API api = new API();
 
-        NavigationMdl navmdl;
         public PayablePage()
         {
             InitializeComponent();
         }
+
        public PayablePage (string title)
-		{
+	   {
 			InitializeComponent ();
             this.Title = title;
             navmdl = new NavigationMdl();
@@ -48,8 +48,9 @@ namespace App2.View
                 PredefinedPaid();
                 navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
             }
-
+            //calling api
             _payable = api.PayableTable(navmdl);
+
             ShowPayableTodayDetail toady_notification = new ShowPayableTodayDetail();            
             flag = 1;
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)

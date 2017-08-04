@@ -201,6 +201,42 @@ namespace App2.APIService
         }
         #endregion
 
+       // ObservableCollection<PartysearchlistMdl> lstLocation = null;
+        public async Task<PartysearchMdl> GetParty(NavigationMdl keyName)
+        {
+            PartysearchMdl _partysearchlistmdl = new PartysearchMdl();
+          
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(RestURL);
 
+                var values = new Dictionary<string, string>
+                        {
+                            { "user_id", "1"},
+                            { "device_id","123456"},
+                            { "company_name", keyName.Company_name},
+                            { "party_name", keyName.Party_Name},
+                            { "tagtype", "partylist"}
+                        };
+
+
+                var content = new FormUrlEncodedContent(values);
+                var response = client.PostAsync(RestURL, content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body. Blocking!
+                    var jsonresult = response.Content.ReadAsStringAsync().Result;
+                    JObject jObj = JObject.Parse(jsonresult);
+
+                    _partysearchlistmdl = JsonConvert.DeserializeObject<PartysearchMdl>(jsonresult);
+                }
+            }
+            catch (Exception)
+            {
+                // StaticMethods.AndroidSnackBar(e.Message);
+            }
+            return _partysearchlistmdl;
+        }
     }
 }
