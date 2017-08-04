@@ -3,8 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.Page1">
     <StackLayout x:Name="Mainstk" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        
-        
+        <Frame BackgroundColor="Black" HasShadow="False" CornerRadius="5" Padding="0">
+        <Button
+                x:Name="YourButton"
+                Text="Some Button Text"
+                TextColor="Black"
+                Clicked="YourButton_Clicked"
+                BackgroundColor="Aqua"
+                BorderColor="Red"
+                BorderWidth="1">
+            <Button.BorderRadius>
+                <!-- HACK: fixes a bug where border doesn't work without a radius. -->
+                <OnPlatform x:TypeArguments="x:Int32">
+                    <OnPlatform.Android>1</OnPlatform.Android>
+                </OnPlatform>
+            </Button.BorderRadius>
+        </Button>
+        </Frame>
     </StackLayout>
 
 </ContentPage>

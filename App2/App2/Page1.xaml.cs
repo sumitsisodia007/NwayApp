@@ -17,9 +17,12 @@ namespace App2
         public Page1()
         {
             InitializeComponent();
-           
+            //yourButton.BorderRadius = Device.OnPlatform<int>(iOS: 0, Android: 1, WinPhone: 0)
         }
-       
-       
+
+        private void YourButton_Clicked(object sender, EventArgs e)
+        {
+           // YourButton.BorderRadius = Device.OnPlatform<int>(iOS: 0, Android: 1, WinPhone: 0);
+        }
     }
 }

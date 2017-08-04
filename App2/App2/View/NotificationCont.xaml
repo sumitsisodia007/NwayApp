@@ -5,7 +5,7 @@
               xmlns:local="clr-namespace:App2.CustomRenderer"
              Title="Notification">
     <ContentPage.Content>
-        <StackLayout x:Name="Mainstk" Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+      
             <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" Padding="0,10,0,0">
                 <Label Text="*Location" TextColor="#000000" FontSize="16" FontFamily="PT Sans Narrow" />
                 <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Horizontal" Margin="0,5,0,0">
@@ -28,9 +28,14 @@
                         <TapGestureRecognizer Tapped="btnClearLocation" />
                     </Image.GestureRecognizers>
                 </Image>
-                <ListView x:Name="Location_listview" SeparatorVisibility="None" SeparatorColor="Black" HasUnevenRows="true" 
-                          ItemTapped="Location_ItemTabbed" VerticalOptions="FillAndExpand" 
-                          HorizontalOptions="FillAndExpand" IsVisible="false">
+                <ListView x:Name="Location_listview" 
+                          SeparatorVisibility="None" 
+                          SeparatorColor="Black"
+                          HasUnevenRows="true" 
+                          ItemTapped="Location_ItemTabbed" 
+                          VerticalOptions="FillAndExpand" 
+                          HorizontalOptions="FillAndExpand" 
+                          IsVisible="false">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -50,6 +55,6 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-        </StackLayout>
+       
     </ContentPage.Content>
 </ContentPage>

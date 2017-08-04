@@ -7,18 +7,54 @@
              Title="Payable">
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <ScrollView>
+            <ScrollView x:Name="scrollbar" IsClippedToBounds="true">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <StackLayout BackgroundColor="White" Padding="10,0">
-                    <local:MyEntry  FontSize="15" 
+                    <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" >
+                        <StackLayout BackgroundColor="White" Padding="10,0">
+                            <local:MyEntry  x:Name="txtAuto"
+                                        TextChanged="txtAuto_TextChanged"
+                                        Focused="txtAuto_Focused"
+                                        Unfocused="txtAuto_Unfocused"
+                                    FontSize="15" 
                                     BackgroundColor="White" 
                                     Placeholder="Select Party"
                                     HorizontalOptions="FillAndExpand" 
                                     TextColor="Black"
                                     PlaceholderColor="Black"
                                     HeightRequest="40"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="txtLocation_Focus" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <ListView x:Name="AutoList"
+                              SeparatorVisibility="None"
+                              HasUnevenRows="False"
+                              IsVisible="False"
+                              VerticalOptions="FillAndExpand"
+                              HorizontalOptions="FillAndExpand"
+                              ItemTapped="AutoList_ItemTapped">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <ViewCell.View>
+                                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="#FFFFFF" Spacing="0">
+                                                <BoxView BackgroundColor="#E8E8E8" HeightRequest="1" />
+                                                <StackLayout Orientation="Horizontal" Padding="0" Spacing="0">
+                                                    <BoxView WidthRequest="2" BackgroundColor="#E8E8E8" VerticalOptions="FillAndExpand" HorizontalOptions="Start" Margin="0" />
+                                                    <Label Margin="10,0,0,0" Text="{Binding Party_Name}" FontSize="15" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start"/>
+                                                    <BoxView WidthRequest="2" BackgroundColor="#E8E8E8" VerticalOptions="FillAndExpand" HorizontalOptions="EndAndExpand" Margin="0" />
+                                                </StackLayout>
+                                                <BoxView HeightRequest="1" BackgroundColor="#E8E8E8" />
+                                            </StackLayout>
+                                        </ViewCell.View>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackLayout>
-                    <Image Source="logo"
+
+                    <Image x:Name="imgLogo"
+                            Source="logo"
                            Aspect="AspectFit"
                            HeightRequest="180" />
                     <StackLayout x:Name="stktodaypayable" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

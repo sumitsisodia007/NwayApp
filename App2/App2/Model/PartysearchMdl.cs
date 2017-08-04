@@ -21,6 +21,5 @@ namespace App2.Model
     {
         public string Party_Name { get; set; }
         public string Party_Id { get; set; }
-        public double txtWidth { get; set; }
     }
     }

@@ -4,8 +4,6 @@
              xmlns:local="clr-namespace:App2"
              x:Class="App2.MainPage"
              Title="Notification">
-
-
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                  AbsoluteLayout.LayoutFlags="All">
@@ -70,8 +68,8 @@
                                WidthRequest="400" 
                                HorizontalOptions="FillAndExpand" 
                                VerticalOptions="FillAndExpand" >
-                    <Label x:Name="lblNotificationType" BackgroundColor="Black" Font="24,Bold" TextColor="White" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="&#x20b9; Notification" />
-                    <Label x:Name="lblName" BackgroundColor="Black" Font="20,Bold" TextColor="White" HorizontalOptions="Fill" HorizontalTextAlignment="Center" Text="Add a Player" />
+                    <Label x:Name="lblNotificationType" BackgroundColor="Black" Font="24,Bold" TextColor="White" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="Notification" />
+                    <Label x:Name="lblName" BackgroundColor="Black" Font="20,Bold" TextColor="White" HorizontalOptions="Fill" HorizontalTextAlignment="Center" Text="" />
 
                     <ListView x:Name="MainlistView"                            
                               HasUnevenRows="True"                              

@@ -37,19 +37,17 @@ namespace App2
                 _Width = calcScreenWidth / 3;
             }
             API api = new API();
-            _notificationModel = api.PostNotification();
-
+          
+             _notificationModel = api.PostNotification();
+          
             ObservableCollection<FoodGroup> food = new ObservableCollection<FoodGroup>();
-
             foreach (var item in _notificationModel.ListNotificationDate)
             {
                 FoodGroup group = new FoodGroup(item.Date + " (" + item.NotCount + ")","D");
-
                 foreach (var item2 in item.ListTags)
                 {
                     group.Add(new Food() { Name = item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
                 }
-
                 food.Add(group);
             }
             _allGroups = food;

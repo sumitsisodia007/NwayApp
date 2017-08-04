@@ -92,7 +92,7 @@ namespace App2.View
 
                     foreach (var item in lstLoca.Party_List)
                     {
-                        _lst.Add(new PartysearchlistMdl { Party_Id = item.Party_Id, Party_Name = item.Party_Name, txtWidth = ScreenWidth });
+                        _lst.Add(new PartysearchlistMdl { Party_Id = item.Party_Id, Party_Name = item.Party_Name });
                     }
                     Location_listview.ItemsSource = _lst;
                     Device.BeginInvokeOnMainThread( () =>
@@ -100,7 +100,7 @@ namespace App2.View
                         if (_lst.Count > 0)
                         {
                             Location_listview.IsVisible = true;
-                            Location_listview.ItemsSource = _lst.Select(c => { c.txtWidth = ScreenWidth; return c; }).ToList();
+                            //Location_listview.ItemsSource = _lst.Select(c => { c.txtWidth = ScreenWidth; return c; }).ToList();
                             Location_listview.HeightRequest = 40 * 5;
                         }
                         else
