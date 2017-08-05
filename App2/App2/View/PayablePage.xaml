@@ -2,13 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.View.PayablePage"
-               xmlns:local="clr-namespace:App2.CustomRenderer"
+             xmlns:local="clr-namespace:App2.CustomRenderer"
              BackgroundColor="#ED7D31"
              Title="Payable">
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <ScrollView x:Name="scrollbar" IsClippedToBounds="true">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <!--Start Auto Complete-->
                     <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" >
                         <StackLayout BackgroundColor="White" Padding="10,0">
                             <local:MyEntry  x:Name="txtAuto"
@@ -52,11 +53,12 @@
                             </ListView.ItemTemplate>
                         </ListView>
                     </StackLayout>
-
+                    <!--End Auto Complete-->
                     <Image x:Name="imgLogo"
                             Source="logo"
                            Aspect="AspectFit"
                            HeightRequest="180" />
+
                     <StackLayout x:Name="stktodaypayable" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <Label x:Name="lblFirstTitle" Text="Today Payment(SETTING amount) (NOTIFICATION)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19" HorizontalTextAlignment="Center"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
@@ -143,6 +145,6 @@
 
             </StackLayout>
         </StackLayout>
-  
+
     </ContentPage.Content>
 </ContentPage>

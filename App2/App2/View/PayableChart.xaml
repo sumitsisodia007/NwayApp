@@ -9,19 +9,20 @@
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <ScrollView x:Name="scrollbar" IsClippedToBounds="true">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <!--Start Auto Complete-->
                     <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" >
                         <StackLayout BackgroundColor="White" Padding="10,0">
                             <local:MyEntry  x:Name="txtAuto"
-                                        TextChanged="txtAuto_TextChanged"
-                                        Focused="txtAuto_Focused"
-                                        Unfocused="txtAuto_Unfocused"
-                                    FontSize="15" 
-                                    BackgroundColor="White" 
-                                    Placeholder="Select Party"
-                                    HorizontalOptions="FillAndExpand" 
-                                    TextColor="Black"
-                                    PlaceholderColor="Black"
-                                    HeightRequest="40"/>
+                                            TextChanged="txtAuto_TextChanged"
+                                            Focused="txtAuto_Focused"
+                                            Unfocused="txtAuto_Unfocused"
+                                            FontSize="15" 
+                                            BackgroundColor="White" 
+                                            Placeholder="Select Party"
+                                            HorizontalOptions="FillAndExpand" 
+                                            TextColor="Black"
+                                            PlaceholderColor="Black"
+                                            HeightRequest="40"/>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="txtLocation_Focus" />
                             </StackLayout.GestureRecognizers>
@@ -37,7 +38,7 @@
                                 <DataTemplate>
                                     <ViewCell>
                                         <ViewCell.View>
-                                            
+
                                             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="#FFFFFF" Spacing="0">
                                                 <BoxView BackgroundColor="#E8E8E8" HeightRequest="1" />
                                                 <StackLayout Orientation="Horizontal" Padding="0" Spacing="0">
@@ -53,7 +54,7 @@
                             </ListView.ItemTemplate>
                         </ListView>
                     </StackLayout>
-
+                    <!--End Auto Complete-->
                     <Image Source="logo" x:Name="imgLogo"
                            Aspect="AspectFit"
                            HeightRequest="180" />
@@ -76,7 +77,7 @@
                                         <Label x:Name="LblMn" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Dr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
                                         <Label x:Name="LblTu" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Cr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
                                         <Label x:Name="LblWe" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Balance" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
-                                     </StackLayout>
+                                    </StackLayout>
                                 </ListView.Header>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -98,7 +99,7 @@
                         </Frame>
                     </StackLayout>
 
-              
+
                 </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="23">

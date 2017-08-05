@@ -1,6 +1,7 @@
 ﻿
 using App2.APIService;
 using App2.ExpandableListView;
+using App2.Helper;
 using App2.Model;
 using App2.View;
 using System;
@@ -164,7 +165,22 @@ namespace App2
        
         private void MainlistView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            NotificationShow nav_next_api = (NotificationShow)e.Item;
+            NotificationShow obj = (NotificationShow)e.Item;
+            NavigationMdl navmdl = new NavigationMdl();
+            navmdl.Party_id = obj.show_party_id_invoice_id;
+            navmdl.Device_id = "32132";
+            navmdl.Company_name = EnumMaster.C21_MALHAR;
+            navmdl.Party_Name = obj.show_party_name_customer_name;
+            if (lblName.Text == "receipt")
+            {
+                navmdl.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING;
+                Navigation.PushAsync(new PayableChart(navmdl));
+            }
+            else if (lblName.Text == "paid")
+            {
+                navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
+                Navigation.PushAsync(new PayableChart(navmdl));
+            }
         }
     }
     public class NotificationShow

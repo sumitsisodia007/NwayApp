@@ -16,6 +16,9 @@ using Android.Media;
 using Android.Support.V4.App;
 using Xamarin.Forms;
 using App2.Droid.DependencyService;
+using Newtonsoft.Json.Linq;
+using Org.Json;
+using Newtonsoft.Json;
 
 namespace App2.Droid
 {
@@ -61,20 +64,20 @@ namespace App2.Droid
             // If the application is in the foreground handle both data and notification messages here.
             // Also if you intend on generating your own notifications as a result of a received FCM
             // message, here is where that should be initiated. See sendNotification method below.
+            //message.Data
+            
+
+
             try
             {
-                //Android.Util.Log.Debug(TAG, "From: " + message.From);
-                Android.Util.Log.Debug(TAG, "Notification Message Body: " + message.GetNotification().Title);
-                //string not_Body = message.GetNotification().Body;
-                var notification = message.GetNotification();
-                var data = message.Data;
-                var title = notification.Title;
-                var body = notification.Body;
+                List<MessageDataMdl> MessageList = new List<MessageDataMdl>();
+                foreach (KeyValuePair<string, string> kvp in message.Data)
+                {
+                    string ss = kvp.Key;
+                    MessageList.Add(new MessageDataMdl() { Msg_Data = kvp.Value });
 
-                SendNotification(title, body);
-
-                //string not_Title= message.GetNotification().Title;
-                //SendNotification(not_Title);
+                    }
+             //   SendNotification(MessageList);
             }
             catch (Exception ex)
             {
@@ -87,7 +90,7 @@ namespace App2.Droid
         /**
          * Create and show a simple notification containing the received FCM message.
          */
-        void SendNotification(string messagetitle, string messagebody)
+        void SendNotification(List<string> lstStr2)
         {
             var intent = new Intent(this, typeof(MainActivity));
             intent.AddFlags(ActivityFlags.ClearTop);
@@ -96,7 +99,7 @@ namespace App2.Droid
             var defaultSoundUri = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
             var notificationBuilder = new NotificationCompat.Builder(this)
                 .SetSmallIcon(Resource.Drawable.icon)
-                .SetContentTitle(messagetitle)
+                .SetContentTitle("ss")
                 .SetContentText("Dard Coded")
                 .SetAutoCancel(true)
                 .SetSound(defaultSoundUri)
@@ -106,5 +109,10 @@ namespace App2.Droid
 
             notificationManager.Notify(0 /* ID of notification */, notificationBuilder.Build());
         }
+    }
+    public class MessageDataMdl
+    {
+        public string Msg_Data { get; set; }
+
     }
 }
