@@ -39,8 +39,6 @@ namespace App2.Droid
             // TODO: Implement this method to send any registration to your app's servers.
             SendRegistrationToServer(refreshedToken);
         }
-        // [END refresh_token]
-
         void SendRegistrationToServer(string token)
         {
             // Add custom implementation, as needed.
@@ -53,10 +51,7 @@ namespace App2.Droid
     {
         const string TAG = "MyFirebaseMsgService";
 
-        /**
-         * Called when message is received.
-         */
-
+        string data0, data_image, data_tital, data_msg, data_onclick, temp;
         // [START receive_message]
         public override void OnMessageReceived(RemoteMessage message)
         {
@@ -65,19 +60,37 @@ namespace App2.Droid
             // Also if you intend on generating your own notifications as a result of a received FCM
             // message, here is where that should be initiated. See sendNotification method below.
             //message.Data
-            
-
-
             try
             {
-                List<MessageDataMdl> MessageList = new List<MessageDataMdl>();
                 foreach (KeyValuePair<string, string> kvp in message.Data)
                 {
-                    string ss = kvp.Key;
-                    MessageList.Add(new MessageDataMdl() { Msg_Data = kvp.Value });
+                    data0 = kvp.Value;
+                    temp = data0;
+                    data0 = data_image;
+                    data_image = data_tital;
+                    data_tital = data_msg;
+                    data_msg = data_onclick;
+                    data_onclick = temp;
+                }
 
-                    }
-             //   SendNotification(MessageList);
+                JObject jObj = JObject.Parse(data0);
+
+                string TAGTYPE = jObj["tagtype"].ToString();
+
+                string SITE_NAME = jObj["site_name"].ToString();
+                string PARTY_NAME = jObj["party_name"].ToString();
+                string COMPANY_NAME = jObj["company_name"].ToString();
+                string PARTY_ID = jObj["party_id"].ToString();
+                string AMOUNT_RECEIVED = jObj["amount_received"].ToString();
+                string SITE_ID = jObj["site_id"].ToString();
+                string CURRENT_OUTSTANDING = jObj["current_outstanding"].ToString();
+                string INFORMATION_TYPE = jObj["information_type"].ToString();
+                string PARTY_OUTSTANDING = jObj["party_outstanding"].ToString();
+
+                string New_Msg = PARTY_NAME.ToUpper() + " : " + AMOUNT_RECEIVED;
+                string New_Title = TAGTYPE.ToUpper();
+                
+                SendNotification(data0, data_image, data_tital, data_msg, data_onclick, New_Msg, New_Title);
             }
             catch (Exception ex)
             {
@@ -90,29 +103,35 @@ namespace App2.Droid
         /**
          * Create and show a simple notification containing the received FCM message.
          */
-        void SendNotification(List<string> lstStr2)
+        void SendNotification(string a, string b, string c, string d, string e, string nmsg, string ntitle)
         {
+            Random _random = new Random();
+            Int32 ss = _random.Next();
+
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
+            {
+                //After Lollipop Version
+            }
+            else
+            {
+                //  pre-Lollipop Version
+            }
+
             var intent = new Intent(this, typeof(MainActivity));
             intent.AddFlags(ActivityFlags.ClearTop);
-            var pendingIntent = PendingIntent.GetActivity(this, 0 /* Request code */, intent, PendingIntentFlags.OneShot);
+            var pendingIntent = PendingIntent.GetActivity(this,ss , intent, PendingIntentFlags.OneShot);
 
             var defaultSoundUri = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
             var notificationBuilder = new NotificationCompat.Builder(this)
                 .SetSmallIcon(Resource.Drawable.icon)
-                .SetContentTitle("ss")
-                .SetContentText("Dard Coded")
+                .SetContentTitle(ntitle)
+                .SetContentText(nmsg)
                 .SetAutoCancel(true)
                 .SetSound(defaultSoundUri)
                 .SetContentIntent(pendingIntent);
 
-            var notificationManager = NotificationManager.FromContext(this);
-
-            notificationManager.Notify(0 /* ID of notification */, notificationBuilder.Build());
+            var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
+            notificationManager.Notify(ss++, notificationBuilder.Build());
         }
-    }
-    public class MessageDataMdl
-    {
-        public string Msg_Data { get; set; }
-
     }
 }
