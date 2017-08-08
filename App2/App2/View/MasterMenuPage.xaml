@@ -28,11 +28,11 @@
                 </StackLayout>
 
                 <ListView x:Name="NavigationList"
-                  RowHeight="40"
-                  BackgroundColor="White"
-                  SeparatorVisibility="None"
-                  SeparatorColor="#4472C4"
-                  ItemSelected="NavigationList_ItemSelected">
+                          RowHeight="40"
+                          BackgroundColor="White"
+                          SeparatorVisibility="None"
+                          SeparatorColor="#4472C4"
+                          ItemSelected="NavigationList_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -51,9 +51,7 @@
                                         FontSize="13"
                                         VerticalOptions="Center"
                                         TextColor="#5B5959"/>
-
                                     </StackLayout>
-
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

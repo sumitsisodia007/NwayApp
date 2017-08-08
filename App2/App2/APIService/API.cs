@@ -201,7 +201,7 @@ namespace App2.APIService
         }
         #endregion
 
-       // ObservableCollection<PartysearchlistMdl> lstLocation = null;
+        #region AutoComplete
         public async Task<PartysearchMdl> GetParty(NavigationMdl keyName)
         {
             PartysearchMdl _partysearchlistmdl = new PartysearchMdl();
@@ -238,5 +238,6 @@ namespace App2.APIService
             }
             return _partysearchlistmdl;
         }
+        #endregion
     }
 }

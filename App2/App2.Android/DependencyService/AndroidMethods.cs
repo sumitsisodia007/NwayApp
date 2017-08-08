@@ -34,6 +34,7 @@ namespace App2.Droid.DependencyService
         {
             var id = MyFirebaseIIDService.RegistrationID;
             return id;
+            
         }
         /*public void SaveLocalData(UserModel um)
         {

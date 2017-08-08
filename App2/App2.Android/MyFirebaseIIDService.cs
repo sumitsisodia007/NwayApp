@@ -1,24 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Firebase.Iid;
-using Android.Util;
 using Firebase.Messaging;
 using Android.Media;
 using Android.Support.V4.App;
-using Xamarin.Forms;
 using App2.Droid.DependencyService;
 using Newtonsoft.Json.Linq;
-using Org.Json;
-using Newtonsoft.Json;
 
 namespace App2.Droid
 {
@@ -50,16 +40,12 @@ namespace App2.Droid
     public class MyFirebaseMessagingService : FirebaseMessagingService
     {
         const string TAG = "MyFirebaseMsgService";
+        private static String GROUP_KEY_NOTIFICATION = "group_key_notification";
 
         string data0, data_image, data_tital, data_msg, data_onclick, temp;
-        // [START receive_message]
+
         public override void OnMessageReceived(RemoteMessage message)
         {
-            // TODO(developer): Handle FCM messages here.
-            // If the application is in the foreground handle both data and notification messages here.
-            // Also if you intend on generating your own notifications as a result of a received FCM
-            // message, here is where that should be initiated. See sendNotification method below.
-            //message.Data
             try
             {
                 foreach (KeyValuePair<string, string> kvp in message.Data)
@@ -88,9 +74,15 @@ namespace App2.Droid
                 string PARTY_OUTSTANDING = jObj["party_outstanding"].ToString();
 
                 string New_Msg = PARTY_NAME.ToUpper() + " : " + AMOUNT_RECEIVED;
-                string New_Title = TAGTYPE.ToUpper();
+                string New_Title;
+                if (TAGTYPE == "paid")
+                { New_Title = "PAID"; }
+                else if(TAGTYPE == "receipt")
+                { New_Title = "RECEIVED"; }
+                else{ New_Title = "CANCELED"; }
+                   
                 
-                SendNotification(data0, data_image, data_tital, data_msg, data_onclick, New_Msg, New_Title);
+                SendNotification( data_onclick, New_Msg, New_Title,PARTY_ID,TAGTYPE);
             }
             catch (Exception ex)
             {
@@ -98,32 +90,63 @@ namespace App2.Droid
             }
             
         }
-        // [END receive_message]
-
-        /**
-         * Create and show a simple notification containing the received FCM message.
-         */
-        void SendNotification(string a, string b, string c, string d, string e, string nmsg, string ntitle)
+        
+        void SendNotification( string _onclick, string nmsg, string ntitle,string _party_id,string _tag_type)
         {
             Random _random = new Random();
             Int32 ss = _random.Next();
+            
+            //App.Current.MainPage.Navigation.PushAsync(new PayableChart());
 
-            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.N)
             {
-                //After Lollipop Version
+                var intent = new Intent(this, typeof(OkayActivity));
+                intent.PutExtra("tag_type", _tag_type);
+                intent.PutExtra("party_id", _party_id);
+                intent.PutExtra("onclick", _onclick);
+                intent.PutExtra("msg", nmsg);
+
+                intent.AddFlags(ActivityFlags.ClearTop);
+                var pendingIntent = PendingIntent.GetActivity(this, ss, intent, PendingIntentFlags.OneShot);
+
+                var defaultSoundUri = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
+                var  notif = new NotificationCompat.Builder(this)
+                                .SetContentTitle(ntitle)
+                                .SetContentText(nmsg)
+                                .SetSmallIcon(Resource.Drawable.n3)
+                               .SetColor(Resources.GetColor(Resource.Color.blue))
+                                .SetGroupSummary(false)
+                                .SetGroup(GROUP_KEY_NOTIFICATION)
+                                .SetSound(defaultSoundUri)
+                                .SetAutoCancel(true)
+                                .SetContentIntent(pendingIntent)
+                                .Build();
+                var notificationManager = NotificationManagerCompat.From(this);
+                notificationManager.Notify(ss, notif);
+                var summaryNotification = new NotificationCompat.Builder(this)
+                                        .SetContentTitle(ntitle)
+                                        .SetContentText(nmsg)
+                                        .SetStyle(new NotificationCompat.InboxStyle()
+                                                    .AddLine(nmsg)
+                                                    .AddLine(nmsg)
+                                                    .SetSummaryText("")
+                                                    .SetBigContentTitle(""))
+                                        .SetSmallIcon(Resource.Drawable.n3)
+                                        .SetColor(Resources.GetColor(Resource.Color.blue))
+                                        .SetGroup(GROUP_KEY_NOTIFICATION)
+                                        .SetGroupSummary(true)
+                                        .SetSound(defaultSoundUri)
+                                        .Build();
+                notificationManager.Notify(123456, summaryNotification);
             }
             else
             {
-                //  pre-Lollipop Version
-            }
-
-            var intent = new Intent(this, typeof(MainActivity));
+            var intent = new Intent(this, typeof(OkayActivity));
             intent.AddFlags(ActivityFlags.ClearTop);
             var pendingIntent = PendingIntent.GetActivity(this,ss , intent, PendingIntentFlags.OneShot);
-
             var defaultSoundUri = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
             var notificationBuilder = new NotificationCompat.Builder(this)
-                .SetSmallIcon(Resource.Drawable.icon)
+                .SetSmallIcon(Resource.Drawable.n3)
                 .SetContentTitle(ntitle)
                 .SetContentText(nmsg)
                 .SetAutoCancel(true)
@@ -132,6 +155,9 @@ namespace App2.Droid
 
             var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
             notificationManager.Notify(ss++, notificationBuilder.Build());
+            }
         }
+
+        
     }
 }

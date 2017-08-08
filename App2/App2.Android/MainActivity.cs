@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace App2.Droid
 {
-    [Activity(  Label = "App2",
+    [Activity(  Label = "NwayConstructionERP",
                 Icon = "@drawable/icon", 
                 Theme = "@style/MainTheme", 
                 MainLauncher = true, 
