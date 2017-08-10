@@ -52,6 +52,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\DemoResponse.cs" />
     <Compile Include="Model\LoginMdl.cs" />
     <Compile Include="Model\MasterPageItem.cs" />
     <Compile Include="Model\NavigationMdl.cs" />
@@ -86,9 +87,6 @@
     <Compile Include="View\MasterMenuPage.xaml.cs">
       <DependentUpon>MasterMenuPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\NotificationCont.xaml.cs">
-      <DependentUpon>NotificationCont.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\NotificationSetting.xaml.cs">
       <DependentUpon>NotificationSetting.xaml</DependentUpon>
     </Compile>
@@ -106,6 +104,9 @@
     </Compile>
     <Compile Include="View\ReceivablePage.xaml.cs">
       <DependentUpon>ReceivablePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -220,13 +221,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="View\NotificationCont.xaml">
+    <EmbeddedResource Include="Page1.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Page1.xaml">
+    <EmbeddedResource Include="View\SettingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

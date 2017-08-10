@@ -100,7 +100,7 @@ namespace App2.Droid
 
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.N)
             {
-                var intent = new Intent(this, typeof(OkayActivity));
+                var intent = new Intent(this, typeof(MainActivity));
                 intent.PutExtra("tag_type", _tag_type);
                 intent.PutExtra("party_id", _party_id);
                 intent.PutExtra("onclick", _onclick);

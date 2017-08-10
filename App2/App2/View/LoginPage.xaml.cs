@@ -18,6 +18,20 @@ namespace App2.View
     {
         API api = new API();
         LoginMdl _login = new LoginMdl();
+
+        public LoginPage(NavigationMdl mdl)
+        {
+            InitializeComponent();
+            if (mdl.Tag_type == "paid")
+            {
+                Navigation.PushModalAsync(new PayableChart());
+            }
+            else
+            {
+                Navigation.PushModalAsync(new MasterMenuPage());
+            }
+        }
+
         public LoginPage()
         {
             InitializeComponent();

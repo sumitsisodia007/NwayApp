@@ -20,15 +20,15 @@
                             <StackLayout Padding="20,0" Orientation="Horizontal">
                                 <Label Text="{Binding Name}"
                                        TextColor="Black"
-                                       FontSize="15"
-                                       HorizontalOptions="StartAndExpand"/>
+                                       FontSize="15" Margin="2"
+                                       WidthRequest="180"/>
                                 <Label Text="{Binding TagNotCount}"
                                        TextColor="Black"
-                                       FontSize="15"
-                                       HorizontalOptions="CenterAndExpand"/>
+                                       FontSize="15" Margin="2"
+                                       HorizontalOptions="StartAndExpand"/>
                                 <Label Text="{Binding Tag_Amount, StringFormat='&#x20b9;{0:N}'}"
                                        TextColor="Black"
-                                       FontSize="15"
+                                       FontSize="15" Margin="2"
                                        HorizontalOptions="EndAndExpand"/>
                                 
                             </StackLayout>
@@ -39,7 +39,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Padding="0" Spacing="0" BackgroundColor="#E2F5F9" Margin="0">
-
+                                
                                 <Button Image="{Binding StateIcon}"
                                         Text="{Binding TitleWithItemCount}"
                                         HorizontalOptions="FillAndExpand"
@@ -60,20 +60,19 @@
                  AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                  AbsoluteLayout.LayoutFlags="All"
                  IsVisible="False"
-                 BackgroundColor="Transparent" Opacity="0.8">
-            <Frame BackgroundColor="Black" Opacity="0.9" Padding="0" Margin="0">
+                 BackgroundColor="#E2F5F9" >
+            <Frame BackgroundColor="#E2F5F9" Padding="0" Margin="0">
                 <StackLayout Orientation="Vertical" 
-                               BackgroundColor="Black" 
-                               Opacity="1"
+                               BackgroundColor="#E2F5F9" 
                                WidthRequest="400" 
                                HorizontalOptions="FillAndExpand" 
                                VerticalOptions="FillAndExpand" >
-                    <Label x:Name="lblNotificationType" BackgroundColor="Black" Font="24,Bold" TextColor="White" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="Notification" />
-                    <Label x:Name="lblName" BackgroundColor="Black" Font="20,Bold" TextColor="White" HorizontalOptions="Fill" HorizontalTextAlignment="Center" Text="" />
+                    <Label x:Name="lblNotificationType" BackgroundColor="#E2F5F9" Font="24,Bold" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="Notification" />
+                    <Label x:Name="lblName" BackgroundColor="#E2F5F9" Font="20,Bold" TextColor="Black" HorizontalOptions="Fill" HorizontalTextAlignment="Center" Text="" />
 
                     <ListView x:Name="MainlistView"                            
                               HasUnevenRows="True"                              
-                              BackgroundColor="Gray"
+                              BackgroundColor="#E2F5F9"
                               SeparatorVisibility="None"
                               ItemTapped="MainlistView_ItemTapped"
                               SeparatorColor="#4472C4">
@@ -84,25 +83,22 @@
                                                  VerticalOptions="FillAndExpand" Spacing="0">
                                         <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
-                                                  BackgroundColor="Black">
-
-                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="Black" HorizontalOptions="Start"  FontSize="15" Text="{Binding show_party_name_customer_name}" TextColor="White" HorizontalTextAlignment="Start" />
-                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="Black" HorizontalOptions="EndAndExpand"  FontSize="15" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="White" HorizontalTextAlignment="End" />
-
+                                                  BackgroundColor="#E2F5F9">
+                                            <Label BackgroundColor="#E2F5F9" HorizontalOptions="StartAndExpand" Margin="2" FontSize="15" Text="{Binding show_party_name_customer_name}" TextColor="Black" HorizontalTextAlignment="Start" />
+                                            <Label  BackgroundColor="#E2F5F9" WidthRequest="100" Margin="2" FontSize="15" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
                                         </StackLayout>
-                                        <BoxView BackgroundColor="White" HeightRequest="1"/>
-                                       
+                                        <BoxView BackgroundColor="#BBBBBB" HeightRequest="1"/>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                         <Button Text="OK" 
-                                 BackgroundColor="Black" FontSize="18" TextColor="White"
+                                 BackgroundColor="#E2F5F9" FontSize="18" TextColor="Black"
                                 FontAttributes="Bold"
                                 VerticalOptions="CenterAndExpand"
-                                HorizontalOptions="CenterAndExpand"
+                                HorizontalOptions="FillAndExpand"
                                 Clicked="OnOKButtonClicked"/>
                     </StackLayout>
 

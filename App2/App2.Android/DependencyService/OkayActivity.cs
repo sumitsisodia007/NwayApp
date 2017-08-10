@@ -9,23 +9,52 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using App2.Model;
+using App2.View;
+using Xamarin.Forms;
 
 namespace App2.Droid.DependencyService
 {
     [Activity(Label = "OkayActivity")]
     public class OkayActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
            
             var intent = new Intent(Android.App.Application.Context, typeof(OkayActivity));
-            //intent.PutExtra("title", Intent.GetStringExtra("title"));
             string tag_type = Intent.GetStringExtra("tag_type");
             string party_id = Intent.GetStringExtra("party_id");
-            string onclick = Intent.GetStringExtra("onclick");
-            string msg = Intent.GetStringExtra("msg");
+            string onclick  = Intent.GetStringExtra("onclick");
+            string msg      = Intent.GetStringExtra("msg");
             
-          //  App.Current.MainPage.Navigation.PushAsync(new PayableChart());
+            NavigationMdl mdl = new NavigationMdl();
+            if (tag_type == "paid")
+            {
+                mdl.Tag_type =Helper.EnumMaster.PAYABLE_OUTSTANDING;
+            }
+            else if (tag_type== "receipt")
+            {
+                mdl.Tag_type = Helper.EnumMaster.RECEIVABLE_OUTSTANDING;
+            }
+
+            mdl.Device_id = "123";
+            mdl.Company_name = Helper.EnumMaster.C21_MALHAR;
+            mdl.Party_id = party_id;
+
+            var navPage = new NavigationPage(new LoginPage());
+            App.Current.MainPage = navPage;
+
+            //  await navPage.Navigation.PushAsync(new App2.View.PayableChart());
+            try
+            {
+                //await navPage.Navigation.PushAsync(new App2.View.PayableChart()); Not Working
+               // LoadApplication(new App(mdl));
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
         }
     }
 }

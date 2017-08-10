@@ -1,4 +1,5 @@
 ﻿using App2.ExpandableListView;
+using App2.Model;
 using App2.View;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,13 @@ namespace App2
             InitializeComponent();
 
             MainPage = new LoginPage();
+        }
+        public App(NavigationMdl mdl)
+        {
+            InitializeComponent();
+           
+            MainPage =new NavigationPage(new PayableChart(mdl));
+            
         }
 
         protected override void OnStart()

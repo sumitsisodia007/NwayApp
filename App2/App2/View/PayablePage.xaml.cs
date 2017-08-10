@@ -36,6 +36,8 @@ namespace App2.View
        public PayablePage (string title)
 	   {
 			InitializeComponent ();
+            NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetTitleIcon(this, "icon.png");
             this.Title = title;
             navmdl = new NavigationMdl();
             navmdl.User_id = "";
@@ -57,11 +59,18 @@ namespace App2.View
 
             ShowPayableTodayDetail toady_notification = new ShowPayableTodayDetail();            
             flag = 1;
-            if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+            try
             {
-                var calcScreenWidth = Application.Current.MainPage.Width;
-                var calcScreenHieght = Application.Current.MainPage.Height;
-                lblparty.WidthRequest =lbloutstanding.WidthRequest =lblTodayReceipt.WidthRequest =lblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
+                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+                {
+                    var calcScreenWidth = Application.Current.MainPage.Width;
+                    var calcScreenHieght = Application.Current.MainPage.Height;
+                    lblparty.WidthRequest = lbloutstanding.WidthRequest = lblTodayReceipt.WidthRequest = lblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
+                }
+
+            }
+            catch (Exception ex)
+            {
             }
             ShowPaybleToday();
             ShowTotalPayble();

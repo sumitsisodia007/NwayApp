@@ -35,7 +35,7 @@ namespace App2
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
                 var calcScreenHieght = Application.Current.MainPage.Height;
-                _Width = calcScreenWidth / 3;
+                _Width = calcScreenWidth / 2;
             }
             API api = new API();
           

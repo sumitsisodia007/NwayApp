@@ -28,10 +28,12 @@ namespace App2.View
 		{
 			InitializeComponent ();
 		}
-        public PayableChart(NavigationMdl toady_notification)
+        public PayableChart(NavigationMdl nmdl)
         {
             InitializeComponent();
-            if (toady_notification.Tag_type == "payable_outstanding")
+            NavigationPage.SetHasNavigationBar(this, true);
+            
+            if ((nmdl.Tag_type == "payable_outstanding"))
             {
                 this.Title = "Payable Chart";
                 this.BackgroundColor = Color.FromHex("#ED7D31");
@@ -43,19 +45,27 @@ namespace App2.View
                 this.BackgroundColor = Color.FromHex("#A3C1E5");
                 LblSu.BackgroundColor = LblMn.BackgroundColor = LblTu.BackgroundColor = LblWe.BackgroundColor = Color.FromHex("#A3C1E5");
             }
-            lblChart.Text = toady_notification.Party_Name + " " + EnumMaster.LblChartTitle;
-            _payable = api.PayableTable(toady_notification);
-
-            if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+            lblChart.Text = nmdl.Party_Name + " " + EnumMaster.LblChartTitle;
+            _payable = api.PayableTable(nmdl);
+            try
             {
-                var calcScreenWidth = Application.Current.MainPage.Width;
-                var calcScreenHieght = Application.Current.MainPage.Height;
-                LblMn.WidthRequest = LblSu.WidthRequest = LblTu.WidthRequest = LblWe.WidthRequest = _Width = calcScreenWidth / 4 - 10;
+                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+                {
+                    var calcScreenWidth = Application.Current.MainPage.Width;
+                    var calcScreenHieght = Application.Current.MainPage.Height;
+                    LblMn.WidthRequest = LblSu.WidthRequest = LblTu.WidthRequest = LblWe.WidthRequest = _Width = calcScreenWidth / 4 - 10;
+                }
             }
+            catch (Exception ex)
+            {
+            }
+            
             ShowTotalPayble();
         }
         public void ShowTotalPayble()
         {
+            try
+            {
             _showpayabletotalpayblelist = new List<ShowPayableTotalPayble>();
             foreach (var item in _payable.ListPayablemdl)
             {
@@ -69,7 +79,12 @@ namespace App2.View
                 }
                 
             }
-            listView.ItemsSource = _showpayabletotalpayblelist;
+                listView.ItemsSource = _showpayabletotalpayblelist;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private async void txtAuto_TextChanged(object sender, TextChangedEventArgs e)
@@ -134,6 +149,7 @@ namespace App2.View
             await Task.Delay(100);
 
         }
+
         async void txtLocation_Focus(object sender, EventArgs args)
         {
             await Task.Delay(2000);
@@ -199,5 +215,9 @@ namespace App2.View
             }
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            return false;
+        }
     }
 }
