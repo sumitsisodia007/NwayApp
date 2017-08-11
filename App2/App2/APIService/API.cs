@@ -18,8 +18,8 @@ namespace App2.APIService
     {
         
 
-       // public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
-        public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
+        public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
+      //  public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
 
         #region Login
         public ResponseModel postLogin(LoginMdl lgmdl)
@@ -56,7 +56,6 @@ namespace App2.APIService
                     response_model.Min_Receipt_Amt = jObj["min_receipt_amount"].ToString();
                     response_model.Notification_Day_Count = jObj["notification_day_count"].ToString();
                     response_model.TagType = jObj["tagtype"].ToString();
-
                 }
 
             }
@@ -109,55 +108,48 @@ namespace App2.APIService
         }
         #endregion
 
-        #region Recievable TodayCollection Tabel
-        public List<ReceivableNotificationMdl> ReceivableTable()
+        #region Notification Setting api
+     
+        public async Task<ResponseModel> NotificationSetting(NavigationMdl td_ntf)
         {
             ResponseModel response_model = new ResponseModel();
-            List<ReceivableNotificationMdl> list_recmdl = new List<ReceivableNotificationMdl>();
-            ReceivableNotificationMdl recmdl=null;
             try
             {
-               
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(RestURL);
+
                 var values = new Dictionary<string, string>
-                {
-                    { "user_id", "1"},
-                    { "device_id", "32132"},
-                    { "company_name", "CENTURY 21 TOWN PLANNERS PVT. LTD."},
-                    //{ "party_id", "4274"},
-                    { "tagtype", "receivable_outstanding"}
-                };
+                        {
+                            { "user_id", td_ntf.User_id},
+                            { "device_id", td_ntf.Device_id},
+                            { "min_receipt_amount", td_ntf.Min_Receipt_Amount},
+                            { "notification_day_count", td_ntf.Notification_Day_Count},
+                            { "tagtype", td_ntf.Tag_type}
+                        };
+
 
                 var content = new FormUrlEncodedContent(values);
 
-                var response = client.PostAsync(RestURL, content).Result; 
+                var response = await client.PostAsync(RestURL, content);
                 if (response.IsSuccessStatusCode)
                 {
-                    // Parse the response body. Blocking!
+                    
                     var dataObjects = response.Content.ReadAsStringAsync().Result;
                     JObject jObj = JObject.Parse(dataObjects);
+                    response_model.Message = jObj["message"].ToString();
                     response_model.Error = jObj["error"].ToString();
+                    response_model.FullName = jObj["full_name"].ToString();
+                    response_model.User_Id = jObj["user_id"].ToString();
+                    response_model.Min_Receipt_Amt = jObj["min_receipt_amount"].ToString();
+                    response_model.Notification_Day_Count = jObj["notification_day_count"].ToString();
                     response_model.TagType = jObj["tagtype"].ToString();
-                    var calcScreenWidth = Application.Current.MainPage.Width;
-                    foreach (var data in jObj["list"])
-                    {
-                        recmdl = new ReceivableNotificationMdl();
-                        recmdl.Perticular= (data["perticular"].ToString());
-                        recmdl.Total_Due = (data["total_due"].ToString());
-                        recmdl.Receive = (data["receive"].ToString());
-                        recmdl.Balance= (data["balance"].ToString());
-                        recmdl.txtWidth= calcScreenWidth / 4 - 20;
-                        list_recmdl.Add(recmdl);
-                    }
-
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 // StaticMethods.AndroidSnackBar(e.Message);
             }
-            return list_recmdl;
+            return response_model;
         }
         #endregion
 

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             x:Class="App2.PopUpPages.LogOutPage"
+                 xmlns:local="clr-namespace:App2.CustomRenderer"
+                 Padding="40,0">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+      PositionIn="Center"
+      PositionOut="Center"
+      ScaleIn="1.2"
+      ScaleOut="1.2"
+      DurationIn="400"
+      DurationOut="300"
+      EasingIn="SinOut"
+      EasingOut="SinIn"
+      HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    
+    <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="20">  
+        <Frame BackgroundColor="White" Padding="10" HasShadow="True">
+        <StackLayout BackgroundColor="White" Padding="0, 10, 0, 0">
+          
+                <Image Source="logout" HorizontalOptions="CenterAndExpand" />
+                <Label Text="Logout!" FontAttributes="Bold" FontSize="17" TextColor="Black" HorizontalOptions="CenterAndExpand"/>
+                <Label Text="Do you want to logout from App?" FontSize="15" HorizontalOptions="CenterAndExpand"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label x:Name="lblCancle" Text="Cancel" FontAttributes="Bold" FontSize="17" TextColor="#4472C4" HorizontalOptions="CenterAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Cancel_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="lblLogout" Text="Logout" FontAttributes="Bold" FontSize="17" TextColor="#4472C4" HorizontalOptions="CenterAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Logout_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+           
+        </StackLayout> 
+        </Frame>
+    </StackLayout>
+    <!--<StackLayout VerticalOptions="Start" 
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="#DFC91D"
+                         Margin="0" >
+        <StackLayout  VerticalOptions="CenterAndExpand"
+                              HorizontalOptions="FillAndExpand"
+                              Orientation="Vertical"
+                              BackgroundColor="#DFC91D"
+                              Margin="0" Padding="0">
+            <Label
+                        Text="CHANGE PASSWORD"
+                            TextColor="Black"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            VerticalTextAlignment="Start"
+                            HorizontalTextAlignment="Start"    
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="CenterAndExpand"
+                            Margin="10"/>
+            <BoxView BackgroundColor="#CBB509" HeightRequest="1"/>
+
+            <StackLayout VerticalOptions="Start" HorizontalOptions="Center"  Spacing="0" Orientation="Horizontal" Padding="0">
+                <Label x:Name ="lblMessage" Text ="" IsVisible ="false" TextColor="Red" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
+            </StackLayout>
+
+            <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Padding="15,0">
+                <Label x:Name ="lblEmailID" Text ="EMAIL:" IsVisible ="false" TextColor="Black" FontSize="12" />
+                <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Horizontal" Padding="0" Margin="0" >
+                    <local:MyEntry x:Name="txtEmailID"
+                             FontSize="12"
+                             PlaceholderColor="Black"
+                             HorizontalOptions="FillAndExpand"
+                             HorizontalTextAlignment="Start"
+                             Placeholder="Enter your mail id"
+                             TextColor="Black"
+                             HeightRequest="40">
+                    </local:MyEntry>
+                    <Image Source="person_white" Aspect="AspectFit" />
+                </StackLayout>
+                <BoxView BackgroundColor="Black" HeightRequest="1"/>
+            </StackLayout>
+
+            <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Padding="15,0">
+                <Label x:Name ="lblOldPass" Text ="Old Password:" IsVisible ="false" TextColor="Black" FontSize="12" />
+                <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Horizontal" Padding="0" Margin="0" >
+                    <local:MyEntry 
+                             FontSize="12"
+                              x:Name="txtOldPass"  
+                             PlaceholderColor="Black"
+                             HorizontalOptions="FillAndExpand"
+                             HorizontalTextAlignment="Start"
+                             Placeholder="Old Password"
+                             TextColor="Black"
+                             HeightRequest="40">
+                    </local:MyEntry>
+                    <Image Source="icon_eye_off" Aspect="AspectFit" x:Name="imgOldPass">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+                <BoxView BackgroundColor="Black" HeightRequest="1"/>
+            </StackLayout>
+
+            <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Padding="15,0">
+                <Label x:Name ="lblNewPass" Text ="New Password:" IsVisible ="false" TextColor="Black" FontSize="12" />
+                <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Horizontal" Padding="0" Margin="0" >
+                    <local:MyEntry 
+                             FontSize="12"
+                               x:Name="txtNewPass"  
+                             PlaceholderColor="Black"
+                             HorizontalOptions="FillAndExpand"
+                             HorizontalTextAlignment="Start"
+                             Placeholder="New Password"
+                             TextColor="Black"
+                             HeightRequest="40">
+                    </local:MyEntry>
+                    <Image Source="icon_eye_off" Aspect="AspectFit" x:Name="signupPassshow">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+                <BoxView BackgroundColor="Black" HeightRequest="1"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand" >
+                <Label x:Name ="lblPassError" IsVisible ="false" TextColor="#9B9B9B" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
+            </StackLayout>
+        </StackLayout>
+        <Label Text="CHANGE NOW!" 
+                       x:Name="btnChangePass"
+                       FontAttributes="Bold" 
+                       TextColor="#DFC91D" 
+                       HorizontalOptions="FillAndExpand" 
+                       BackgroundColor="Black" 
+                       Margin="0,5"
+                       HeightRequest="55"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center" 
+                       FontSize="15" >
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer  />
+            </Label.GestureRecognizers>
+        </Label>
+    </StackLayout>-->
+
+</pages:PopupPage>

@@ -8,13 +8,15 @@ using UIKit;
 using App2.iOS.DependencyService;
 using App2.Interface;
 using BigTed;
+using App2.Model;
+using PerpetualEngine.Storage;
 
 [assembly: Xamarin.Forms.Dependency(typeof(IosMethods))]
 namespace App2.iOS.DependencyService
 {
     public class IosMethods : IIosMethods
     {
-        private string Key = "fazza_driver";
+        
         public IosMethods()
         {
         }
@@ -25,11 +27,12 @@ namespace App2.iOS.DependencyService
             return id;
         }
 
-        /*
+        
         public void ShowToast(string msg)
         {
             BTProgressHUD.ShowToast(msg, ProgressHUD.MaskType.Black, false, 2000);
         }
+        /*
         public void ShowLoader()
         {
             BTProgressHUD.Show();
@@ -37,68 +40,55 @@ namespace App2.iOS.DependencyService
         public void DismissLoader()
         {
             BTProgressHUD.Dismiss();
+        }/**/
+
+        public void SaveLocalData(ResponseModel um)
+        {
+            try
+            {
+                var storage = SimpleStorage.EditGroup(Key);
+                storage.Put("Min_Receipt_Amt", um.Min_Receipt_Amt);
+                storage.Put("Notification_Day_Count", um.Notification_Day_Count);
+                storage.Put("TagType", um.TagType);
+                storage.Put("User_Id", um.User_Id);
+                storage.Put("Device_Id", um.Device_Id);
+            }
+            catch (Exception)
+            {
+
+            }
         }
-        //public void SaveLocalData(UserModel um)
-        //{
-        //    try
-        //    {
-        //        var storage = SimpleStorage.EditGroup(Key);
-        //        storage.Put("UserGUID", um.UserGUID);
-        //        storage.Put("Email", um.Email);
-        //        storage.Put("FirstName", um.FirstName);
-        //        storage.Put("LastName", um.LastName);
-        //        storage.Put("DOB", um.DOB);
-        //        storage.Put("UserTypeID", um.UserTypeID.ToString());
-        //        storage.Put("LoginGUID", um.LoginGUID);
-        //        storage.Put("LoginSessionKey", um.LoginSessionKey);
-        //        storage.Put("redirect_back_url", um.redirect_back_url);
-        //        storage.Put("IsSignup", um.IsSignup);
-        //        storage.Put("DeviceToken", um.DeviceToken);
-        //    }
-        //    catch (Exception)
-        //    {
+        public ResponseModel RetriveLocalData()
+        {
+            ResponseModel um = new ResponseModel();
+            try
+            {
+                var storage = SimpleStorage.EditGroup(Key);
+                um.Min_Receipt_Amt = Convert.ToString(storage.Get("Min_Receipt_Amt", null));
+                um.Notification_Day_Count = storage.Get("Notification_Day_Count", null);
+                um.TagType = storage.Get("TagType", null);
+                um.User_Id = storage.Get("User_Id", null);
+                um.Device_Id = storage.Get("Device_Id", null);
+                return um;
+            }
+            catch (Exception)
+            {
+                return um;
+            }
+        }
+        private string Key = "fazza_driver";
+        public void DeleteLocalData()
+        {
+            string values = string.Empty;
+            try
+            {
+                var storage = SimpleStorage.EditGroup(Key);
+                storage.Delete(Key);
+            }
+            catch (Exception)
+            {
 
-        //    }
-        //}
-        //public UserModel RetriveLocalData()
-        //{
-        //    UserModel um = new UserModel();
-        //    try
-        //    {
-        //        var storage = SimpleStorage.EditGroup(Key);
-        //        um.UserGUID = Convert.ToString(storage.Get("UserGUID", null));
-        //        um.Email = storage.Get("Email", null);
-        //        um.FirstName = storage.Get("FirstName", null);
-        //        um.LastName = storage.Get("LastName", null);
-        //        um.DOB = storage.Get("DOB", null);
-        //        um.UserTypeID = Convert.ToInt32(storage.Get("UserTypeID", null));
-        //        um.LoginGUID = Convert.ToString(storage.Get("LoginGUID", null));
-        //        um.LoginSessionKey = storage.Get("LoginSessionKey", null);
-        //        um.redirect_back_url = storage.Get("redirect_back_url", null);
-        //        um.IsSignup = storage.Get("IsSignup", false);
-        //        um.DeviceToken = storage.Get("DeviceToken", "");
-
-        //        return um;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return um;
-        //    }
-        //}
-        //public void DeleteLocalData()
-        //{
-        //    string values = string.Empty;
-        //    try
-        //    {
-
-        //        var storage = SimpleStorage.EditGroup(Key);
-        //        storage.Delete(Key);
-
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //    }
-        //}*/
+            }
+        }
     }
 }

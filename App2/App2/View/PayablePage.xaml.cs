@@ -1,6 +1,7 @@
 ﻿using App2.APIService;
 using App2.Helper;
 using App2.Model;
+using App2.ShowModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,7 +22,7 @@ namespace App2.View
         public List<PayableNotificationMdl> _payablenotificationdata { get; set; }
         PartysearchMdl lstLoca = null;
         bool isListSelected = false;
-      
+        ShowPayableTodayDetail toady_notification;
         NavigationMdl navmdl;
         PayableNotificationMdl _payable;
         public double _Width = 0;
@@ -33,31 +34,29 @@ namespace App2.View
             InitializeComponent();
         }
 
-       public PayablePage (string title)
+       public PayablePage (NavigationMdl mdl)
 	   {
 			InitializeComponent ();
-            NavigationPage.SetHasNavigationBar(this, false);
-            NavigationPage.SetTitleIcon(this, "icon.png");
-            this.Title = title;
+           // NavigationPage.SetHasNavigationBar(this, false);
+            //NavigationPage.SetTitleIcon(this, "icon.png");
+            this.Title = mdl.Page_Title;
             navmdl = new NavigationMdl();
-            navmdl.User_id = "";
-            navmdl.Device_id = "32132";
-            navmdl.Company_name = EnumMaster.C21_MALHAR;
+          
             
-            if (title == "Receivable")
+            if (mdl.Page_Title == "Receivable")
             {
                 PredefinedReceived();
-                navmdl.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING;
+               // navmdl.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING;
             }
             else
             {
                 PredefinedPaid();
-                navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
+               // navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
             }
             //calling api
-            _payable = api.PayableTable(navmdl);
+            _payable = api.PayableTable(mdl);
 
-            ShowPayableTodayDetail toady_notification = new ShowPayableTodayDetail();            
+             toady_notification = new ShowPayableTodayDetail();            
             flag = 1;
             try
             {
@@ -280,23 +279,5 @@ namespace App2.View
             }
         }
     }
-    public class ShowPayableTodayDetail
-    {
-        public string Show_Pay_Party { get; set; }
-        public string Show_Pay_Outstanding { get; set; }
-        public string Show_Amount_Received { get; set; }
-        public string Show_Cur_Outstanding { get; set; }
-        public string Show_Party_Id { get; set; }
-        public double txtWidth { get; set; }
-    }
-
-    public class ShowPayableTotalPayble
-    {
-        public string Show_Site_name { get; set; }
-        public string Show_Total_dr { get; set; }
-        public string Show_Total_cr { get; set; }
-        public string Show_Balance { get; set; }
-        public double txtWidth { get; set; }
-    }
-
+   
 }

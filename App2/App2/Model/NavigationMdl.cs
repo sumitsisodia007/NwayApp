@@ -14,5 +14,8 @@ namespace App2.Model
         public string Tag_type { get; set; }
         public string Party_id { get; set; }
         public string Party_Name { get; set; }
+        public string Min_Receipt_Amount { get; set; }
+        public string Notification_Day_Count { get; set; }
+        public string Page_Title { get; set; }
     }
 }

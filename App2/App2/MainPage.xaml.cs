@@ -3,6 +3,7 @@ using App2.APIService;
 using App2.ExpandableListView;
 using App2.Helper;
 using App2.Model;
+using App2.ShowModels;
 using App2.View;
 using System;
 using System.Collections.Generic;
@@ -136,6 +137,7 @@ namespace App2
                                 show_party_name_customer_name = item3.Party_name,
                                 show_party_id_invoice_id=item3.Party_id
                             });
+                            
                         }
                        else if (item2.Tag == "receipt" && lblName.Text == "receipt" && item.Date == food.Tag_date)
                         {
@@ -173,22 +175,17 @@ namespace App2
             navmdl.Party_Name = obj.show_party_name_customer_name;
             if (lblName.Text == "receipt")
             {
+                navmdl.Page_Title = "Receivable";
                 navmdl.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING;
-                Navigation.PushAsync(new PayableChart(navmdl));
+                Navigation.PushAsync(new PayablePage(navmdl));
             }
             else if (lblName.Text == "paid")
             {
+                navmdl.Page_Title = "Payable";
                 navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
-                Navigation.PushAsync(new PayableChart(navmdl));
+                Navigation.PushAsync(new PayablePage(navmdl));
             }
         }
     }
-    public class NotificationShow
-    {
-        public string show_party_name_customer_name { get; set; }
-        public string show_amount_received { get; set; }
-        public string show_party_id_invoice_id{ get; set; }
-       // public string show_invoice_code { get; set; }
-        public double txtWidth { get; set; }
-    }
+   
 }

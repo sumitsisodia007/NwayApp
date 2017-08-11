@@ -1,4 +1,5 @@
 ﻿using App2.APIService;
+using App2.Helper;
 using App2.Model;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace App2.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+        NavigationMdl nav = null;
         LoginMdl _login = new LoginMdl();
         API api=new API();
         
@@ -44,13 +46,24 @@ namespace App2.View
 
         private  void Receivable_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new PayablePage(lblReceive.Text));
+            nav = new NavigationMdl();
+            nav.Page_Title = lblReceive.Text;
+            nav.User_id = "";
+            nav.Device_id = "32132";
+            nav.Company_name = EnumMaster.C21_MALHAR;
+            nav.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING;
+            Navigation.PushAsync(new PayablePage(nav));
         }
 
         private  void Payable_Tapped(object sender, EventArgs e)
         {
-
-             Navigation.PushAsync(new PayablePage(lblPay.Text));
+            nav = new NavigationMdl();
+            nav.Page_Title = lblPay.Text;
+            nav.User_id = "";
+            nav.Device_id = "32132";
+            nav.Company_name = EnumMaster.C21_MALHAR;
+            nav.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
+            Navigation.PushAsync(new PayablePage(nav));
         }
 
         private void CashFlow_Tapped(object sender, EventArgs e)

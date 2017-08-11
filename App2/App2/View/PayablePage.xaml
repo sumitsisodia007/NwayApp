@@ -7,22 +7,22 @@
              Title="Payable">
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <ScrollView x:Name="scrollbar" IsClippedToBounds="true">
+            <ScrollView x:Name="scrollbar" >
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <!--Start Auto Complete-->
                     <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" >
                         <StackLayout BackgroundColor="White" Padding="10,0">
                             <local:MyEntry  x:Name="txtAuto"
-                                        TextChanged="txtAuto_TextChanged"
-                                        Focused="txtAuto_Focused"
-                                        Unfocused="txtAuto_Unfocused"
-                                    FontSize="15" 
-                                    BackgroundColor="White" 
-                                    Placeholder="Select Party"
-                                    HorizontalOptions="FillAndExpand" 
-                                    TextColor="Black"
-                                    PlaceholderColor="Black"
-                                    HeightRequest="40"/>
+                                            TextChanged="txtAuto_TextChanged"
+                                            Focused="txtAuto_Focused"
+                                            Unfocused="txtAuto_Unfocused"
+                                            FontSize="15" 
+                                            BackgroundColor="White" 
+                                            Placeholder="Select Party"
+                                            HorizontalOptions="FillAndExpand" 
+                                            TextColor="Black"
+                                            PlaceholderColor="Black"
+                                            HeightRequest="40"/>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="txtLocation_Focus" />
                             </StackLayout.GestureRecognizers>
@@ -62,6 +62,7 @@
                     <StackLayout x:Name="stktodaypayable" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <Label x:Name="lblFirstTitle" Text="Today Payment(SETTING amount) (NOTIFICATION)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19" HorizontalTextAlignment="Center"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
+                           
                             <ListView x:Name="list_today_payble"
                                       RowHeight="40"
                                       HeightRequest="200"
@@ -88,7 +89,7 @@
                                                 <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Pay_Party}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
                                                 <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Pay_Outstanding}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
                                                 <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Amount_Received}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding txtWidth}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Cur_Outstanding}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
                                             </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>

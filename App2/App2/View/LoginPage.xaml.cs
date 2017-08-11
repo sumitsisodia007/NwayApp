@@ -57,19 +57,32 @@ namespace App2.View
             ResponseModel rs=new ResponseModel();
             _Loading.Color = Color.FromHex("#4472C4");
             _Loading.IsRunning = true;
-            _login.Username = "sumit";//  txtFName.Text;
-            _login.Password = "1";// txtPass.Text;
+            _login.Username = txtFName.Text;
+            _login.Password =  txtPass.Text;
             _login.DeviceID = "123456";// StaticMethods.getDeviceidentifier();
             _login.Firebasetoken =  StaticMethods.getTokan();//"asdgasdggshgdj";
             _login.Tagtype = "signin";
             await Task.Run( () =>
             {
-                rs=  api.postLogin(_login);
+                if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
+                {
+                    rs = api.postLogin(_login);
+                    rs.Device_Id = _login.DeviceID;
+                    StaticMethods.SaveLocalData(rs);
+                }
+                else if (txtFName.Text == string.Empty && txtPass.Text == string.Empty)
+                { StaticMethods.ShowToast("Please Fill All Details"); }
+                else if (txtFName.Text == string.Empty )
+                { StaticMethods.ShowToast("Please Fill User Name"); }
+                else if(txtPass.Text == string.Empty)
+                { StaticMethods.ShowToast("Please Fill Password"); }
             });
-            if (rs.Error=="False")
+            if (rs.Error == "False")
             {
-              await  Navigation.PushModalAsync(new MasterMenuPage());
+                StaticMethods.ShowToast(rs.Message);
+                await Navigation.PushModalAsync(new MasterMenuPage());
             }
+           
             _Loading.IsRunning = false;
         }
     }

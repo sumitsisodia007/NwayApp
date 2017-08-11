@@ -1,4 +1,6 @@
 ﻿using App2.Model;
+using App2.PopUpPages;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +44,7 @@ namespace App2.View
             var page6 = new MasterPageItem() { Title = "Approvels", Icon = "thumbs_up", TargetType = typeof(HomePage) };
             var page8 = new MasterPageItem() { Title = "Setting", Icon = "setting", TargetType = typeof(SettingPage) };
             var page9 = new MasterPageItem() { Title = "Help & Feedback", Icon = "help", TargetType = typeof(LoginPage) };
-            var page10 = new MasterPageItem() { Title = "Logout", Icon = "logout", TargetType = typeof(LoginPage) };
+            var page10 = new MasterPageItem() { Title = "Logout", Icon = "logout", TargetType = typeof(LogOutPage) };
 
             // Adding menu items to menuList
             menuList.Add(page1);
@@ -62,12 +64,21 @@ namespace App2.View
 
         }
 
-        private void NavigationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void NavigationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var item = (MasterPageItem)e.SelectedItem;
+          
+            if (item.Title == "Logout")
+            {
+                await PopupNavigation.PushAsync(new LogOutPage());
+            }
+            else
+            {
                 Type page = item.TargetType;
                 Detail = new NavigationPage((Page)Activator.CreateInstance(page));
-                IsPresented = false;            
+               
+            }
+            IsPresented = false;
         }
 
         private void C21_Tapped(object sender, EventArgs e)

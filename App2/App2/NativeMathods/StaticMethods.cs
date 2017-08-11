@@ -1,4 +1,5 @@
 ﻿using App2.Interface;
+using App2.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace App2.NativeMathods
             }
             return strDeviceIdentifier;
         }
+
         public static string getTokan()
         {
             string strDeviceIdentifier = "";
@@ -38,7 +40,7 @@ namespace App2.NativeMathods
             }
             return strDeviceIdentifier;
         }
-        /*
+
         public static void ShowToast(string msg)
         {
             Device.BeginInvokeOnMainThread(() =>
@@ -54,36 +56,10 @@ namespace App2.NativeMathods
                 }
             });
         }
-        public static void ShowLoader()
-        {
-            if (Device.OS == TargetPlatform.iOS)
-            {
-                DependencyService.Get<IIosMethods>().ShowLoader();
-            }
-            else
-            {
-                DependencyService.Get<IAndroidMethods>().ShowLoader();
-            }
 
-        }
-        public static void DismissLoader()
+        public static ResponseModel GetLocalSavedData()
         {
-            if (Device.OS == TargetPlatform.iOS)
-            {
-                DependencyService.Get<IIosMethods>().DismissLoader();
-
-            }
-            else
-            {
-                DependencyService.Get<IAndroidMethods>().DismissLoader();
-            }
-
-        }
-        
-        
-        public static UserModel GetLocalSavedData()
-        {
-            UserModel um = null;
+            ResponseModel um = null;
             try
             {
                 if (Device.OS == TargetPlatform.iOS)
@@ -104,7 +80,8 @@ namespace App2.NativeMathods
 
 
         }
-        public static void SaveLocalData(UserModel um)
+
+        public static void SaveLocalData(ResponseModel um)
         {
             try
             {
@@ -124,6 +101,7 @@ namespace App2.NativeMathods
 
             }
         }
+
         public static void DeleteLocalData()
         {
             try
@@ -144,6 +122,6 @@ namespace App2.NativeMathods
 
             }
         }
-        */
+        
     }
 }

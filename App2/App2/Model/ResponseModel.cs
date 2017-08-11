@@ -15,5 +15,6 @@ namespace App2.Model
         public string Min_Receipt_Amt { get; set; }
         public string Notification_Day_Count { get; set; }
         public string User_Id { get; set; }
+        public string Device_Id { get; set; }
     }
 }

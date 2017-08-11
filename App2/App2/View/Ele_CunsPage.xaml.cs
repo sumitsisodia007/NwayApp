@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App2.ShowModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,7 +45,7 @@ namespace App2.View
                 _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "Swan", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
                 listView.ItemsSource = _receivablList;
             }
-            catch (Exception )
+            catch (Exception)
             {
 
 

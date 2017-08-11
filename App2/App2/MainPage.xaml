@@ -5,8 +5,10 @@
              x:Class="App2.MainPage"
              Title="Notification">
     <AbsoluteLayout>
+        
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                  AbsoluteLayout.LayoutFlags="All">
+            <!--<ActivityIndicator IsRunning="False"/>-->
             <ListView  x:Name="GroupedView"
                     GroupDisplayBinding="{Binding Title}"
                     RowHeight="80"
@@ -81,11 +83,12 @@
                                 <ViewCell>
                                     <StackLayout Orientation="Vertical"
                                                  VerticalOptions="FillAndExpand" Spacing="0">
+                                        <BoxView BackgroundColor="#BBBBBB" HeightRequest="1"/>
                                         <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                   BackgroundColor="#E2F5F9">
-                                            <Label BackgroundColor="#E2F5F9" HorizontalOptions="StartAndExpand" Margin="2" FontSize="15" Text="{Binding show_party_name_customer_name}" TextColor="Black" HorizontalTextAlignment="Start" />
-                                            <Label  BackgroundColor="#E2F5F9" WidthRequest="100" Margin="2" FontSize="15" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
+                                            <Label BackgroundColor="#E2F5F9" HorizontalOptions="StartAndExpand" Margin="0,2" FontSize="15" Text="{Binding show_party_name_customer_name}" TextColor="Black" HorizontalTextAlignment="Start" />
+                                            <Label  BackgroundColor="#E2F5F9" WidthRequest="100" Margin="0,2" FontSize="15" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
                                         </StackLayout>
                                         <BoxView BackgroundColor="#BBBBBB" HeightRequest="1"/>
                                     </StackLayout>

@@ -6,16 +6,15 @@
              Title="Notification Setting"
              Padding="20,0">
     <ContentPage.Content>
-      
+
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
-                <StackLayout HorizontalOptions="FillAndExpand"  Orientation="Horizontal" VerticalOptions="StartAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand"  Orientation="Horizontal" VerticalOptions="StartAndExpand">
                 <Label  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                                    Margin="0,0,1,0" TextColor="Black"
                                    FontSize="17" BackgroundColor="White"
                                    Text="Days :"   />
                 <StackLayout  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Vertical" >
-                    
-                        <local:MyEntry Placeholder="No Of Days"   HorizontalOptions="FillAndExpand"/>
+                    <local:MyEntry x:Name="txtDaysOfno" Placeholder="No Of Days"  Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
                     <BoxView BackgroundColor="#D7D7D7" HeightRequest="1" />
                 </StackLayout>
             </StackLayout>
@@ -26,26 +25,30 @@
                                    Text="Min. Amount:"   />
                 <StackLayout  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Vertical" >
 
-                    <local:MyEntry Placeholder="Minimum Amount"   HorizontalOptions="FillAndExpand"/>
+                    <local:MyEntry x:Name="txtMinimumAmt" Placeholder="Minimum Amount"  Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
                     <BoxView BackgroundColor="#D7D7D7" HeightRequest="1" />
                 </StackLayout>
             </StackLayout>
             <StackLayout HorizontalOptions="Fill" Padding="0,40">
-            <local:CurvedCornersLabel Text="Save" FontSize="17"
+                <local:CurvedCornersLabel Text="Save" FontSize="17"
                                                       HorizontalTextAlignment="Center"
                                                       VerticalTextAlignment="Center"
                                                       CurvedBackgroundColor="#2983C6"
                                                       TextColor="White"
-                                      HeightRequest="40"
-                                                      CurvedCornerRadius="6"/>
+                                                      HeightRequest="40"
+                                                      CurvedCornerRadius="6">
+                    <local:CurvedCornersLabel.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapOnSave"/>
+                    </local:CurvedCornersLabel.GestureRecognizers>
+                </local:CurvedCornersLabel>
             </StackLayout>
             <StackLayout>
-            <Frame  HasShadow="True"  BackgroundColor="White"  Padding="1" OutlineColor="Gray">
+                <Frame  HasShadow="True"  BackgroundColor="White"  Padding="1" OutlineColor="Gray">
                     <StackLayout Padding="0,2">
                         <Label Text="Current Settings" FontSize="17" TextColor="Black" HorizontalOptions="CenterAndExpand" />
                         <StackLayout HorizontalOptions="FillAndExpand"  Orientation="Horizontal" VerticalOptions="StartAndExpand">
                             <StackLayout HorizontalOptions="FillAndExpand"  Orientation="Vertical" VerticalOptions="StartAndExpand" Padding="0,0,.5,0">
-                               
+
                                 <Label  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                                    Margin="0" TextColor="Gray"
                                    FontSize="15"
@@ -54,7 +57,7 @@
                                    Margin="0" TextColor="Black"
                                    FontSize="16" 
                                    Text="previous Days "   />
-                                
+
                             </StackLayout>
                             <StackLayout Padding="1" BackgroundColor="Black" />
                             <StackLayout HorizontalOptions="FillAndExpand"  Orientation="Vertical" VerticalOptions="StartAndExpand" Padding=".5,0,0,0">
@@ -66,12 +69,12 @@
                                    Margin="0" TextColor="Black"
                                    FontSize="16" BackgroundColor="White"
                                    Text="Minimum Amount"   />
-                                
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
             </StackLayout>
+            <ActivityIndicator x:Name="_Loading" IsRunning="False" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

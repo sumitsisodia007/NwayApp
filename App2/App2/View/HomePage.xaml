@@ -22,211 +22,212 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-   
-    <StackLayout  Orientation="Vertical" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-      <ScrollView> 
-          <StackLayout Padding="0,15" Orientation="Vertical" Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-            <StackLayout  Orientation="Horizontal" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                <Frame x:Name="GridRec" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black">
-                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                            <Image Source="icon_money" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="Receivable_Tapped" />
-                                </Image.GestureRecognizers>
-                            </Image>
+    <Grid>
+            <StackLayout  Orientation="Vertical" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                <ScrollView>
+                    <StackLayout Padding="0,15" Orientation="Vertical" Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                        <StackLayout  Orientation="Horizontal" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                            <Frame x:Name="GridRec" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black">
+                                <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                    <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                        <Image Source="icon_money" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Receivable_Tapped" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
 
-                            <Label x:Name="lblReceive" Text="Receivable" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="13">
-                                <Label.GestureRecognizers>
+                                        <Label x:Name="lblReceive" Text="Receivable" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="13">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Receivable_Tapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </StackLayout>
+                                    <local:CurvedCornersLabel Text="1120" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13" CurvedCornerRadius="12">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Receivable_Tapped"/>
+                                        </Label.GestureRecognizers>
+                                    </local:CurvedCornersLabel>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Receivable_Tapped"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Receivable_Tapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </StackLayout>
-                        <local:CurvedCornersLabel Text="1120" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13" CurvedCornerRadius="12">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Receivable_Tapped"/>
-                            </Label.GestureRecognizers>
-                        </local:CurvedCornersLabel>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Receivable_Tapped"/>
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Receivable_Tapped"/>
-                    </Frame.GestureRecognizers>
-                </Frame>
+                                </Frame.GestureRecognizers>
+                            </Frame>
 
-                <Frame x:Name="GridPay"   BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black" >
-                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                            <Image Source="icon_card_pay" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Image.GestureRecognizers>
+                            <Frame x:Name="GridPay"   BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black" >
+                                <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                    <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                        <Image Source="icon_card_pay" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Payable_Tapped" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <Label x:Name="lblPay" Text="Payable" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Payable_Tapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Payable_Tapped"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                    <Label Text="1120" HeightRequest="22" BackgroundColor="#ED7D31"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Payable_Tapped"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Payable_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Payable_Tapped" />
-                                </Image.GestureRecognizers>
-                            </Image>
-                                <Label x:Name="lblPay" Text="Payable" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="Payable_Tapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
+                                </Frame.GestureRecognizers>
+                            </Frame>
 
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Payable_Tapped"/>
-                            </StackLayout.GestureRecognizers>
                         </StackLayout>
-                        <Label Text="1120" HeightRequest="22" BackgroundColor="#ED7D31"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Payable_Tapped"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Payable_Tapped" />
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Payable_Tapped" />
-                    </Frame.GestureRecognizers>
-                </Frame>
 
-            </StackLayout>
-
-            <StackLayout  Orientation="Horizontal" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                <Frame x:Name="GridCas"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black" >
-                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                            <Image Source="icon_cash" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Image.GestureRecognizers>
+                        <StackLayout  Orientation="Horizontal" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                            <Frame x:Name="GridCas"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black" >
+                                <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                    <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                        <Image Source="icon_cash" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="CashFlow_Tapped" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <Label x:Name="lblcashflow" Text="Cash Flow" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="CashFlow_Tapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="CashFlow_Tapped" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                    <Label Text="1120" HeightRequest="22" BackgroundColor="#6DB040"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="CashFlow_Tapped"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="CashFlow_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="CashFlow_Tapped" />
-                                </Image.GestureRecognizers>
-                            </Image>
-                                <Label x:Name="lblcashflow" Text="Cash Flow" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="CashFlow_Tapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="CashFlow_Tapped" />
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
-                        <Label Text="1120" HeightRequest="22" BackgroundColor="#6DB040"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="CashFlow_Tapped"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="CashFlow_Tapped" />
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="CashFlow_Tapped" />
-                    </Frame.GestureRecognizers>
-                </Frame>
+                                </Frame.GestureRecognizers>
+                            </Frame>
 
-                <Frame x:Name="GridCon"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black">
-                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                            <Image Source="icon_bulb" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Image.GestureRecognizers>
+                            <Frame x:Name="GridCon"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black">
+                                <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                    <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                        <Image Source="icon_bulb" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Elect_Tapped" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <Label x:Name="lblEleCun" Text="Elec. Cunsuption" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"    VerticalOptions="StartAndExpand" FontSize="13">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Elect_Tapped" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Elect_Tapped" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                    <Label Text="1120" HeightRequest="22" BackgroundColor="#A5A5A5"  VerticalOptions="EndAndExpand"  FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Elect_Tapped"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Elect_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Elect_Tapped" />
-                                </Image.GestureRecognizers>
-                            </Image>
-                                <Label x:Name="lblEleCun" Text="Elec. Cunsuption" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"    VerticalOptions="StartAndExpand" FontSize="13">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="Elect_Tapped" />
-                                </Label.GestureRecognizers>
-                            </Label>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Elect_Tapped" />
-                            </StackLayout.GestureRecognizers>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
                         </StackLayout>
-                        <Label Text="1120" HeightRequest="22" BackgroundColor="#A5A5A5"  VerticalOptions="EndAndExpand"  FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Elect_Tapped"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Elect_Tapped" />
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Elect_Tapped" />
-                    </Frame.GestureRecognizers>
-                </Frame>
 
-            </StackLayout>
+                        <StackLayout Spacing="20" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                            <Frame x:Name="GridExp"  BackgroundColor="White" HasShadow="True" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black">
+                                <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                    <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                        <Image Source="icon_loading" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Expired_Tapped" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <Label x:Name="lblExpir" Text="Expired Soon" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  VerticalOptions="StartAndExpand" FontSize="13">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Expired_Tapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Expired_Tapped" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                    <Label Text="1120" HeightRequest="22" BackgroundColor="#FFD993"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
 
-            <StackLayout Spacing="20" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                <Frame x:Name="GridExp"  BackgroundColor="White" HasShadow="True" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black">
-                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                            <Image Source="icon_loading" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Image.GestureRecognizers>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Expired_Tapped"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Expired_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Expired_Tapped" />
-                                </Image.GestureRecognizers>
-                            </Image>
-                                <Label x:Name="lblExpir" Text="Expired Soon" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  VerticalOptions="StartAndExpand" FontSize="13">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="Expired_Tapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Expired_Tapped" />
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
-                        <Label Text="1120" HeightRequest="22" BackgroundColor="#FFD993"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                                </Frame.GestureRecognizers>
+                            </Frame>
 
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Expired_Tapped"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Expired_Tapped" />
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Expired_Tapped" />
-                    </Frame.GestureRecognizers>
-                </Frame>
-
-                <Frame x:Name="GridInv"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black" >
-                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                            <Image Source="icon_cancel" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Image.GestureRecognizers>
+                            <Frame x:Name="GridInv"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="1" OutlineColor="Black" >
+                                <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                    <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                        <Image Source="icon_cancel" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Canceled_Tapped" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <Label x:Name="lblInvoiceCancel" Text="Invoice Canceled" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"   VerticalOptions="StartAndExpand" FontSize="13">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="Canceled_Tapped"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Canceled_Tapped" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                    <Label Text="1120" HeightRequest="22" TextColor="White" BackgroundColor="Black"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Canceled_Tapped"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Canceled_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Canceled_Tapped" />
-                                </Image.GestureRecognizers>
-                            </Image>
-                                <Label x:Name="lblInvoiceCancel" Text="Invoice Canceled" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"   VerticalOptions="StartAndExpand" FontSize="13">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="Canceled_Tapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Canceled_Tapped" />
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
-                        <Label Text="1120" HeightRequest="22" TextColor="White" BackgroundColor="Black"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Canceled_Tapped"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Canceled_Tapped" />
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Canceled_Tapped" />
-                    </Frame.GestureRecognizers>
-                </Frame>
+                                </Frame.GestureRecognizers>
+                            </Frame>
 
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="20">
+                    <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="19"/>
+                    <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
-       </ScrollView> 
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="20">
-            <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="19"/>
-            <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
-        </StackLayout>
-    </StackLayout>
-    
-    
+            <ActivityIndicator x:Name="_loding" IsRunning="False" HeightRequest="150" WidthRequest="150" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+    </Grid>
+
 </ContentPage> 

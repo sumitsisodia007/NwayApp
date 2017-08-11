@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App2.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,9 @@ namespace App2.Interface
     {
         string GetIdentifier();
         string GetTokan();
-       // void ShowToast(string msg);
-        //UserModel RetriveLocalData();
-        //void SaveLocalData(UserModel um);
-        //void DeleteLocalData();
-        //void ShowLoader();
-        //void DismissLoader();
+        void ShowToast(string msg);
+        ResponseModel RetriveLocalData();
+        void SaveLocalData(ResponseModel um);
+        void DeleteLocalData();
     }
 }

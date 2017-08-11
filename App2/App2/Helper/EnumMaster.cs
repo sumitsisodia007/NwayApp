@@ -15,7 +15,7 @@ namespace App2.Helper
         public static readonly string LblChartTitle= "(Monthly Ledger)";
 
         public static readonly string LblReceivedFirstTitle= "Today Collection(Notification)";
-        public static readonly string LblReceivedSecoundTitle = "Today OutStanding";
+        public static readonly string LblReceivedSecoundTitle = "Total OutStanding";
         public static readonly string LblReceivedOutstanding= "Pre Outstanding";
         public static readonly string LblReceivedTodayPaid= "Today Receipt";
         public static readonly string LblReceivedCurOutstanding= "Cur. Outstanding";
@@ -23,7 +23,7 @@ namespace App2.Helper
         public static readonly string LblReceivedTotaleDr = "Total Due";
         public static readonly string LblReceivedTotaleCr = "Receive";
         public static readonly string LblPaidFirstTitle = "Today Payment(SETTING amount) (NOTIFICATION)";
-        public static readonly string LblPaidSecoundTitle = "Today Payable";
+        public static readonly string LblPaidSecoundTitle = "Total Payable";
         public static readonly string LblPaidReceivedParty = "Party";
         public static readonly string LblPaidReceivedBalance = "Balance";
         public static readonly string LblPaidOutstanding = "Outstanding";
