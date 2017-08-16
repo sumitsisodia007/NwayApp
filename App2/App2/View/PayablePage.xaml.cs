@@ -66,7 +66,6 @@ namespace App2.View
                     var calcScreenHieght = Application.Current.MainPage.Height;
                     lblparty.WidthRequest = lbloutstanding.WidthRequest = lblTodayReceipt.WidthRequest = lblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
                 }
-
             }
             catch (Exception ex)
             {
@@ -122,8 +121,17 @@ namespace App2.View
                     }
                     foreach (var item3 in item2.Notification)
                     {
-                        
-                        _payableshowlist.Add(new ShowPayableTodayDetail() {Show_Party_Id=item3.Party_id, txtWidth = _Width, Show_Pay_Party = item3.Party_name, Show_Pay_Outstanding = item3.Party_outstanding, Show_Amount_Received = item3.Amount_received, Show_Cur_Outstanding = item3.Current_outstanding });
+                        string tmp;
+                        if (Convert.ToInt32(item3.Party_name.Length) >= 9)
+                        {
+                            tmp = item3.Party_name.Substring(0, 10);
+                        }
+                        else
+                        {
+                            tmp = item3.Party_name;
+                        }
+
+                        _payableshowlist.Add(new ShowPayableTodayDetail() {Show_Party_Id=item3.Party_id, txtWidth = _Width, Show_Pay_Party =tmp+"..", Show_Pay_Outstanding = item3.Party_outstanding, Show_Amount_Received = item3.Amount_received, Show_Cur_Outstanding = item3.Current_outstanding });
                     }
                 }
             }
@@ -135,13 +143,23 @@ namespace App2.View
             _showpayabletotalpayblelist = new List<ShowPayableTotalPayble>();
             foreach (var item in _payable.ListPayablemdl)
             {
+                string tmp = null;
                 if (lblSiteName.Text != "Particular")
                 {
-                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = item.Site_name, Show_Balance = item.Balance, Show_Total_cr = item.Total_cr, Show_Total_dr = item.Total_dr });
+                    if (Convert.ToInt32(item.Site_name.Length) >= 9)
+                    {
+                        tmp = item.Site_name.Substring(0, 10);
+                    }
+                    else
+                    {
+                        tmp = item.Site_name;
+                    }
+                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = tmp+"..", Show_Balance = item.Balance, Show_Total_cr = item.Total_cr, Show_Total_dr = item.Total_dr });
                 }
                 else
                 {
-                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = item.Perticular, Show_Balance = item.Balance, Show_Total_cr = item.Total_Due, Show_Total_dr = item.Receive });
+
+                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = item.Perticular, Show_Balance = item.Balance, Show_Total_cr = item.Receive, Show_Total_dr = item.Total_Due});
                 }
             }
             list_totalpayble.ItemsSource = _showpayabletotalpayblelist;
@@ -186,7 +204,7 @@ namespace App2.View
                         _lst.Add(new PartysearchlistMdl { Party_Id = item.Party_Id, Party_Name = item.Party_Name });
                     }
                     AutoList.ItemsSource = _lst;
-                    Device.BeginInvokeOnMainThread(async() =>
+                    Device.BeginInvokeOnMainThread(() =>
                     {
                         if (_lst.Count > 0)
                         {
@@ -203,7 +221,7 @@ namespace App2.View
                             AutoList.ItemsSource = null;
                             AutoList.IsVisible = false;
                         }
-                           await scrollbar.ScrollToAsync(txtAuto, ScrollToPosition.Start, true);
+                           //await scrollbar.ScrollToAsync(txtAuto, ScrollToPosition.Start, true);
                     });
                    
                 }

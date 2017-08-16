@@ -2,6 +2,7 @@
 using App2.Interface;
 using App2.Model;
 using App2.NativeMathods;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace App2.View
         public LoginPage(NavigationMdl mdl)
         {
             InitializeComponent();
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             if (mdl.Tag_type == "paid")
             {
                 Navigation.PushModalAsync(new PayableChart());
@@ -35,6 +37,7 @@ namespace App2.View
         public LoginPage()
         {
             InitializeComponent();
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private void txtPassRecognizer_Tapped(object sender, EventArgs e)
@@ -59,15 +62,17 @@ namespace App2.View
             _Loading.IsRunning = true;
             _login.Username = txtFName.Text;
             _login.Password =  txtPass.Text;
-            _login.DeviceID = "123456";// StaticMethods.getDeviceidentifier();
+            _login.DeviceID = "123456 ";// StaticMethods.getDeviceidentifier();
             _login.Firebasetoken =  StaticMethods.getTokan();//"asdgasdggshgdj";
             _login.Tagtype = "signin";
             await Task.Run( () =>
             {
                 if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
                 {
+                    ResponseModel res = StaticMethods.GetLocalSavedData();
                     rs = api.postLogin(_login);
                     rs.Device_Id = _login.DeviceID;
+                    rs.Min_Receipt_Amt = res.Min_Receipt_Amt;
                     StaticMethods.SaveLocalData(rs);
                 }
                 else if (txtFName.Text == string.Empty && txtPass.Text == string.Empty)
@@ -82,8 +87,19 @@ namespace App2.View
                 StaticMethods.ShowToast(rs.Message);
                 await Navigation.PushModalAsync(new MasterMenuPage());
             }
-           
+            txtFName.Text = txtPass.Text = string.Empty;
             _Loading.IsRunning = false;
+        }
+
+        protected override void OnAppearing()
+        {
+
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                //You are offline, notify the user
+                DisplayAlert("No Internet Connection", "it looks like your internet connection is off, Please turn on and try again", "OK");
+
+            }
         }
     }
 }

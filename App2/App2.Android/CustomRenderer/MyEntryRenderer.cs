@@ -31,6 +31,14 @@ namespace App2.Droid.CustomRenderer
                if (PayablePage.flag == 1)
                     Control.Gravity = Android.Views.GravityFlags.Center;
             }
+            /* if (Control != null)
+                {
+                GradientDrawable gd = new GradientDrawable();
+                gd.SetCornerRadius(10); // increase or decrease to changes the corner look
+                this.Control.SetBackgroundDrawable(gd);
+                this.Control.SetRawInputType(InputTypes.TextFlagNoSuggestions);
+                }
+            */
         }
     }
 }

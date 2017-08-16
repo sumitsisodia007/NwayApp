@@ -5,12 +5,7 @@
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms">
 
     <StackLayout>
-        <StackLayout.BackgroundColor>
-            <OnPlatform x:TypeArguments="Color"
-                        Android="White"
-                        WinPhone="Black"
-                        iOS="White" />
-        </StackLayout.BackgroundColor>
+        <Button Text="Click Here" Clicked="YourButton_Clicked"/>
         <controls:CheckBox DefaultText="Default text"
                            FontName="AmericanTypewriter"
                            FontSize="25"

@@ -17,7 +17,7 @@
                        Margin="0"
                        HorizontalOptions="CenterAndExpand"
                        VerticalOptions="CenterAndExpand" />
-                <Label  Text ="Enter Email ID &amp; Password"  TextColor="Gray" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
+               <Label  Text ="Enter Email ID &amp; Password"  TextColor="Gray" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
             </StackLayout>
             <StackLayout VerticalOptions="Start" HorizontalOptions="Center"  Spacing="0" Orientation="Horizontal" Padding="0">
                 <Label x:Name ="lblMessage" Text ="" IsVisible ="false" TextColor="Red" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
@@ -59,7 +59,7 @@
                                                       TextColor="White"
                                                       CurvedCornerRadius="10"
                                                       FontAttributes="Bold"
-                                          WidthRequest="100">
+                                                      WidthRequest="100">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="btnLogin_Clicked" />
                     </Label.GestureRecognizers>

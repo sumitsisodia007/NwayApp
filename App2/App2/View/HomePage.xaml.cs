@@ -1,6 +1,7 @@
 ﻿using App2.APIService;
 using App2.Helper;
 using App2.Model;
+using App2.NativeMathods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,20 +90,41 @@ namespace App2.View
         private void Notification_Clicked(object sender, EventArgs e)
         {
 
-            _login.Username = "sumit";// txtFName.Text;
-            _login.Password = "1";// txtPass.Text;
-            _login.DeviceID = "12345";// StaticMethods.getDeviceidentifier();
-            _login.Firebasetoken = "cq9_AqsQW1w:APA91bHRiZM2TKb3qUuf3T1NCEviyg6vPJ6K-wu7DBdkHhn8AF2oPmKsTnqtT8TdVGknGQRNDFyiqNXf_MvHXgw4gkcHDGfxSR5mUdCRuz_rtqQpqF5PoteZFvu8p8tObdckvFgZvTbi";
-            _login.Tagtype = "signin";
+            //_login.Username = "sumit";// txtFName.Text;
+            //_login.Password = "1";// txtPass.Text;
+            //_login.DeviceID = "12345";// StaticMethods.getDeviceidentifier();
+            //_login.Firebasetoken = "cq9_AqsQW1w:APA91bHRiZM2TKb3qUuf3T1NCEviyg6vPJ6K-wu7DBdkHhn8AF2oPmKsTnqtT8TdVGknGQRNDFyiqNXf_MvHXgw4gkcHDGfxSR5mUdCRuz_rtqQpqF5PoteZFvu8p8tObdckvFgZvTbi";
+            //_login.Tagtype = "signin";  
             //api.PostNotification();
             try
             {
+                //_loding.IsRunning = true;
+                
+                //StaticMethods.ShowToast("Please Wait");
+                //await Task.Run(async() =>
+                //{
+                // await 
                 Navigation.PushAsync(new MainPage());
+                //});
             }
             catch (Exception ex)
             {
             }
-            
+            finally
+            {
+                _loding.IsRunning = false;
+            }
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            _loding.IsRunning = false;
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
     }
 }

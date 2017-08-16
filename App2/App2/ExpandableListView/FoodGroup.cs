@@ -65,7 +65,6 @@ namespace App2.ExpandableListView
         }
 
 
-
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

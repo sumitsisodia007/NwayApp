@@ -5,9 +5,34 @@
              xmlns:local="clr-namespace:App2.CustomRenderer"
              BackgroundColor="#ED7D31"
              Title="Payable">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ListHeaderLabelStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="#ED7D31"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="Margin" Value=".5"/>
+            </Style>
+            
+            <Style x:Key="ListLabelStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="Margin" Value=".5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <ScrollView x:Name="scrollbar" >
+          
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <!--Start Auto Complete-->
                     <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" >
@@ -57,89 +82,85 @@
                     <Image x:Name="imgLogo"
                             Source="logo"
                            Aspect="AspectFit"
-                           HeightRequest="180" />
+                           HeightRequest="150" />
 
                     <StackLayout x:Name="stktodaypayable" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <Label x:Name="lblFirstTitle" Text="Today Payment(SETTING amount) (NOTIFICATION)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19" HorizontalTextAlignment="Center"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
-                           
-                            <ListView x:Name="list_today_payble"
-                                      RowHeight="40"
-                                      HeightRequest="200"
+                            <ScrollView Orientation="Horizontal" >
+                                <ListView x:Name="list_today_payble"
+                                      HeightRequest="150"
                                       BackgroundColor="White"
                                       ItemTapped="list_today_payble_ItemTapped"
                                       SeparatorVisibility="None"
                                       SeparatorColor="#4472C4">
-                                <ListView.Header>
-                                    <StackLayout Orientation="Horizontal"
+                                    <ListView.Header>
+                                        <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
-                                        <Label x:Name="lblparty" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Party" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label x:Name="lbloutstanding" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label x:Name="lblTodayReceipt" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Today Paid" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label x:Name="lblCurOutstanding" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="15" Text="Cur. Outstanding" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                    </StackLayout>
-                                </ListView.Header>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <ViewCell>
-                                            <StackLayout Orientation="Horizontal"
+                                        <Label x:Name="lblparty" Text="Party" Style="{StaticResource ListHeaderLabelStyle}" />
+                                        <Label x:Name="lbloutstanding"  Text="Outstanding" Style="{StaticResource ListHeaderLabelStyle}"  />
+                                        <Label x:Name="lblTodayReceipt" Text="Today Paid"  Style="{StaticResource ListHeaderLabelStyle}" />
+                                        <Label x:Name="lblCurOutstanding"  Text="Cur. Outstanding" Style="{StaticResource ListHeaderLabelStyle}"  />
+                                        </StackLayout>
+                                    </ListView.Header>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Pay_Party}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Pay_Outstanding}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Amount_Received}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Cur_Outstanding}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                            </StackLayout>
-                                        </ViewCell>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-
+                                                <Label WidthRequest="{Binding txtWidth}" Text="{Binding Show_Pay_Party}" Style="{StaticResource ListLabelStyle}" />
+                                                    <Label WidthRequest="{Binding txtWidth}" Text="{Binding Show_Pay_Outstanding}" Style="{StaticResource ListLabelStyle}"/>
+                                                    <Label WidthRequest="{Binding txtWidth}" Text="{Binding Show_Amount_Received}" Style="{StaticResource ListLabelStyle}" />
+                                                    <Label WidthRequest="{Binding txtWidth}" Text="{Binding Show_Cur_Outstanding}" Style="{StaticResource ListLabelStyle}" />
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </ScrollView>
                         </Frame>
                     </StackLayout>
 
                     <StackLayout x:Name="stktotalpayable" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-
                         <Label x:Name="lblSecoundTitle" Text="Today Payable" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="19"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
-                            <ListView x:Name="list_totalpayble"
-                                      RowHeight="40"
-                                      HeightRequest="180"
+                            <ScrollView Orientation="Horizontal" >
+                                <ListView x:Name="list_totalpayble"
+                                      HeightRequest="150"
                                       BackgroundColor="White"
-                                      SeparatorVisibility="None"
-                                      >
-                                <ListView.Header>
-                                    <StackLayout Orientation="Horizontal"
+                                      SeparatorVisibility="None">
+                                    <ListView.Header>
+                                        <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
-                                        <Label x:Name="lblSiteName" WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Site Name" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label x:Name="lblTotalDr"   WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Total Dr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label x:Name="lblTotalCr"   WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Total Cr." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                        <Label x:Name="lblBalance"    WidthRequest="{Binding txtWidth}" BackgroundColor="#ED7D31" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Balance" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                    </StackLayout>
-                                </ListView.Header>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <ViewCell>
-                                            <StackLayout Orientation="Horizontal"
+                                            <Label x:Name="lblSiteName" WidthRequest="{Binding txtWidth}"  Text="Site Name" Style="{StaticResource ListHeaderLabelStyle}" />
+                                            <Label x:Name="lblTotalDr"   WidthRequest="{Binding txtWidth}" Text="Total Dr." Style="{StaticResource ListHeaderLabelStyle}" />
+                                            <Label x:Name="lblTotalCr"   WidthRequest="{Binding txtWidth}" Text="Total Cr." Style="{StaticResource ListHeaderLabelStyle}" />
+                                            <Label x:Name="lblBalance"    WidthRequest="{Binding txtWidth}" Text="Balance"  Style="{StaticResource ListHeaderLabelStyle}"/>
+                                        </StackLayout>
+                                    </ListView.Header>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" Margin="0" Padding="0" BackgroundColor="Black">
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Site_name}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Total_dr}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Total_cr}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                                <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="15" Text="{Binding Show_Balance}" Margin="0.5" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-
-
-                                            </StackLayout>
-                                        </ViewCell>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                                                    <Label WidthRequest="{Binding txtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Show_Site_name}" />
+                                                    <Label WidthRequest="{Binding txtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Show_Total_dr}" />
+                                                    <Label WidthRequest="{Binding txtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Show_Total_cr}" />
+                                                    <Label WidthRequest="{Binding txtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Show_Balance}"  />
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </ScrollView>
                         </Frame>
                     </StackLayout>
                 </StackLayout>
-            </ScrollView>
+      
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="23">
                 <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="25"/>
                 <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />

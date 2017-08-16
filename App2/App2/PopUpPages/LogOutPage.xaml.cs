@@ -1,4 +1,7 @@
-﻿using Rg.Plugins.Popup.Pages;
+﻿using App2.APIService;
+using App2.NativeMathods;
+using App2.View;
+using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -14,6 +17,9 @@ namespace App2.PopUpPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LogOutPage : PopupPage
     {
+        API api = null;
+        App2.Model.ResponseModel res=null;
+        App2.Model.NavigationMdl nav = null;
         public LogOutPage()
         {
             InitializeComponent();
@@ -39,7 +45,13 @@ namespace App2.PopUpPages
         }
         private void Logout_Tapped(object sender, EventArgs e)
         {
-
+            PopupNavigation.PopAsync();
+            api = new API();
+            nav = new Model.NavigationMdl();
+            res = StaticMethods.GetLocalSavedData();
+            
+            var MyAppsFirstPage = new LoginPage();
+            Application.Current.MainPage = new NavigationPage(MyAppsFirstPage);
         }
         protected override bool OnBackgroundClicked()
         {

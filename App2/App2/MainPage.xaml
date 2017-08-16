@@ -8,7 +8,7 @@
         
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                  AbsoluteLayout.LayoutFlags="All">
-            <!--<ActivityIndicator IsRunning="False"/>-->
+            <!--<ActivityIndicator x:Name="load" IsRunning="False" IsVisible="True"/>-->
             <ListView  x:Name="GroupedView"
                     GroupDisplayBinding="{Binding Title}"
                     RowHeight="80"

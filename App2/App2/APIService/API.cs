@@ -214,7 +214,7 @@ namespace App2.APIService
 
 
                 var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync(RestURL, content).Result;
+                var response = await client.PostAsync(RestURL, content);
                 if (response.IsSuccessStatusCode)
                 {
                     // Parse the response body. Blocking!

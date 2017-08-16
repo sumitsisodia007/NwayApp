@@ -18,13 +18,12 @@ namespace App2.iOS.CustomRenderer
             {
                 Control.BackgroundColor = UIColor.Clear;
                 Control.Layer.BorderWidth = 0;
+                //Control.Layer.CornerRadius = 5;       //this is for rounded corner
                 Control.BorderStyle = UITextBorderStyle.None;
                 Control.SpellCheckingType = UITextSpellCheckingType.No;             // No Spellchecking
                 Control.AutocorrectionType = UITextAutocorrectionType.No;           // No Autocorrection
                 Control.AutocapitalizationType = UITextAutocapitalizationType.None; // No Autocapitalization
-                if (ReceivablePage.flag == 1)
-                    Control.TextAlignment = UITextAlignment.Center;
-                else if (PayablePage.flag == 1)
+                 if (PayablePage.flag == 1)
                     Control.TextAlignment = UITextAlignment.Center;
             }
         }

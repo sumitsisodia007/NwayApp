@@ -3,8 +3,10 @@ using App2.APIService;
 using App2.ExpandableListView;
 using App2.Helper;
 using App2.Model;
+using App2.PopUpPages;
 using App2.ShowModels;
 using App2.View;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,6 +34,7 @@ namespace App2
         public MainPage()
         {
             InitializeComponent();
+
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
@@ -39,13 +42,12 @@ namespace App2
                 _Width = calcScreenWidth / 2;
             }
             API api = new API();
-          
-             _notificationModel = api.PostNotification();
-          
+
+            _notificationModel = api.PostNotification();
             ObservableCollection<FoodGroup> food = new ObservableCollection<FoodGroup>();
             foreach (var item in _notificationModel.ListNotificationDate)
             {
-                FoodGroup group = new FoodGroup(item.Date + " (" + item.NotCount + ")","D");
+                FoodGroup group = new FoodGroup(item.Date + " (" + item.NotCount + ")", "o");
                 foreach (var item2 in item.ListTags)
                 {
                     group.Add(new Food() { Name = item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
@@ -80,7 +82,7 @@ namespace App2
                 foreach (FoodGroup group in _allGroups)
                 {
                     //Create new FoodGroups so we do not alter original list
-                    FoodGroup newGroup = new FoodGroup(group.Title,"D", group.Expanded);
+                    FoodGroup newGroup = new FoodGroup(group.Title, "D", group.Expanded);
                     //Add the count of food items for Lits Header Titles to use
                     if (group.Expanded)
                     {
@@ -120,43 +122,74 @@ namespace App2
         {
             _receivablList = new List<NotificationShow>();
             var notification = _notificationModel.ListNotificationDate.Where(o => o.Date == food.Tag_date).ToList();
-           
+
             foreach (var item in notification)
             {
                 foreach (var item2 in item.ListTags)
                 {
                     foreach (var item3 in item2.Notification)
-                    { 
-                       
+                    {
+                      
+
                         if (lblName.Text == "paid" && item2.Tag == "paid" && item.Date == food.Tag_date)
                         {
+                            string tmp;
+                            if (Convert.ToInt32(item3.Party_name.Length) >= 25)
+                            {
+                                tmp = item3.Party_name.Substring(0, 25);
+
+                            }
+                            else
+                            {
+                                tmp = item3.Party_name;
+                            }
                             _receivablList.Add(new NotificationShow
                             {
                                 show_amount_received = item3.Amount_received,
                                 txtWidth = _Width,
-                                show_party_name_customer_name = item3.Party_name,
-                                show_party_id_invoice_id=item3.Party_id
+                                show_party_name_customer_name = tmp+"..",
+                                show_party_id_invoice_id = item3.Party_id
                             });
-                            
+
                         }
-                       else if (item2.Tag == "receipt" && lblName.Text == "receipt" && item.Date == food.Tag_date)
+                        else if (item2.Tag == "receipt" && lblName.Text == "receipt" && item.Date == food.Tag_date)
                         {
+                            string tmp;
+                            if (Convert.ToInt32(item3.Party_name.Length) >= 25)
+                            {
+                                tmp = item3.Party_name.Substring(0, 25);
+
+                            }
+                            else
+                            {
+                                tmp = item3.Party_name;
+                            }
                             _receivablList.Add(new NotificationShow
                             {
                                 show_amount_received = item3.Amount_received,
                                 txtWidth = _Width,
-                                show_party_name_customer_name = item3.Party_name,
+                                show_party_name_customer_name = tmp + "..",
                                 show_party_id_invoice_id = item3.Party_id
                             });
                         }
-                       else if (item2.Tag == "invoice_cancelletion" && lblName.Text == "invoice_cancelletion" && item.Date == food.Tag_date)
+                        else if (item2.Tag == "invoice_cancelletion" && lblName.Text == "invoice_cancelletion" && item.Date == food.Tag_date)
                         {
+                            string tmp;
+                            if (Convert.ToInt32(item3.Customer_name.Length) >= 25)
+                            {
+                                tmp = item3.Customer_name.Substring(0, 25);
+
+                            }
+                            else
+                            {
+                                tmp = item3.Customer_name;
+                            }
                             _receivablList.Add(new NotificationShow
                             {
                                 txtWidth = _Width,
-                                show_party_name_customer_name = item3.Customer_name,
+                                show_party_name_customer_name = tmp + "..",
                                 show_amount_received = item3.Invoice_code,
-                                show_party_id_invoice_id=item3.Customer_id,
+                                show_party_id_invoice_id = item3.Customer_id,
                             });
                         }
                     }
@@ -164,7 +197,7 @@ namespace App2
             }
             MainlistView.ItemsSource = _receivablList;
         }
-       
+
         private void MainlistView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             NotificationShow obj = (NotificationShow)e.Item;
@@ -187,5 +220,4 @@ namespace App2
             }
         }
     }
-   
 }
