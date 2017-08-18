@@ -42,7 +42,7 @@
                                         </Label.GestureRecognizers>
                                     </Label>
                                 </StackLayout>
-                                <local:CurvedCornersLabel Text="1120" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13" CurvedCornerRadius="12">
+                                <local:CurvedCornersLabel Text="1120" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#C1D5ED"  VerticalOptions="EndAndExpand" FontSize="13" CurvedCornerRadius="12">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="Receivable_Tapped"/>
                                     </Label.GestureRecognizers>

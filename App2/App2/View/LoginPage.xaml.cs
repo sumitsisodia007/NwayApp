@@ -1,4 +1,5 @@
 ﻿using App2.APIService;
+using App2.Helper;
 using App2.Interface;
 using App2.Model;
 using App2.NativeMathods;
@@ -34,6 +35,12 @@ namespace App2.View
             }
         }
 
+        public LoginPage(string Status)
+        {
+            InitializeComponent();
+            Navigation.PushModalAsync(new MasterMenuPage());
+        }
+
         public LoginPage()
         {
             InitializeComponent();
@@ -57,49 +64,60 @@ namespace App2.View
 
         private async void btnLogin_Clicked(object sender, EventArgs e)
         {
-            ResponseModel rs=new ResponseModel();
+            btnLogin.IsEnabled = false;
+            ResponseModel rs = new ResponseModel();
             _Loading.Color = Color.FromHex("#4472C4");
             _Loading.IsRunning = true;
             _login.Username = txtFName.Text;
-            _login.Password =  txtPass.Text;
+            _login.Password = txtPass.Text;
             _login.DeviceID = "123456 ";// StaticMethods.getDeviceidentifier();
-            _login.Firebasetoken =  StaticMethods.getTokan();//"asdgasdggshgdj";
-            _login.Tagtype = "signin";
-            await Task.Run( () =>
+            _login.Firebasetoken = StaticMethods.getTokan();//"asdgasdggshgdj";
+            _login.Tagtype = EnumMaster.SIGNIN;
+            await Task.Run(() =>
             {
                 if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
                 {
                     ResponseModel res = StaticMethods.GetLocalSavedData();
                     rs = api.postLogin(_login);
-                    rs.Device_Id = _login.DeviceID;
-                    rs.Min_Receipt_Amt = res.Min_Receipt_Amt;
-                    StaticMethods.SaveLocalData(rs);
+                    if (rs.Error == "False")
+                    {
+                        rs.Device_Id = _login.DeviceID;
+                        rs.Min_Receipt_Amt = res.Min_Receipt_Amt;
+                        StaticMethods.SaveLocalData(rs);
+                  
+                        //StaticMethods.ShowToast(rs.Message);
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await Navigation.PushModalAsync(new MasterMenuPage());
+                        });
+                    }
+                    else
+                    {
+
+                    }
+
                 }
                 else if (txtFName.Text == string.Empty && txtPass.Text == string.Empty)
                 { StaticMethods.ShowToast("Please Fill All Details"); }
-                else if (txtFName.Text == string.Empty )
+                else if (txtFName.Text == string.Empty)
                 { StaticMethods.ShowToast("Please Fill User Name"); }
-                else if(txtPass.Text == string.Empty)
+                else if (txtPass.Text == string.Empty)
                 { StaticMethods.ShowToast("Please Fill Password"); }
             });
-            if (rs.Error == "False")
-            {
-                StaticMethods.ShowToast(rs.Message);
-                await Navigation.PushModalAsync(new MasterMenuPage());
-            }
+
             txtFName.Text = txtPass.Text = string.Empty;
             _Loading.IsRunning = false;
+            btnLogin.IsEnabled = true;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
+            ResponseModel res = StaticMethods.GetLocalSavedData();
+        }
 
-            if (!CrossConnectivity.Current.IsConnected)
-            {
-                //You are offline, notify the user
-                DisplayAlert("No Internet Connection", "it looks like your internet connection is off, Please turn on and try again", "OK");
-
-            }
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
     }
 }

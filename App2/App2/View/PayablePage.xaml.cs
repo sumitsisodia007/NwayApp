@@ -46,14 +46,11 @@ namespace App2.View
             if (mdl.Page_Title == "Receivable")
             {
                 PredefinedReceived();
-               // navmdl.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING;
             }
             else
             {
                 PredefinedPaid();
-               // navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
             }
-            //calling api
             _payable = api.PayableTable(mdl);
 
              toady_notification = new ShowPayableTodayDetail();            

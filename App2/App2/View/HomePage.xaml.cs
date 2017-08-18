@@ -2,6 +2,9 @@
 using App2.Helper;
 using App2.Model;
 using App2.NativeMathods;
+using App2.PopUpPages;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +48,7 @@ namespace App2.View
             }
         }
 
-        private  void Receivable_Tapped(object sender, EventArgs e)
+        private async void Receivable_Tapped(object sender, EventArgs e)
         {
             nav = new NavigationMdl();
             nav.Page_Title = lblReceive.Text;
@@ -53,10 +56,14 @@ namespace App2.View
             nav.Device_id = "32132";
             nav.Company_name = EnumMaster.C21_MALHAR;
             nav.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING;
-            Navigation.PushAsync(new PayablePage(nav));
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
+            await Task.Delay(200);
+            await Navigation.PushAsync(new PayablePage(nav));
+            await Navigation.RemovePopupPageAsync(loadingPage);
         }
 
-        private  void Payable_Tapped(object sender, EventArgs e)
+        private async void Payable_Tapped(object sender, EventArgs e)
         {
             nav = new NavigationMdl();
             nav.Page_Title = lblPay.Text;
@@ -64,7 +71,11 @@ namespace App2.View
             nav.Device_id = "32132";
             nav.Company_name = EnumMaster.C21_MALHAR;
             nav.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
-            Navigation.PushAsync(new PayablePage(nav));
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
+            await Task.Delay(200);
+            await Navigation.PushAsync(new PayablePage(nav));
+            await Navigation.RemovePopupPageAsync(loadingPage);
         }
 
         private void CashFlow_Tapped(object sender, EventArgs e)
@@ -87,7 +98,7 @@ namespace App2.View
             DisplayAlert("Message", "Comming Soon", "ok");
         }
 
-        private void Notification_Clicked(object sender, EventArgs e)
+        private async void Notification_Clicked(object sender, EventArgs e)
         {
 
             //_login.Username = "sumit";// txtFName.Text;
@@ -99,12 +110,17 @@ namespace App2.View
             try
             {
                 //_loding.IsRunning = true;
-                
+
                 //StaticMethods.ShowToast("Please Wait");
                 //await Task.Run(async() =>
                 //{
                 // await 
-                Navigation.PushAsync(new MainPage());
+                
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
+                await Task.Delay(2000);
+                 await  Navigation.PushAsync(new MainPage());
+                await Navigation.RemovePopupPageAsync(loadingPage);
                 //});
             }
             catch (Exception ex)

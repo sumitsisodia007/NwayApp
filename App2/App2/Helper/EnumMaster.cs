@@ -8,10 +8,11 @@ namespace App2.Helper
 {
     public class EnumMaster
     {
+        public static readonly string SIGNIN = "signin";
         public static readonly string PAYABLE_OUTSTANDING = "payable_outstanding";
         public static readonly string RECEIVABLE_OUTSTANDING = "receivable_outstanding";
         public static readonly string C21_MALHAR= "CENTURY 21 TOWN PLANNERS PVT. LTD.";
-
+        
         public static readonly string LblChartTitle= "(Monthly Ledger)";
 
         public static readonly string LblReceivedFirstTitle= "Today Collection(Notification)";
@@ -32,6 +33,5 @@ namespace App2.Helper
         public static readonly string LblPaidSiteName = "Site Name";
         public static readonly string LblPaidTotaleDr = "Total Dr.";
         public static readonly string LblPaidTotaleCr = "Total Cr.";
-        
     }
 }

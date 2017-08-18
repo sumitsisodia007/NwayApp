@@ -6,6 +6,7 @@ using App2.Model;
 using App2.PopUpPages;
 using App2.ShowModels;
 using App2.View;
+using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,8 @@ namespace App2
 {
     public partial class MainPage : ContentPage
     {
-        private ObservableCollection<FoodGroup> _allGroups;
-        private ObservableCollection<FoodGroup> _expandedGroups;
+        private ObservableCollection<NotificationGroup> _allGroups;
+        private ObservableCollection<NotificationGroup> _expandedGroups;
         NotificationListMdl _notificationModel;
         /// <summary>
         /// Second List
@@ -42,20 +43,25 @@ namespace App2
                 _Width = calcScreenWidth / 2;
             }
             API api = new API();
+          
+               
 
-            _notificationModel = api.PostNotification();
-            ObservableCollection<FoodGroup> food = new ObservableCollection<FoodGroup>();
-            foreach (var item in _notificationModel.ListNotificationDate)
-            {
-                FoodGroup group = new FoodGroup(item.Date + " (" + item.NotCount + ")", "o");
-                foreach (var item2 in item.ListTags)
+                _notificationModel =  api.PostNotification();
+       
+                ObservableCollection<NotificationGroup> food = new ObservableCollection<NotificationGroup>();
+                foreach (var item in _notificationModel.ListNotificationDate)
                 {
-                    group.Add(new Food() { Name = item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
+                    NotificationGroup group = new NotificationGroup(item.Date + " (" + item.NotCount + ")", "o");
+                    foreach (var item2 in item.ListTags)
+                    {
+                        group.Add(new NotificationDetails() { Name = item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
+                    }
+                    food.Add(group);
                 }
-                food.Add(group);
-            }
-            _allGroups = food;
-            UpdateListContent();
+                _allGroups = food;
+                UpdateListContent();
+                 
+         
         }
 
         private void HeaderTapped(object sender, EventArgs args)
@@ -63,7 +69,7 @@ namespace App2
             try
             {
                 int selectedIndex = _expandedGroups.IndexOf(
-                ((FoodGroup)((Button)sender).CommandParameter));
+                ((NotificationGroup)((Button)sender).CommandParameter));
                 _allGroups[selectedIndex].Expanded = !_allGroups[selectedIndex].Expanded;
                 UpdateListContent();
             }
@@ -78,15 +84,15 @@ namespace App2
         {
             try
             {
-                _expandedGroups = new ObservableCollection<FoodGroup>();
-                foreach (FoodGroup group in _allGroups)
+                _expandedGroups = new ObservableCollection<NotificationGroup>();
+                foreach (NotificationGroup group in _allGroups)
                 {
                     //Create new FoodGroups so we do not alter original list
-                    FoodGroup newGroup = new FoodGroup(group.Title, "D", group.Expanded);
+                    NotificationGroup newGroup = new NotificationGroup(group.Title, "o", group.Expanded);
                     //Add the count of food items for Lits Header Titles to use
                     if (group.Expanded)
                     {
-                        foreach (Food food in group)
+                        foreach (NotificationDetails food in group)
                         {
                             newGroup.Add(food);
                         }
@@ -104,7 +110,7 @@ namespace App2
 
         private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Food food = (Food)e.Item;
+            NotificationDetails food = (NotificationDetails)e.Item;
             overlay.IsVisible = true;
             lblName.Text = food.Name;
             TodayCollationList(food);
@@ -118,7 +124,7 @@ namespace App2
             _receivablList.Clear();
         }
 
-        public void TodayCollationList(Food food)
+        public void TodayCollationList(NotificationDetails food)
         {
             _receivablList = new List<NotificationShow>();
             var notification = _notificationModel.ListNotificationDate.Where(o => o.Date == food.Tag_date).ToList();
@@ -183,6 +189,26 @@ namespace App2
                             else
                             {
                                 tmp = item3.Customer_name;
+                            }
+                            _receivablList.Add(new NotificationShow
+                            {
+                                txtWidth = _Width,
+                                show_party_name_customer_name = tmp + "..",
+                                show_amount_received = item3.Invoice_code,
+                                show_party_id_invoice_id = item3.Customer_id,
+                            });
+                        }
+                        else if (item2.Tag == "booking_end" && lblName.Text == "booking_end" && item.Date == food.Tag_date)
+                        {
+                            string tmp;
+                            if (Convert.ToInt32(item3.Party_name.Length) >= 25)
+                            {
+                                tmp = item3.Party_name.Substring(0, 25);
+
+                            }
+                            else
+                            {
+                                tmp = item3.Party_name;
                             }
                             _receivablList.Add(new NotificationShow
                             {

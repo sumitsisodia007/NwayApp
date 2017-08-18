@@ -42,8 +42,8 @@
     <Compile Include="CustomRenderer\BorderEntry.cs" />
     <Compile Include="CustomRenderer\CurvedCornersLabel.cs" />
     <Compile Include="CustomRenderer\MyEntry.cs" />
-    <Compile Include="ExpandableListView\Food.cs" />
-    <Compile Include="ExpandableListView\FoodGroup.cs" />
+    <Compile Include="ExpandableListView\NotificationDetails.cs" />
+    <Compile Include="ExpandableListView\NotificationGroup.cs" />
     <Compile Include="ExpandableListView\MainViewModel.cs" />
     <Compile Include="ExpandableListView\Product.cs" />
     <Compile Include="Helper\EnumMaster.cs" />

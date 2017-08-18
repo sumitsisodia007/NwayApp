@@ -16,5 +16,7 @@ namespace App2.Model
         public string Notification_Day_Count { get; set; }
         public string User_Id { get; set; }
         public string Device_Id { get; set; }
+        public string DeviceToken { get; set; }
+        
     }
 }

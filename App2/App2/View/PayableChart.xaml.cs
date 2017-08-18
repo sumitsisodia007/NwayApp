@@ -47,7 +47,10 @@ namespace App2.View
                 LblSu.BackgroundColor = LblMn.BackgroundColor = LblTu.BackgroundColor = LblWe.BackgroundColor = Color.FromHex("#A3C1E5");
             }
             lblChart.Text = nmdl.Party_Name + " " + EnumMaster.LblChartTitle;
-            _payable = api.PayableTable(nmdl);
+        
+                _payable =  api.PayableTable(nmdl);
+   
+            //_payable = api.PayableTable(nmdl);
             try
             {
                 if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
@@ -201,7 +204,10 @@ namespace App2.View
                 {
                     navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
                 }
-                 _payable = api.PayableTable(navmdl);
+              
+                    _payable = api.PayableTable(navmdl);
+             
+                //_payable = api.PayableTable(navmdl);
                 ShowTotalPayble();
                 lblChart.Text = obj.Party_Name + " " + EnumMaster.LblChartTitle;
             }

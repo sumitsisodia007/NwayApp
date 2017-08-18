@@ -46,10 +46,10 @@ namespace App2.PopUpPages
         private void Logout_Tapped(object sender, EventArgs e)
         {
             PopupNavigation.PopAsync();
-            api = new API();
-            nav = new Model.NavigationMdl();
-            res = StaticMethods.GetLocalSavedData();
-            
+            //api = new API();
+            //nav = new Model.NavigationMdl();
+            //res = StaticMethods.GetLocalSavedData();
+            StaticMethods.DeleteLocalData();
             var MyAppsFirstPage = new LoginPage();
             Application.Current.MainPage = new NavigationPage(MyAppsFirstPage);
         }

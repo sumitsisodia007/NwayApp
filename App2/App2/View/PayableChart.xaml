@@ -64,8 +64,8 @@
                                TextColor="Black" HorizontalTextAlignment="Center" FontSize="18"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                             <ListView x:Name="listView"
-                              RowHeight="40"
-                              HeightRequest="180"
+                             HasUnevenRows="True"
+                            HeightRequest="180"
                               BackgroundColor="White"
                               SeparatorVisibility="None"
                               SeparatorColor="#4472C4">

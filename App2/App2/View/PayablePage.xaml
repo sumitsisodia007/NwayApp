@@ -90,10 +90,10 @@
                             <ScrollView Orientation="Horizontal" >
                                 <ListView x:Name="list_today_payble"
                                       HeightRequest="150"
+                                      HasUnevenRows="True"
                                       BackgroundColor="White"
                                       ItemTapped="list_today_payble_ItemTapped"
-                                      SeparatorVisibility="None"
-                                      SeparatorColor="#4472C4">
+                                      SeparatorVisibility="None">
                                     <ListView.Header>
                                         <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
@@ -129,6 +129,7 @@
                             <ScrollView Orientation="Horizontal" >
                                 <ListView x:Name="list_totalpayble"
                                       HeightRequest="150"
+                                      HasUnevenRows="True"
                                       BackgroundColor="White"
                                       SeparatorVisibility="None">
                                     <ListView.Header>

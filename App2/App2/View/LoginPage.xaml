@@ -50,7 +50,7 @@
                 <Label x:Name ="lblPassError" IsVisible ="false" TextColor="#9B9B9B" FontSize="13" HorizontalOptions="Center" FontAttributes="Bold" />
             </StackLayout>
             <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20" Orientation="Vertical" Padding="16,0,16,0">
-                <local:CurvedCornersLabel x:Name="Img1" Text="Login"
+                <local:CurvedCornersLabel x:Name="btnLogin" Text="Login"
                                                       HorizontalTextAlignment="Center"
                                                       VerticalTextAlignment="Center"
                                                       FontSize="17"

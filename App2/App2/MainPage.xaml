@@ -11,7 +11,6 @@
             <!--<ActivityIndicator x:Name="load" IsRunning="False" IsVisible="True"/>-->
             <ListView  x:Name="GroupedView"
                     GroupDisplayBinding="{Binding Title}"
-                    RowHeight="80"
                     HasUnevenRows="True"
                     GroupShortNameBinding="{Binding ShortName}"
                     IsGroupingEnabled="true"
@@ -19,20 +18,19 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="20,0" Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal" Padding="5,0">
                                 <Label Text="{Binding Name}"
                                        TextColor="Black"
-                                       FontSize="15" Margin="2"
+                                       FontSize="15"
                                        WidthRequest="180"/>
                                 <Label Text="{Binding TagNotCount}"
                                        TextColor="Black"
-                                       FontSize="15" Margin="2"
+                                       FontSize="15" 
                                        HorizontalOptions="StartAndExpand"/>
                                 <Label Text="{Binding Tag_Amount, StringFormat='&#x20b9;{0:N}'}"
                                        TextColor="Black"
-                                       FontSize="15" Margin="2"
+                                       FontSize="15"
                                        HorizontalOptions="EndAndExpand"/>
-                                
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -40,11 +38,10 @@
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" Padding="0" Spacing="0" BackgroundColor="#E2F5F9" Margin="0">
-                                
+                            <StackLayout Orientation="Horizontal"  BackgroundColor="#E2F5F9">
                                 <Button Image="{Binding StateIcon}"
                                         Text="{Binding TitleWithItemCount}"
-                                        HorizontalOptions="FillAndExpand"
+                                        HorizontalOptions="StartAndExpand"
                                         BackgroundColor="Transparent"
                                         BorderColor="Transparent"
                                         BorderWidth="0"
@@ -69,9 +66,9 @@
                                WidthRequest="400" 
                                HorizontalOptions="FillAndExpand" 
                                VerticalOptions="FillAndExpand" >
-                    <Label x:Name="lblNotificationType" BackgroundColor="#E2F5F9" Font="24,Bold" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="Notification" />
+                    <!--<Label x:Name="lblNotificationType" BackgroundColor="#E2F5F9" Font="24,Bold" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="Notification" />-->
                     <Label x:Name="lblName" BackgroundColor="#E2F5F9" Font="20,Bold" TextColor="Black" HorizontalOptions="Fill" HorizontalTextAlignment="Center" Text="" />
-
+                    <BoxView BackgroundColor="#BBBBBB" HeightRequest="1"/>
                     <ListView x:Name="MainlistView"                            
                               HasUnevenRows="True"                              
                               BackgroundColor="#E2F5F9"
@@ -82,13 +79,13 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Orientation="Vertical"
-                                                 VerticalOptions="FillAndExpand" Spacing="0">
-                                        <BoxView BackgroundColor="#BBBBBB" HeightRequest="1"/>
+                                                 VerticalOptions="FillAndExpand" Spacing="0" >
                                         <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                   BackgroundColor="#E2F5F9">
                                             <Label BackgroundColor="#E2F5F9" HorizontalOptions="StartAndExpand" Margin="0,2" FontSize="15" Text="{Binding show_party_name_customer_name}" TextColor="Black" HorizontalTextAlignment="Start" />
                                             <Label  BackgroundColor="#E2F5F9" WidthRequest="100" Margin="0,2" FontSize="15" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
+
                                         </StackLayout>
                                         <BoxView BackgroundColor="#BBBBBB" HeightRequest="1"/>
                                     </StackLayout>
@@ -109,8 +106,5 @@
             </Frame>
 
         </ContentView>
-       
     </AbsoluteLayout>
-
-
 </ContentPage>

@@ -1,5 +1,6 @@
 ﻿using App2.ExpandableListView;
 using App2.Model;
+using App2.NativeMathods;
 using App2.View;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,17 @@ namespace App2
         public App()
         {
             InitializeComponent();
+            //var data = StaticMethods.GetLocalSavedData();
 
-            MainPage = new LoginPage();
+            //if (data.Error == "False")
+            //{
+            //  MainPage = new MasterMenuPage();
+            //}
+            //else
+            //{
+                MainPage = new NavigationPage(new LoginPage());
+            //}
+   
         }
         public App(NavigationMdl mdl)
         {
@@ -25,6 +35,7 @@ namespace App2
             MainPage =new NavigationPage(new PayableChart(mdl));
             
         }
+            
 
         protected override void OnStart()
         {
