@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:App2"
              x:Class="App2.MainPage"
+             xmlns:btn="clr-namespace:App2.CustomRenderer"
              Title="Notification">
     <AbsoluteLayout>
         
@@ -18,18 +19,18 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" Padding="5,0">
+                            <StackLayout Orientation="Horizontal"  Padding="5">
                                 <Label Text="{Binding Name}"
                                        TextColor="Black"
-                                       FontSize="15"
+                                       FontSize="18"
                                        WidthRequest="180"/>
                                 <Label Text="{Binding TagNotCount}"
                                        TextColor="Black"
-                                       FontSize="15" 
+                                       FontSize="18" 
                                        HorizontalOptions="StartAndExpand"/>
                                 <Label Text="{Binding Tag_Amount, StringFormat='&#x20b9;{0:N}'}"
                                        TextColor="Black"
-                                       FontSize="15"
+                                       FontSize="18"
                                        HorizontalOptions="EndAndExpand"/>
                             </StackLayout>
                         </ViewCell>
@@ -39,16 +40,14 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal"  BackgroundColor="#E2F5F9">
-                                <Button Image="{Binding StateIcon}"
-                                        Text="{Binding TitleWithItemCount}"
-                                        HorizontalOptions="StartAndExpand"
-                                        BackgroundColor="Transparent"
-                                        BorderColor="Transparent"
-                                        BorderWidth="0"
-                                        FontSize="13"
-                                        Margin="0"
-                                        Clicked="HeaderTapped" 
-                                        CommandParameter="{Binding .}"/>
+                                <Image Source="{Binding StateIcon}" HeightRequest="50"/> 
+                      <btn:MyButton Text="{Binding TitleWithItemCount}"
+                                                HorizontalOptions="FillAndExpand"
+                                                BackgroundColor="Transparent"
+                                                BorderColor="Transparent"
+                                                Font="13,Bold"
+                                                Clicked="HeaderTapped" 
+                                                CommandParameter="{Binding .}"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -82,9 +81,14 @@
                                                  VerticalOptions="FillAndExpand" Spacing="0" >
                                         <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
-                                                  BackgroundColor="#E2F5F9">
-                                            <Label BackgroundColor="#E2F5F9" HorizontalOptions="StartAndExpand" Margin="0,2" FontSize="15" Text="{Binding show_party_name_customer_name}" TextColor="Black" HorizontalTextAlignment="Start" />
-                                            <Label  BackgroundColor="#E2F5F9" WidthRequest="100" Margin="0,2" FontSize="15" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
+                                                  BackgroundColor="#E2F5F9" Padding="2">
+                                            <Label BackgroundColor="#E2F5F9" 
+                                                   HorizontalOptions="StartAndExpand" 
+                                                   FontSize="15" 
+                                                   Text="{Binding show_party_name_customer_name}" 
+                                                   TextColor="Black" HorizontalTextAlignment="Start" />
+                                            <Label  BackgroundColor="#E2F5F9" WidthRequest="100" 
+                                                    FontSize="15" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
 
                                         </StackLayout>
                                         <BoxView BackgroundColor="#BBBBBB" HeightRequest="1"/>

@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="CustomRenderer\BorderEntryRenderer.cs" />
     <Compile Include="CustomRenderer\CurvedCornersLabelRenderer.cs" />
+    <Compile Include="CustomRenderer\MyButtonRenderer.cs" />
     <Compile Include="CustomRenderer\MyEntryRenderer.cs" />
     <Compile Include="DependencyService\IosMethods.cs" />
     <Compile Include="Main.cs" />

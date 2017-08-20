@@ -2,9 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.Page1"
+             xmlns:local="clr-namespace:App2.CustomRenderer"
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms">
 
     <StackLayout>
+        <local:MyButton Text="sssssss" BackgroundColor="Beige" />
         <Button Text="Click Here" Clicked="YourButton_Clicked"/>
         <controls:CheckBox DefaultText="Default text"
                            FontName="AmericanTypewriter"

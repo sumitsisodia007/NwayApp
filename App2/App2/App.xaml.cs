@@ -16,17 +16,15 @@ namespace App2
         public App()
         {
             InitializeComponent();
-            //var data = StaticMethods.GetLocalSavedData();
-
-            //if (data.Error == "False")
-            //{
-            //  MainPage = new MasterMenuPage();
-            //}
-            //else
-            //{
+            var data = StaticMethods.GetLocalSavedData();
+            if (data.Error == "False")
+            {
+                MainPage = new MasterMenuPage();
+            }
+            else
+            {
                 MainPage = new NavigationPage(new LoginPage());
-            //}
-   
+            }
         }
         public App(NavigationMdl mdl)
         {

@@ -20,15 +20,20 @@ namespace App2.View
         {
             InitializeComponent();
             DrawalMenu();
-            if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
-            {
-                var calcScreenWidth = Application.Current.MainPage.Width;
-                var calcScreenHieght = Application.Current.MainPage.Height;
-              TI.WidthRequest=  C21.WidthRequest = calcScreenWidth / 3;
-               
-            }
+            
         }
 
+        protected override void OnAppearing()
+        {
+            Device.BeginInvokeOnMainThread(() => {
+                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+                {
+                    var calcScreenWidth = Application.Current.MainPage.Width;
+                    var calcScreenHieght = Application.Current.MainPage.Height;
+                    TI.WidthRequest = C21.WidthRequest = calcScreenWidth / 3;
+                }
+            });
+        }
         public void DrawalMenu()
         {
             menuList = new List<MasterPageItem>();
@@ -58,9 +63,15 @@ namespace App2.View
             menuList.Add(page10);
             // Setting our list to be ItemSource for ListView in MainPage.xaml
             NavigationList.ItemsSource = menuList;
-
-            // Initial navigation, this can be used for our home page
-            Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(HomePage)));
+            try
+            {
+                // Initial navigation, this can be used for our home page
+                Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(HomePage)));
+            }
+            catch (Exception ex)
+            {
+            }
+            
 
         }
 

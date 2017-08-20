@@ -22,7 +22,7 @@ namespace App2.APIService
       //  public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
 
         #region Login
-        public ResponseModel postLogin(LoginMdl lgmdl)
+        public async Task<ResponseModel> postLogin(LoginMdl lgmdl)
         {
             ResponseModel response_model = new ResponseModel();
             try
@@ -43,7 +43,7 @@ namespace App2.APIService
 
                 var content = new FormUrlEncodedContent(values);
 
-                var response = client.PostAsync(RestURL, content).Result; // Blocking call!
+                var response = await client.PostAsync(RestURL, content);
                 if (response.IsSuccessStatusCode)
                 {
                     // Parse the response body. Blocking!

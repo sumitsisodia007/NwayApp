@@ -218,6 +218,26 @@ namespace App2
                                 show_party_id_invoice_id = item3.Customer_id,
                             });
                         }
+                        else if (item2.Tag == "booking_entry" && lblName.Text == "booking_entry" && item.Date == food.Tag_date)
+                        {
+                            string tmp;
+                            if (Convert.ToInt32(item3.Party_name.Length) >= 25)
+                            {
+                                tmp = item3.Party_name.Substring(0, 25);
+
+                            }
+                            else
+                            {
+                                tmp = item3.Party_name;
+                            }
+                            _receivablList.Add(new NotificationShow
+                            {
+                                txtWidth = _Width,
+                                show_party_name_customer_name = tmp + "..",
+                                show_amount_received = item3.Invoice_code,
+                                show_party_id_invoice_id = item3.Customer_id,
+                            });
+                        }
                     }
                 }
             }

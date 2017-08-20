@@ -52,6 +52,7 @@ namespace App2.iOS.DependencyService
                 storage.Put("TagType", um.TagType);
                 storage.Put("User_Id", um.User_Id);
                 storage.Put("Device_Id", um.Device_Id);
+                storage.Put("Error", um.Error);
             }
             catch (Exception)
             {
@@ -69,6 +70,7 @@ namespace App2.iOS.DependencyService
                 um.TagType = storage.Get("TagType", null);
                 um.User_Id = storage.Get("User_Id", null);
                 um.Device_Id = storage.Get("Device_Id", null);
+                um.Error = storage.Get("Error", null);
                 return um;
             }
             catch (Exception)

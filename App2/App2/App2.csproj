@@ -41,6 +41,7 @@
     </Compile>
     <Compile Include="CustomRenderer\BorderEntry.cs" />
     <Compile Include="CustomRenderer\CurvedCornersLabel.cs" />
+    <Compile Include="CustomRenderer\MyButton.cs" />
     <Compile Include="CustomRenderer\MyEntry.cs" />
     <Compile Include="ExpandableListView\NotificationDetails.cs" />
     <Compile Include="ExpandableListView\NotificationGroup.cs" />
@@ -66,6 +67,9 @@
     </Compile>
     <Compile Include="PopUpPages\LoaderPage.xaml.cs">
       <DependentUpon>LoaderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopUpPages\LoginSuccessPopupPage.xaml.cs">
+      <DependentUpon>LoginSuccessPopupPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PopUpPages\LogOutPage.xaml.cs">
       <DependentUpon>LogOutPage.xaml</DependentUpon>
@@ -145,7 +149,7 @@
       <HintPath>..\..\packages\Rg.Plugins.Popup.1.0.4\lib\portable-win+net45+wp8+win8+wpa81\Rg.Plugins.Popup.Platform.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
-      <HintPath>..\..\..\..\Project\SportsConn Latest\SportsConn Latest\SportsConn Latest\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
+      <HintPath>D:\OfficeProject\Final Project\SportsConn Latest\SportsConn Latest\SportsConn Latest\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
@@ -262,6 +266,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="PopUpPages\LoaderPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PopUpPages\LoginSuccessPopupPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

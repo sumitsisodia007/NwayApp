@@ -48,6 +48,7 @@ namespace App2.Droid.DependencyService
                 var prefs = Android.App.Application.Context.GetSharedPreferences("MyApp", FileCreationMode.Private);
                 var storage = prefs.Edit();
                 storage.PutString("TagType", um.TagType);
+                storage.PutString("Error", um.Error);
                 storage.PutString("Min_Receipt_Amt", um.Min_Receipt_Amt);
                 storage.PutString("Notification_Day_Count", um.Notification_Day_Count);
                 storage.PutString("User_Id", um.User_Id);
@@ -73,6 +74,7 @@ namespace App2.Droid.DependencyService
                 storage.PutString("Min_Receipt_Amt", "");
                 storage.PutString("TagType", "");
                 storage.PutString("Device_Id", "");
+                storage.PutString("Error", "");
                 storage.Commit();
             }
             catch (Exception)
@@ -94,6 +96,7 @@ namespace App2.Droid.DependencyService
                 um.Notification_Day_Count= storage.GetString("Notification_Day_Count", null);
                 um.Min_Receipt_Amt = storage.GetString("Min_Receipt_Amt", null);
                 um.Device_Id = storage.GetString("Device_Id", null);
+                um.Error= storage.GetString("Error", null);
                 return um;
             }
             catch (Exception ex)

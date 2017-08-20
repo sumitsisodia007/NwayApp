@@ -26,26 +26,48 @@ namespace App2.View
         public HomePage()
         {
             InitializeComponent();
-          
-            if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
-            {
-                var calcScreenWidth = Application.Current.MainPage.Width;
-                var calcScreenHieght = Application.Current.MainPage.Height;
-                
-                GridRec.HeightRequest =
-                GridPay.HeightRequest =
-                GridCas.HeightRequest =
-                GridCon.HeightRequest =
-                GridExp.HeightRequest =
-                GridInv.HeightRequest = calcScreenHieght / 4;
-                GridRec.WidthRequest =
-                GridPay.WidthRequest =
-                GridCas.WidthRequest =
-                GridCon.WidthRequest =
-                GridExp.WidthRequest =
-                GridInv.WidthRequest = calcScreenWidth / 3;
-                
-            }
+
+            //if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+            //{
+            //    var calcScreenWidth = Application.Current.MainPage.Width;
+            //    var calcScreenHieght = Application.Current.MainPage.Height;
+
+            //    GridRec.HeightRequest =
+            //    GridPay.HeightRequest =
+            //    GridCas.HeightRequest =
+            //    GridCon.HeightRequest =
+            //    GridExp.HeightRequest =
+            //    GridInv.HeightRequest = calcScreenHieght / 4;
+            //    GridRec.WidthRequest =
+            //    GridPay.WidthRequest =
+            //    GridCas.WidthRequest =
+            //    GridCon.WidthRequest =
+            //    GridExp.WidthRequest =
+            //    GridInv.WidthRequest = calcScreenWidth / 3;
+            //}
+        }
+
+        protected override void OnAppearing()
+        {
+            Device.BeginInvokeOnMainThread(() => {
+                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+                {
+                    var calcScreenWidth = Application.Current.MainPage.Width;
+                    var calcScreenHieght = Application.Current.MainPage.Height;
+                    GridRec.HeightRequest =
+                    GridPay.HeightRequest =
+                    GridCas.HeightRequest =
+                    GridCon.HeightRequest =
+                    GridExp.HeightRequest =
+                    GridInv.HeightRequest = calcScreenHieght / 4;
+                    GridRec.WidthRequest =
+                    GridPay.WidthRequest =
+                    GridCas.WidthRequest =
+                    GridCon.WidthRequest =
+                    GridExp.WidthRequest =
+                    GridInv.WidthRequest = calcScreenWidth / 3;
+                }
+            });
         }
 
         private async void Receivable_Tapped(object sender, EventArgs e)
@@ -118,7 +140,7 @@ namespace App2.View
                 
                 var loadingPage = new LoaderPage();
                 await PopupNavigation.PushAsync(loadingPage);
-                await Task.Delay(2000);
+                await Task.Delay(1000);
                  await  Navigation.PushAsync(new MainPage());
                 await Navigation.RemovePopupPageAsync(loadingPage);
                 //});
