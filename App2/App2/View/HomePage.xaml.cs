@@ -150,14 +150,14 @@ namespace App2.View
             }
             finally
             {
-                _loding.IsRunning = false;
+             
             }
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            _loding.IsRunning = false;
+          
         }
 
         protected override bool OnBackButtonPressed()

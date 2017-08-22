@@ -29,8 +29,14 @@ namespace App2.PopUpPages
             if (mtitle=="W")
             {
                 stkMessage.BackgroundColor = Color.FromHex("#0077FF");
-                lblMessage.Text = msg;
-            } 
+            }else if (mtitle == "S")
+            {
+                stkMessage.BackgroundColor = Color.FromHex("#43A047");
+            }else if (mtitle == "E")
+            {
+                stkMessage.BackgroundColor = Color.FromHex("#FF2E27");
+            }
+            lblMessage.Text = msg;
         }
 
         protected override void OnAppearing()

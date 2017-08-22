@@ -12,11 +12,12 @@ using Newtonsoft.Json.Linq;
 
 namespace App2.Droid
 {
-    [Service]
-    [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
+   // [Service]
+
+    [Service, IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
     public class MyFirebaseIIDService : FirebaseInstanceIdService
     {
-        AndroidMethods am = new AndroidMethods();
+      
         const string TAG = "MyFirebaseIIDService";
         public static string RegistrationID { get; set; }
         public override void OnTokenRefresh()
@@ -35,8 +36,8 @@ namespace App2.Droid
         }
     }
 
-    [Service]
-    [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
+    //[Service]
+    [Service, IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
     public class MyFirebaseMessagingService : FirebaseMessagingService
     {
         const string TAG = "MyFirebaseMsgService";

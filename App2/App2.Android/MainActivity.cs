@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Android.Content;
 using App2.Model;
 
+
 namespace App2.Droid
 {
     [Activity(  Label = "NwayConstructionERP",

@@ -72,8 +72,7 @@
                               HasUnevenRows="True"                              
                               BackgroundColor="#E2F5F9"
                               SeparatorVisibility="None"
-                              ItemTapped="MainlistView_ItemTapped"
-                              SeparatorColor="#4472C4">
+                              ItemTapped="MainlistView_ItemTapped">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -84,11 +83,11 @@
                                                   BackgroundColor="#E2F5F9" Padding="2">
                                             <Label BackgroundColor="#E2F5F9" 
                                                    HorizontalOptions="StartAndExpand" 
-                                                   FontSize="15" 
+                                                   FontSize="17" 
                                                    Text="{Binding show_party_name_customer_name}" 
                                                    TextColor="Black" HorizontalTextAlignment="Start" />
                                             <Label  BackgroundColor="#E2F5F9" WidthRequest="100" 
-                                                    FontSize="15" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
+                                                    FontSize="17" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
 
                                         </StackLayout>
                                         <BoxView BackgroundColor="#BBBBBB" HeightRequest="1"/>

@@ -20,7 +20,7 @@
             <Style x:Key="ListLabelStyle" TargetType="Label">
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontSize" Value="15"/>
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
@@ -128,7 +128,7 @@
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                             <ScrollView Orientation="Horizontal" >
                                 <ListView x:Name="list_totalpayble"
-                                      HeightRequest="150"
+                                      HeightRequest="120"
                                       HasUnevenRows="True"
                                       BackgroundColor="White"
                                       SeparatorVisibility="None">

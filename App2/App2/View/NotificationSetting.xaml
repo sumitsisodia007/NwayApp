@@ -7,7 +7,7 @@
              Padding="20,0">
     <ContentPage.Content>
 
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
             <StackLayout HorizontalOptions="FillAndExpand"  Orientation="Horizontal" VerticalOptions="StartAndExpand">
                 <Label  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                                    Margin="0,0,1,0" TextColor="Black"
@@ -75,6 +75,11 @@
                 </Frame>
             </StackLayout>
             <ActivityIndicator x:Name="_Loading" IsRunning="False" />
+            <StackLayout.Spacing>
+                <OnPlatform x:TypeArguments="x:Double"
+                      iOS="30"
+                      Android="0" />
+            </StackLayout.Spacing>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

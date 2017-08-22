@@ -37,12 +37,6 @@ namespace App2.View
             }
         }
 
-        public LoginPage(string Status)
-        {
-            InitializeComponent();
-            Navigation.PushModalAsync(new MasterMenuPage());
-        }
-
         public LoginPage()
         {
             InitializeComponent();
@@ -72,39 +66,38 @@ namespace App2.View
             _Loading.IsRunning = true;
             _login.Username = txtFName.Text;
             _login.Password = txtPass.Text;
-            _login.DeviceID = "123456 ";// StaticMethods.getDeviceidentifier();
+            _login.DeviceID = "123";// StaticMethods.getDeviceidentifier();
             _login.Firebasetoken = StaticMethods.getTokan();//"asdgasdggshgdj";
             _login.Tagtype = EnumMaster.SIGNIN;
             //await Task.Run(() =>
             //{
             //    Device.BeginInvokeOnMainThread(async () =>
             //    {
-                    if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
-                    {
-                        ResponseModel res = StaticMethods.GetLocalSavedData();
-                        rs = await api.postLogin(_login);
-                        if (rs.Error == "False")
-                        {
-                            rs.Device_Id = _login.DeviceID;
-                            rs.Min_Receipt_Amt = res.Min_Receipt_Amt;
-                            StaticMethods.SaveLocalData(rs);
-                            await Navigation.PushPopupAsync(new LoginSuccessPopupPage());
-                            await Navigation.PushModalAsync(new MasterMenuPage());
-                            txtFName.Text = txtPass.Text = string.Empty;
-                        }
-                    }
-                    else if (txtFName.Text == string.Empty && txtPass.Text == string.Empty)
-                    {
-                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage("W", "Please Fill All Details"));
-                    }
-                    else if (txtFName.Text == string.Empty)
-                    {
-                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage("W", "Please Fill User Name"));
-                    }
-                    else if (txtPass.Text == string.Empty)
-                    {
-                        StaticMethods.ShowToast("Please Fill Password");
-                    }
+            if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
+            {
+                rs = await api.PostLogin(_login);
+                if (rs.Error == "False")
+                {
+                    rs.Device_Id = _login.DeviceID;
+                    StaticMethods.SaveLocalData(rs);
+                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage());
+                    await Navigation.PushModalAsync(new MasterMenuPage());
+                    txtFName.Text = txtPass.Text = string.Empty;
+                }
+            }
+            else if (txtFName.Text == string.Empty && txtPass.Text == string.Empty)
+            {
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("W", "Please Fill All Details"));
+            }
+            else if (txtFName.Text == string.Empty)
+            {
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("W", "Please Fill User Name"));
+            }
+            else if (txtPass.Text == string.Empty)
+            {
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("W", "Please Fill Password"));
+                //StaticMethods.ShowToast("Please Fill Password");
+            }
             //    });
             //});
 
@@ -114,7 +107,7 @@ namespace App2.View
 
         protected async override void OnAppearing()
         {
-            ResponseModel res = StaticMethods.GetLocalSavedData();
+            // ResponseModel res = StaticMethods.GetLocalSavedData();
         }
 
         protected override bool OnBackButtonPressed()

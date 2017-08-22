@@ -1,6 +1,8 @@
 ﻿using App2.APIService;
 using App2.Model;
 using App2.NativeMathods;
+using App2.PopUpPages;
+using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,24 +39,29 @@ namespace App2.View
 
             ResponseModel res = StaticMethods.GetLocalSavedData();
 
-            nav.Tag_type = "settings";
+            nav.Tag_type = App2.Helper.EnumMaster.SETTINGS;
             nav.User_id = res.User_Id;
-            nav.Device_id = "123";
-            lblMinAmt.Text = res.Min_Receipt_Amt = nav.Min_Receipt_Amount = txtMinimumAmt.Text + ".00";
-            lblpreDays.Text = res.Notification_Day_Count = nav.Notification_Day_Count = txtDaysOfno.Text;
+            nav.Device_id = "123";// StaticMethods.getDeviceidentifier();
+           res.Min_Receipt_Amt= lblMinAmt.Text = nav.Min_Receipt_Amount = txtMinimumAmt.Text + ".00";
+           res.Notification_Day_Count= lblpreDays.Text = nav.Notification_Day_Count = txtDaysOfno.Text;
 
-            StaticMethods.SaveLocalData(res);
-            res = await api.NotificationSetting(nav);
-            txtDaysOfno.Text = txtMinimumAmt.Text = "";
-            StaticMethods.ShowToast(res.Message);
+           string rs = await api.NotificationSetting(nav);
+            if (rs == "False")
+            {
+                StaticMethods.SaveLocalData(res);
+                txtDaysOfno.Text = txtMinimumAmt.Text = "";
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("S", "Setting Saved !"));
+               // StaticMethods.ShowToast("Setting Saved !");
+            }
+           
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ResponseModel res = StaticMethods.GetLocalSavedData();
-            lblMinAmt.Text = res.Min_Receipt_Amt;
-            lblpreDays.Text = res.Notification_Day_Count;
+            ResponseModel rs = StaticMethods.GetLocalSavedData();
+            lblMinAmt.Text = rs.Min_Receipt_Amt;
+            lblpreDays.Text = rs.Notification_Day_Count;
 
         }
     }

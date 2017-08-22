@@ -19,10 +19,10 @@ namespace App2.APIService
         
 
         public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
-      //  public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
+       // public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
 
         #region Login
-        public async Task<ResponseModel> postLogin(LoginMdl lgmdl)
+        public async Task<ResponseModel> PostLogin(LoginMdl lgmdl)
         {
             ResponseModel response_model = new ResponseModel();
             try
@@ -110,9 +110,10 @@ namespace App2.APIService
 
         #region Notification Setting api
      
-        public async Task<ResponseModel> NotificationSetting(NavigationMdl td_ntf)
+        public async Task<string> NotificationSetting(NavigationMdl td_ntf)
         {
-            ResponseModel response_model = new ResponseModel();
+            //   ResponseModel response_model = new ResponseModel();
+            string sss=null;
             try
             {
                 HttpClient client = new HttpClient();
@@ -136,20 +137,16 @@ namespace App2.APIService
                     
                     var dataObjects = response.Content.ReadAsStringAsync().Result;
                     JObject jObj = JObject.Parse(dataObjects);
-                    response_model.Message = jObj["message"].ToString();
-                    response_model.Error = jObj["error"].ToString();
-                    response_model.FullName = jObj["full_name"].ToString();
-                    response_model.User_Id = jObj["user_id"].ToString();
-                    response_model.Min_Receipt_Amt = jObj["min_receipt_amount"].ToString();
-                    response_model.Notification_Day_Count = jObj["notification_day_count"].ToString();
-                    response_model.TagType = jObj["tagtype"].ToString();
+                   // sss= jObj["message"].ToString();
+                    sss = jObj["error"].ToString();
+                    //response_model.TagType = jObj["tagtype"].ToString();
                 }
             }
             catch (Exception)
             {
                 // StaticMethods.AndroidSnackBar(e.Message);
             }
-            return response_model;
+            return sss;
         }
         #endregion
 
