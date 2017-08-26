@@ -10,9 +10,13 @@ namespace App2.Interface
     public interface IIosMethods
     {
         string GetIdentifier();
+        string GetTokan();
         void ShowToast(string msg);
         ResponseModel RetriveLocalData();
         void SaveLocalData(ResponseModel um);
         void DeleteLocalData();
+        NavigationMdl RetriveLocalNotification();
+        void SaveLocalNotification(NavigationMdl um);
+        void DeleteLocalNotification();
     }
 }

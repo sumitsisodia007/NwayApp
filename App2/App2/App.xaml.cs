@@ -25,6 +25,7 @@ namespace App2
             {
                 MainPage = new NavigationPage(new LoginPage());
             }
+
         }
         public App(NavigationMdl mdl)
         {

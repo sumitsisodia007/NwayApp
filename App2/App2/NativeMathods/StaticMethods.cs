@@ -11,7 +11,7 @@ namespace App2.NativeMathods
 {
     public static class StaticMethods
     {
-        public static string DeviceToken = string.Empty;
+        public static string DeviceToken { get; set; }
 
         public static string getDeviceidentifier()
         {
@@ -32,7 +32,7 @@ namespace App2.NativeMathods
             string strDeviceIdentifier = "";
             if (Device.OS == TargetPlatform.iOS)
             {
-              //  strDeviceIdentifier = DependencyService.Get<IIosMethods>().GetIdentifier();
+                strDeviceIdentifier = DependencyService.Get<IIosMethods>().GetTokan();
             }
             else
             {
@@ -122,6 +122,62 @@ namespace App2.NativeMathods
 
             }
         }
-        
+
+
+
+        ////////////////////////////////
+        public static NavigationMdl GetLocalNotification()
+        {
+            NavigationMdl um = null;
+            try
+            {
+                if (Device.OS == TargetPlatform.iOS)
+                {
+                    um = DependencyService.Get<IIosMethods>().RetriveLocalNotification();
+                    return um;
+                }
+                
+            }
+            catch (Exception)
+            {
+                return um;
+            }
+
+            return um;
+        }
+
+        public static void SaveLocalNotification(NavigationMdl um)
+        {
+            try
+            {
+                if (Device.OS == TargetPlatform.iOS)
+                {
+                    DependencyService.Get<IIosMethods>().SaveLocalNotification(um);
+
+                }
+               
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public static void DeleteLocalNotification()
+        {
+            try
+            {
+                if (Device.OS == TargetPlatform.iOS)
+                {
+                    DependencyService.Get<IIosMethods>().DeleteLocalData();
+
+                }
+               
+            }
+            catch (Exception)
+            {
+
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using App2.Model;
+using App2.NativeMathods;
 using App2.View;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -37,6 +38,7 @@ namespace App2.APIService
                     { "username", lgmdl.Username},
                     { "password", lgmdl.Password },
                     { "firebasetoken", lgmdl.Firebasetoken},
+                    { "iosdevicetoken", lgmdl.IosToken},
                     { "device_id", lgmdl.DeviceID},
                     { "tagtype", lgmdl.Tagtype}
                 };
@@ -59,9 +61,9 @@ namespace App2.APIService
                 }
 
             }
-            catch (Exception )
+            catch (Exception ex)
             {
-                // StaticMethods.AndroidSnackBar(e.Message);
+                StaticMethods.ShowToast(ex.Message);
             }
             finally
             {
@@ -72,7 +74,7 @@ namespace App2.APIService
         #endregion
 
         #region PostNotification
-        public NotificationListMdl PostNotification()
+        public NotificationListMdl PostNotification(NavigationMdl nav)
         {
              NotificationListMdl jsonResponse = new NotificationListMdl();
             try
@@ -84,11 +86,11 @@ namespace App2.APIService
 
                 var values = new Dictionary<string, string>
                 {
-                    { "user_id", "1"},
-                    { "device_id", "123"},
-                    { "company_name", "CENTURY 21 TOWN PLANNERS PVT. LTD."},
-                    { "party_id", "7875"},
-                    { "tagtype", "notifications"}
+                    { "user_id", nav.Device_id},
+                    { "device_id", nav.Device_id},
+                    { "company_name", nav.Company_name},
+                    { "party_id", nav.Party_id},
+                    { "tagtype", nav.Tag_type}
                 };
 
                 var content = new FormUrlEncodedContent(values);
@@ -151,7 +153,7 @@ namespace App2.APIService
         #endregion
 
         #region Payable TodayCollection Tabel
-        public PayableNotificationMdl PayableTable(NavigationMdl td_ntf)
+        public async Task<PayableNotificationMdl> PayableTable(NavigationMdl td_ntf)
         {
             PayableNotificationMdl response_model = new PayableNotificationMdl();
             try
@@ -171,7 +173,7 @@ namespace App2.APIService
 
                 var content = new FormUrlEncodedContent(values);
 
-                var response = client.PostAsync(RestURL, content).Result; 
+                var response =await client.PostAsync(RestURL, content); 
                 if (response.IsSuccessStatusCode)
                 {
                     // Parse the response body. Blocking!

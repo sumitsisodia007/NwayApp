@@ -75,9 +75,13 @@ namespace App2.View
             nav = new NavigationMdl();
             nav.Page_Title = lblReceive.Text;
             nav.User_id = "";
-            nav.Device_id = "32132";
+            nav.Device_id = StaticMethods.getDeviceidentifier();
+            if (nav.Device_id == "unknown")
+            {
+                nav.Device_id = "123456";
+            }
             nav.Company_name = EnumMaster.C21_MALHAR;
-            nav.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING;
+            nav.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);
             await Task.Delay(200);
@@ -90,12 +94,15 @@ namespace App2.View
             nav = new NavigationMdl();
             nav.Page_Title = lblPay.Text;
             nav.User_id = "";
-            nav.Device_id = "32132";
+            nav.Device_id = StaticMethods.getDeviceidentifier(); 
+            if (nav.Device_id == "unknown")
+            {
+                nav.Device_id = "123456";
+            }
             nav.Company_name = EnumMaster.C21_MALHAR;
-            nav.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
+            nav.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);
-            await Task.Delay(200);
             await Navigation.PushAsync(new PayablePage(nav));
             await Navigation.RemovePopupPageAsync(loadingPage);
         }

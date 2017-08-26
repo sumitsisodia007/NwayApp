@@ -33,7 +33,7 @@ namespace App2.View
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, true);
-            
+            Device.BeginInvokeOnMainThread(async () => { 
             if ((nmdl.Tag_type == "payable_outstanding"))
             {
                 this.Title = "Payable Chart";
@@ -48,7 +48,7 @@ namespace App2.View
             }
             lblChart.Text = nmdl.Party_Name + " " + EnumMaster.LblChartTitle;
         
-                _payable =  api.PayableTable(nmdl);
+                _payable =await  api.PayableTable(nmdl);
    
             //_payable = api.PayableTable(nmdl);
             try
@@ -65,6 +65,7 @@ namespace App2.View
             }
             
             ShowTotalPayble();
+            });
         }
         public void ShowTotalPayble()
         {
@@ -177,7 +178,7 @@ namespace App2.View
 
         }
 
-        private void AutoList_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void AutoList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             PartysearchlistMdl obj = null;
             navmdl = new NavigationMdl();
@@ -198,14 +199,14 @@ namespace App2.View
 
                 if (this.Title == "Receivable Chart")
                 {
-                    navmdl.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING;
+                    navmdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
                 }
                 else
                 {
-                    navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
+                    navmdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
                 }
               
-                    _payable = api.PayableTable(navmdl);
+                    _payable =await api.PayableTable(navmdl);
              
                 //_payable = api.PayableTable(navmdl);
                 ShowTotalPayble();

@@ -1,6 +1,7 @@
 ﻿using App2.APIService;
 using App2.Helper;
 using App2.Model;
+using App2.NativeMathods;
 using App2.ShowModels;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace App2.View
         public List<ShowPayableTodayDetail> _payableshowlist { get; set; }
         public List<ShowPayableTotalPayble> _showpayabletotalpayblelist { get; set; }
         public List<PayableNotificationMdl> _payablenotificationdata { get; set; }
+        public bool Notflag { get; set; }
         PartysearchMdl lstLoca = null;
         bool isListSelected = false;
         ShowPayableTodayDetail toady_notification;
@@ -32,13 +34,46 @@ namespace App2.View
         public PayablePage()
         {
             InitializeComponent();
+            //if (Device.OS == TargetPlatform.iOS)
+            //{
+            //    NavigationMdl mdl = StaticMethods.GetLocalNotification();
+            //    this.Title = mdl.Page_Title;
+            //    if (mdl.Page_Title == "Receivable")
+            //    {
+            //        PredefinedReceived();
+            //    }
+            //    else
+            //    {
+            //        PredefinedPaid();
+            //    }
+            //    _payable = api.PayableTable(mdl);
+            //    toady_notification = new ShowPayableTodayDetail();
+            //    flag = 1;
+            //    try
+            //    {
+            //        if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+            //        {
+            //            var calcScreenWidth = Application.Current.MainPage.Width;
+            //            var calcScreenHieght = Application.Current.MainPage.Height;
+            //            lblparty.WidthRequest = lbloutstanding.WidthRequest = lblTodayReceipt.WidthRequest = lblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //    }
+            //    ShowPaybleToday();
+            //    ShowTotalPayble();
+            //    StaticMethods.DeleteLocalNotification();
+            //}
         }
 
        public PayablePage (NavigationMdl mdl)
 	   {
 			InitializeComponent ();
-           // NavigationPage.SetHasNavigationBar(this, false);
+            // NavigationPage.SetHasNavigationBar(this, false);
             //NavigationPage.SetTitleIcon(this, "icon.png");
+            Notflag = mdl.Is_Notification;
+            Device.BeginInvokeOnMainThread(async ()=> { 
             this.Title = mdl.Page_Title;
             navmdl = new NavigationMdl();
           
@@ -51,9 +86,9 @@ namespace App2.View
             {
                 PredefinedPaid();
             }
-            _payable = api.PayableTable(mdl);
+            _payable = await api.PayableTable(mdl);
 
-             toady_notification = new ShowPayableTodayDetail();            
+            toady_notification = new ShowPayableTodayDetail();            
             flag = 1;
             try
             {
@@ -69,6 +104,7 @@ namespace App2.View
             }
             ShowPaybleToday();
             ShowTotalPayble();
+            });
         }
         private void PredefinedPaid()
         {
@@ -118,17 +154,23 @@ namespace App2.View
                     }
                     foreach (var item3 in item2.Notification)
                     {
-                        string tmp;
-                        if (Convert.ToInt32(item3.Party_name.Length) >= 9)
+                        if (item3.Party_name==null&&item3.Party_name==null&& item3.Party_outstanding==null&& item3.Amount_received==null&&item3.Current_outstanding==null)
                         {
-                            tmp = item3.Party_name.Substring(0, 10);
+                            _payableshowlist.Add(new ShowPayableTodayDetail() { Show_Party_Id = "Rec. Null Data", txtWidth = _Width, Show_Pay_Party = "Rec. Null Data", Show_Pay_Outstanding = "Rec. Null Data", Show_Amount_Received = "Rec. Null Data", Show_Cur_Outstanding = "Rec. Null Data" });
                         }
-                        else
-                        {
-                            tmp = item3.Party_name;
-                        }
+                        else {
+                            string tmp;
+                            if (Convert.ToInt32(item3.Party_name.Length) >= 9)
+                            {
+                                tmp = item3.Party_name.Substring(0, 10);
+                            }
+                            else
+                            {
+                                tmp = item3.Party_name;
+                            }
 
-                        _payableshowlist.Add(new ShowPayableTodayDetail() {Show_Party_Id=item3.Party_id, txtWidth = _Width, Show_Pay_Party =tmp+"..", Show_Pay_Outstanding = item3.Party_outstanding, Show_Amount_Received = item3.Amount_received, Show_Cur_Outstanding = item3.Current_outstanding });
+                            _payableshowlist.Add(new ShowPayableTodayDetail() { Show_Party_Id = item3.Party_id, txtWidth = _Width, Show_Pay_Party = tmp + "..", Show_Pay_Outstanding = item3.Party_outstanding, Show_Amount_Received = item3.Amount_received, Show_Cur_Outstanding = item3.Current_outstanding });
+                        }
                     }
                 }
             }
@@ -168,13 +210,20 @@ namespace App2.View
             ShowPayableTodayDetail toady_notification = (ShowPayableTodayDetail)e.Item;
            
             navmdl.Party_id = toady_notification.Show_Party_Id;
-            navmdl.Device_id = "32132";
+            navmdl.Device_id = StaticMethods.getDeviceidentifier(); 
+            if (navmdl.Device_id == "unknown")
+            {
+                navmdl.Device_id = "123456";
+            }
             navmdl.Company_name = EnumMaster.C21_MALHAR;
             navmdl.Party_Name = toady_notification.Show_Pay_Party;
             if (this.Title== "Receivable")
-            { navmdl.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING; }
-            else { navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING; }
-            Navigation.PushAsync(new PayableChart(navmdl));
+            { navmdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING; }
+            else { navmdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING; }
+            if (Notflag != true)
+            {
+                Navigation.PushAsync(new PayableChart(navmdl));
+            }
         }
 
         private async void txtAuto_TextChanged(object sender, TextChangedEventArgs e)
@@ -186,7 +235,11 @@ namespace App2.View
                 {
                     navmdl = new NavigationMdl();
                     navmdl.User_id = "1";
-                    navmdl.Device_id = "123456";//StaticMethods.getDeviceidentifier();
+                    navmdl.Device_id = StaticMethods.getDeviceidentifier(); 
+                    if (navmdl.Device_id == "unknown")
+                    {
+                        navmdl.Device_id = "123456";
+                    }
                     navmdl.Company_name = Helper.EnumMaster.C21_MALHAR;
                     navmdl.Party_Name = e.NewTextValue;
                     navmdl.Tag_type = "partylist";
@@ -275,17 +328,21 @@ namespace App2.View
                 obj = (PartysearchlistMdl)e.Item;
                
                 navmdl.Party_id = obj.Party_Id;
-                navmdl.Device_id = "32132";
+                navmdl.Device_id = StaticMethods.getDeviceidentifier(); //"123";//
+                if (navmdl.Device_id == "unknown")
+                {
+                    navmdl.Device_id = "123456";
+                }
                 navmdl.Company_name = EnumMaster.C21_MALHAR;
                 navmdl.Party_Name = obj.Party_Name;
                 if (this.Title == "Receivable")
-                { navmdl.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING; }
-                else { navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING; }
+                { navmdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING; }
+                else { navmdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING; }
                 Navigation.PushAsync(new PayableChart(navmdl));
             }
             catch (Exception ex)
             {
-                //StaticMethods.ShowToast(ex.Message);
+                StaticMethods.ShowToast(ex.Message);
             }
             finally
             {

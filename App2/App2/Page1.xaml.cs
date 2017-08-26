@@ -17,23 +17,24 @@ namespace App2
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page1 : ContentPage
     {
-        bool isListSelected = false;
         public Page1()
         {
             InitializeComponent();
             //yourButton.BorderRadius = Device.OnPlatform<int>(iOS: 0, Android: 1, WinPhone: 0)
         }
 
-        private async void YourButton_Clicked(object sender, EventArgs e)
+        void webviewNavigating(object sender, WebNavigatingEventArgs e)
         {
-            string temp = "Formandmanner.AAA";
-            if (temp.Length > 4)
-            {
-                string tmp = temp.Substring(0,4);
-
-                DisplayAlert("String", "Real Value is : " + temp + " and change value " + tmp, "OK");
-            }
+            this.labelLoading.IsVisible = true; //display the label when navigating starts
         }
-     
+
+        /// <summary>
+        /// Called when the webview finished navigating. Hides the loading label.
+        /// </summary>
+        void webviewNavigated(object sender, WebNavigatedEventArgs e)
+        {
+            this.labelLoading.IsVisible = false; //remove the loading indicator when navigating is finished
+        }
+
     }
 }

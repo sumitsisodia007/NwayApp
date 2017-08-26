@@ -3,6 +3,7 @@ using App2.APIService;
 using App2.ExpandableListView;
 using App2.Helper;
 using App2.Model;
+using App2.NativeMathods;
 using App2.PopUpPages;
 using App2.ShowModels;
 using App2.View;
@@ -24,6 +25,7 @@ namespace App2
         private ObservableCollection<NotificationGroup> _allGroups;
         private ObservableCollection<NotificationGroup> _expandedGroups;
         NotificationListMdl _notificationModel;
+
         /// <summary>
         /// Second List
         /// </summary>
@@ -43,25 +45,28 @@ namespace App2
                 _Width = calcScreenWidth / 2;
             }
             API api = new API();
-          
-               
+            NavigationMdl nav = new NavigationMdl();
+            nav.Device_id = StaticMethods.getDeviceidentifier();
+            if (nav.Device_id == "unknown")
+            {
+                nav.Device_id = "123456";
+            }
+            nav.Company_name = EnumMaster.C21_MALHAR;
+            nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
+            _notificationModel = api.PostNotification(nav);
 
-                _notificationModel =  api.PostNotification();
-       
-                ObservableCollection<NotificationGroup> food = new ObservableCollection<NotificationGroup>();
-                foreach (var item in _notificationModel.ListNotificationDate)
+            ObservableCollection<NotificationGroup> food = new ObservableCollection<NotificationGroup>();
+            foreach (var item in _notificationModel.ListNotificationDate)
+            {
+                NotificationGroup group = new NotificationGroup(item.Date + " (" + item.NotCount + ")", "o");
+                foreach (var item2 in item.ListTags)
                 {
-                    NotificationGroup group = new NotificationGroup(item.Date + " (" + item.NotCount + ")", "o");
-                    foreach (var item2 in item.ListTags)
-                    {
-                        group.Add(new NotificationDetails() { Name = item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
-                    }
-                    food.Add(group);
+                    group.Add(new NotificationDetails() { Name = item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
                 }
-                _allGroups = food;
-                UpdateListContent();
-                 
-         
+                food.Add(group);
+            }
+            _allGroups = food;
+            UpdateListContent();
         }
 
         private void HeaderTapped(object sender, EventArgs args)
@@ -75,7 +80,6 @@ namespace App2
             }
             catch (Exception ex)
             {
-
                 DisplayAlert("Message", ex.Message, "OK");
             }
         }
@@ -85,16 +89,17 @@ namespace App2
             try
             {
                 _expandedGroups = new ObservableCollection<NotificationGroup>();
-                foreach (NotificationGroup group in _allGroups)
+                foreach (NotificationGroup notgroup in _allGroups)
                 {
+                   
                     //Create new FoodGroups so we do not alter original list
-                    NotificationGroup newGroup = new NotificationGroup(group.Title, "o", group.Expanded);
+                    NotificationGroup newGroup = new NotificationGroup(notgroup.Title, "o", notgroup.Expanded);
                     //Add the count of food items for Lits Header Titles to use
-                    if (group.Expanded)
+                    if (notgroup.Expanded)
                     {
-                        foreach (NotificationDetails food in group)
+                        foreach (NotificationDetails n in notgroup)
                         {
-                            newGroup.Add(food);
+                            newGroup.Add(n);
                         }
                     }
                     _expandedGroups.Add(newGroup);
@@ -124,10 +129,12 @@ namespace App2
             _receivablList.Clear();
         }
 
-        public void TodayCollationList(NotificationDetails food)
+        public void TodayCollationList(NotificationDetails notdetail)
         {
+            try
+            {
             _receivablList = new List<NotificationShow>();
-            var notification = _notificationModel.ListNotificationDate.Where(o => o.Date == food.Tag_date).ToList();
+            var notification = _notificationModel.ListNotificationDate.Where(o => o.Date == notdetail.Tag_date).ToList();
 
             foreach (var item in notification)
             {
@@ -135,15 +142,13 @@ namespace App2
                 {
                     foreach (var item3 in item2.Notification)
                     {
-                      
-
-                        if (lblName.Text == "paid" && item2.Tag == "paid" && item.Date == food.Tag_date)
+                        if (lblName.Text == "paid" && item2.Tag == "paid" && item.Date == notdetail.Tag_date&& item3.Party_name != null)
                         {
+
                             string tmp;
                             if (Convert.ToInt32(item3.Party_name.Length) >= 25)
                             {
                                 tmp = item3.Party_name.Substring(0, 25);
-
                             }
                             else
                             {
@@ -153,18 +158,17 @@ namespace App2
                             {
                                 show_amount_received = item3.Amount_received,
                                 txtWidth = _Width,
-                                show_party_name_customer_name = tmp+"..",
+                                show_party_name_customer_name = tmp + "..",
                                 show_party_id_invoice_id = item3.Party_id
                             });
 
                         }
-                        else if (item2.Tag == "receipt" && lblName.Text == "receipt" && item.Date == food.Tag_date)
+                        else if (item2.Tag == "receipt" && lblName.Text == "receipt" && item.Date == notdetail.Tag_date && item3.Party_name != null)
                         {
                             string tmp;
                             if (Convert.ToInt32(item3.Party_name.Length) >= 25)
                             {
                                 tmp = item3.Party_name.Substring(0, 25);
-
                             }
                             else
                             {
@@ -178,13 +182,12 @@ namespace App2
                                 show_party_id_invoice_id = item3.Party_id
                             });
                         }
-                        else if (item2.Tag == "invoice_cancelletion" && lblName.Text == "invoice_cancelletion" && item.Date == food.Tag_date)
+                        else if (item2.Tag == "invoice_cancelletion" && lblName.Text == "invoice_cancelletion" && item.Date == notdetail.Tag_date && item3.Customer_name!=null)
                         {
                             string tmp;
                             if (Convert.ToInt32(item3.Customer_name.Length) >= 25)
                             {
                                 tmp = item3.Customer_name.Substring(0, 25);
-
                             }
                             else
                             {
@@ -198,13 +201,12 @@ namespace App2
                                 show_party_id_invoice_id = item3.Customer_id,
                             });
                         }
-                        else if (item2.Tag == "booking_end" && lblName.Text == "booking_end" && item.Date == food.Tag_date)
+                        else if (item2.Tag == "booking_end" && lblName.Text == "booking_end" && item.Date == notdetail.Tag_date)
                         {
                             string tmp;
                             if (Convert.ToInt32(item3.Party_name.Length) >= 25)
                             {
                                 tmp = item3.Party_name.Substring(0, 25);
-
                             }
                             else
                             {
@@ -218,13 +220,12 @@ namespace App2
                                 show_party_id_invoice_id = item3.Customer_id,
                             });
                         }
-                        else if (item2.Tag == "booking_entry" && lblName.Text == "booking_entry" && item.Date == food.Tag_date)
+                        else if (item2.Tag == "booking_entry" && lblName.Text == "booking_entry" && item.Date == notdetail.Tag_date)
                         {
                             string tmp;
                             if (Convert.ToInt32(item3.Party_name.Length) >= 25)
                             {
                                 tmp = item3.Party_name.Substring(0, 25);
-
                             }
                             else
                             {
@@ -242,28 +243,50 @@ namespace App2
                 }
             }
             MainlistView.ItemsSource = _receivablList;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
-        private void MainlistView_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void MainlistView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             NotificationShow obj = (NotificationShow)e.Item;
             NavigationMdl navmdl = new NavigationMdl();
             navmdl.Party_id = obj.show_party_id_invoice_id;
-            navmdl.Device_id = "32132";
+            navmdl.Device_id = StaticMethods.getDeviceidentifier();
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
+            if (navmdl.Device_id == "unknown")
+            {
+                navmdl.Device_id = "123456";
+            }
             navmdl.Company_name = EnumMaster.C21_MALHAR;
             navmdl.Party_Name = obj.show_party_name_customer_name;
             if (lblName.Text == "receipt")
             {
                 navmdl.Page_Title = "Receivable";
-                navmdl.Tag_type = EnumMaster.RECEIVABLE_OUTSTANDING;
-                Navigation.PushAsync(new PayablePage(navmdl));
+                navmdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
+                await Navigation.PushAsync(new PayablePage(navmdl));
+                await Navigation.RemovePopupPageAsync(loadingPage);
             }
             else if (lblName.Text == "paid")
             {
                 navmdl.Page_Title = "Payable";
-                navmdl.Tag_type = EnumMaster.PAYABLE_OUTSTANDING;
-                Navigation.PushAsync(new PayablePage(navmdl));
+                navmdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
+                await Navigation.PushAsync(new PayablePage(navmdl));
+                await Navigation.RemovePopupPageAsync(loadingPage);
             }
+            //else if (lblName.Text == "invoice_cancelletion")
+            //{
+            //    navmdl.Page_Title = "Invoice_cancelletion";
+            //    navmdl.Tag_type = EnumMaster.TAGTYPEINVOICE_CANCELLETION;
+            //    Navigation.PushAsync(new PayablePage(navmdl));
+            //}
+           
+           
+           
         }
     }
 }

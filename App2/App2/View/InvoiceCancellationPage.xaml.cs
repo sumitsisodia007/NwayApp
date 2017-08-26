@@ -11,18 +11,18 @@ using Xamarin.Forms.Xaml;
 namespace App2.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ExpiredSoon : ContentPage
+    public partial class InvoiceCancellationPage : ContentPage
     {
         public List<PartyDetails> _receivablList { get; set; }
         public double _Width = 0;
-        public ExpiredSoon()
+        public InvoiceCancellationPage()
         {
             InitializeComponent();
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
                 var calcScreenHieght = Application.Current.MainPage.Height;
-                _Width = calcScreenWidth / 4 ;
+                _Width = calcScreenWidth / 4;
             }
             TodayCollationList();
         }
@@ -42,10 +42,10 @@ namespace App2.View
                 _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 " });
                 _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "for 30 seconds" });
                 _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
-                ListViewMain.ItemsSource= _receivablList;
-               
+                InvoceCancellation.ItemsSource = _receivablList;
+                
             }
-            catch (Exception )
+            catch (Exception)
             {
 
 

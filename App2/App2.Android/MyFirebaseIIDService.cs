@@ -109,7 +109,6 @@ namespace App2.Droid
 
                 intent.AddFlags(ActivityFlags.ClearTop);
                 var pendingIntent = PendingIntent.GetActivity(this, ss, intent, PendingIntentFlags.OneShot);
-
                 var defaultSoundUri = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
                 var  notif = new NotificationCompat.Builder(this)
                                 .SetContentTitle(ntitle)

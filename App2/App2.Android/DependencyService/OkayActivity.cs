@@ -30,11 +30,11 @@ namespace App2.Droid.DependencyService
             NavigationMdl mdl = new NavigationMdl();
             if (tag_type == "paid")
             {
-                mdl.Tag_type =Helper.EnumMaster.PAYABLE_OUTSTANDING;
+                mdl.Tag_type =Helper.EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
             }
             else if (tag_type== "receipt")
             {
-                mdl.Tag_type = Helper.EnumMaster.RECEIVABLE_OUTSTANDING;
+                mdl.Tag_type = Helper.EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
             }
 
             mdl.Device_id = "123";

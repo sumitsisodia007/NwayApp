@@ -7,7 +7,7 @@ using Firebase.Iid;
 using System.Threading.Tasks;
 using Android.Content;
 using App2.Model;
-
+using App2.NativeMathods;
 
 namespace App2.Droid
 {
@@ -38,20 +38,23 @@ namespace App2.Droid
             string msg = Intent.GetStringExtra("msg");
 
             NavigationMdl mdl = new NavigationMdl();
-           
 
-            mdl.Device_id = "123";
+            mdl.Device_id = StaticMethods.getDeviceidentifier();
+            if (mdl.Device_id == "unknown")
+            {
+                mdl.Device_id = "123456";
+            }
             mdl.Company_name = Helper.EnumMaster.C21_MALHAR;
             mdl.Party_id = party_id;
 
             if (tag_type == "paid")
             {
-                mdl.Tag_type = Helper.EnumMaster.PAYABLE_OUTSTANDING;
+                mdl.Tag_type = Helper.EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
                 LoadApplication(new App(mdl));
             }
             else if (tag_type == "receipt")
             {
-                mdl.Tag_type = Helper.EnumMaster.RECEIVABLE_OUTSTANDING;
+                mdl.Tag_type = Helper.EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
                 LoadApplication(new App(mdl));
             }
             else

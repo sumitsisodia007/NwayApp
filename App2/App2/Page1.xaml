@@ -5,32 +5,11 @@
              xmlns:local="clr-namespace:App2.CustomRenderer"
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms">
 
-    <StackLayout>
-        <local:MyButton Text="sssssss" BackgroundColor="Beige" />
-        <Button Text="Click Here" Clicked="YourButton_Clicked"/>
-        <controls:CheckBox DefaultText="Default text"
-                           FontName="AmericanTypewriter"
-                           FontSize="25"
-                           HorizontalOptions="FillAndExpand"
-                           TextColor="Green" 
-                          />
-        <controls:CheckBox CheckedText="Checked"
-                           DefaultText="Default text"
-                           HorizontalOptions="FillAndExpand"
-                           TextColor="Blue"
-                           UncheckedText="Unchecked" />
-        <controls:CheckBox DefaultText="This is a very long string. A very long string. A really very long string."
-                           HorizontalOptions="FillAndExpand"
-                           TextColor="Blue" />
-        <controls:CheckBox DefaultText="Normal length text again."
-                           FontSize="25"
-                           HorizontalOptions="FillAndExpand">
-            <controls:CheckBox.TextColor>
-                <OnPlatform x:TypeArguments="Color"
-                            Android="Black"
-                            WinPhone="White"
-                            iOS="Black" />
-            </controls:CheckBox.TextColor>
-        </controls:CheckBox>
-    </StackLayout>
+    <ContentPage.Content>
+        <StackLayout>
+            <!--Loading label should not render by default.-->
+            <Label Text="Loading..." IsVisible="false" x:Name="labelLoading" />
+            <WebView HeightRequest="1000" WidthRequest="1000" Source="http://www.xamarin.com" Navigated="webviewNavigated" Navigating="webviewNavigating" />
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

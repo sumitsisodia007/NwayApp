@@ -10,8 +10,10 @@ namespace App2.Helper
     {
         public static readonly string SIGNIN = "signin";
         public static readonly string SETTINGS = "settings";
-        public static readonly string PAYABLE_OUTSTANDING = "payable_outstanding";
-        public static readonly string RECEIVABLE_OUTSTANDING = "receivable_outstanding";
+        public static readonly string TAGTYPENOTIFICATIONS = "notifications";
+        public static readonly string TAGTYPEPAYABLE_OUTSTANDING = "payable_outstanding";
+        public static readonly string TAGTYPERECEIVABLE_OUTSTANDING = "receivable_outstanding";
+        public static readonly string TAGTYPEINVOICE_CANCELLETION = "invoice_cancelletion";
         public static readonly string C21_MALHAR= "CENTURY 21 TOWN PLANNERS PVT. LTD.";
         
         public static readonly string LblChartTitle= "(Monthly Ledger)";

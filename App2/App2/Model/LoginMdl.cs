@@ -11,6 +11,7 @@ namespace App2.Model
         public string Username { get; set; }
         public string Password { get; set; }
         public string Firebasetoken { get; set; }
+        public string IosToken { get; set; }
         public string DeviceID { get; set; }
         public string Tagtype { get; set; }
         public string Tokan { get; set; }

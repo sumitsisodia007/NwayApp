@@ -41,8 +41,12 @@ namespace App2.View
 
             nav.Tag_type = App2.Helper.EnumMaster.SETTINGS;
             nav.User_id = res.User_Id;
-            nav.Device_id = "123";// StaticMethods.getDeviceidentifier();
-           res.Min_Receipt_Amt= lblMinAmt.Text = nav.Min_Receipt_Amount = txtMinimumAmt.Text + ".00";
+            nav.Device_id = StaticMethods.getDeviceidentifier(); //"123";//
+            if (nav.Device_id == "unknown")
+            {
+                nav.Device_id = "123456";
+            }
+            res.Min_Receipt_Amt= lblMinAmt.Text = nav.Min_Receipt_Amount = txtMinimumAmt.Text + ".00";
            res.Notification_Day_Count= lblpreDays.Text = nav.Notification_Day_Count = txtDaysOfno.Text;
 
            string rs = await api.NotificationSetting(nav);

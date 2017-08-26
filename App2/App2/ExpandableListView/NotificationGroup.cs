@@ -1,5 +1,7 @@
 ﻿using App2.APIService;
+using App2.Helper;
 using App2.Model;
+using App2.NativeMathods;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -48,8 +50,16 @@ namespace App2.ExpandableListView
         public static ObservableCollection<NotificationGroup> FoodGroups()
         {
 
-            API api = new API();           
-            NotificationListMdl mode = api.PostNotification();
+            API api = new API();
+            NavigationMdl nav = new NavigationMdl();
+            nav.Device_id = StaticMethods.getDeviceidentifier(); //"123";//
+            if (nav.Device_id == "unknown")
+            {
+                nav.Device_id = "123456";
+            }
+            nav.Company_name = EnumMaster.C21_MALHAR;
+            nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
+            NotificationListMdl mode = api.PostNotification(nav);
             ObservableCollection<NotificationGroup> food = new ObservableCollection<NotificationGroup>();
             foreach (var item in mode.ListNotificationDate)
             {
@@ -71,26 +81,26 @@ namespace App2.ExpandableListView
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        private NotificationDetails _oldfood;
-        public void ShowOrHideFoods(NotificationDetails food)
+        private NotificationDetails _oldnot;
+        public void ShowOrHideFoods(NotificationDetails not)
         {
-            if (_oldfood == food)
+            if (_oldnot == not)
             {
                 // click twice on the same item will hide it
-                food.IsVisible = !food.IsVisible;
+                not.IsVisible = !not.IsVisible;
             }
             else
             {
-                if (_oldfood != null)
+                if (_oldnot != null)
                 {
                     // hide previous selected item
-                    _oldfood.IsVisible = false;
+                    _oldnot.IsVisible = false;
                 }
                 // show selected item
-                food.IsVisible = true;
+                not.IsVisible = true;
             }
 
-            _oldfood = food;
+            _oldnot = not;
         }
     }
 }

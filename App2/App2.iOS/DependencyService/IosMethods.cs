@@ -32,6 +32,11 @@ namespace App2.iOS.DependencyService
         {
             BTProgressHUD.ShowToast(msg, ProgressHUD.MaskType.Black, false, 2000);
         }
+        public string GetTokan()
+        {
+            var id = AppDelegate.RegistrationID;
+            return id;
+        }
         /*
         public void ShowLoader()
         {
@@ -85,6 +90,58 @@ namespace App2.iOS.DependencyService
             try
             {
                 var storage = SimpleStorage.EditGroup(Key);
+                storage.Delete(Key);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+        private string Key1 = "fazza";
+        public NavigationMdl RetriveLocalNotification()
+        {
+            NavigationMdl um = new NavigationMdl();
+            try
+            {
+                var storage = SimpleStorage.EditGroup(Key1);
+                um.Device_id = Convert.ToString(storage.Get("Device_id", null));
+                um.Company_name= storage.Get("Company_name", null);
+                um.Party_Name = storage.Get("Party_Name", null);
+                um.Party_id = storage.Get("Party_id", null);
+                um.Tag_type= storage.Get("Tag_type", null);
+                um.Page_Title = storage.Get("Page_Title", null);
+                return um;
+            }
+            catch (Exception)
+            {
+                return um;
+            }
+        }
+
+        public void SaveLocalNotification(NavigationMdl um)
+        {
+            try
+            {
+                var storage = SimpleStorage.EditGroup(Key1);
+                storage.Put("Device_id", um.Device_id);
+                storage.Put("Company_name", um.Company_name);
+                storage.Put("Party_Name", um.Party_Name);
+                storage.Put("Party_id", um.Party_id);
+                storage.Put("Tag_type", um.Tag_type);
+                storage.Put("Page_Title", um.Page_Title);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public void DeleteLocalNotification()
+        {
+            string values = string.Empty;
+            try
+            {
+                var storage = SimpleStorage.EditGroup(Key1);
                 storage.Delete(Key);
             }
             catch (Exception)

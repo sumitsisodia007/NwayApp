@@ -17,5 +17,6 @@ namespace App2.Model
         public string Min_Receipt_Amount { get; set; }
         public string Notification_Day_Count { get; set; }
         public string Page_Title { get; set; }
+        public bool Is_Notification{ get; set; }
     }
 }
