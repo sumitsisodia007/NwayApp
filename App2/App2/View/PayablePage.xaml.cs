@@ -154,11 +154,8 @@ namespace App2.View
                     }
                     foreach (var item3 in item2.Notification)
                     {
-                        if (item3.Party_name==null&&item3.Party_name==null&& item3.Party_outstanding==null&& item3.Amount_received==null&&item3.Current_outstanding==null)
+                        if (item3.Party_name!=null)
                         {
-                            _payableshowlist.Add(new ShowPayableTodayDetail() { Show_Party_Id = "Rec. Null Data", txtWidth = _Width, Show_Pay_Party = "Rec. Null Data", Show_Pay_Outstanding = "Rec. Null Data", Show_Amount_Received = "Rec. Null Data", Show_Cur_Outstanding = "Rec. Null Data" });
-                        }
-                        else {
                             string tmp;
                             if (Convert.ToInt32(item3.Party_name.Length) >= 9)
                             {
@@ -168,7 +165,6 @@ namespace App2.View
                             {
                                 tmp = item3.Party_name;
                             }
-
                             _payableshowlist.Add(new ShowPayableTodayDetail() { Show_Party_Id = item3.Party_id, txtWidth = _Width, Show_Pay_Party = tmp + "..", Show_Pay_Outstanding = item3.Party_outstanding, Show_Amount_Received = item3.Amount_received, Show_Cur_Outstanding = item3.Current_outstanding });
                         }
                     }

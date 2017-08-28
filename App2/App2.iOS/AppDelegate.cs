@@ -46,7 +46,6 @@ namespace App2.iOS
                     UILocalNotification localNotification = options[UIApplication.LaunchOptionsLocalNotificationKey] as UILocalNotification;
                     if (localNotification != null)
                     {
-
                         new UIAlertView(localNotification.AlertAction, localNotification.AlertBody, null, "OK", null).Show();
                         // reset our badge
                         UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
@@ -122,7 +121,6 @@ namespace App2.iOS
                         string pOut = (extra[new NSString("party_outstanding")] as NSObject).ToString();
                         int.TryParse(pOut, out Party_outstanding);
                     }
-                    
                     NavigationMdl mdl = new NavigationMdl();
                     mdl.Device_id = StaticMethods.getDeviceidentifier();
                     if (mdl.Device_id == "unknown")
@@ -131,9 +129,8 @@ namespace App2.iOS
                     }
                     mdl.Company_name = Company_name;
                     mdl.Party_id = Party_id;
-                    mdl.Tag_type = TagType;
                     mdl.Is_Notification = true;
-                    if (mdl.Tag_type == "receipt")
+                    if (TagType == "receipt")
                     {
                         mdl.Page_Title = "Receivable";
                         mdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
@@ -144,21 +141,19 @@ namespace App2.iOS
                         mdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
                     }
                     StaticMethods.SaveLocalNotification(mdl);
-                    UIAlertView alert = new UIAlertView(mdl.Page_Title+ " Notification Received.", null, null, NSBundle.MainBundle.LocalizedString("Cancel", "Cancel"),
-                                              NSBundle.MainBundle.LocalizedString("OK", "Go"));
-                    alert.Show();
-                    alert.Clicked += (sender, buttonArgs) =>
-                    {
-                        if (buttonArgs.ButtonIndex == 1)
-                        {
-                            App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
-                        }
-                        else
-                        {
-                            
-                        }
-                    };
-                        
+                    App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
+                    //UIAlertView alert = new UIAlertView(mdl.Page_Title+ " Notification Received.", null, null, NSBundle.MainBundle.LocalizedString("Cancel", "Cancel"),
+                    //                          NSBundle.MainBundle.LocalizedString("OK", "Go"));
+                    //alert.Show();
+                    //alert.Clicked += (sender, buttonArgs) =>
+                    //{
+                    //    if (buttonArgs.ButtonIndex == 1)
+                    //    {
+                    //    }
+                    //    else
+                    //    {
+                    //    }
+                    //};
                 }
             }
             catch (Exception ex)

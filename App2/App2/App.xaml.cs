@@ -30,9 +30,7 @@ namespace App2
         public App(NavigationMdl mdl)
         {
             InitializeComponent();
-           
             MainPage =new NavigationPage(new PayableChart(mdl));
-            
         }
             
 
