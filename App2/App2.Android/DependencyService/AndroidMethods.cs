@@ -15,12 +15,13 @@ using Xamarin.Forms;
 using Android.Graphics.Drawables;
 using App2.Model;
 
+
 [assembly: Xamarin.Forms.Dependency(typeof(AndroidMethods))]
 namespace App2.Droid.DependencyService
 {
     public class AndroidMethods : IAndroidMethods
     {
-        Dialog d;
+        
         public string GetIdentifier()
         {
             var id = Android.OS.Build.Serial;

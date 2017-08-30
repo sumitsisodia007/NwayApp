@@ -96,9 +96,9 @@ namespace App2.NativeMathods
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                StaticMethods.ShowToast(ex.Message);
             }
         }
 
@@ -117,9 +117,9 @@ namespace App2.NativeMathods
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                StaticMethods.ShowToast(ex.Message);
             }
         }
 
@@ -157,9 +157,9 @@ namespace App2.NativeMathods
                 }
                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                StaticMethods.ShowToast(ex.Message);
             }
         }
 

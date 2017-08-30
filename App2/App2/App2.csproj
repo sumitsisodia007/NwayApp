@@ -39,7 +39,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomRenderer\BadgeView.xaml.cs">
+      <DependentUpon>BadgeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomRenderer\BorderEntry.cs" />
+    <Compile Include="CustomRenderer\CircleView.cs" />
     <Compile Include="CustomRenderer\CurvedCornersLabel.cs" />
     <Compile Include="CustomRenderer\MyButton.cs" />
     <Compile Include="CustomRenderer\MyEntry.cs" />
@@ -278,6 +282,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\InvoiceCancellationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomRenderer\BadgeView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

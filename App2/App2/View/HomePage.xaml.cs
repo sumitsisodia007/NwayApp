@@ -26,25 +26,7 @@ namespace App2.View
         public HomePage()
         {
             InitializeComponent();
-
-            //if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
-            //{
-            //    var calcScreenWidth = Application.Current.MainPage.Width;
-            //    var calcScreenHieght = Application.Current.MainPage.Height;
-
-            //    GridRec.HeightRequest =
-            //    GridPay.HeightRequest =
-            //    GridCas.HeightRequest =
-            //    GridCon.HeightRequest =
-            //    GridExp.HeightRequest =
-            //    GridInv.HeightRequest = calcScreenHieght / 4;
-            //    GridRec.WidthRequest =
-            //    GridPay.WidthRequest =
-            //    GridCas.WidthRequest =
-            //    GridCon.WidthRequest =
-            //    GridExp.WidthRequest =
-            //    GridInv.WidthRequest = calcScreenWidth / 3;
-            //}
+           // Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
         }
 
         protected override void OnAppearing()
@@ -109,6 +91,7 @@ namespace App2.View
 
         private void CashFlow_Tapped(object sender, EventArgs e)
         {
+            
             DisplayAlert("Message", "Comming Soon", "ok");
         }
 

@@ -92,6 +92,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CustomRenderer\BorderEntryRenderer.cs" />
+    <Compile Include="CustomRenderer\CircleViewRenderer.cs" />
     <Compile Include="CustomRenderer\CurvedCornersLabelRenderer.cs" />
     <Compile Include="CustomRenderer\MyButtonRenderer.cs" />
     <Compile Include="CustomRenderer\MyEntryRenderer.cs" />

@@ -64,6 +64,9 @@
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
     </Reference>
+    <Reference Include="GCM.Client">
+      <HintPath>..\..\Components\GCMClient-1.0\lib\android\GCM.Client.dll</HintPath>
+    </Reference>
     <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\MonoAndroid10\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
     </Reference>
@@ -201,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomRenderer\BorderEntryRenderer.cs" />
+    <Compile Include="CustomRenderer\CircleViewRenderer.cs" />
     <Compile Include="CustomRenderer\CurvedCornersLabelRenderer.cs" />
     <Compile Include="CustomRenderer\MyButtonRenderer.cs" />
     <Compile Include="CustomRenderer\MyEntryRenderer.cs" />
@@ -602,6 +606,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\nitication_setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Notification\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

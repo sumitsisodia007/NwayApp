@@ -246,7 +246,7 @@ namespace App2
             }
             catch (Exception ex)
             {
-
+                StaticMethods.ShowToast(ex.Message);
             }
         }
 

@@ -7,7 +7,8 @@ using Firebase.Iid;
 using System.Threading.Tasks;
 using Android.Content;
 using App2.Model;
-using App2.NativeMathods;
+using App2.NativeMathods;   
+
 
 namespace App2.Droid
 {
@@ -30,11 +31,11 @@ namespace App2.Droid
                 instanceid.DeleteInstanceId();
             });
             global::Xamarin.Forms.Forms.Init(this, bundle);
+        
 
             var intent = new Intent(Android.App.Application.Context, typeof(MainActivity));
             string tag_type = Intent.GetStringExtra("tag_type");
             string party_id = Intent.GetStringExtra("party_id");
-            string onclick = Intent.GetStringExtra("onclick");
             string msg = Intent.GetStringExtra("msg");
 
             NavigationMdl mdl = new NavigationMdl();
@@ -62,6 +63,17 @@ namespace App2.Droid
                 LoadApplication(new App());
             }
         }
+
+        //private void RegisterWithGCM()
+        //{
+        //    // Check to ensure everything's set up right
+        //    GcmClient.CheckDevice(this);
+        //    GcmClient.CheckManifest(this);
+
+        //    // Register for push notifications
+        //    Log.Info("MainActivity", "Registering...");
+        //    GcmClient.Register(this, PushHandlerBroadcastReceiver.SENDER_IDS);
+        //}
     }
     
 }

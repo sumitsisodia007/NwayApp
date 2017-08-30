@@ -17,10 +17,8 @@ namespace App2.APIService
 {
     public class API
     {
-        
-
-        public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
-       // public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
+       // public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
+        public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
 
         #region Login
         public async Task<ResponseModel> PostLogin(LoginMdl lgmdl)
@@ -102,9 +100,9 @@ namespace App2.APIService
                      jsonResponse = JsonConvert.DeserializeObject<NotificationListMdl>(jsonresult);
                 }
             }
-            catch (Exception )
+            catch (Exception ex)
             {
-               
+                StaticMethods.ShowToast(ex.Message);
             }
             return jsonResponse;
         }
@@ -115,7 +113,7 @@ namespace App2.APIService
         public async Task<string> NotificationSetting(NavigationMdl td_ntf)
         {
             //   ResponseModel response_model = new ResponseModel();
-            string sss=null;
+            string msg=null;
             try
             {
                 HttpClient client = new HttpClient();
@@ -140,15 +138,15 @@ namespace App2.APIService
                     var dataObjects = response.Content.ReadAsStringAsync().Result;
                     JObject jObj = JObject.Parse(dataObjects);
                    // sss= jObj["message"].ToString();
-                    sss = jObj["error"].ToString();
+                    msg = jObj["error"].ToString();
                     //response_model.TagType = jObj["tagtype"].ToString();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // StaticMethods.AndroidSnackBar(e.Message);
+                 StaticMethods.ShowToast(e.Message);
             }
-            return sss;
+            return msg;
         }
         #endregion
 
@@ -184,9 +182,9 @@ namespace App2.APIService
 
                 }
             }
-            catch (Exception )
+            catch (Exception ex)
             {
-                // StaticMethods.AndroidSnackBar(e.Message);
+                StaticMethods.ShowToast(ex.Message);
             }
             return response_model;
         }
@@ -223,9 +221,9 @@ namespace App2.APIService
                     _partysearchlistmdl = JsonConvert.DeserializeObject<PartysearchMdl>(jsonresult);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // StaticMethods.AndroidSnackBar(e.Message);
+                StaticMethods.ShowToast(ex.Message);
             }
             return _partysearchlistmdl;
         }

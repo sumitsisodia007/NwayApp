@@ -9,12 +9,12 @@ using Android.Media;
 using Android.Support.V4.App;
 using App2.Droid.DependencyService;
 using Newtonsoft.Json.Linq;
+using App2.NativeMathods;
 
 namespace App2.Droid
 {
-   // [Service]
-
-    [Service, IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
+    [Service]
+    [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
     public class MyFirebaseIIDService : FirebaseInstanceIdService
     {
       
@@ -36,8 +36,9 @@ namespace App2.Droid
         }
     }
 
-    //[Service]
-    [Service, IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
+ 
+    [Service]
+    [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
     public class MyFirebaseMessagingService : FirebaseMessagingService
     {
         const string TAG = "MyFirebaseMsgService";
@@ -87,9 +88,10 @@ namespace App2.Droid
             }
             catch (Exception ex)
             {
-                
+                StaticMethods.ShowToast(ex.Message);
+
             }
-            
+
         }
         
         void SendNotification( string _onclick, string nmsg, string ntitle,string _party_id,string _tag_type)
