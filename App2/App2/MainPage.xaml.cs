@@ -278,15 +278,27 @@ namespace App2
                 await Navigation.PushAsync(new PayablePage(navmdl));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
-            //else if (lblName.Text == "invoice_cancelletion")
-            //{
-            //    navmdl.Page_Title = "Invoice_cancelletion";
-            //    navmdl.Tag_type = EnumMaster.TAGTYPEINVOICE_CANCELLETION;
-            //    Navigation.PushAsync(new PayablePage(navmdl));
-            //}
-           
-           
-           
+            else if (lblName.Text == "invoice_cancelletion")
+            {
+                navmdl.Page_Title = "Invoice_cancelletion";
+                //navmdl.Tag_type = EnumMaster.TAGTYPEINVOICE_CANCELLETION;
+                //Navigation.PushAsync(new PayablePage(navmdl));
+                await Navigation.RemovePopupPageAsync(loadingPage);
+            }
+            else if (lblName.Text == "booking_end")
+            {
+                navmdl.Page_Title = "Invoice_cancelletion";
+                //navmdl.Tag_type = EnumMaster.TAGTYPEINVOICE_CANCELLETION;
+                //Navigation.PushAsync(new PayablePage(navmdl));
+                await Navigation.RemovePopupPageAsync(loadingPage);
+            }
+            else if (lblName.Text == "booking_entry")
+            {
+                navmdl.Page_Title = "Invoice_cancelletion";
+                //navmdl.Tag_type = EnumMaster.TAGTYPEINVOICE_CANCELLETION;
+                //Navigation.PushAsync(new PayablePage(navmdl));
+                await Navigation.RemovePopupPageAsync(loadingPage);
+            }
         }
     }
 }
