@@ -6,24 +6,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace App2
 {
     public partial class App : Application
     {
+        public static MasterDetailPage MasterDetail { get; set; }
+    
+        public async static Task NavigationDetailPage(Page page)
+        {
+            App.MasterDetail.IsPresented = false;
+            await App.MasterDetail.Detail.Navigation.PushAsync(page);
+        }
         public App()
         {
             InitializeComponent();
             var data = StaticMethods.GetLocalSavedData();
             if (data.Error == "False")
             {
-                MainPage = new MasterMenuPage();
+                MainPage = new MasterMainPage();
             }
             else
             {
-                MainPage = new NavigationPage(new LoginPage());
+                MainPage = new LoginPage();
             }
 
         }

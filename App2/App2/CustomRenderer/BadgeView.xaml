@@ -7,4 +7,4 @@
    WidthRequest="18">
     <local:CircleView x:Name="BadgeCir" HeightRequest="18" WidthRequest="18" CornerRadius="16" VerticalOptions="Center" HorizontalOptions="Center" />
     <Label x:Name="Badgelbl" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="10"/>
-    </Grid>
+</Grid>

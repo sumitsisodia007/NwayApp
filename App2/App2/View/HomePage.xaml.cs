@@ -22,12 +22,13 @@ namespace App2.View
         NavigationMdl nav = null;
         LoginMdl _login = new LoginMdl();
         API api=new API();
-        
+       
         public HomePage()
         {
             InitializeComponent();
-           // Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
         }
+
 
         protected override void OnAppearing()
         {
@@ -95,9 +96,9 @@ namespace App2.View
             DisplayAlert("Message", "Comming Soon", "ok");
         }
 
-        private void Elect_Tapped(object sender, EventArgs e)
+        private async void Elect_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Ele_CunsPage());
+           await Navigation.PushAsync(new Ele_CunsPage());
         }
 
         private void Expired_Tapped(object sender, EventArgs e)
@@ -153,6 +154,14 @@ namespace App2.View
         protected override bool OnBackButtonPressed()
         {
             return true;
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            if ((App.MasterDetail.IsPresented) == false)
+            {
+                App.MasterDetail.IsPresented = true;
+            }
         }
     }
 }

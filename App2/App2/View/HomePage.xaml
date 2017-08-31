@@ -26,14 +26,21 @@
 
 
     <StackLayout>
-        <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="55" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+        <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="55" HorizontalOptions="FillAndExpand" VerticalOptions="Start" >
 
-            <Image Source="icon" HeightRequest="32" WidthRequest="32" HorizontalOptions="Start" VerticalOptions="Start" />
-            <Label Text="Home Title" />
+            <Image Source="manu_w" HeightRequest="28" Margin="5" WidthRequest="28" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Home" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" Font="72,Bold"/>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                 <Grid BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
                     <Image Source="icon_notification" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" />
                     <local:BadgeView Text="3" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End"/>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Notification_Clicked"/>
+                    </Grid.GestureRecognizers>
                 </Grid>
                 <Grid BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="End">
                     <Image Source="icon_notification" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" />

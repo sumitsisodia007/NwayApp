@@ -33,7 +33,7 @@ namespace App2.View
             }
             else
             {
-                Navigation.PushModalAsync(new MasterMenuPage());
+                Navigation.PushModalAsync(new MasterMainPage());
             }
         }
 
@@ -93,7 +93,7 @@ namespace App2.View
                         StaticMethods.SaveLocalData(rs);
                         //IsLoginSuccess = true;
                         await Navigation.PushPopupAsync(new LoginSuccessPopupPage());
-                        await Navigation.PushModalAsync(new MasterMenuPage());
+                        await Navigation.PushModalAsync(new MasterMainPage());
                         txtFName.Text = txtPass.Text = string.Empty;
                     }
                 }
