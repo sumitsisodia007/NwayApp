@@ -156,7 +156,7 @@ namespace App2.View
             return true;
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private void MainManuSlide_Tapped(object sender, EventArgs e)
         {
             if ((App.MasterDetail.IsPresented) == false)
             {

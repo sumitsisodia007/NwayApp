@@ -22,6 +22,7 @@ namespace App2.View
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             DrawalMenu();
         }
+
         protected override void OnAppearing()
         {
             Device.BeginInvokeOnMainThread(() => {
@@ -33,6 +34,7 @@ namespace App2.View
                 }
             });
         }
+
         public void DrawalMenu()
         {
             menuList = new List<MasterPageItem>();

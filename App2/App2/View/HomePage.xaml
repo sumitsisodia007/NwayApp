@@ -26,33 +26,32 @@
 
 
     <StackLayout>
-        <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="55" HorizontalOptions="FillAndExpand" VerticalOptions="Start" >
+        <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="58" HorizontalOptions="FillAndExpand" VerticalOptions="Start" >
 
-            <Image Source="manu_w" HeightRequest="28" Margin="5" WidthRequest="28" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
+            <Image Source="manu_w" HeightRequest="28"  WidthRequest="28" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
                 <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    <TapGestureRecognizer Tapped="MainManuSlide_Tapped"/>
                 </Image.GestureRecognizers>
             </Image>
-            <Label Text="Home" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" Font="72,Bold"/>
+            <Label Text="Home" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" FontSize="Large" FontAttributes="Bold"/>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                 <Grid BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
                     <Image Source="icon_notification" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" />
-                    <local:BadgeView Text="3" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End"/>
+                    <local:BadgeView x:Name="lblNotificationBadge" Text="0" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End"/>
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Notification_Clicked"/>
                     </Grid.GestureRecognizers>
                 </Grid>
                 <Grid BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="End">
                     <Image Source="icon_notification" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" />
-                    <local:BadgeView Text="332" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End"/>
+                    <local:BadgeView x:Name="lblNotificationBadge1" Text="0" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End"/>
                 </Grid>
                 <Grid BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="End">
                     <Image Source="icon_notification" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" />
-                    <local:BadgeView Text="3" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End"/>
+                    <local:BadgeView x:Name="lblNotificationBadge2" Text="0" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End"/>
                 </Grid>
             </StackLayout>
         </StackLayout>
-
         <StackLayout  Orientation="Vertical" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
         <ScrollView>
             <StackLayout Padding="0,15" Orientation="Vertical" Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
@@ -255,6 +254,5 @@
             <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
         </StackLayout>
     </StackLayout>
-    
     </StackLayout>
 </ContentPage> 
