@@ -61,7 +61,19 @@ namespace App2
                 NotificationGroup group = new NotificationGroup(item.Date + " (" + item.NotCount + ")", "o");
                 foreach (var item2 in item.ListTags)
                 {
-                    group.Add(new NotificationDetails() { Name = item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
+                    if (item2.Tag == "invoice_cancelletion")
+                    {
+                        item2.Tag = "Invoice_cancelletion";
+                    }
+                    else if (item2.Tag == "receipt")
+                    {
+                        item2.Tag = "Receipt";
+                            }
+                    else if (item2.Tag == "paid") { item2.Tag = "Paid"; }
+                    else if (item2.Tag == "booking_entry") { item2.Tag = "Booking_entry"; }
+                    else if (item2.Tag == "booking_end") { item2.Tag = "Booking_end"; }
+                    else if (item2.Tag == "invoice_event") { item2.Tag = "Invoice_event"; }
+                        group.Add(new NotificationDetails() { Name = item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
                 }
                 food.Add(group);
             }
@@ -142,7 +154,7 @@ namespace App2
                 {
                     foreach (var item3 in item2.Notification)
                     {
-                        if (lblName.Text == "paid" && item2.Tag == "paid" && item.Date == notdetail.Tag_date&& item3.Party_name != null)
+                        if (lblName.Text == "Paid" && item2.Tag == "Paid" && item.Date == notdetail.Tag_date&& item3.Party_name != null)
                         {
 
                             string tmp;
@@ -163,7 +175,7 @@ namespace App2
                             });
 
                         }
-                        else if (item2.Tag == "receipt" && lblName.Text == "receipt" && item.Date == notdetail.Tag_date && item3.Party_name != null)
+                        else if (item2.Tag == "Receipt" && lblName.Text == "Receipt" && item.Date == notdetail.Tag_date && item3.Party_name != null)
                         {
                             string tmp;
                             if (Convert.ToInt32(item3.Party_name.Length) >= 25)
@@ -182,7 +194,7 @@ namespace App2
                                 show_party_id_invoice_id = item3.Party_id
                             });
                         }
-                        else if (item2.Tag == "invoice_cancelletion" && lblName.Text == "invoice_cancelletion" && item.Date == notdetail.Tag_date && item3.Customer_name!=null)
+                        else if (item2.Tag == "Invoice_cancelletion" && lblName.Text == "Invoice_cancelletion" && item.Date == notdetail.Tag_date && item3.Customer_name!=null)
                         {
                             string tmp;
                             if (Convert.ToInt32(item3.Customer_name.Length) >= 25)
@@ -201,7 +213,7 @@ namespace App2
                                 show_party_id_invoice_id = item3.Customer_id,
                             });
                         }
-                        else if (item2.Tag == "booking_end" && lblName.Text == "booking_end" && item.Date == notdetail.Tag_date)
+                        else if (item2.Tag == "Booking_end" && lblName.Text == "Booking_end" && item.Date == notdetail.Tag_date)
                         {
                             string tmp;
                             if (Convert.ToInt32(item3.Party_name.Length) >= 25)
@@ -220,7 +232,7 @@ namespace App2
                                 show_party_id_invoice_id = item3.Customer_id,
                             });
                         }
-                        else if (item2.Tag == "booking_entry" && lblName.Text == "booking_entry" && item.Date == notdetail.Tag_date)
+                        else if (item2.Tag == "Booking_end" && lblName.Text == "Booking_end" && item.Date == notdetail.Tag_date)
                         {
                             string tmp;
                             if (Convert.ToInt32(item3.Party_name.Length) >= 25)
@@ -264,35 +276,35 @@ namespace App2
             }
             navmdl.Company_name = EnumMaster.C21_MALHAR;
             navmdl.Party_Name = obj.show_party_name_customer_name;
-            if (lblName.Text == "receipt")
+            if (lblName.Text == "Receipt")
             {
                 navmdl.Page_Title = "Receivable";
                 navmdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
                 await Navigation.PushAsync(new PayablePage(navmdl));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
-            else if (lblName.Text == "paid")
+            else if (lblName.Text == "Paid")
             {
                 navmdl.Page_Title = "Payable";
                 navmdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
                 await Navigation.PushAsync(new PayablePage(navmdl));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
-            else if (lblName.Text == "invoice_cancelletion")
+            else if (lblName.Text == "Invoice_cancelletion")
             {
                 navmdl.Page_Title = "Invoice_cancelletion";
                 //navmdl.Tag_type = EnumMaster.TAGTYPEINVOICE_CANCELLETION;
                 //Navigation.PushAsync(new PayablePage(navmdl));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
-            else if (lblName.Text == "booking_end")
+            else if (lblName.Text == "Booking_end")
             {
                 navmdl.Page_Title = "Invoice_cancelletion";
                 //navmdl.Tag_type = EnumMaster.TAGTYPEINVOICE_CANCELLETION;
                 //Navigation.PushAsync(new PayablePage(navmdl));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
-            else if (lblName.Text == "booking_entry")
+            else if (lblName.Text == "Booking_entry")
             {
                 navmdl.Page_Title = "Invoice_cancelletion";
                 //navmdl.Tag_type = EnumMaster.TAGTYPEINVOICE_CANCELLETION;
