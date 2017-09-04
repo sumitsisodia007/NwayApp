@@ -121,6 +121,7 @@ namespace App2.View
             this.BackgroundColor = Color.FromHex("#ED7D31");
             lblparty.BackgroundColor = lbloutstanding.BackgroundColor = lblTodayReceipt.BackgroundColor = lblCurOutstanding.BackgroundColor = lblSiteName.BackgroundColor = lblTotalDr.BackgroundColor = lblTotalCr.BackgroundColor = lblBalance.BackgroundColor = Color.FromHex("#ED7D31");
         }
+
         private void PredefinedReceived()
         {
             lblFirstTitle.Text = EnumMaster.LblReceivedFirstTitle;
@@ -140,6 +141,8 @@ namespace App2.View
         public void ShowPaybleToday()
         {
             _payableshowlist = new List<ShowPayableTodayDetail>();
+            try
+            {
             foreach (var item in _payable.ListPayableNotification)
             {
                 foreach (var item2 in item.ListPayablemdl)
@@ -160,15 +163,23 @@ namespace App2.View
                             if (Convert.ToInt32(item3.Party_name.Length) >= 9)
                             {
                                 tmp = item3.Party_name.Substring(0, 10);
+                                tmp= tmp + "...";
                             }
                             else
                             {
                                 tmp = item3.Party_name;
                             }
-                            _payableshowlist.Add(new ShowPayableTodayDetail() { Show_Party_Id = item3.Party_id, txtWidth = _Width, Show_Pay_Party = tmp + "..", Show_Pay_Outstanding = item3.Party_outstanding, Show_Amount_Received = item3.Amount_received, Show_Cur_Outstanding = item3.Current_outstanding });
+                            _payableshowlist.Add(new ShowPayableTodayDetail() { Show_Party_Id = item3.Party_id, txtWidth = _Width, Show_Pay_Party = tmp , Show_Pay_Outstanding = item3.Party_outstanding, Show_Amount_Received = item3.Amount_received, Show_Cur_Outstanding = item3.Current_outstanding });
                         }
                     }
                 }
+            }
+
+
+            }
+            catch (Exception ex)
+            {
+              //  StaticMethods.ShowToast("Internal Error Payble Today" + ex.Message);
             }
             list_today_payble.ItemsSource = _payableshowlist;
         }
@@ -176,6 +187,8 @@ namespace App2.View
         public void ShowTotalPayble()
         {
             _showpayabletotalpayblelist = new List<ShowPayableTotalPayble>();
+            try
+            {
             foreach (var item in _payable.ListPayablemdl)
             {
                 string tmp = null;
@@ -184,18 +197,24 @@ namespace App2.View
                     if (Convert.ToInt32(item.Site_name.Length) >= 9)
                     {
                         tmp = item.Site_name.Substring(0, 10);
+                            tmp = tmp + "...";
                     }
                     else
                     {
                         tmp = item.Site_name;
                     }
-                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = tmp+"..", Show_Balance = item.Balance, Show_Total_cr = item.Total_cr, Show_Total_dr = item.Total_dr });
+                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = tmp, Show_Balance = item.Balance, Show_Total_cr = item.Total_cr, Show_Total_dr = item.Total_dr });
                 }
                 else
                 {
 
                     _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = item.Perticular, Show_Balance = item.Balance, Show_Total_cr = item.Receive, Show_Total_dr = item.Total_Due});
                 }
+            }
+            }
+            catch (Exception ex)
+            {
+             //   StaticMethods.ShowToast("Internal Error ShowTotal" + ex.Message);
             }
             list_totalpayble.ItemsSource = _showpayabletotalpayblelist;
         }
@@ -288,6 +307,7 @@ namespace App2.View
             await Task.Delay(100);
             
         }
+
         async void txtLocation_Focus(object sender, EventArgs args)
         {
             await Task.Delay(2000);
@@ -306,7 +326,6 @@ namespace App2.View
             
             AutoList.IsVisible = false;
             imgLogo.IsVisible = true;
-            //PM 18-2-2017
             txtAuto.Placeholder = "Select Party";
 
         }

@@ -60,7 +60,6 @@ namespace App2.Droid
                     data_msg = data_onclick;
                     data_onclick = temp;
                 }
-
                 JObject jObj = JObject.Parse(data0);
 
                 string TAGTYPE = jObj["tagtype"].ToString();
@@ -82,14 +81,13 @@ namespace App2.Droid
                 else if(TAGTYPE == "receipt")
                 { New_Title = "RECEIVED"; }
                 else{ New_Title = "CANCELED"; }
-                   
-                
+
+                StaticMethods.NotificationCount++;
                 SendNotification( data_onclick, New_Msg, New_Title,PARTY_ID,TAGTYPE);
             }
             catch (Exception ex)
             {
                 StaticMethods.ShowToast(ex.Message);
-
             }
 
         }
@@ -116,7 +114,7 @@ namespace App2.Droid
                                 .SetContentTitle(ntitle)
                                 .SetContentText(nmsg)
                                 .SetSmallIcon(Resource.Drawable.n3)
-                               .SetColor(Resources.GetColor(Resource.Color.blue))
+                                .SetColor(Resources.GetColor(Resource.Color.blue))
                                 .SetGroupSummary(false)
                                 .SetGroup(GROUP_KEY_NOTIFICATION)
                                 .SetSound(defaultSoundUri)
@@ -143,23 +141,34 @@ namespace App2.Droid
             }
             else
             {
-            var intent = new Intent(this, typeof(OkayActivity));
-            intent.AddFlags(ActivityFlags.ClearTop);
-            var pendingIntent = PendingIntent.GetActivity(this,ss , intent, PendingIntentFlags.OneShot);
-            var defaultSoundUri = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
-            var notificationBuilder = new NotificationCompat.Builder(this)
-                .SetSmallIcon(Resource.Drawable.n3)
-                .SetContentTitle(ntitle)
-                .SetContentText(nmsg)
-                .SetAutoCancel(true)
-                .SetSound(defaultSoundUri)
-                .SetContentIntent(pendingIntent);
+                //var intent = new Intent(this, typeof(OkayActivity));
+                //intent.AddFlags(ActivityFlags.ClearTop);
+                //var pendingIntent = PendingIntent.GetActivity(this,ss , intent, PendingIntentFlags.OneShot);
+                //var defaultSoundUri = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
+                //var notificationBuilder = new NotificationCompat.Builder(this)
+                //    .SetSmallIcon(Resource.Drawable.n3)
+                //    .SetContentTitle(ntitle)
+                //    .SetContentText(nmsg)
+                //    .SetAutoCancel(true)
+                //    .SetSound(defaultSoundUri)
+                //    .SetContentIntent(pendingIntent);
 
-            var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
-            notificationManager.Notify(ss++, notificationBuilder.Build());
+                //var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
+                //notificationManager.Notify(ss++, notificationBuilder.Build());
+                var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
+                var uiIntent = new Intent(this, typeof(MainActivity));
+
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+                var notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
+                        .SetSmallIcon(Resource.Drawable.n3)
+                        .SetTicker(ntitle)
+                        .SetContentTitle(ntitle)
+                        .SetContentText(nmsg)
+                        .SetAutoCancel(true)
+                        .Build();
+                notificationManager.Notify(0, notification);
             }
         }
-
-        
     }
 }

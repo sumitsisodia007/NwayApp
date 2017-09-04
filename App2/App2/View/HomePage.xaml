@@ -5,28 +5,9 @@
              x:Class="App2.View.HomePage"
              BackgroundColor="White"
              Title="Home">
-    
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Refresh" Clicked="Notification_Clicked">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_notification" Android="icon_notification" />
-            </ToolbarItem.Icon>
-        </ToolbarItem>
-        <ToolbarItem Text="Refresh">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_notification" Android="icon_notification" />
-            </ToolbarItem.Icon>
-        </ToolbarItem>
-        <ToolbarItem Text="Refresh">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource" iOS="icon_notification" Android="icon_notification" />
-            </ToolbarItem.Icon>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
-
-
+  
     <StackLayout>
-        <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="58" HorizontalOptions="FillAndExpand" VerticalOptions="Start" >
+        <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="58" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="0,20,0,0">
 
             <Image Source="manu_w" HeightRequest="28"  WidthRequest="28" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
                 <Image.GestureRecognizers>

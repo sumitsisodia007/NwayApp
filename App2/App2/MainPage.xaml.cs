@@ -37,7 +37,7 @@ namespace App2
         public MainPage()
         {
             InitializeComponent();
-
+            StaticMethods.NotificationCount = 0;
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
@@ -300,5 +300,6 @@ namespace App2
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
         }
+
     }
 }

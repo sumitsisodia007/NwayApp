@@ -68,7 +68,7 @@ namespace App2.iOS
 
         public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
         {
-            int buttonClicked = -1;
+            StaticMethods.NotificationCount++;
             try
             {
                 if (userInfo != null && userInfo.ContainsKey(new NSString("aps")))
@@ -83,15 +83,15 @@ namespace App2.iOS
                     string Party_id = "";
                     string Party_name = "";
                     int Party_outstanding = -1;
-                    
+
                     if (extra.ContainsKey(new NSString("amount_received")))
                     {
-                        string amtrec= (extra[new NSString("amount_received")] as NSObject).ToString();
+                        string amtrec = (extra[new NSString("amount_received")] as NSObject).ToString();
                         int.TryParse(amtrec, out Amount_received);
                     }
                     if (extra.ContainsKey(new NSString("company_name")))
                     {
-                         Company_name = (extra[new NSString("company_name")] as NSObject).ToString();
+                        Company_name = (extra[new NSString("company_name")] as NSObject).ToString();
                     }
                     if (extra.ContainsKey(new NSString("current_outstanding")))
                     {
@@ -100,7 +100,7 @@ namespace App2.iOS
                     }
                     if (extra.ContainsKey(new NSString("tagtype")))
                     {
-                         TagType = (extra[new NSString("tagtype")] as NSObject).ToString();
+                        TagType = (extra[new NSString("tagtype")] as NSObject).ToString();
                     }
                     if (extra.ContainsKey(new NSString("notification_count")))
                     {
@@ -114,7 +114,7 @@ namespace App2.iOS
                     }
                     if (extra.ContainsKey(new NSString("party_name")))
                     {
-                         Party_name = (extra[new NSString("party_name")] as NSObject).ToString();
+                        Party_name = (extra[new NSString("party_name")] as NSObject).ToString();
                     }
                     if (extra.ContainsKey(new NSString("party_outstanding")))
                     {
@@ -134,14 +134,24 @@ namespace App2.iOS
                     {
                         mdl.Page_Title = "Receivable";
                         mdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
+                        App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
                     }
-                    else
+                    else if (TagType == "paid")
                     {
                         mdl.Page_Title = "Payable";
                         mdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
+                        App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
                     }
-                    StaticMethods.SaveLocalNotification(mdl);
-                    App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
+                    else if (TagType == "booking_entry")
+                    { LoadApplication(new App()); }
+                    else if (TagType == "booking_end")
+                    { LoadApplication(new App()); }
+                    else if (TagType == "invoice_cancelletion")
+                    { LoadApplication(new App()); }
+                    else if (TagType == "invoice_event")
+                    { LoadApplication(new App()); }
+                    // StaticMethods.SaveLocalNotification(mdl);
+
                     //UIAlertView alert = new UIAlertView(mdl.Page_Title+ " Notification Received.", null, null, NSBundle.MainBundle.LocalizedString("Cancel", "Cancel"),
                     //                          NSBundle.MainBundle.LocalizedString("OK", "Go"));
                     //alert.Show();

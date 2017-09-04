@@ -79,6 +79,10 @@ namespace App2.View
             else
             {
                 _login.Firebasetoken = DependencyService.Get<IAndroidMethods>().GetTokan();
+                if (_login.Firebasetoken == null)
+                {
+                    _login.Firebasetoken = "";
+                }
             }
             _login.Tagtype = EnumMaster.SIGNIN;
 

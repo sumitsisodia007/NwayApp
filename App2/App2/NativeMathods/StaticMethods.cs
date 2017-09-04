@@ -11,7 +11,7 @@ namespace App2.NativeMathods
 {
     public static class StaticMethods
     {
-        public static string DeviceToken { get; set; }
+        public static int NotificationCount { get; set; }
 
         public static string getDeviceidentifier()
         {

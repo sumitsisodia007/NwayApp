@@ -22,7 +22,7 @@ namespace App2.View
         NavigationMdl nav = null;
         LoginMdl _login = new LoginMdl();
         API api=new API();
-       
+        
         public HomePage()
         {
             InitializeComponent();
@@ -33,6 +33,7 @@ namespace App2.View
         protected override void OnAppearing()
         {
             Device.BeginInvokeOnMainThread(() => {
+                lblNotificationBadge.Text = StaticMethods.NotificationCount.ToString();
                 if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
                 {
                     var calcScreenWidth = Application.Current.MainPage.Width;
@@ -114,41 +115,23 @@ namespace App2.View
         private async void Notification_Clicked(object sender, EventArgs e)
         {
 
-            //_login.Username = "sumit";// txtFName.Text;
-            //_login.Password = "1";// txtPass.Text;
-            //_login.DeviceID = "12345";// StaticMethods.getDeviceidentifier();
-            //_login.Firebasetoken = "cq9_AqsQW1w:APA91bHRiZM2TKb3qUuf3T1NCEviyg6vPJ6K-wu7DBdkHhn8AF2oPmKsTnqtT8TdVGknGQRNDFyiqNXf_MvHXgw4gkcHDGfxSR5mUdCRuz_rtqQpqF5PoteZFvu8p8tObdckvFgZvTbi";
-            //_login.Tagtype = "signin";  
-            //api.PostNotification();
+          
             try
-            {
-                //_loding.IsRunning = true;
-
-                //StaticMethods.ShowToast("Please Wait");
-                //await Task.Run(async() =>
-                //{
-                // await 
-                
-                var loadingPage = new LoaderPage();
+            {  var loadingPage = new LoaderPage();
                 await PopupNavigation.PushAsync(loadingPage);
                 await Task.Delay(1000);
                  await  Navigation.PushAsync(new MainPage());
                 await Navigation.RemovePopupPageAsync(loadingPage);
-                //});
+               
             }
             catch (Exception ex)
             {
-            }
-            finally
-            {
-             
             }
         }
 
         protected override void OnDisappearing()
         {
-            base.OnDisappearing();
-          
+            
         }
 
         protected override bool OnBackButtonPressed()
