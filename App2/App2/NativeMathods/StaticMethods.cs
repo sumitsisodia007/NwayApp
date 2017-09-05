@@ -13,6 +13,16 @@ namespace App2.NativeMathods
     {
         public static int NotificationCount { get; set; }
 
+        public static string getNotificationCount()
+        {
+            string strCount = "";
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                strCount = NotificationCount.ToString();
+            }
+            return strCount;
+        }
+
         public static string getDeviceidentifier()
         {
             string strDeviceIdentifier = "";
@@ -36,7 +46,7 @@ namespace App2.NativeMathods
             }
             else
             {
-                strDeviceIdentifier =  DependencyService.Get<IAndroidMethods>().GetTokan();
+                strDeviceIdentifier = DependencyService.Get<IAndroidMethods>().GetTokan();
             }
             return strDeviceIdentifier;
         }
@@ -123,61 +133,5 @@ namespace App2.NativeMathods
             }
         }
 
-
-
-        ////////////////////////////////
-        public static NavigationMdl GetLocalNotification()
-        {
-            NavigationMdl um = null;
-            try
-            {
-                if (Device.OS == TargetPlatform.iOS)
-                {
-                    um = DependencyService.Get<IIosMethods>().RetriveLocalNotification();
-                    return um;
-                }
-                
-            }
-            catch (Exception)
-            {
-                return um;
-            }
-
-            return um;
-        }
-
-        public static void SaveLocalNotification(NavigationMdl um)
-        {
-            try
-            {
-                if (Device.OS == TargetPlatform.iOS)
-                {
-                    DependencyService.Get<IIosMethods>().SaveLocalNotification(um);
-
-                }
-               
-            }
-            catch (Exception ex)
-            {
-                StaticMethods.ShowToast(ex.Message);
-            }
-        }
-
-        public static void DeleteLocalNotification()
-        {
-            try
-            {
-                if (Device.OS == TargetPlatform.iOS)
-                {
-                    DependencyService.Get<IIosMethods>().DeleteLocalData();
-
-                }
-               
-            }
-            catch (Exception)
-            {
-
-            }
-        }
     }
 }

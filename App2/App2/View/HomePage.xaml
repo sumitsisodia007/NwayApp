@@ -16,18 +16,26 @@
             </Image>
             <Label Text="Home" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" FontSize="Large" FontAttributes="Bold"/>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
-                <Grid BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
-                    <Image Source="icon_notification" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" />
-                    <local:BadgeView x:Name="lblNotificationBadge" Text="0" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End"/>
+                <Grid Padding="3" BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
+                    <Image Source="icon_notification" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Notification_Clicked"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <local:BadgeView x:Name="lblNotificationBadge" Text="0" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End">
+                        <local:BadgeView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Notification_Clicked"/>
+                        </local:BadgeView.GestureRecognizers>
+                    </local:BadgeView>
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Notification_Clicked"/>
                     </Grid.GestureRecognizers>
                 </Grid>
-                <Grid BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="End">
+                <Grid Padding="3" BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="End">
                     <Image Source="icon_notification" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" />
                     <local:BadgeView x:Name="lblNotificationBadge1" Text="0" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End"/>
                 </Grid>
-                <Grid BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="End">
+                <Grid Padding="3" BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="End">
                     <Image Source="icon_notification" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" />
                     <local:BadgeView x:Name="lblNotificationBadge2" Text="0" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End"/>
                 </Grid>

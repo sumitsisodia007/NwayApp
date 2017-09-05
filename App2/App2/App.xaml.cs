@@ -44,16 +44,21 @@ namespace App2
         protected override void OnStart()
         {
             // Handle when your app starts
-        }
+           //ResponseModel rs= StaticMethods.GetLocalSavedData();
+           //StaticMethods.NotificationCount= rs.NotCount;
+        } 
 
         protected override void OnSleep()
         {
             // Handle when your app sleeps
+            
         }
 
         protected override void OnResume()
         {
             // Handle when your app resumes
+            //ResponseModel rs = StaticMethods.GetLocalSavedData();
+            //StaticMethods.NotificationCount = rs.NotCount;
         }
     }
 }

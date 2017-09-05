@@ -18,13 +18,7 @@ namespace App2.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
-        //
-        // This method is invoked when the application has loaded and is ready to run. In this 
-        // method you should instantiate the window, load the UI into it and then make the window
-        // visible.
-        //
-        // You have 17 seconds to return from this method, or iOS will terminate your application.
-        //
+        
         protected UIWindow window;
 
         public static string RegistrationID { get; set; }
@@ -63,12 +57,18 @@ namespace App2.iOS
                 }
             }
             PrepareRemoteNotification();
+            UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(33, 150, 243);
+            UINavigationBar.Appearance.TintColor = UIColor.White;
+            UINavigationBar.Appearance.TitleTextAttributes = new UIStringAttributes()
+            {
+                ForegroundColor = UIColor.White
+            };
             return base.FinishedLaunching(app, options);
         }
 
         public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
         {
-            StaticMethods.NotificationCount++;
+            
             try
             {
                 if (userInfo != null && userInfo.ContainsKey(new NSString("aps")))
@@ -83,7 +83,7 @@ namespace App2.iOS
                     string Party_id = "";
                     string Party_name = "";
                     int Party_outstanding = -1;
-
+                   
                     if (extra.ContainsKey(new NSString("amount_received")))
                     {
                         string amtrec = (extra[new NSString("amount_received")] as NSObject).ToString();
@@ -106,6 +106,10 @@ namespace App2.iOS
                     {
                         string notcount = (extra[new NSString("notification_count")] as NSObject).ToString();
                         int.TryParse(notcount, out Notification_count);
+                        ResponseModel res = StaticMethods.GetLocalSavedData();
+                        StaticMethods.NotificationCount= Notification_count;
+                        res.NotCount = Notification_count.ToString();
+                        StaticMethods.SaveLocalData(res);
                     }
                     if (extra.ContainsKey(new NSString("party_id")))
                     {

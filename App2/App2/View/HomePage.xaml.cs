@@ -7,6 +7,7 @@ using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,13 +28,19 @@ namespace App2.View
         {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            ResponseModel sss = StaticMethods.GetLocalSavedData();
+            lblNotificationBadge.Text = sss.NotCount;
+            DateTime localTime = DateTime.Now;
+            string timeString24Hour = localTime.ToString("HH:mm", CultureInfo.CurrentCulture);
+            
         }
 
 
         protected override void OnAppearing()
         {
             Device.BeginInvokeOnMainThread(() => {
-                lblNotificationBadge.Text = StaticMethods.NotificationCount.ToString();
+                //ResponseModel sss = StaticMethods.GetLocalSavedData();
+                //lblNotificationBadge.Text = sss.NotCount;
                 if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
                 {
                     var calcScreenWidth = Application.Current.MainPage.Width;

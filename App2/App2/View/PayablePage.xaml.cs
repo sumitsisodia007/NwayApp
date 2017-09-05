@@ -86,7 +86,9 @@ namespace App2.View
             {
                 PredefinedPaid();
             }
-            _payable = await api.PayableTable(mdl);
+                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                mdl.User_id = rs.User_Id;
+                _payable = await api.PayableTable(mdl);
 
             toady_notification = new ShowPayableTodayDetail();            
             flag = 1;

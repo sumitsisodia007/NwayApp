@@ -59,6 +59,8 @@ namespace App2.ExpandableListView
             }
             nav.Company_name = EnumMaster.C21_MALHAR;
             nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
+            ResponseModel rs = StaticMethods.GetLocalSavedData();
+            nav.User_id = rs.User_Id;
             NotificationListMdl mode = api.PostNotification(nav);
             ObservableCollection<NotificationGroup> food = new ObservableCollection<NotificationGroup>();
             foreach (var item in mode.ListNotificationDate)

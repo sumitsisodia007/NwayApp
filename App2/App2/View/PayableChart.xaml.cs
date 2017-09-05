@@ -1,6 +1,7 @@
 ﻿using App2.APIService;
 using App2.Helper;
 using App2.Model;
+using App2.NativeMathods;
 using App2.ShowModels;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,8 @@ namespace App2.View
                 LblSu.BackgroundColor = LblMn.BackgroundColor = LblTu.BackgroundColor = LblWe.BackgroundColor = Color.FromHex("#A3C1E5");
             }
             lblChart.Text = nmdl.Party_Name + " " + EnumMaster.LblChartTitle;
-        
+                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                nmdl.User_id = rs.User_Id;
                 _payable =await  api.PayableTable(nmdl);
    
             //_payable = api.PayableTable(nmdl);
@@ -205,8 +207,9 @@ namespace App2.View
                 {
                     navmdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
                 }
-              
-                    _payable =await api.PayableTable(navmdl);
+                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                navmdl.User_id = rs.User_Id;
+                _payable =await api.PayableTable(navmdl);
              
                 //_payable = api.PayableTable(navmdl);
                 ShowTotalPayble();

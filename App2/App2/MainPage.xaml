@@ -6,7 +6,7 @@
              xmlns:btn="clr-namespace:App2.CustomRenderer"
              Title="Notification">
     <AbsoluteLayout>
-        
+
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                  AbsoluteLayout.LayoutFlags="All">
             <!--<ActivityIndicator x:Name="load" IsRunning="False" IsVisible="True"/>-->
@@ -19,7 +19,12 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal"  Padding="0,10">
+                            <StackLayout Orientation="Horizontal" >
+                                <StackLayout.Padding>
+                                    <OnPlatform x:TypeArguments="Thickness"
+                                                  iOS="0,5"
+                                                  Android="0,10" />
+                                </StackLayout.Padding>
                                 <Label Text="{Binding Name}"
                                        TextColor="Black"
                                        FontSize="18"
@@ -40,9 +45,10 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand" BackgroundColor="#E2F5F9" Padding="0,15">
-                                
-                      <btn:MyButton Text="{Binding TitleWithItemCount}"
-                                                HorizontalOptions="StartAndExpand"
+
+                                <btn:MyButton Text="{Binding TitleWithItemCount}"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="FillAndExpand"
                                                 BackgroundColor="Transparent"
                                                 BorderColor="Transparent"                                    
                                                 Font="13,Bold"
@@ -50,7 +56,7 @@
                                                 Clicked="HeaderTapped" 
                                                 CommandParameter="{Binding .}"/>
                                 <Image Source="{Binding StateIcon}" HeightRequest="50" HorizontalOptions="End"/>
-                                
+
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -80,10 +86,15 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Orientation="Vertical"
-                                                 VerticalOptions="FillAndExpand" Spacing="0" Padding="0,10">
+                                                 VerticalOptions="FillAndExpand" Spacing="0" >
                                         <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
-                                                  BackgroundColor="#E2F5F9" Padding="2">
+                                                  BackgroundColor="#E2F5F9" >
+                                            <StackLayout.Padding>
+                                                <OnPlatform x:TypeArguments="Thickness"
+                                                                              iOS="2,10"
+                                                                              Android="2,5" />
+                                            </StackLayout.Padding>
                                             <Label BackgroundColor="#E2F5F9" 
                                                    HorizontalOptions="StartAndExpand" 
                                                    FontSize="17" 

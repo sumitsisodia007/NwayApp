@@ -37,7 +37,7 @@ namespace App2
         public MainPage()
         {
             InitializeComponent();
-            StaticMethods.NotificationCount = 0;
+            //StaticMethods.NotificationCount = "0";
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
@@ -53,6 +53,8 @@ namespace App2
             }
             nav.Company_name = EnumMaster.C21_MALHAR;
             nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
+            ResponseModel rs = StaticMethods.GetLocalSavedData();
+            nav.User_id = rs.User_Id;
             _notificationModel = api.PostNotification(nav);
 
             ObservableCollection<NotificationGroup> food = new ObservableCollection<NotificationGroup>();
@@ -161,6 +163,7 @@ namespace App2
                             if (Convert.ToInt32(item3.Party_name.Length) >= 25)
                             {
                                 tmp = item3.Party_name.Substring(0, 25);
+                                    tmp = tmp + "...";
                             }
                             else
                             {
@@ -170,7 +173,7 @@ namespace App2
                             {
                                 show_amount_received = item3.Amount_received,
                                 txtWidth = _Width,
-                                show_party_name_customer_name = tmp + "..",
+                                show_party_name_customer_name = tmp ,
                                 show_party_id_invoice_id = item3.Party_id
                             });
 
@@ -181,7 +184,8 @@ namespace App2
                             if (Convert.ToInt32(item3.Party_name.Length) >= 25)
                             {
                                 tmp = item3.Party_name.Substring(0, 25);
-                            }
+                                    tmp = tmp + "...";
+                                }
                             else
                             {
                                 tmp = item3.Party_name;
@@ -190,7 +194,7 @@ namespace App2
                             {
                                 show_amount_received = item3.Amount_received,
                                 txtWidth = _Width,
-                                show_party_name_customer_name = tmp + "..",
+                                show_party_name_customer_name = tmp ,
                                 show_party_id_invoice_id = item3.Party_id
                             });
                         }
@@ -200,7 +204,8 @@ namespace App2
                             if (Convert.ToInt32(item3.Customer_name.Length) >= 25)
                             {
                                 tmp = item3.Customer_name.Substring(0, 25);
-                            }
+                                    tmp = tmp + "...";
+                                }
                             else
                             {
                                 tmp = item3.Customer_name;
@@ -208,7 +213,7 @@ namespace App2
                             _receivablList.Add(new NotificationShow
                             {
                                 txtWidth = _Width,
-                                show_party_name_customer_name = tmp + "..",
+                                show_party_name_customer_name = tmp ,
                                 show_amount_received = item3.Invoice_code,
                                 show_party_id_invoice_id = item3.Customer_id,
                             });
@@ -219,6 +224,7 @@ namespace App2
                             if (Convert.ToInt32(item3.Party_name.Length) >= 25)
                             {
                                 tmp = item3.Party_name.Substring(0, 25);
+                                tmp = tmp + "...";
                             }
                             else
                             {

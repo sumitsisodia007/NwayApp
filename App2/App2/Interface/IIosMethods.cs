@@ -15,8 +15,5 @@ namespace App2.Interface
         ResponseModel RetriveLocalData();
         void SaveLocalData(ResponseModel um);
         void DeleteLocalData();
-        NavigationMdl RetriveLocalNotification();
-        void SaveLocalNotification(NavigationMdl um);
-        void DeleteLocalNotification();
     }
 }

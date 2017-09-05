@@ -37,11 +37,9 @@ namespace App2.iOS.DependencyService
             var id = AppDelegate.RegistrationID;
             return id;
         }
+     
+        
         /*
-        public void ShowLoader()
-        {
-            BTProgressHUD.Show();
-        }
         public void DismissLoader()
         {
             BTProgressHUD.Dismiss();
@@ -58,6 +56,7 @@ namespace App2.iOS.DependencyService
                 storage.Put("User_Id", um.User_Id);
                 storage.Put("Device_Id", um.Device_Id);
                 storage.Put("Error", um.Error);
+                storage.Put("NotCount", um.NotCount);
             }
             catch (Exception)
             {
@@ -76,6 +75,7 @@ namespace App2.iOS.DependencyService
                 um.User_Id = storage.Get("User_Id", null);
                 um.Device_Id = storage.Get("Device_Id", null);
                 um.Error = storage.Get("Error", null);
+                um.NotCount = storage.Get("NotCount", null);
                 return um;
             }
             catch (Exception)
@@ -90,58 +90,6 @@ namespace App2.iOS.DependencyService
             try
             {
                 var storage = SimpleStorage.EditGroup(Key);
-                storage.Delete(Key);
-            }
-            catch (Exception)
-            {
-
-            }
-        }
-        private string Key1 = "fazza";
-        public NavigationMdl RetriveLocalNotification()
-        {
-            NavigationMdl um = new NavigationMdl();
-            try
-            {
-                var storage = SimpleStorage.EditGroup(Key1);
-                um.Device_id = Convert.ToString(storage.Get("Device_id", null));
-                um.Company_name= storage.Get("Company_name", null);
-                um.Party_Name = storage.Get("Party_Name", null);
-                um.Party_id = storage.Get("Party_id", null);
-                um.Tag_type= storage.Get("Tag_type", null);
-                um.Page_Title = storage.Get("Page_Title", null);
-                return um;
-            }
-            catch (Exception)
-            {
-                return um;
-            }
-        }
-
-        public void SaveLocalNotification(NavigationMdl um)
-        {
-            try
-            {
-                var storage = SimpleStorage.EditGroup(Key1);
-                storage.Put("Device_id", um.Device_id);
-                storage.Put("Company_name", um.Company_name);
-                storage.Put("Party_Name", um.Party_Name);
-                storage.Put("Party_id", um.Party_id);
-                storage.Put("Tag_type", um.Tag_type);
-                storage.Put("Page_Title", um.Page_Title);
-            }
-            catch (Exception)
-            {
-
-            }
-        }
-
-        public void DeleteLocalNotification()
-        {
-            string values = string.Empty;
-            try
-            {
-                var storage = SimpleStorage.EditGroup(Key1);
                 storage.Delete(Key);
             }
             catch (Exception)

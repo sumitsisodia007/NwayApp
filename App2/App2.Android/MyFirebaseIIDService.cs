@@ -82,7 +82,7 @@ namespace App2.Droid
                 { New_Title = "RECEIVED"; }
                 else{ New_Title = "CANCELED"; }
 
-                StaticMethods.NotificationCount++;
+                //StaticMethods.NotificationCount++;
                 SendNotification( data_onclick, New_Msg, New_Title,PARTY_ID,TAGTYPE);
             }
             catch (Exception ex)
