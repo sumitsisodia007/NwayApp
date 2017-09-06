@@ -26,7 +26,7 @@ namespace App2
         private ObservableCollection<NotificationGroup> _expandedGroups;
         NotificationListMdl _notificationModel;
         API api = null;
-
+       
         public List<NotificationShow> _receivablList { get; set; }
         public double _Width = 0;
 
@@ -42,8 +42,7 @@ namespace App2
 
         protected override void OnAppearing()
         {
-            Device.BeginInvokeOnMainThread(() =>
-            {
+            Device.BeginInvokeOnMainThread(() => {
                 if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
                 {
                     var calcScreenWidth = Application.Current.MainPage.Width;
@@ -51,7 +50,7 @@ namespace App2
                     _Width = calcScreenWidth / 2;
                 }
             });
-
+            
         }
 
         private void HeaderTapped(object sender, EventArgs args)
@@ -71,7 +70,7 @@ namespace App2
 
         private void NotificationMehods()
         {
-
+            
             api = new API();
             NavigationMdl nav = new NavigationMdl();
             nav.Device_id = StaticMethods.getDeviceidentifier();
@@ -103,8 +102,8 @@ namespace App2
                     else if (item2.Tag == "booking_entry") { item2.Tag = "Booking_entry"; }
                     else if (item2.Tag == "booking_end") { item2.Tag = "Booking_end"; }
                     else if (item2.Tag == "invoice_event") { item2.Tag = "Invoice_event"; }
-
-                    group.Add(new NotificationDetails() { Name = item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
+                
+                    group.Add(new NotificationDetails() { Name =  item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
                     //group.Add(new NotificationDetails() { Name = item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
                 }
                 _not.Add(group);
@@ -119,7 +118,7 @@ namespace App2
                 _expandedGroups = new ObservableCollection<NotificationGroup>();
                 foreach (NotificationGroup notgroup in _allGroups)
                 {
-
+                   
                     //Create new FoodGroups so we do not alter original list
                     NotificationGroup newGroup = new NotificationGroup(notgroup.Title, "o", notgroup.Expanded);
                     //Add the count of food items for Lits Header Titles to use
@@ -161,123 +160,126 @@ namespace App2
         {
             try
             {
-                _receivablList = new List<NotificationShow>();
-                var notification = _notificationModel.ListNotificationDate.Where(o => o.Date == notdetail.Tag_date).ToList();
+            _receivablList = new List<NotificationShow>();
+            var notification = _notificationModel.ListNotificationDate.Where(o => o.Date == notdetail.Tag_date).ToList();
 
-                foreach (var item in notification)
+            foreach (var item in notification)
+            {
+                foreach (var item2 in item.ListTags)
                 {
-                    foreach (var item2 in item.ListTags)
+                    foreach (var item3 in item2.Notification)
                     {
-                        foreach (var item3 in item2.Notification)
+                        if (lblName.Text == "Paid" && item2.Tag == "Paid" && item.Date == notdetail.Tag_date&& item3.Party_name != null)
                         {
-                            if (lblName.Text == "Paid" && item2.Tag == "Paid" && item.Date == notdetail.Tag_date && item3.Party_name != null)
-                            {
 
-                                string tmp;
-                                tmp = item3.Site_short_name + ":" + item3.Party_name;
-                                if (Convert.ToInt32(tmp.Length) >= 25)
-                                {
+                            string tmp;
+                            if (Convert.ToInt32(item3.Party_name.Length) >= 20)
+                            {
+                                tmp = item3.Party_name.Substring(0, 20);
+                                tmp = tmp + "...";
+                            }
+                            else
+                            {
+                                tmp = item3.Party_name;
+                            }
+                            _receivablList.Add(new NotificationShow
+                            {
+                                show_amount_received = item3.Amount_received,
+                                txtWidth = _Width,
+                                show_sohrtName=item3.Site_short_name+":",
 
-                                    tmp = tmp.Substring(0, 25);
-                                    tmp = tmp + "...";
-                                }
-                                //else
-                                //{
-                                //    tmp = item3.Party_name;
-                                //}
-                                _receivablList.Add(new NotificationShow
-                                {
-                                    show_amount_received = item3.Amount_received,
-                                    txtWidth = _Width,
-                                    show_party_name_customer_name = tmp,
-                                    show_party_id_invoice_id = item3.Party_id
-                                });
+                                show_party_name_customer_name = tmp ,
+                                show_party_id_invoice_id = item3.Party_id
+                            });
 
-                            }
-                            else if (item2.Tag == "Receipt" && lblName.Text == "Receipt" && item.Date == notdetail.Tag_date && item3.Party_name != null)
+                        }
+                        else if (item2.Tag == "Receipt" && lblName.Text == "Receipt" && item.Date == notdetail.Tag_date && item3.Party_name != null)
+                        {
+                            string tmp;
+                            if (Convert.ToInt32(item3.Party_name.Length) >= 20)
                             {
-                                string tmp;
-                                tmp = item3.Site_short_name + ":" + item3.Party_name;
-                                if (Convert.ToInt32(tmp.Length) >= 25)
-                                {
-                                    tmp = tmp.Substring(0, 25);
+                                tmp = item3.Party_name.Substring(0, 20);
+                                tmp = tmp + "...";
+                            }
+                            else
+                            {
+                                tmp = item3.Party_name;
+                            }
+                            _receivablList.Add(new NotificationShow
+                            {
+                                show_amount_received = item3.Amount_received,
+                                txtWidth = _Width,
+                                show_sohrtName = item3.Site_short_name + ":",
+                                show_party_name_customer_name = tmp ,
+                                show_party_id_invoice_id = item3.Party_id
+                            });
+                        }
+                        else if (item2.Tag == "Invoice_cancelletion" && lblName.Text == "Invoice_cancelletion" && item.Date == notdetail.Tag_date && item3.Customer_name!=null)
+                        {
+                            string tmp;
+                            if (Convert.ToInt32(item3.Customer_name.Length) >= 20)
+                            {
+                                tmp = item3.Customer_name.Substring(0, 20);
                                     tmp = tmp + "...";
                                 }
-                                else
-                                {
-                                    tmp = item3.Party_name;
-                                }
-                                _receivablList.Add(new NotificationShow
-                                {
-                                    show_amount_received = item3.Amount_received,
-                                    txtWidth = _Width,
-                                    show_party_name_customer_name = tmp,
-                                    show_party_id_invoice_id = item3.Party_id
-                                });
-                            }
-                            else if (item2.Tag == "Invoice_cancelletion" && lblName.Text == "Invoice_cancelletion" && item.Date == notdetail.Tag_date && item3.Customer_name != null)
+                            else
                             {
-                                string tmp;
-                                if (Convert.ToInt32(item3.Customer_name.Length) >= 25)
-                                {
-                                    tmp = item3.Customer_name.Substring(0, 25);
-                                    tmp = tmp + "...";
-                                }
-                                else
-                                {
-                                    tmp = item3.Customer_name;
-                                }
-                                _receivablList.Add(new NotificationShow
-                                {
-                                    txtWidth = _Width,
-                                    show_party_name_customer_name = tmp,
-                                    show_amount_received = item3.Invoice_code,
-                                    show_party_id_invoice_id = item3.Customer_id,
-                                });
+                                tmp = item3.Customer_name;
                             }
-                            else if (item2.Tag == "Booking_end" && lblName.Text == "Booking_end" && item.Date == notdetail.Tag_date)
+                            _receivablList.Add(new NotificationShow
                             {
-                                string tmp;
-                                if (Convert.ToInt32(item3.Party_name.Length) >= 25)
-                                {
-                                    tmp = item3.Party_name.Substring(0, 25);
-                                    tmp = tmp + "...";
-                                }
-                                else
-                                {
-                                    tmp = item3.Party_name;
-                                }
-                                _receivablList.Add(new NotificationShow
-                                {
-                                    txtWidth = _Width,
-                                    show_party_name_customer_name = tmp + "..",
-                                    show_amount_received = item3.Invoice_code,
-                                    show_party_id_invoice_id = item3.Customer_id,
-                                });
-                            }
-                            else if (item2.Tag == "Booking_end" && lblName.Text == "Booking_end" && item.Date == notdetail.Tag_date)
+                                txtWidth = _Width,
+                                show_party_name_customer_name = tmp ,
+                                show_amount_received = item3.Invoice_code,
+                                show_sohrtName = item3.Site_short_name + ":",
+                                show_party_id_invoice_id = item3.Customer_id,
+                            });
+                        }
+                        else if (item2.Tag == "Booking_end" && lblName.Text == "Booking_end" && item.Date == notdetail.Tag_date)
+                        {
+                            string tmp;
+                            if (Convert.ToInt32(item3.Party_name.Length) >= 20)
                             {
-                                string tmp;
-                                if (Convert.ToInt32(item3.Party_name.Length) >= 25)
-                                {
-                                    tmp = item3.Party_name.Substring(0, 25);
-                                }
-                                else
-                                {
-                                    tmp = item3.Party_name;
-                                }
-                                _receivablList.Add(new NotificationShow
-                                {
-                                    txtWidth = _Width,
-                                    show_party_name_customer_name = tmp + "..",
-                                    show_amount_received = item3.Invoice_code,
-                                    show_party_id_invoice_id = item3.Customer_id,
-                                });
+                                tmp = item3.Party_name.Substring(0, 20);
+                                tmp = tmp + "...";
                             }
+                            else
+                            {
+                                tmp = item3.Party_name;
+                            }
+                            _receivablList.Add(new NotificationShow
+                            {
+                                txtWidth = _Width,
+                                show_party_name_customer_name = tmp,
+                                show_sohrtName = item3.Site_short_name + ":",
+                                show_amount_received = item3.Invoice_code,
+                                show_party_id_invoice_id = item3.Customer_id,
+                            });
+                        }
+                        else if (item2.Tag == "Booking_end" && lblName.Text == "Booking_end" && item.Date == notdetail.Tag_date)
+                        {
+                            string tmp;
+                            if (Convert.ToInt32(item3.Party_name.Length) >= 20)
+                            {
+                                tmp = item3.Party_name.Substring(0, 20);
+                            }
+                            else
+                            {
+                                tmp = item3.Party_name;
+                            }
+                            _receivablList.Add(new NotificationShow
+                            {
+                                txtWidth = _Width,
+                                show_party_name_customer_name = tmp + "..",
+                                show_sohrtName = item3.Site_short_name + ":",
+                                show_amount_received = item3.Invoice_code,
+                                show_party_id_invoice_id = item3.Customer_id,
+                            });
                         }
                     }
                 }
-                MainlistView.ItemsSource = _receivablList;
+            }
+            MainlistView.ItemsSource = _receivablList;
             }
             catch (Exception ex)
             {

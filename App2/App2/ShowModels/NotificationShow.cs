@@ -11,7 +11,7 @@ namespace App2.ShowModels
         public string show_party_name_customer_name { get; set; }
         public string show_amount_received { get; set; }
         public string show_party_id_invoice_id { get; set; }
-        // public string show_invoice_code { get; set; }
+         public string show_sohrtName { get; set; }
         public double txtWidth { get; set; }
     }
 }

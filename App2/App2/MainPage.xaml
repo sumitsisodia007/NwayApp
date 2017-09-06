@@ -101,6 +101,13 @@
                                                                               Android="1,5" />
                                             </StackLayout.Padding>
                                             <Label BackgroundColor="#E2F5F9" 
+                                                   HorizontalOptions="Start" 
+                                                   FontSize="20"
+                                                   FontAttributes="Bold"
+                                                   Text="{Binding show_sohrtName}" 
+                                                   TextColor="Black" 
+                                                   HorizontalTextAlignment="Start" />
+                                            <Label BackgroundColor="#E2F5F9" 
                                                    HorizontalOptions="StartAndExpand" 
                                                    FontSize="17" 
                                                    Text="{Binding show_party_name_customer_name}" 
