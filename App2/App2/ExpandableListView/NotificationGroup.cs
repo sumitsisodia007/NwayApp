@@ -52,7 +52,7 @@ namespace App2.ExpandableListView
 
             API api = new API();
             NavigationMdl nav = new NavigationMdl();
-            nav.Device_id = StaticMethods.getDeviceidentifier(); //"123";//
+            nav.Device_id = StaticMethods.getDeviceidentifier(); 
             if (nav.Device_id == "unknown")
             {
                 nav.Device_id = "123456";
@@ -73,7 +73,6 @@ namespace App2.ExpandableListView
                 }
             }
             Groups = food;
-                       
            return Groups;
         }
 

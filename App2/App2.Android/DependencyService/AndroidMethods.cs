@@ -54,6 +54,8 @@ namespace App2.Droid.DependencyService
                 storage.PutString("Notification_Day_Count", um.Notification_Day_Count);
                 storage.PutString("User_Id", um.User_Id);
                 storage.PutString("Device_Id", um.Device_Id);
+                storage.PutString("NotCount", um.NotCount);
+                storage.PutString("NotCountDate", um.NotCountDate);
                 storage.Commit();
             }
             catch (Exception)
@@ -76,6 +78,8 @@ namespace App2.Droid.DependencyService
                 storage.PutString("TagType", "");
                 storage.PutString("Device_Id", "");
                 storage.PutString("Error", "");
+                storage.PutString("NotCount", "");
+                storage.PutString("NotCountDate", "");
                 storage.Commit();
             }
             catch (Exception)
@@ -98,6 +102,8 @@ namespace App2.Droid.DependencyService
                 um.Min_Receipt_Amt = storage.GetString("Min_Receipt_Amt", null);
                 um.Device_Id = storage.GetString("Device_Id", null);
                 um.Error= storage.GetString("Error", null);
+                um.NotCount= storage.GetString("NotCount", null);
+                um.NotCountDate= storage.GetString("NotCountDate", null);
                 return um;
             }
             catch (Exception ex)

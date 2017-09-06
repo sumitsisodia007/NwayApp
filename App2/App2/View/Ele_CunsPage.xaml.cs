@@ -53,12 +53,11 @@ namespace App2.View
         }
         private void Row_Tapped(object sender, EventArgs e)
         {
-            //Navigation.PushModalAsync(new PayableChart());
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new Ele_CunsPageCont());
+            Navigation.PushAsync(new Ele_CunsPageCont());
         }
     }
 }

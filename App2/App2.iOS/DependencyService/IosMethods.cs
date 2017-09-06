@@ -57,6 +57,7 @@ namespace App2.iOS.DependencyService
                 storage.Put("Device_Id", um.Device_Id);
                 storage.Put("Error", um.Error);
                 storage.Put("NotCount", um.NotCount);
+                storage.Put("NotCountDate", um.NotCountDate);
             }
             catch (Exception)
             {
@@ -76,6 +77,7 @@ namespace App2.iOS.DependencyService
                 um.Device_Id = storage.Get("Device_Id", null);
                 um.Error = storage.Get("Error", null);
                 um.NotCount = storage.Get("NotCount", null);
+                um.NotCountDate = storage.Get("NotCountDate", null);
                 return um;
             }
             catch (Exception)

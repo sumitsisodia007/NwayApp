@@ -15,10 +15,19 @@ namespace App2.View
 		public SettingPage ()
 		{
 			InitializeComponent ();
-            var calcScreenWidth = Application.Current.MainPage.Width;
-            var calcScreenHieght = Application.Current.MainPage.Height;
-            CircleImg.WidthRequest = calcScreenWidth / 4;
-            CircleImg.HeightRequest = calcScreenWidth / 4;
+        }
+
+        protected override void OnAppearing()
+        {
+            Device.BeginInvokeOnMainThread(() => {
+                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+                {
+                    var calcScreenWidth = Application.Current.MainPage.Width;
+                    var calcScreenHieght = Application.Current.MainPage.Height;
+                    CircleImg.WidthRequest = calcScreenWidth / 4;
+                    CircleImg.HeightRequest = calcScreenWidth / 4;
+                }
+            });
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)

@@ -18,5 +18,6 @@ namespace App2.Model
         public string Device_Id { get; set; }
         public string DeviceToken { get; set; }
         public string NotCount { get; set; }
+        public string NotCountDate { get; set; }
     }
 }

@@ -43,11 +43,11 @@ namespace App2.View
             // Here you can define title for item, 
             // icon on the left side, and page that you want to open after selection
             var page1 = new MasterPageItem() { Title = "Home", Icon = "home", TargetType = typeof(HomePage) };
-            var page2 = new MasterPageItem() { Title = "Sales", Icon = "sales", TargetType = typeof(HomePage) };
+            var page2 = new MasterPageItem() { Title = "Sales", Icon = "sales", TargetType = typeof(SalesPage) };
             var page3 = new MasterPageItem() { Title = "Account", Icon = "inr", TargetType = typeof(Account) };
             var page4 = new MasterPageItem() { Title = "Purchase", Icon = "purch", TargetType = typeof(PurchasePage) };
-            var page5 = new MasterPageItem() { Title = "Human Resource", Icon = "hr", TargetType = typeof(HomePage) };
-            var page6 = new MasterPageItem() { Title = "Approvels", Icon = "thumbs_up", TargetType = typeof(HomePage) };
+            var page5 = new MasterPageItem() { Title = "Human Resource", Icon = "hr", TargetType = typeof(HumanResourcePage) };
+            var page6 = new MasterPageItem() { Title = "Approvels", Icon = "thumbs_up", TargetType = typeof(ApprovelsPage) };
             var page8 = new MasterPageItem() { Title = "Setting", Icon = "setting", TargetType = typeof(SettingPage) };
             var page9 = new MasterPageItem() { Title = "Help & Feedback", Icon = "help", TargetType = typeof(LoginPage) };
             var page10 = new MasterPageItem() { Title = "Logout", Icon = "logout", TargetType = typeof(LogOutPage) };

@@ -60,7 +60,7 @@ namespace App2.View
 
         private async void btnLogin_Clicked(object sender, EventArgs e)
         {
-            bool IsLoginSuccess = false;
+           
             btnLogin.IsEnabled = false;
             ResponseModel rs = new ResponseModel();
             _Loading.Color = Color.FromHex("#4472C4");
@@ -95,7 +95,6 @@ namespace App2.View
                     {
                         rs.Device_Id = _login.DeviceID;
                         StaticMethods.SaveLocalData(rs);
-                        //IsLoginSuccess = true;
                         await Navigation.PushPopupAsync(new LoginSuccessPopupPage());
                         await Navigation.PushModalAsync(new MasterMainPage());
                         txtFName.Text = txtPass.Text = string.Empty;
@@ -128,11 +127,6 @@ namespace App2.View
                 await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", ex.Message));
             }
             
-        }
-
-        protected async override void OnAppearing()
-        {
-            // ResponseModel res = StaticMethods.GetLocalSavedData();
         }
 
         protected override bool OnBackButtonPressed()

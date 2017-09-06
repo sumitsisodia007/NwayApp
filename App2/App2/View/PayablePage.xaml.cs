@@ -34,40 +34,9 @@ namespace App2.View
         public PayablePage()
         {
             InitializeComponent();
-            //if (Device.OS == TargetPlatform.iOS)
-            //{
-            //    NavigationMdl mdl = StaticMethods.GetLocalNotification();
-            //    this.Title = mdl.Page_Title;
-            //    if (mdl.Page_Title == "Receivable")
-            //    {
-            //        PredefinedReceived();
-            //    }
-            //    else
-            //    {
-            //        PredefinedPaid();
-            //    }
-            //    _payable = api.PayableTable(mdl);
-            //    toady_notification = new ShowPayableTodayDetail();
-            //    flag = 1;
-            //    try
-            //    {
-            //        if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
-            //        {
-            //            var calcScreenWidth = Application.Current.MainPage.Width;
-            //            var calcScreenHieght = Application.Current.MainPage.Height;
-            //            lblparty.WidthRequest = lbloutstanding.WidthRequest = lblTodayReceipt.WidthRequest = lblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //    }
-            //    ShowPaybleToday();
-            //    ShowTotalPayble();
-            //    StaticMethods.DeleteLocalNotification();
-            //}
         }
 
-       public PayablePage (NavigationMdl mdl)
+        public PayablePage (NavigationMdl mdl)
 	   {
 			InitializeComponent ();
             // NavigationPage.SetHasNavigationBar(this, false);
@@ -76,8 +45,6 @@ namespace App2.View
             Device.BeginInvokeOnMainThread(async ()=> { 
             this.Title = mdl.Page_Title;
             navmdl = new NavigationMdl();
-          
-            
             if (mdl.Page_Title == "Receivable")
             {
                 PredefinedReceived();
@@ -86,28 +53,30 @@ namespace App2.View
             {
                 PredefinedPaid();
             }
-                ResponseModel rs = StaticMethods.GetLocalSavedData();
-                mdl.User_id = rs.User_Id;
-                _payable = await api.PayableTable(mdl);
+            ResponseModel rs = StaticMethods.GetLocalSavedData();
+            mdl.User_id = rs.User_Id;
+            _payable = await api.PayableTable(mdl);
 
             toady_notification = new ShowPayableTodayDetail();            
             flag = 1;
-            try
-            {
-                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
-                {
-                    var calcScreenWidth = Application.Current.MainPage.Width;
-                    var calcScreenHieght = Application.Current.MainPage.Height;
-                    lblparty.WidthRequest = lbloutstanding.WidthRequest = lblTodayReceipt.WidthRequest = lblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
-                }
-            }
-            catch (Exception ex)
-            {
-            }
+           
             ShowPaybleToday();
             ShowTotalPayble();
             });
         }
+
+        protected override void OnAppearing()
+        {
+            Device.BeginInvokeOnMainThread(() => {
+                flag = 1;
+                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+            {
+                var calcScreenWidth = Application.Current.MainPage.Width;
+                var calcScreenHieght = Application.Current.MainPage.Height;
+                lblparty.WidthRequest = lbloutstanding.WidthRequest = lblTodayReceipt.WidthRequest = lblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
+            }});
+        }
+
         private void PredefinedPaid()
         {
             lblFirstTitle.Text = EnumMaster.LblPaidFirstTitle;
@@ -136,8 +105,8 @@ namespace App2.View
             lblTotalDr.Text = EnumMaster.LblReceivedTotaleDr;
             lblTotalCr.Text = EnumMaster.LblReceivedTotaleCr;
             lblBalance.Text = EnumMaster.LblPaidReceivedBalance;
-            this.BackgroundColor = Color.FromHex("#A3C1E5");
-            lblparty.BackgroundColor = lbloutstanding.BackgroundColor = lblTodayReceipt.BackgroundColor = lblCurOutstanding.BackgroundColor = lblSiteName.BackgroundColor = lblTotalDr.BackgroundColor = lblTotalCr.BackgroundColor = lblBalance.BackgroundColor = Color.FromHex("#A3C1E5");
+            this.BackgroundColor = Color.FromHex("#A8C4E6");
+            lblparty.BackgroundColor = lbloutstanding.BackgroundColor = lblTodayReceipt.BackgroundColor = lblCurOutstanding.BackgroundColor = lblSiteName.BackgroundColor = lblTotalDr.BackgroundColor = lblTotalCr.BackgroundColor = lblBalance.BackgroundColor = Color.FromHex("#A8C4E6");
         }
 
         public void ShowPaybleToday()
@@ -280,7 +249,6 @@ namespace App2.View
                             {
                                 imgLogo.IsVisible = false;
                             }
-                           // AutoList.ItemsSource = _lst.Select(c => { c.txtWidth = ScreenWidth; return c; }).ToList();
                             AutoList.HeightRequest = 40 * 5;
                         }
                         else
@@ -288,7 +256,6 @@ namespace App2.View
                             AutoList.ItemsSource = null;
                             AutoList.IsVisible = false;
                         }
-                           //await scrollbar.ScrollToAsync(txtAuto, ScrollToPosition.Start, true);
                     });
                    
                 }
@@ -300,14 +267,13 @@ namespace App2.View
             }
             catch (Exception ex)
             {
-                // StaticMethods.ShowToast(ex.Message);
+                 StaticMethods.ShowToast(ex.Message);
             }
         }
 
         private async void txtAuto_Focused(object sender, FocusEventArgs e)
         {
             await Task.Delay(100);
-            
         }
 
         async void txtLocation_Focus(object sender, EventArgs args)

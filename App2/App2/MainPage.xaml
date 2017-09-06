@@ -15,6 +15,8 @@
                     HasUnevenRows="True"
                     GroupShortNameBinding="{Binding ShortName}"
                     IsGroupingEnabled="true"
+                       SeparatorVisibility="Default" 
+                       SeparatorColor="Black"
                    ItemTapped="ListView_OnItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -22,7 +24,7 @@
                             <StackLayout Orientation="Horizontal" >
                                 <StackLayout.Padding>
                                     <OnPlatform x:TypeArguments="Thickness"
-                                                  iOS="0,5"
+                                                  iOS="0,12"
                                                   Android="0,10" />
                                 </StackLayout.Padding>
                                 <Label Text="{Binding Name}"
@@ -44,7 +46,9 @@
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand" BackgroundColor="#E2F5F9" Padding="0,15">
+                            <StackLayout Spacing="0" Padding="0" BackgroundColor="#E2F5F9">
+                                <BoxView HeightRequest="1" BackgroundColor="Black" />
+                                <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand" BackgroundColor="#E2F5F9" >
 
                                 <btn:MyButton Text="{Binding TitleWithItemCount}"
                                                 HorizontalOptions="FillAndExpand"
@@ -56,7 +60,8 @@
                                                 Clicked="HeaderTapped" 
                                                 CommandParameter="{Binding .}"/>
                                 <Image Source="{Binding StateIcon}" HeightRequest="50" HorizontalOptions="End"/>
-
+                                </StackLayout>
+                                <BoxView HeightRequest="1" BackgroundColor="Black" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -92,15 +97,15 @@
                                                   BackgroundColor="#E2F5F9" >
                                             <StackLayout.Padding>
                                                 <OnPlatform x:TypeArguments="Thickness"
-                                                                              iOS="2,10"
-                                                                              Android="2,5" />
+                                                                              iOS="1,10"
+                                                                              Android="1,5" />
                                             </StackLayout.Padding>
                                             <Label BackgroundColor="#E2F5F9" 
                                                    HorizontalOptions="StartAndExpand" 
                                                    FontSize="17" 
                                                    Text="{Binding show_party_name_customer_name}" 
                                                    TextColor="Black" HorizontalTextAlignment="Start" />
-                                            <Label  BackgroundColor="#E2F5F9" WidthRequest="100" 
+                                            <Label  BackgroundColor="#E2F5F9" WidthRequest="105" 
                                                     FontSize="17" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
 
                                         </StackLayout>

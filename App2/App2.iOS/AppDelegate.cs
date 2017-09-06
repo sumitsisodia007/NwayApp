@@ -9,6 +9,7 @@ using App2.NativeMathods;
 using Xamarin.Forms;
 using App2.Model;
 using App2.Helper;
+using ImageCircle.Forms.Plugin.iOS;
 
 namespace App2.iOS
 {
@@ -30,7 +31,7 @@ namespace App2.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
-
+            ImageCircleRenderer.Init();
             if (options != null)
             {
                 // check for a local notification
@@ -107,9 +108,12 @@ namespace App2.iOS
                         string notcount = (extra[new NSString("notification_count")] as NSObject).ToString();
                         int.TryParse(notcount, out Notification_count);
                         ResponseModel res = StaticMethods.GetLocalSavedData();
-                        StaticMethods.NotificationCount= Notification_count;
+                        var d2 = DateTime.Now.ToString("dd/MM/yyyy");
+                        res.NotCountDate = d2.ToString();
+                       // StaticMethods.NotificationCount= Notification_count;
                         res.NotCount = Notification_count.ToString();
                         StaticMethods.SaveLocalData(res);
+
                     }
                     if (extra.ContainsKey(new NSString("party_id")))
                     {

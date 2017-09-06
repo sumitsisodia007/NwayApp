@@ -83,6 +83,9 @@
     <Compile Include="View\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ApprovelsPage.xaml.cs">
+      <DependentUpon>ApprovelsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Ele_CunsPage.xaml.cs">
       <DependentUpon>Ele_CunsPage.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,9 @@
     </Compile>
     <Compile Include="View\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HumanResourcePage.xaml.cs">
+      <DependentUpon>HumanResourcePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InvoiceCancellationPage.xaml.cs">
       <DependentUpon>InvoiceCancellationPage.xaml</DependentUpon>
@@ -118,6 +124,9 @@
     </Compile>
     <Compile Include="View\PurchasePage.xaml.cs">
       <DependentUpon>PurchasePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SalesPage.xaml.cs">
+      <DependentUpon>SalesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
@@ -297,6 +306,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\MasterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\SalesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\HumanResourcePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\ApprovelsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -56,6 +56,8 @@ namespace App2.Model
             public string Party_outstanding { get; set; }
             public string Amount_received { get; set; }
             public string Current_outstanding { get; set; }
+            public string Site_short_name { get; set; }
+            public string Company_short_name { get; set; }
             //Invoice event
             public string Converted_To { get; set; }
             public string Event_Date { get; set; }

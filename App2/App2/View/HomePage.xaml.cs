@@ -22,25 +22,44 @@ namespace App2.View
     {
         NavigationMdl nav = null;
         LoginMdl _login = new LoginMdl();
-        API api=new API();
-        
+        API api = new API();
+        string Notcount = "0";
+        NotificationListMdl _notificationModel;
         public HomePage()
         {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            ResponseModel sss = StaticMethods.GetLocalSavedData();
-            lblNotificationBadge.Text = sss.NotCount;
-            DateTime localTime = DateTime.Now;
-            string timeString24Hour = localTime.ToString("HH:mm", CultureInfo.CurrentCulture);
-            
+            ResponseModel rs = StaticMethods.GetLocalSavedData();
+            //var d2 = DateTime.Now.ToString("dd/MM/yyyy");
+            //if (d2.ToString() != rs.NotCountDate)
+            //{
+                api = new API();
+                NavigationMdl nav = new NavigationMdl();
+                nav.Device_id = StaticMethods.getDeviceidentifier();
+                if (nav.Device_id == "unknown")
+                {
+                    nav.Device_id = "123456";
+                }
+                nav.Company_name = EnumMaster.C21_MALHAR;
+                nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
+
+                nav.User_id = rs.User_Id;
+                _notificationModel = api.PostNotification(nav);
+                foreach (var item in _notificationModel.ListNotificationDate)
+                {
+                    rs.NotCount = lblNotificationBadge.Text = item.NotCount;
+                    rs.NotCountDate = item.Date;
+                    StaticMethods.SaveLocalData(rs);
+                    break;
+                }
+
         }
 
 
         protected override void OnAppearing()
         {
-            Device.BeginInvokeOnMainThread(() => {
-                //ResponseModel sss = StaticMethods.GetLocalSavedData();
-                //lblNotificationBadge.Text = sss.NotCount;
+            Device.BeginInvokeOnMainThread(() =>
+            {
                 if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
                 {
                     var calcScreenWidth = Application.Current.MainPage.Width;
@@ -85,7 +104,7 @@ namespace App2.View
             nav = new NavigationMdl();
             nav.Page_Title = lblPay.Text;
             nav.User_id = "";
-            nav.Device_id = StaticMethods.getDeviceidentifier(); 
+            nav.Device_id = StaticMethods.getDeviceidentifier();
             if (nav.Device_id == "unknown")
             {
                 nav.Device_id = "123456";
@@ -100,13 +119,12 @@ namespace App2.View
 
         private void CashFlow_Tapped(object sender, EventArgs e)
         {
-            
             DisplayAlert("Message", "Comming Soon", "ok");
         }
 
         private async void Elect_Tapped(object sender, EventArgs e)
         {
-           await Navigation.PushAsync(new Ele_CunsPage());
+            await Navigation.PushAsync(new Ele_CunsPage());
         }
 
         private void Expired_Tapped(object sender, EventArgs e)
@@ -121,15 +139,14 @@ namespace App2.View
 
         private async void Notification_Clicked(object sender, EventArgs e)
         {
-
-          
             try
-            {  var loadingPage = new LoaderPage();
+            {
+                var loadingPage = new LoaderPage();
                 await PopupNavigation.PushAsync(loadingPage);
                 await Task.Delay(1000);
-                 await  Navigation.PushAsync(new MainPage());
+                await Navigation.PushAsync(new MainPage());
                 await Navigation.RemovePopupPageAsync(loadingPage);
-               
+
             }
             catch (Exception ex)
             {
@@ -138,7 +155,7 @@ namespace App2.View
 
         protected override void OnDisappearing()
         {
-            
+
         }
 
         protected override bool OnBackButtonPressed()
