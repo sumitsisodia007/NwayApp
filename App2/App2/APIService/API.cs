@@ -17,8 +17,8 @@ namespace App2.APIService
 {
     public class API
     {
-          public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
-      //  public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
+        //    public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
+      public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
 
         #region Login
         public async Task<ResponseModel> PostLogin(LoginMdl lgmdl)
@@ -161,7 +161,7 @@ namespace App2.APIService
 
                 var values = new Dictionary<string, string>
                         {
-                            { "user_id", "1"},
+                            { "user_id", td_ntf.User_id},
                             { "device_id", td_ntf.Device_id},
                             { "company_name", td_ntf.Company_name},
                             { "party_id", td_ntf.Party_id},
@@ -202,8 +202,8 @@ namespace App2.APIService
 
                 var values = new Dictionary<string, string>
                         {
-                            { "user_id", "1"},
-                            { "device_id","123456"},
+                            { "user_id", keyName.User_id},
+                            { "device_id",keyName.Device_id},
                             { "company_name", keyName.Company_name},
                             { "party_name", keyName.Party_Name},
                             { "tagtype", "partylist"}

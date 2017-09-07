@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using App2.Model;
 using App2.Helper;
 using ImageCircle.Forms.Plugin.iOS;
+using ObjCRuntime;
 
 namespace App2.iOS
 {
@@ -84,7 +85,10 @@ namespace App2.iOS
                     string Party_id = "";
                     string Party_name = "";
                     int Party_outstanding = -1;
-                   
+                    if (extra.ContainsKey(new NSString("tagtype")))
+                    {
+                        TagType = (extra[new NSString("tagtype")] as NSObject).ToString();
+                    }
                     if (extra.ContainsKey(new NSString("amount_received")))
                     {
                         string amtrec = (extra[new NSString("amount_received")] as NSObject).ToString();
@@ -98,10 +102,6 @@ namespace App2.iOS
                     {
                         string curout = (extra[new NSString("current_outstanding")] as NSObject).ToString();
                         int.TryParse(curout, out Current_outstanding);
-                    }
-                    if (extra.ContainsKey(new NSString("tagtype")))
-                    {
-                        TagType = (extra[new NSString("tagtype")] as NSObject).ToString();
                     }
                     if (extra.ContainsKey(new NSString("notification_count")))
                     {
@@ -129,6 +129,7 @@ namespace App2.iOS
                         string pOut = (extra[new NSString("party_outstanding")] as NSObject).ToString();
                         int.TryParse(pOut, out Party_outstanding);
                     }
+
                     NavigationMdl mdl = new NavigationMdl();
                     mdl.Device_id = StaticMethods.getDeviceidentifier();
                     if (mdl.Device_id == "unknown")

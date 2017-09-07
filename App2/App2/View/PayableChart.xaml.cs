@@ -50,9 +50,17 @@ namespace App2.View
             lblChart.Text = nmdl.Party_Name + " " + EnumMaster.LblChartTitle;
                 ResponseModel rs = StaticMethods.GetLocalSavedData();
                 nmdl.User_id = rs.User_Id;
-                _payable =await  api.PayableTable(nmdl);
+                _payable = await api.PayableTable(nmdl);
    
             //_payable = api.PayableTable(nmdl);
+           
+            
+            ShowTotalPayble();
+            });
+        }
+
+        protected override void OnAppearing()
+        {
             try
             {
                 if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
@@ -65,9 +73,7 @@ namespace App2.View
             catch (Exception ex)
             {
             }
-            
-            ShowTotalPayble();
-            });
+
         }
         public void ShowTotalPayble()
         {
@@ -102,8 +108,13 @@ namespace App2.View
                 if (e.NewTextValue != string.Empty)
                 {
                     navmdl = new NavigationMdl();
-                    navmdl.User_id = "1";
-                    navmdl.Device_id = "123456";//StaticMethods.getDeviceidentifier();
+                    ResponseModel rs = StaticMethods.GetLocalSavedData();
+                    navmdl.User_id = rs.User_Id;
+                    navmdl.Device_id = StaticMethods.getDeviceidentifier();
+                    if (navmdl.Device_id == "unknown")
+                    {
+                        navmdl.Device_id = "123456";
+                    }
                     navmdl.Company_name = Helper.EnumMaster.C21_MALHAR;
                     navmdl.Party_Name = e.NewTextValue;
                     navmdl.Tag_type = "partylist";

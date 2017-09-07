@@ -23,38 +23,51 @@ namespace App2.View
         NavigationMdl nav = null;
         LoginMdl _login = new LoginMdl();
         API api = new API();
-        string Notcount = "0";
+       
         NotificationListMdl _notificationModel;
         public HomePage()
         {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            ResponseModel rs = StaticMethods.GetLocalSavedData();
-            //var d2 = DateTime.Now.ToString("dd/MM/yyyy");
-            //if (d2.ToString() != rs.NotCountDate)
-            //{
-                api = new API();
-                NavigationMdl nav = new NavigationMdl();
-                nav.Device_id = StaticMethods.getDeviceidentifier();
-                if (nav.Device_id == "unknown")
-                {
-                    nav.Device_id = "123456";
-                }
-                nav.Company_name = EnumMaster.C21_MALHAR;
-                nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
-
-                nav.User_id = rs.User_Id;
-                _notificationModel = api.PostNotification(nav);
-                foreach (var item in _notificationModel.ListNotificationDate)
-                {
-                    rs.NotCount = lblNotificationBadge.Text = item.NotCount;
-                    rs.NotCountDate = item.Date;
-                    StaticMethods.SaveLocalData(rs);
-                    break;
-                }
-
+            SetNotificationBadge();
         }
 
+        private void SetNotificationBadge()
+        {
+            string DateChk = null;
+            string Notcount = "0";
+            ResponseModel rs = StaticMethods.GetLocalSavedData();
+            api = new API();
+            NavigationMdl nav = new NavigationMdl();
+            nav.Device_id = StaticMethods.getDeviceidentifier();
+            if (nav.Device_id == "unknown")
+            {
+                nav.Device_id = "123456";
+            }
+            nav.Company_name = EnumMaster.C21_MALHAR;
+            nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
+
+            nav.User_id = rs.User_Id;
+            _notificationModel = api.PostNotification(nav);
+
+            var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
+            foreach (var item in _notificationModel.ListNotificationDate)
+            {
+                DateChk= item.Date;
+                Notcount= item.NotCount;
+                break;
+            }
+            if (d2.ToString() == DateChk)
+            {
+                rs.NotCount = lblNotificationBadge.Text = Notcount;
+            }
+            else
+            {
+                lblNotificationBadge.Text = "0";
+                //rs.NotCountDate = DateChk;
+                //StaticMethods.SaveLocalData(rs);
+            }
+        }
 
         protected override void OnAppearing()
         {

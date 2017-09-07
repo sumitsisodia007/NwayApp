@@ -21,12 +21,13 @@ namespace App2.View
         public List<ShowPayableTodayDetail> _payableshowlist { get; set; }
         public List<ShowPayableTotalPayble> _showpayabletotalpayblelist { get; set; }
         public List<PayableNotificationMdl> _payablenotificationdata { get; set; }
+        
         public bool Notflag { get; set; }
         PartysearchMdl lstLoca = null;
         bool isListSelected = false;
         ShowPayableTodayDetail toady_notification;
         NavigationMdl navmdl;
-        PayableNotificationMdl _payable;
+       
         public double _Width = 0;
         public static int flag = 0;
         API api = new API();
@@ -41,9 +42,37 @@ namespace App2.View
 			InitializeComponent ();
             // NavigationPage.SetHasNavigationBar(this, false);
             //NavigationPage.SetTitleIcon(this, "icon.png");
-            Notflag = mdl.Is_Notification;
-            Device.BeginInvokeOnMainThread(async ()=> { 
-            this.Title = mdl.Page_Title;
+             this.Title = mdl.Page_Title;
+            MAinMethods(mdl);
+            flag = 1;
+            //Device.BeginInvokeOnMainThread(async () =>
+            //{
+            //    Notflag = mdl.Is_Notification;
+
+              
+            //    navmdl = new NavigationMdl();
+            //    if (mdl.Page_Title == "Receivable")
+            //    {
+            //        PredefinedReceived();
+            //    }
+            //    else
+            //    {
+            //        PredefinedPaid();
+            //    }
+            //    ResponseModel rs = StaticMethods.GetLocalSavedData();
+            //    mdl.User_id = rs.User_Id;
+            //    PayableNotificationMdl _payable = await api.PayableTable(mdl);
+
+            //    toady_notification = new ShowPayableTodayDetail();
+            //    flag = 1;
+
+            //    ShowPaybleToday(_payable);
+            //    ShowTotalPayble(_payable);
+            //});
+        }
+
+        private async void MAinMethods(NavigationMdl mdl)
+        {
             navmdl = new NavigationMdl();
             if (mdl.Page_Title == "Receivable")
             {
@@ -55,14 +84,11 @@ namespace App2.View
             }
             ResponseModel rs = StaticMethods.GetLocalSavedData();
             mdl.User_id = rs.User_Id;
-            _payable = await api.PayableTable(mdl);
+            PayableNotificationMdl _payable = await api.PayableTable(mdl);
+            toady_notification = new ShowPayableTodayDetail();
 
-            toady_notification = new ShowPayableTodayDetail();            
-            flag = 1;
-           
-            ShowPaybleToday();
-            ShowTotalPayble();
-            });
+            ShowPaybleToday(_payable);
+            ShowTotalPayble(_payable);
         }
 
         protected override void OnAppearing()
@@ -109,7 +135,7 @@ namespace App2.View
             lblparty.BackgroundColor = lbloutstanding.BackgroundColor = lblTodayReceipt.BackgroundColor = lblCurOutstanding.BackgroundColor = lblSiteName.BackgroundColor = lblTotalDr.BackgroundColor = lblTotalCr.BackgroundColor = lblBalance.BackgroundColor = Color.FromHex("#A8C4E6");
         }
 
-        public void ShowPaybleToday()
+        public void ShowPaybleToday(PayableNotificationMdl _payable)
         {
             _payableshowlist = new List<ShowPayableTodayDetail>();
             try
@@ -153,9 +179,10 @@ namespace App2.View
               //  StaticMethods.ShowToast("Internal Error Payble Today" + ex.Message);
             }
             list_today_payble.ItemsSource = _payableshowlist;
+            
         }
 
-        public void ShowTotalPayble()
+        public void ShowTotalPayble(PayableNotificationMdl _payable)
         {
             _showpayabletotalpayblelist = new List<ShowPayableTotalPayble>();
             try
@@ -220,7 +247,8 @@ namespace App2.View
                 if (e.NewTextValue != string.Empty)
                 {
                     navmdl = new NavigationMdl();
-                    navmdl.User_id = "1";
+                    ResponseModel rs = StaticMethods.GetLocalSavedData();
+                    navmdl.User_id = rs.User_Id;
                     navmdl.Device_id = StaticMethods.getDeviceidentifier(); 
                     if (navmdl.Device_id == "unknown")
                     {
