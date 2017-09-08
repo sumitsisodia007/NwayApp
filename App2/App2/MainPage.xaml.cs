@@ -36,8 +36,9 @@ namespace App2
         {
             InitializeComponent();
 
-            NotificationMehods();
-            UpdateListContent();
+                NotificationMehods();
+                UpdateListContent();
+          
         }
 
         protected override void OnAppearing()
@@ -291,7 +292,7 @@ namespace App2
         {
             NotificationShow obj = (NotificationShow)e.Item;
             NavigationMdl navmdl = new NavigationMdl();
-            navmdl.Party_id = obj.show_party_id_invoice_id;
+           // navmdl.Party_id = obj.show_party_id_invoice_id;
             navmdl.Device_id = StaticMethods.getDeviceidentifier();
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);

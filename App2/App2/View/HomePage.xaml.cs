@@ -183,5 +183,14 @@ namespace App2.View
                 App.MasterDetail.IsPresented = true;
             }
         }
+
+        private void Alert_Tapped(object sender, EventArgs e)
+        {
+            DisplayAlert("Message", "Comming Soon, Alert", "ok");
+        }
+        private void Approval_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Message", "Comming Soon, Approval", "ok");
+        }
     }
 }

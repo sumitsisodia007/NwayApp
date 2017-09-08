@@ -95,22 +95,22 @@ namespace App2.View
                     {
                         rs.Device_Id = _login.DeviceID;
                         StaticMethods.SaveLocalData(rs);
-                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage());
+                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage("S", "Successfully Login"));
                         await Navigation.PushModalAsync(new MasterMainPage());
                         txtFName.Text = txtPass.Text = string.Empty;
                     }
                 }
                 else if (txtFName.Text == string.Empty && txtPass.Text == string.Empty)
                 {
-                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("W", "Please Fill All Details"));
+                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "Please Fill All Details"));
                 }
                 else if (txtFName.Text == string.Empty)
                 {
-                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("W", "Please Fill User Name"));
+                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "Please Fill User Name"));
                 }
                 else if (txtPass.Text == string.Empty)
                 {
-                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("W", "Please Fill Password"));
+                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "Please Fill Password"));
                 }
                 //if (IsLoginSuccess == true)
                 //{

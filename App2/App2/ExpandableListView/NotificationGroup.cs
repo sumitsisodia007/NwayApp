@@ -20,6 +20,7 @@ namespace App2.ExpandableListView
         {
             get { return string.Format(Title); }
         }
+
         public bool Expanded
         {
             get { return _expanded; }
@@ -46,35 +47,35 @@ namespace App2.ExpandableListView
             Expanded = expanded;
         }
      
-        public static ObservableCollection<NotificationGroup> Groups {  set; get; }
-        public static ObservableCollection<NotificationGroup> FoodGroups()
-        {
+      //  public static ObservableCollection<NotificationGroup> Groups {  set; get; }
+        //public static ObservableCollection<NotificationGroup> FoodGroups()
+        //{
 
-            API api = new API();
-            NavigationMdl nav = new NavigationMdl();
-            nav.Device_id = StaticMethods.getDeviceidentifier(); 
-            if (nav.Device_id == "unknown")
-            {
-                nav.Device_id = "123456";
-            }
-            nav.Company_name = EnumMaster.C21_MALHAR;
-            nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
-            ResponseModel rs = StaticMethods.GetLocalSavedData();
-            nav.User_id = rs.User_Id;
-            NotificationListMdl mode = api.PostNotification(nav);
-            ObservableCollection<NotificationGroup> food = new ObservableCollection<NotificationGroup>();
-            foreach (var item in mode.ListNotificationDate)
-            {
-                NotificationGroup group = new NotificationGroup(item.Date,"o");
+        //    API api = new API();
+        //    NavigationMdl nav = new NavigationMdl();
+        //    nav.Device_id = StaticMethods.getDeviceidentifier(); 
+        //    if (nav.Device_id == "unknown")
+        //    {
+        //        nav.Device_id = "123456";
+        //    }
+        //    nav.Company_name = EnumMaster.C21_MALHAR;
+        //    nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
+        //    ResponseModel rs = StaticMethods.GetLocalSavedData();
+        //    nav.User_id = rs.User_Id;
+        //   NotificationListMdl mode = api.PostNotification(nav);
+        //    ObservableCollection<NotificationGroup> food = new ObservableCollection<NotificationGroup>();
+        //    foreach (var item in mode.ListNotificationDate)
+        //    {
+        //        NotificationGroup group = new NotificationGroup(item.Date,"o");
 
-                foreach (var item2 in item.ListTags)
-                {
-                    group.Add(new NotificationDetails() { Name = item2.Tag });
-                }
-            }
-            Groups = food;
-           return Groups;
-        }
+        //        foreach (var item2 in item.ListTags)
+        //        {
+        //            group.Add(new NotificationDetails() { Name = item2.Tag });
+        //        }
+        //    }
+        //    Groups = food;
+        //   return Groups;
+        //}
 
 
         public event PropertyChangedEventHandler PropertyChanged;

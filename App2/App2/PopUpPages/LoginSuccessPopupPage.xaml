@@ -12,12 +12,22 @@
         <animations:MoveAnimation PositionIn="Top" PositionOut="Top"/>
     </pages:PopupPage.Animation>
     <StackLayout x:Name="stkMessage"
+                 Orientation="Horizontal"
                 VerticalOptions="Start"
                 BackgroundColor="#43A047"
-                HeightRequest="50">
+                HeightRequest="50"
+                Padding="20,0">
+      
+        <Image x:Name="imgAlert"
+                            Source="check"
+                           Aspect="AspectFit"
+                           HeightRequest="42"
+                        HorizontalOptions="StartAndExpand"
+      VerticalOptions="EndAndExpand"/>
+      
         <Label    x:Name="lblMessage"
-                  Margin="10, 0, 0, 5"
                   TextColor="White"
+                  HorizontalOptions="StartAndExpand"
                   VerticalOptions="EndAndExpand"
                   Text="Login is success"/>
     </StackLayout>
