@@ -3,6 +3,8 @@ using App2.Helper;
 using App2.Model;
 using App2.NativeMathods;
 using App2.ShowModels;
+using Microcharts;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -71,6 +73,9 @@ namespace App2.View
             //});
         }
 
+
+
+
         private async void MAinMethods(NavigationMdl mdl)
         {
             navmdl = new NavigationMdl();
@@ -84,17 +89,22 @@ namespace App2.View
             }
             ResponseModel rs = StaticMethods.GetLocalSavedData();
             mdl.User_id = rs.User_Id;
-            PayableNotificationMdl _payable = await api.PayableTable(mdl);
+            PayableNotificationMdl  _payable = await api.PayableTable(mdl);
             toady_notification = new ShowPayableTodayDetail();
 
             ShowPaybleToday(_payable);
             ShowTotalPayble(_payable);
+            var charts = CreateQuickstart(_payable);
+            linechart.Chart = charts[0];
         }
 
         protected override void OnAppearing()
         {
             Device.BeginInvokeOnMainThread(() => {
                 flag = 1;
+               
+               
+               
                 if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
@@ -275,7 +285,7 @@ namespace App2.View
                             AutoList.IsVisible = true;
                             if(AutoList.IsVisible == true)
                             {
-                                imgLogo.IsVisible = false;
+                                linechart.IsVisible = false;
                             }
                             AutoList.HeightRequest = 40 * 5;
                         }
@@ -290,7 +300,7 @@ namespace App2.View
                 else
                 {
                     AutoList.IsVisible = false;
-                    imgLogo.IsVisible = true;
+                    linechart.IsVisible = true;
                 }
             }
             catch (Exception ex)
@@ -321,7 +331,7 @@ namespace App2.View
             }
             
             AutoList.IsVisible = false;
-            imgLogo.IsVisible = true;
+            linechart.IsVisible = true;
             txtAuto.Placeholder = "Select Party";
 
         }
@@ -360,6 +370,53 @@ namespace App2.View
                 obj = null;
                 txtAuto.TextChanged += txtAuto_TextChanged;
             }
+        }
+
+
+        public static Chart[] CreateQuickstart(PayableNotificationMdl data)
+        {
+           
+            var entries = new[]
+            {
+
+                            new Microcharts.Entry(100000)
+                            {
+
+                                    Label = "January",
+                                    ValueLabel = "100000",
+                                    Color = SKColor.Parse("#266489"), TextColor=SKColor.Parse("#EC792B"),
+                            },
+                            new Microcharts.Entry(250000)
+                            {
+                                    Label = "February",
+                                    ValueLabel = "250000",
+                                    Color = SKColor.Parse("#68B9C0"), TextColor=SKColor.Parse("#EC792B"),
+                            },
+                            new Microcharts.Entry(350000)
+                            {
+                                    Label = "March",
+                                    ValueLabel = "350000",
+                                    Color = SKColor.Parse("#90D585"),
+                                    TextColor=SKColor.Parse("#EC792B"),
+                            },
+                        };
+            
+            return new Chart[]
+            {
+                                //new BarChart() { Entries = entries },
+                                //new PointChart() { Entries = entries },
+                                new LineChart() { Entries = entries ,
+                                
+                                                  BackgroundColor =SKColor.Parse("#A8C4E6"),
+                                                  PointSize =10,
+                                                  LabelTextSize =17,
+                                                  LineSize =3,
+                                                  PointMode =PointMode.Circle,
+                                                  LineMode=LineMode.Straight},
+                                //new DonutChart() { Entries = entries },
+                                //new RadialGaugeChart() { Entries = entries },
+                               
+            };
         }
     }
    

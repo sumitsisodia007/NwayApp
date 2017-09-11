@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.View.PayablePage"
+             xmlns:micro="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:local="clr-namespace:App2.CustomRenderer"
              BackgroundColor="#ED7D31"
              Title="Payable">
@@ -78,10 +79,14 @@
                         </ListView>
                     </StackLayout>
                     <!--End Auto Complete-->
-                    <Image x:Name="imgLogo"
+                <StackLayout BackgroundColor="#A8C4E6">
+                    <micro:ChartView x:Name="linechart" HeightRequest="150" BackgroundColor="#A8C4E6"  />
+                    <!--<Image x:Name="imgLogo"
                             Source="logo"
                            Aspect="AspectFit"
-                           HeightRequest="150" />
+                           HeightRequest="150" />-->
+                </StackLayout>
+                    
                     <StackLayout x:Name="stktodaypayable" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
                         <Label x:Name="lblFirstTitle" Text="Today Payment(SETTING amount) (NOTIFICATION)" HorizontalOptions="CenterAndExpand" TextColor="Black" FontSize="19" HorizontalTextAlignment="Center"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
