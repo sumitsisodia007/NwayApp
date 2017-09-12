@@ -22,7 +22,8 @@ namespace App2.View
     {
         public List<ShowPayableTodayDetail> _payableshowlist { get; set; }
         public List<ShowPayableTotalPayble> _showpayabletotalpayblelist { get; set; }
-        public List<PayableNotificationMdl> _payablenotificationdata { get; set; }
+        // public List<PayableNotificationMdl> _payablenotificationdata { get; set; }
+        public static SKColor ColorsPayable = SKColors.Gray;
         
         public bool Notflag { get; set; }
         PartysearchMdl lstLoca = null;
@@ -73,29 +74,29 @@ namespace App2.View
             //});
         }
 
-
-
-
         private async void MAinMethods(NavigationMdl mdl)
         {
+            PayableNotificationMdl _payable = await api.PayableTable(mdl);
             navmdl = new NavigationMdl();
-            if (mdl.Page_Title == "Receivable")
+           if (mdl.Page_Title == "Receivable")
             {
                 PredefinedReceived();
+                var charts = CreateQuickstart(_payable);
+                linechart.Chart = charts[0];
             }
             else
             {
                 PredefinedPaid();
+                var charts = CreateQuickstart1(_payable);
+                linechart.Chart = charts[0];
             }
             ResponseModel rs = StaticMethods.GetLocalSavedData();
             mdl.User_id = rs.User_Id;
-            PayableNotificationMdl  _payable = await api.PayableTable(mdl);
+           
             toady_notification = new ShowPayableTodayDetail();
 
             ShowPaybleToday(_payable);
             ShowTotalPayble(_payable);
-            var charts = CreateQuickstart(_payable);
-            linechart.Chart = charts[0];
         }
 
         protected override void OnAppearing()
@@ -219,6 +220,7 @@ namespace App2.View
                     _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = item.Perticular, Show_Balance = item.Balance, Show_Total_cr = item.Receive, Show_Total_dr = item.Total_Due});
                 }
             }
+
             }
             catch (Exception ex)
             {
@@ -372,30 +374,48 @@ namespace App2.View
             }
         }
 
-
         public static Chart[] CreateQuickstart(PayableNotificationMdl data)
         {
            
-            var entries = new[]
+            List<ShowPayableTotalPayble>  _showlist = new List<ShowPayableTotalPayble>();
+            foreach (var item in data.ListPayablemdl)
+            {
+                ColorsPayable = SKColor.Parse("#A8C4E6");
+                    _showlist.Add(new ShowPayableTotalPayble() { Show_Site_name = item.Perticular, Show_Balance = item.Balance, Show_Total_cr = item.Receive, Show_Total_dr = item.Total_Due });
+
+            }
+            float a1 = Convert.ToSingle(_showlist[0].Show_Balance);
+            float b1 = Convert.ToSingle(_showlist[1].Show_Balance);
+            float c1 = Convert.ToSingle(_showlist[2].Show_Balance);
+            float d1 = Convert.ToSingle(_showlist[3].Show_Balance);
+
+            var  entries = new[]
             {
 
-                            new Microcharts.Entry(100000)
+                            new Microcharts.Entry(a1)
                             {
 
-                                    Label = "January",
-                                    ValueLabel = "100000",
+                                    Label = _showlist[0].Show_Site_name,
+                                    ValueLabel = a1.ToString(),
                                     Color = SKColor.Parse("#266489"), TextColor=SKColor.Parse("#EC792B"),
                             },
-                            new Microcharts.Entry(250000)
+                            new Microcharts.Entry(b1)
                             {
-                                    Label = "February",
-                                    ValueLabel = "250000",
+                                    Label = _showlist[1].Show_Site_name,
+                                    ValueLabel = b1.ToString(),
                                     Color = SKColor.Parse("#68B9C0"), TextColor=SKColor.Parse("#EC792B"),
                             },
-                            new Microcharts.Entry(350000)
+                            new Microcharts.Entry(c1)
                             {
-                                    Label = "March",
-                                    ValueLabel = "350000",
+                                    Label = _showlist[2].Show_Site_name,
+                                    ValueLabel = c1.ToString(),
+                                    Color = SKColor.Parse("#90D585"),
+                                    TextColor=SKColor.Parse("#EC792B"),
+                            },
+                            new Microcharts.Entry(d1)
+                            {
+                                    Label = _showlist[3].Show_Site_name,
+                                    ValueLabel = d1.ToString(),
                                     Color = SKColor.Parse("#90D585"),
                                     TextColor=SKColor.Parse("#EC792B"),
                             },
@@ -407,7 +427,67 @@ namespace App2.View
                                 //new PointChart() { Entries = entries },
                                 new LineChart() { Entries = entries ,
                                 
-                                                  BackgroundColor =SKColor.Parse("#A8C4E6"),
+                                                  BackgroundColor =ColorsPayable,
+                                                  PointSize =10,
+                                                  LabelTextSize =17,
+                                                  LineSize =3,
+                                                  PointMode =PointMode.Circle,
+                                                  LineMode=LineMode.Straight},
+                                //new DonutChart() { Entries = entries },
+                                //new RadialGaugeChart() { Entries = entries },
+                               
+            };
+        }
+
+        public static Chart[] CreateQuickstart1(PayableNotificationMdl data)
+        {
+
+            List<ShowPayableTotalPayble> _showlist = new List<ShowPayableTotalPayble>();
+            foreach (var item in data.ListPayablemdl)
+            {
+                
+                    ColorsPayable = SKColor.Parse("#EC792B");
+                    _showlist.Add(new ShowPayableTotalPayble() { Show_Site_name = item.Site_name, Show_Balance = item.Balance, Show_Total_cr = item.Total_cr, Show_Total_dr = item.Total_dr });
+                
+            }
+            float a1 = Convert.ToSingle(_showlist[0].Show_Balance);
+            float b1 = Convert.ToSingle(_showlist[1].Show_Balance);
+            float c1 = Convert.ToSingle(_showlist[2].Show_Balance);
+            
+
+            var entries = new[]
+            {
+
+                            new Microcharts.Entry(a1)
+                            {
+
+                                    Label = _showlist[0].Show_Site_name,
+                                    ValueLabel = a1.ToString(),
+                                    Color = SKColor.Parse("#266489"), TextColor=SKColor.Parse("#EC792B"),
+                            },
+                            new Microcharts.Entry(b1)
+                            {
+                                    Label = _showlist[1].Show_Site_name,
+                                    ValueLabel = b1.ToString(),
+                                    Color = SKColor.Parse("#68B9C0"), TextColor=SKColor.Parse("#EC792B"),
+                            },
+                            new Microcharts.Entry(c1)
+                            {
+                                    Label = _showlist[2].Show_Site_name,
+                                    ValueLabel = c1.ToString(),
+                                    Color = SKColor.Parse("#90D585"),
+                                    TextColor=SKColor.Parse("#EC792B"),
+                            },
+                           
+                        };
+
+            return new Chart[]
+            {
+                                //new BarChart() { Entries = entries },
+                                //new PointChart() { Entries = entries },
+                                new LineChart() { Entries = entries ,
+
+                                                  BackgroundColor =ColorsPayable,
                                                   PointSize =10,
                                                   LabelTextSize =17,
                                                   LineSize =3,

@@ -61,6 +61,7 @@ namespace App2
                 int selectedIndex = _expandedGroups.IndexOf(
                 ((NotificationGroup)((Button)sender).CommandParameter));
                 _allGroups[selectedIndex].Expanded = !_allGroups[selectedIndex].Expanded;
+               
                 UpdateListContent();
             }
             catch (Exception ex)
@@ -91,6 +92,10 @@ namespace App2
                 NotificationGroup group = new NotificationGroup(item.Date + " (" + item.NotCount + ")", "o");
                 foreach (var item2 in item.ListTags)
                 {
+                    //foreach (var item3 in item2.Notification)
+                    //{
+                    //    item3.Site_short_name
+                    //}
                     if (item2.Tag == "invoice_cancelletion")
                     {
                         item2.Tag = "Invoice_cancelletion";
@@ -105,7 +110,6 @@ namespace App2
                     else if (item2.Tag == "invoice_event") { item2.Tag = "Invoice_event"; }
                 
                     group.Add(new NotificationDetails() { Name =  item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
-                    //group.Add(new NotificationDetails() { Name = item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
                 }
                 _not.Add(group);
             }
@@ -339,5 +343,26 @@ namespace App2
             }
         }
 
+        //private void C21_Tapped(object sender, EventArgs e)
+        //{
+        //    if (!(MALHAR.Text == "C21"))
+        //    {
+        //        MALHAR.BackgroundColor = Color.White;
+        //        MALHAR.TextColor = Color.FromHex("#4472C4");
+        //        C21.BackgroundColor = Color.FromHex("#4472C4");
+        //        C21.TextColor = Color.White;
+        //    }
+        //}
+
+        //private void MALHAR_Tapped(object sender, EventArgs e)
+        //{
+        //    if (!(C21.Text == "MALHAR"))
+        //    {
+        //        MALHAR.BackgroundColor = Color.FromHex("#4472C4");
+        //        MALHAR.TextColor = Color.White;
+        //        C21.BackgroundColor = Color.White;
+        //        C21.TextColor = Color.FromHex("#4472C4");
+        //    }
+        //}
     }
 }

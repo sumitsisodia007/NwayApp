@@ -67,7 +67,7 @@
         <ScrollView>
             <StackLayout Padding="0,15" Orientation="Vertical" Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
                 <StackLayout  Orientation="Horizontal" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                    <Frame x:Name="GridRec" HasShadow="True"  BackgroundColor="White" HeightRequest="165" WidthRequest="135" Padding="1" OutlineColor="Black">
+                    <Frame x:Name="GridRec" HasShadow="True"  BackgroundColor="White" HeightRequest="170" WidthRequest="135" Padding="1" OutlineColor="Black">
                         <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                             <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                                 <Image Source="icon_money" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -96,7 +96,7 @@
                         </Frame.GestureRecognizers>
                     </Frame>
 
-                    <Frame x:Name="GridPay"   BackgroundColor="White" HeightRequest="165" WidthRequest="135" Padding="1" OutlineColor="Black" >
+                    <Frame x:Name="GridPay"   BackgroundColor="White" HeightRequest="170" WidthRequest="135" Padding="1" OutlineColor="Black" >
                         <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                             <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                                 <Image Source="icon_card_pay" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -131,7 +131,7 @@
                 </StackLayout>
 
                 <StackLayout  Orientation="Horizontal" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                    <Frame x:Name="GridCas"  BackgroundColor="White" HeightRequest="165" WidthRequest="135" Padding="1" OutlineColor="Black" >
+                    <Frame x:Name="GridCas"  BackgroundColor="White" HeightRequest="170" WidthRequest="135" Padding="1" OutlineColor="Black" >
                         <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                             <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                                 <Image Source="icon_cash" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -162,7 +162,7 @@
                         </Frame.GestureRecognizers>
                     </Frame>
 
-                    <Frame x:Name="GridCon"  BackgroundColor="White" HeightRequest="165" WidthRequest="135" Padding="1" OutlineColor="Black">
+                    <Frame x:Name="GridCon"  BackgroundColor="White" HeightRequest="170" WidthRequest="135" Padding="1" OutlineColor="Black">
                         <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                             <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                                 <Image Source="icon_bulb" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -194,7 +194,7 @@
                     </Frame>
                 </StackLayout>
                 <StackLayout Spacing="20" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                    <Frame x:Name="GridExp"  BackgroundColor="White" HasShadow="True" HeightRequest="165" WidthRequest="135" Padding="1" OutlineColor="Black">
+                    <Frame x:Name="GridExp"  BackgroundColor="White" HasShadow="True" HeightRequest="170" WidthRequest="135" Padding="1" OutlineColor="Black">
                         <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                             <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                                 <Image Source="icon_loading" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -226,7 +226,7 @@
                         </Frame.GestureRecognizers>
                     </Frame>
 
-                    <Frame x:Name="GridInv"  BackgroundColor="White" HeightRequest="165" WidthRequest="135" Padding="1" OutlineColor="Black" >
+                    <Frame x:Name="GridInv"  BackgroundColor="White" HeightRequest="170" WidthRequest="135" Padding="1" OutlineColor="Black" >
                         <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                             <StackLayout Orientation="Vertical" Padding="0,30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                                 <Image Source="icon_cancel" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">

@@ -95,6 +95,9 @@
     <Compile Include="View\ExpiredSoon.xaml.cs">
       <DependentUpon>ExpiredSoon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -333,6 +336,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\ApprovelsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\HelpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

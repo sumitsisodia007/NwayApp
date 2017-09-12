@@ -9,7 +9,20 @@
 
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                  AbsoluteLayout.LayoutFlags="All">
-            <!--<ActivityIndicator x:Name="load" IsRunning="False" IsVisible="True"/>-->
+            <!--<StackLayout>
+                <StackLayout Orientation="Horizontal"  x:Name="stkMallName">
+                        <Label x:Name="C21" FontSize="17" Text="C21" TextColor="White" BackgroundColor="#4472C4" HeightRequest="25" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="C21_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label x:Name="MALHAR"  FontSize="17" Text="MALHAR" TextColor="#4472C4" BackgroundColor="White" HeightRequest="25" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="MALHAR_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+            </StackLayout>-->
             <ListView  x:Name="GroupedView"
                     GroupDisplayBinding="{Binding Title}"
                     HasUnevenRows="True"
@@ -46,7 +59,7 @@
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Spacing="0" Padding="0" BackgroundColor="#E2F5F9">
+                            <StackLayout x:Name="stkHeader" Spacing="0" Padding="0" BackgroundColor="#E2F5F9">
                                 <BoxView HeightRequest="1" BackgroundColor="Black" />
                                 <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand" BackgroundColor="#E2F5F9" >
 
@@ -123,7 +136,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Button Text="OK" 
+                        <Button Text="Back To Notification" 
                                  BackgroundColor="#E2F5F9" FontSize="18" TextColor="Black"
                                 FontAttributes="Bold"
                                 VerticalOptions="CenterAndExpand"

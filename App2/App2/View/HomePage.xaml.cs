@@ -29,6 +29,7 @@ namespace App2.View
         {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            PrepareView();
             SetNotificationBadge();
         }
 
@@ -71,26 +72,7 @@ namespace App2.View
 
         protected override void OnAppearing()
         {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
-                {
-                    var calcScreenWidth = Application.Current.MainPage.Width;
-                    var calcScreenHieght = Application.Current.MainPage.Height;
-                    GridRec.HeightRequest =
-                    GridPay.HeightRequest =
-                    GridCas.HeightRequest =
-                    GridCon.HeightRequest =
-                    GridExp.HeightRequest =
-                    GridInv.HeightRequest = calcScreenHieght / 4;
-                    GridRec.WidthRequest =
-                    GridPay.WidthRequest =
-                    GridCas.WidthRequest =
-                    GridCon.WidthRequest =
-                    GridExp.WidthRequest =
-                    GridInv.WidthRequest = calcScreenWidth / 3;
-                }
-            });
+           // PrepareView();
         }
 
         private async void Receivable_Tapped(object sender, EventArgs e)
@@ -166,11 +148,6 @@ namespace App2.View
             }
         }
 
-        protected override void OnDisappearing()
-        {
-
-        }
-
         protected override bool OnBackButtonPressed()
         {
             return true;
@@ -191,6 +168,35 @@ namespace App2.View
         private void Approval_Clicked(object sender, EventArgs e)
         {
             DisplayAlert("Message", "Comming Soon, Approval", "ok");
+        }
+
+        private void PrepareView()
+        {
+            try
+            {
+
+                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+                {
+                    var calcScreenWidth = Application.Current.MainPage.Width;
+                    var calcScreenHieght = Application.Current.MainPage.Height;
+                    GridRec.HeightRequest =
+                    GridPay.HeightRequest =
+                    GridCas.HeightRequest =
+                    GridCon.HeightRequest =
+                    GridExp.HeightRequest =
+                    GridInv.HeightRequest = calcScreenHieght / 4;
+                    GridRec.WidthRequest =
+                    GridPay.WidthRequest =
+                    GridCas.WidthRequest =
+                    GridCon.WidthRequest =
+                    GridExp.WidthRequest =
+                    GridInv.WidthRequest = calcScreenWidth / 3;
+                }
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Erro",ex.Message,"ok");
+            }
         }
     }
 }

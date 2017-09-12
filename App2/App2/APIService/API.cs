@@ -1,24 +1,18 @@
 ﻿using App2.Model;
 using App2.NativeMathods;
-using App2.View;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
-using static App2.Model.NotificationListMdl;
 
 namespace App2.APIService
 {
     public class API
     {
-      //      public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
-      public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
+       public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
+      //     public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
 
         #region Login
         public async Task<ResponseModel> PostLogin(LoginMdl lgmdl)

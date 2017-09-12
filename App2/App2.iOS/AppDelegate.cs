@@ -143,13 +143,13 @@ namespace App2.iOS
                     {
                         mdl.Page_Title = "Receivable";
                         mdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
-                        App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
+                      //  App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
                     }
                     else if (TagType == "paid")
                     {
                         mdl.Page_Title = "Payable";
                         mdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
-                        App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
+                      //  App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
                     }
                     else if (TagType == "booking_entry")
                     { LoadApplication(new App()); }
@@ -161,18 +161,20 @@ namespace App2.iOS
                     { LoadApplication(new App()); }
                     // StaticMethods.SaveLocalNotification(mdl);
 
-                    //UIAlertView alert = new UIAlertView(mdl.Page_Title+ " Notification Received.", null, null, NSBundle.MainBundle.LocalizedString("Cancel", "Cancel"),
-                    //                          NSBundle.MainBundle.LocalizedString("OK", "Go"));
-                    //alert.Show();
-                    //alert.Clicked += (sender, buttonArgs) =>
-                    //{
-                    //    if (buttonArgs.ButtonIndex == 1)
-                    //    {
-                    //    }
-                    //    else
-                    //    {
-                    //    }
-                    //};
+                    UIAlertView alert = new UIAlertView("You have Receive Notification.", null, null, NSBundle.MainBundle.LocalizedString("Cancel", "Cancel"),
+                                              NSBundle.MainBundle.LocalizedString("OK", "Go"));
+                    alert.Show();
+                    alert.Clicked += (sender, buttonArgs) =>
+                    {
+                        if (buttonArgs.ButtonIndex == 1)
+                        {
+                            App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
+                        }
+                        else
+                        {
+                            LoadApplication(new App());
+                        }
+                    };
                 }
             }
             catch (Exception ex)

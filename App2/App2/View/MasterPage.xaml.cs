@@ -49,7 +49,7 @@ namespace App2.View
             var page5 = new MasterPageItem() { Title = "Human Resource", Icon = "hr", TargetType = typeof(HumanResourcePage) };
             var page6 = new MasterPageItem() { Title = "Approvels", Icon = "thumbs_up", TargetType = typeof(ApprovelsPage) };
             var page8 = new MasterPageItem() { Title = "Setting", Icon = "setting", TargetType = typeof(SettingPage) };
-            var page9 = new MasterPageItem() { Title = "Help & Feedback", Icon = "help", TargetType = typeof(LoginPage) };
+            var page9 = new MasterPageItem() { Title = "Help & Feedback", Icon = "help", TargetType = typeof(HelpPage) };
             var page10 = new MasterPageItem() { Title = "Logout", Icon = "logout", TargetType = typeof(LogOutPage) };
 
             // Adding menu items to menuList
