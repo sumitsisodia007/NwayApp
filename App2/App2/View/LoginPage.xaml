@@ -27,7 +27,7 @@
 
                     <StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Horizontal" Padding="0">
                         <Image Source="e_mail" Aspect="AspectFit" />
-                        <local:MyEntry x:Name="txtFName" FontSize="15" Text="Sumit"  FontFamily="SF UI Display"  PlaceholderColor="#E8E8E8"
+                        <local:MyEntry x:Name="txtFName" FontSize="15" Text="elensoft"  FontFamily="SF UI Display"  PlaceholderColor="#E8E8E8"
 							Placeholder="USER NAME" HorizontalOptions="FillAndExpand" TextColor="Black"
 							HeightRequest="40">
                         </local:MyEntry>

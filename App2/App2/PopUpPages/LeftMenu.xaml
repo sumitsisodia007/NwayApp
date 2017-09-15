@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.PopUpPages.LeftMenu"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"                 
+                xmlns:local="clr-namespace:App2.CustomRenderer"
+                 InputTransparent="False"
+                HasSystemPadding="True"
+                CloseWhenBackgroundIsClicked="True"
+                 Padding="100,0,0,0">
+    <pages:PopupPage.Animation>
+        <animations:MoveAnimation PositionIn="Right" PositionOut="Right"/>
+    </pages:PopupPage.Animation>
+
+    <StackLayout x:Name="stkMessage"
+                 VerticalOptions="FillAndExpand"
+                 HorizontalOptions="FillAndExpand"
+                 BackgroundColor="White"
+                 Padding="0,20">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="20,10" Spacing="0">
+            <Label Text="Sites Name" Font="17,Bold" HorizontalOptions="StartAndExpand"/>
+            <!--<Label Text="Update" Font="17,Bold" HorizontalOptions="EndAndExpand"/>-->
+            <local:CurvedCornersLabel x:Name="lblupdate" Text=" Update "
+                                                      FontSize="14.5"
+                                                      CurvedBackgroundColor="#008D4C"
+                                                      TextColor="White"
+                                                      HorizontalOptions="EndAndExpand"
+                                                      CurvedCornerRadius="8">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </local:CurvedCornersLabel>
+        </StackLayout>
+        <StackLayout >
+            <ListView x:Name="NavigationList"
+                          BackgroundColor="White"
+                          SeparatorVisibility="None"
+                          SeparatorColor="#4472C4"
+                      HasUnevenRows="True"
+                          ItemSelected="NavigationList_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <controls:CheckBox DefaultText="{Binding DefaultText}"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       TextColor="Black"
+                                                   CheckedChanged="CheckBox_CheckedChanged"
+                                                       />
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+        <!--<controls:CheckBox CheckedText="{Binding Title}"
+                                                       DefaultText="{Binding Title}"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       TextColor="Blue"
+                                                       UncheckedText="This is Unchecked" />-->
+        <Button VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Text="OK" Clicked="Button_Clicked"/>
+
+    </StackLayout>
+
+</pages:PopupPage>

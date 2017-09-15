@@ -56,15 +56,20 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\LoginMdl.cs" />
+    <Compile Include="Model\LoginResponseMdl.cs" />
     <Compile Include="Model\MasterPageItem.cs" />
     <Compile Include="Model\NavigationMdl.cs" />
     <Compile Include="Model\NotificationListMdl.cs" />
     <Compile Include="Model\PartysearchMdl.cs" />
     <Compile Include="Model\PayableNotificationMdl.cs" />
     <Compile Include="Model\ResponseModel.cs" />
+    <Compile Include="Model\SiteNameMdl.cs" />
     <Compile Include="NativeMathods\StaticMethods.cs" />
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopUpPages\LeftMenu.xaml.cs">
+      <DependentUpon>LeftMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="PopUpPages\LoaderPage.xaml.cs">
       <DependentUpon>LoaderPage.xaml</DependentUpon>
@@ -78,6 +83,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowModels\NotificationShow.cs" />
     <Compile Include="ShowModels\PartyDetails.cs" />
+    <Compile Include="ShowModels\ShowCompanyNameMdl.cs" />
     <Compile Include="ShowModels\ShowPayableTodayDetail.cs" />
     <Compile Include="ShowModels\ShowPayableTotalPayble.cs" />
     <Compile Include="View\Account.xaml.cs">
@@ -342,6 +348,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\HelpPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PopUpPages\LeftMenu.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

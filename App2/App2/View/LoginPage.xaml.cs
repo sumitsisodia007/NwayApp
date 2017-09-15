@@ -63,10 +63,12 @@ namespace App2.View
            
             btnLogin.IsEnabled = false;
             ResponseModel rs = new ResponseModel();
+            LoginResponseMdl res = new LoginResponseMdl();
             _Loading.Color = Color.FromHex("#4472C4");
             _Loading.IsRunning = true;
-            _login.Username = txtFName.Text;
-            _login.Password = txtPass.Text;
+           rs.UserName= _login.Username = txtFName.Text;
+           rs.Password= _login.Password = txtPass.Text;
+            _login.Tagtype = EnumMaster.SIGNIN;
             _login.DeviceID = StaticMethods.getDeviceidentifier(); 
             if (_login.DeviceID == "unknown")
             {
@@ -84,41 +86,44 @@ namespace App2.View
                     _login.Firebasetoken = "";
                 }
             }
-            _login.Tagtype = EnumMaster.SIGNIN;
+           
 
             try
             {
-                if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
+                if (!CrossConnectivity.Current.IsConnected)
                 {
-                    rs = await api.PostLogin(_login);
-                    if (rs.Error == "False")
+                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+                }
+                else
+                {
+                    if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
                     {
-                        rs.Device_Id = _login.DeviceID;
-                        StaticMethods.SaveLocalData(rs);
-                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage("S", "Successfully Login"));
-                        await Navigation.PushModalAsync(new MasterMainPage());
-                        txtFName.Text = txtPass.Text = string.Empty;
+                        res = await api.PostLogin(_login);
+                        if (res.Error == "false")
+                        {
+                            rs.Device_Id = _login.DeviceID;
+                            rs.Min_Receipt_Amt = res.Min_receipt_amount.ToString();
+                            rs.Notification_Day_Count = res.Notification_day_count.ToString();
+                            rs.Error = res.Error;
+                            StaticMethods.SaveLocalData(rs);
+                            await Navigation.PushPopupAsync(new LoginSuccessPopupPage("S", res.Message));
+                            await Navigation.PushModalAsync(new MasterMainPage(res));
+                            txtFName.Text = txtPass.Text = string.Empty;
+                        }
+                    }
+                    else if (txtFName.Text == string.Empty && txtPass.Text == string.Empty)
+                    {
+                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "Please Fill All Details"));
+                    }
+                    else if (txtFName.Text == string.Empty)
+                    {
+                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "Please Fill User Name"));
+                    }
+                    else if (txtPass.Text == string.Empty)
+                    {
+                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "Please Fill Password"));
                     }
                 }
-                else if (txtFName.Text == string.Empty && txtPass.Text == string.Empty)
-                {
-                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "Please Fill All Details"));
-                }
-                else if (txtFName.Text == string.Empty)
-                {
-                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "Please Fill User Name"));
-                }
-                else if (txtPass.Text == string.Empty)
-                {
-                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "Please Fill Password"));
-                }
-                //if (IsLoginSuccess == true)
-                //{
-                //    await Navigation.PushPopupAsync(new LoginSuccessPopupPage());
-                //    await Navigation.PushModalAsync(new MasterMenuPage());
-                //    txtFName.Text = txtPass.Text = string.Empty;
-                //}
-                
                 _Loading.IsRunning = false;
                 btnLogin.IsEnabled = true;
             }

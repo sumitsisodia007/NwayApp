@@ -2,6 +2,7 @@
 using App2.Model;
 using App2.NativeMathods;
 using App2.PopUpPages;
+using Plugin.Connectivity;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ namespace App2.View
 
         async Task SettingNotification()
         {
+            string rs = null;
             nav = new NavigationMdl();
             api = new API();
 
@@ -48,16 +50,21 @@ namespace App2.View
             }
             res.Min_Receipt_Amt= lblMinAmt.Text = nav.Min_Receipt_Amount = txtMinimumAmt.Text + ".00";
            res.Notification_Day_Count= lblpreDays.Text = nav.Notification_Day_Count = txtDaysOfno.Text;
-
-           string rs = await api.NotificationSetting(nav);
-            if (rs == "False")
+            if (!CrossConnectivity.Current.IsConnected)
             {
-                StaticMethods.SaveLocalData(res);
-                txtDaysOfno.Text = txtMinimumAmt.Text = "";
-                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("S", "Setting Saved !"));
-               // StaticMethods.ShowToast("Setting Saved !");
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
             }
-           
+            else
+            {
+                rs = await api.NotificationSetting(nav);
+                if (rs == "False")
+                {
+                    StaticMethods.SaveLocalData(res);
+                    txtDaysOfno.Text = txtMinimumAmt.Text = "";
+                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("S", "Setting Saved !"));
+                   // StaticMethods.ShowToast("Setting Saved !");
+                }
+            }
         }
 
         protected override void OnAppearing()

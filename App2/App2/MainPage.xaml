@@ -4,13 +4,14 @@
              xmlns:local="clr-namespace:App2"
              x:Class="App2.MainPage"
              xmlns:btn="clr-namespace:App2.CustomRenderer"
-             Title="Notification">
-    <AbsoluteLayout>
+             Title="Notification"
+             >
+    <AbsoluteLayout BackgroundColor="#E2F5F9">
 
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                  AbsoluteLayout.LayoutFlags="All">
-            <!--<StackLayout>
-                <StackLayout Orientation="Horizontal"  x:Name="stkMallName">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal"  x:Name="stkMallName" Spacing="0">
                         <Label x:Name="C21" FontSize="17" Text="C21" TextColor="White" BackgroundColor="#4472C4" HeightRequest="25" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="C21_Tapped"/>
@@ -22,7 +23,7 @@
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
-            </StackLayout>-->
+            </StackLayout>
             <ListView  x:Name="GroupedView"
                     GroupDisplayBinding="{Binding Title}"
                     HasUnevenRows="True"

@@ -7,6 +7,7 @@ using App2.NativeMathods;
 using App2.PopUpPages;
 using App2.ShowModels;
 using App2.View;
+using Plugin.Connectivity;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -35,10 +36,12 @@ namespace App2
         public MainPage()
         {
             InitializeComponent();
-
-                NotificationMehods();
-                UpdateListContent();
-          
+            NotificationMehods();
+        }
+        public MainPage(NotificationListMdl _notificationModel)
+        {
+            InitializeComponent();
+            NotificationMehods();
         }
 
         protected override void OnAppearing()
@@ -70,10 +73,15 @@ namespace App2
             }
         }
 
-        private void NotificationMehods()
+        private async void NotificationMehods()
         {
-            
-            api = new API();
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+            }
+            else
+            {
+                api = new API();
             NavigationMdl nav = new NavigationMdl();
             nav.Device_id = StaticMethods.getDeviceidentifier();
             if (nav.Device_id == "unknown")
@@ -84,7 +92,8 @@ namespace App2
             nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
             ResponseModel rs = StaticMethods.GetLocalSavedData();
             nav.User_id = rs.User_Id;
-            _notificationModel = api.PostNotification(nav);
+
+            _notificationModel = api.PostNotification(nav); 
 
             ObservableCollection<NotificationGroup> _not = new ObservableCollection<NotificationGroup>();
             foreach (var item in _notificationModel.ListNotificationDate)
@@ -114,6 +123,8 @@ namespace App2
                 _not.Add(group);
             }
             _allGroups = _not;
+                UpdateListContent();
+            }
         }
 
         private void UpdateListContent()
@@ -343,26 +354,27 @@ namespace App2
             }
         }
 
-        //private void C21_Tapped(object sender, EventArgs e)
-        //{
-        //    if (!(MALHAR.Text == "C21"))
-        //    {
-        //        MALHAR.BackgroundColor = Color.White;
-        //        MALHAR.TextColor = Color.FromHex("#4472C4");
-        //        C21.BackgroundColor = Color.FromHex("#4472C4");
-        //        C21.TextColor = Color.White;
-        //    }
-        //}
+        private void C21_Tapped(object sender, EventArgs e)
+        {
+            if (!(MALHAR.Text == "C21"))
+            {
+                MALHAR.BackgroundColor = Color.White;
+                MALHAR.TextColor = Color.FromHex("#4472C4");
+                C21.BackgroundColor = Color.FromHex("#4472C4");
+                C21.TextColor = Color.White;
+            }
+        }
 
-        //private void MALHAR_Tapped(object sender, EventArgs e)
-        //{
-        //    if (!(C21.Text == "MALHAR"))
-        //    {
-        //        MALHAR.BackgroundColor = Color.FromHex("#4472C4");
-        //        MALHAR.TextColor = Color.White;
-        //        C21.BackgroundColor = Color.White;
-        //        C21.TextColor = Color.FromHex("#4472C4");
-        //    }
-        //}
+        private void MALHAR_Tapped(object sender, EventArgs e)
+        {
+            if (!(C21.Text == "MALHAR"))
+            {
+                MALHAR.BackgroundColor = Color.FromHex("#4472C4");
+                MALHAR.TextColor = Color.White;
+                C21.BackgroundColor = Color.White;
+                C21.TextColor = Color.FromHex("#4472C4");
+                
+            }
+        }
     }
 }

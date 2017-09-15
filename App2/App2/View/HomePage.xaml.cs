@@ -3,6 +3,7 @@ using App2.Helper;
 using App2.Model;
 using App2.NativeMathods;
 using App2.PopUpPages;
+using Plugin.Connectivity;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -23,18 +24,34 @@ namespace App2.View
         NavigationMdl nav = null;
         LoginMdl _login = new LoginMdl();
         API api = new API();
-       
+        LoginResponseMdl _newres;
         NotificationListMdl _notificationModel;
         public HomePage()
         {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             PrepareView();
-            SetNotificationBadge();
+            Device.BeginInvokeOnMainThread(() => {
+                Task.Delay(1000);
+                SetNotificationBadge();
+            });
+        }
+        public HomePage(LoginResponseMdl res)
+        {
+            InitializeComponent();
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            _newres = res;
+            PrepareView();
+            Device.BeginInvokeOnMainThread(() => {
+                Task.Delay(500);
+                SetNotificationBadge();
+           });
         }
 
-        private void SetNotificationBadge()
+        private async void SetNotificationBadge()
         {
+             try
+            {
             string DateChk = null;
             string Notcount = "0";
             ResponseModel rs = StaticMethods.GetLocalSavedData();
@@ -50,6 +67,7 @@ namespace App2.View
 
             nav.User_id = rs.User_Id;
             _notificationModel = api.PostNotification(nav);
+            
 
             var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
             foreach (var item in _notificationModel.ListNotificationDate)
@@ -65,15 +83,16 @@ namespace App2.View
             else
             {
                 lblNotificationBadge.Text = "0";
-                //rs.NotCountDate = DateChk;
-                //StaticMethods.SaveLocalData(rs);
+                        //rs.NotCountDate = DateChk;
+                        //StaticMethods.SaveLocalData(rs);
+                    }
+                }
+            catch (Exception ex)
+            {
+             //  await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
             }
         }
 
-        protected override void OnAppearing()
-        {
-           // PrepareView();
-        }
 
         private async void Receivable_Tapped(object sender, EventArgs e)
         {
@@ -139,7 +158,7 @@ namespace App2.View
                 var loadingPage = new LoaderPage();
                 await PopupNavigation.PushAsync(loadingPage);
                 await Task.Delay(1000);
-                await Navigation.PushAsync(new MainPage());
+                await Navigation.PushAsync(new MainPage(_notificationModel));
                 await Navigation.RemovePopupPageAsync(loadingPage);
 
             }
@@ -165,26 +184,27 @@ namespace App2.View
         {
             DisplayAlert("Message", "Comming Soon, Alert", "ok");
         }
-        private void Approval_Clicked(object sender, EventArgs e)
+        private async void Approval_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("Message", "Comming Soon, Approval", "ok");
-        }
+            // DisplayAlert("Message", "Comming Soon, Approval", "ok");
+            await PopupNavigation.PushAsync(new LeftMenu());
+                }
 
         private void PrepareView()
         {
             try
             {
 
-                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+                if (App.ScreenWidth > 0 && App.ScreenHeight> 0)
                 {
-                    var calcScreenWidth = Application.Current.MainPage.Width;
-                    var calcScreenHieght = Application.Current.MainPage.Height;
+                    var calcScreenWidth = App.ScreenWidth;
+                    var calcScreenHieght = App.ScreenHeight;
                     GridRec.HeightRequest =
                     GridPay.HeightRequest =
                     GridCas.HeightRequest =
                     GridCon.HeightRequest =
                     GridExp.HeightRequest =
-                    GridInv.HeightRequest = calcScreenHieght / 4;
+                    GridInv.HeightRequest = calcScreenHieght / 4+20;
                     GridRec.WidthRequest =
                     GridPay.WidthRequest =
                     GridCas.WidthRequest =

@@ -14,7 +14,8 @@ namespace App2
     public partial class App : Application
     {
         public static MasterDetailPage MasterDetail { get; set; }
-    
+        public static double ScreenHeight;
+        public static double ScreenWidth;
         public async static Task NavigationDetailPage(Page page)
         {
             App.MasterDetail.IsPresented = false;
@@ -24,7 +25,7 @@ namespace App2
         {
             InitializeComponent();
             var data = StaticMethods.GetLocalSavedData();
-            if (data.Error == "False")
+            if (data.Error == "false")
             {
                 MainPage = new MasterMainPage();
             }

@@ -2,8 +2,11 @@
 using App2.Helper;
 using App2.Model;
 using App2.NativeMathods;
+using App2.PopUpPages;
 using App2.ShowModels;
 using Microcharts;
+using Plugin.Connectivity;
+using Rg.Plugins.Popup.Extensions;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -38,12 +41,14 @@ namespace App2.View
         public PayablePage()
         {
             InitializeComponent();
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, true);
+            
         }
 
         public PayablePage (NavigationMdl mdl)
 	   {
 			InitializeComponent ();
-            // NavigationPage.SetHasNavigationBar(this, false);
+             NavigationPage.SetHasNavigationBar(this, true);
             //NavigationPage.SetTitleIcon(this, "icon.png");
              this.Title = mdl.Page_Title;
             MAinMethods(mdl);
@@ -75,28 +80,32 @@ namespace App2.View
         }
 
         private async void MAinMethods(NavigationMdl mdl)
-        {
-            PayableNotificationMdl _payable = await api.PayableTable(mdl);
-            navmdl = new NavigationMdl();
-           if (mdl.Page_Title == "Receivable")
+        {   navmdl = new NavigationMdl();
+            if (mdl.Page_Title == "Receivable")
             {
                 PredefinedReceived();
-                var charts = CreateQuickstart(_payable);
-                linechart.Chart = charts[0];
             }
             else
             {
                 PredefinedPaid();
-                var charts = CreateQuickstart1(_payable);
-                linechart.Chart = charts[0];
             }
-            ResponseModel rs = StaticMethods.GetLocalSavedData();
-            mdl.User_id = rs.User_Id;
-           
-            toady_notification = new ShowPayableTodayDetail();
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+            }
+            else
+            {
+                PayableNotificationMdl _payable = await api.PayableTable(mdl);
+             
+                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                mdl.User_id = rs.User_Id;
 
-            ShowPaybleToday(_payable);
-            ShowTotalPayble(_payable);
+                toady_notification = new ShowPayableTodayDetail();
+
+                ShowPaybleToday(_payable);
+                ShowTotalPayble(_payable);
+            }
         }
 
         protected override void OnAppearing()
@@ -221,7 +230,17 @@ namespace App2.View
                 }
             }
 
-            }
+                if (lblSiteName.Text != "Particular")
+                {
+                    var charts = CreateQuickstart1(_showpayabletotalpayblelist);
+                    linechart.Chart = charts[0];
+                }
+                else
+                {
+                    var charts = CreateQuickstart(_showpayabletotalpayblelist);
+                    linechart.Chart = charts[0];
+                }
+                }
             catch (Exception ex)
             {
              //   StaticMethods.ShowToast("Internal Error ShowTotal" + ex.Message);
@@ -270,34 +289,40 @@ namespace App2.View
                     navmdl.Party_Name = e.NewTextValue;
                     navmdl.Tag_type = "partylist";
                     lstLoca = new PartysearchMdl();
-                    ObservableCollection<PartysearchlistMdl> _lst = null;
-                    _lst = new ObservableCollection<PartysearchlistMdl>();
+                    ObservableCollection<PartysearchlistMdl> _lst = new ObservableCollection<PartysearchlistMdl>();
                     api = new API();
-                    lstLoca = await api.GetParty(navmdl);
+                    if (!CrossConnectivity.Current.IsConnected)
+                    {
 
-                    foreach (var item in lstLoca.Party_List)
-                    {
-                        _lst.Add(new PartysearchlistMdl { Party_Id = item.Party_Id, Party_Name = item.Party_Name });
+                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
                     }
-                    AutoList.ItemsSource = _lst;
-                    Device.BeginInvokeOnMainThread(() =>
+                    else
                     {
-                        if (_lst.Count > 0)
+                        lstLoca = await api.GetParty(navmdl);
+
+                        foreach (var item in lstLoca.Party_List)
                         {
-                            AutoList.IsVisible = true;
-                            if(AutoList.IsVisible == true)
+                            _lst.Add(new PartysearchlistMdl { Party_Id = item.Party_Id, Party_Name = item.Party_Name });
+                        }
+                        AutoList.ItemsSource = _lst;
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            if (_lst.Count > 0)
                             {
-                                linechart.IsVisible = false;
+                                AutoList.IsVisible = true;
+                                if (AutoList.IsVisible == true)
+                                {
+                                    linechart.IsVisible = false;
+                                }
+                                AutoList.HeightRequest = 40 * 5;
                             }
-                            AutoList.HeightRequest = 40 * 5;
-                        }
-                        else
-                        {
-                            AutoList.ItemsSource = null;
-                            AutoList.IsVisible = false;
-                        }
-                    });
-                   
+                            else
+                            {
+                                AutoList.ItemsSource = null;
+                                AutoList.IsVisible = false;
+                            }
+                        });
+                    }
                 }
                 else
                 {
@@ -313,7 +338,14 @@ namespace App2.View
 
         private async void txtAuto_Focused(object sender, FocusEventArgs e)
         {
-            await Task.Delay(100);
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+            }
+            else
+            {
+                await Task.Delay(100);
+            }
         }
 
         async void txtLocation_Focus(object sender, EventArgs args)
@@ -374,20 +406,19 @@ namespace App2.View
             }
         }
 
-        public static Chart[] CreateQuickstart(PayableNotificationMdl data)
+        public static Chart[] CreateQuickstart(List<ShowPayableTotalPayble> data)
         {
            
-            List<ShowPayableTotalPayble>  _showlist = new List<ShowPayableTotalPayble>();
-            foreach (var item in data.ListPayablemdl)
-            {
-                ColorsPayable = SKColor.Parse("#A8C4E6");
-                    _showlist.Add(new ShowPayableTotalPayble() { Show_Site_name = item.Perticular, Show_Balance = item.Balance, Show_Total_cr = item.Receive, Show_Total_dr = item.Total_Due });
-
-            }
-            float a1 = Convert.ToSingle(_showlist[0].Show_Balance);
-            float b1 = Convert.ToSingle(_showlist[1].Show_Balance);
-            float c1 = Convert.ToSingle(_showlist[2].Show_Balance);
-            float d1 = Convert.ToSingle(_showlist[3].Show_Balance);
+            //List<ShowPayableTotalPayble>  _showlist = new List<ShowPayableTotalPayble>();
+            //foreach (var item in data.ListPayablemdl)
+            //{
+            ColorsPayable = SKColor.Parse("#A8C4E6");
+            //        _showlist.Add(new ShowPayableTotalPayble() { Show_Site_name = item.Perticular, Show_Balance = item.Balance, Show_Total_cr = item.Receive, Show_Total_dr = item.Total_Due });
+            //}
+            float a1 = Convert.ToSingle(data[0].Show_Balance);
+            float b1 = Convert.ToSingle(data[1].Show_Balance);
+            float c1 = Convert.ToSingle(data[2].Show_Balance);
+            float d1 = Convert.ToSingle(data[3].Show_Balance);
 
             var  entries = new[]
             {
@@ -395,26 +426,26 @@ namespace App2.View
                             new Microcharts.Entry(a1)
                             {
 
-                                    Label = _showlist[0].Show_Site_name,
+                                    Label = data[0].Show_Site_name,
                                     ValueLabel = a1.ToString(),
                                     Color = SKColor.Parse("#266489"), TextColor=SKColor.Parse("#EC792B"),
                             },
                             new Microcharts.Entry(b1)
                             {
-                                    Label = _showlist[1].Show_Site_name,
+                                    Label = data[1].Show_Site_name,
                                     ValueLabel = b1.ToString(),
                                     Color = SKColor.Parse("#68B9C0"), TextColor=SKColor.Parse("#EC792B"),
                             },
                             new Microcharts.Entry(c1)
                             {
-                                    Label = _showlist[2].Show_Site_name,
+                                    Label = data[2].Show_Site_name,
                                     ValueLabel = c1.ToString(),
                                     Color = SKColor.Parse("#90D585"),
                                     TextColor=SKColor.Parse("#EC792B"),
                             },
                             new Microcharts.Entry(d1)
                             {
-                                    Label = _showlist[3].Show_Site_name,
+                                    Label = data[3].Show_Site_name,
                                     ValueLabel = d1.ToString(),
                                     Color = SKColor.Parse("#90D585"),
                                     TextColor=SKColor.Parse("#EC792B"),
@@ -439,20 +470,19 @@ namespace App2.View
             };
         }
 
-        public static Chart[] CreateQuickstart1(PayableNotificationMdl data)
+        public static Chart[] CreateQuickstart1(List<ShowPayableTotalPayble> data)
         {
 
-            List<ShowPayableTotalPayble> _showlist = new List<ShowPayableTotalPayble>();
-            foreach (var item in data.ListPayablemdl)
-            {
+            //List<ShowPayableTotalPayble> _showlist = new List<ShowPayableTotalPayble>();
+            //foreach (var item in data.ListPayablemdl)
+            //{
                 
-                    ColorsPayable = SKColor.Parse("#EC792B");
-                    _showlist.Add(new ShowPayableTotalPayble() { Show_Site_name = item.Site_name, Show_Balance = item.Balance, Show_Total_cr = item.Total_cr, Show_Total_dr = item.Total_dr });
-                
-            }
-            float a1 = Convert.ToSingle(_showlist[0].Show_Balance);
-            float b1 = Convert.ToSingle(_showlist[1].Show_Balance);
-            float c1 = Convert.ToSingle(_showlist[2].Show_Balance);
+            ColorsPayable = SKColor.Parse("#EC792B");
+            //        _showlist.Add(new ShowPayableTotalPayble() { Show_Site_name = item.Site_name, Show_Balance = item.Balance, Show_Total_cr = item.Total_cr, Show_Total_dr = item.Total_dr });
+            //}
+            float a1 = Convert.ToSingle(data[0].Show_Balance);
+            float b1 = Convert.ToSingle(data[1].Show_Balance);
+            float c1 = Convert.ToSingle(data[2].Show_Balance);
             
 
             var entries = new[]
@@ -461,22 +491,22 @@ namespace App2.View
                             new Microcharts.Entry(a1)
                             {
 
-                                    Label = _showlist[0].Show_Site_name,
+                                    Label = data[0].Show_Site_name,
                                     ValueLabel = a1.ToString(),
-                                    Color = SKColor.Parse("#266489"), TextColor=SKColor.Parse("#EC792B"),
+                                    Color = SKColor.Parse("#266489"), TextColor=SKColor.Parse("#2A83C6"),
                             },
                             new Microcharts.Entry(b1)
                             {
-                                    Label = _showlist[1].Show_Site_name,
+                                    Label = data[1].Show_Site_name,
                                     ValueLabel = b1.ToString(),
-                                    Color = SKColor.Parse("#68B9C0"), TextColor=SKColor.Parse("#EC792B"),
+                                    Color = SKColor.Parse("#68B9C0"), TextColor=SKColor.Parse("#2A83C6"),
                             },
                             new Microcharts.Entry(c1)
                             {
-                                    Label = _showlist[2].Show_Site_name,
+                                    Label = data[2].Show_Site_name,
                                     ValueLabel = c1.ToString(),
                                     Color = SKColor.Parse("#90D585"),
-                                    TextColor=SKColor.Parse("#EC792B"),
+                                    TextColor=SKColor.Parse("#2A83C6"),
                             },
                            
                         };

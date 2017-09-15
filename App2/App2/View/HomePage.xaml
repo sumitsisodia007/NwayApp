@@ -7,7 +7,7 @@
              Title="Home">
   
     <StackLayout>
-        <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="58" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="0,20,0,0">
+        <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="60" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
 
             <Image Source="manu_w" HeightRequest="28"  WidthRequest="28" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
                 <Image.GestureRecognizers>

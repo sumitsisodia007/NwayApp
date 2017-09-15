@@ -22,13 +22,13 @@
                             Source="check"
                            Aspect="AspectFit"
                            HeightRequest="42"
-                        HorizontalOptions="StartAndExpand"
+                        HorizontalOptions="Start"
       VerticalOptions="EndAndExpand"/>
       
         <Label    x:Name="lblMessage"
                   TextColor="White"
-                  HorizontalOptions="StartAndExpand"
-                  VerticalOptions="EndAndExpand"
+                  HorizontalOptions="CenterAndExpand"
+                  VerticalOptions="CenterAndExpand"
                   Text="Login is success"/>
     </StackLayout>
 

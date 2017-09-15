@@ -2,7 +2,10 @@
 using App2.Helper;
 using App2.Model;
 using App2.NativeMathods;
+using App2.PopUpPages;
 using App2.ShowModels;
+using Plugin.Connectivity;
+using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,15 +29,44 @@ namespace App2.View
         bool isListSelected = false;
         public static double ScreenWidth = 120;
         API api = new API();
+
 		public PayableChart ()
 		{
 			InitializeComponent ();
 		}
+
         public PayableChart(NavigationMdl nmdl)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, true);
-            Device.BeginInvokeOnMainThread(async () => { 
+            MainMethods(nmdl);
+            //Device.BeginInvokeOnMainThread(async () => { 
+            //if ((nmdl.Tag_type == "payable_outstanding"))
+            //{
+            //    this.Title = "Payable Chart";
+            //    this.BackgroundColor = Color.FromHex("#ED7D31");
+            //    LblSu.BackgroundColor = LblMn.BackgroundColor = LblTu.BackgroundColor = LblWe.BackgroundColor = Color.FromHex("#ED7D31");
+            //}
+            //else
+            //{
+            //    this.Title = "Receivable Chart";
+            //    this.BackgroundColor = Color.FromHex("#A3C1E5");
+            //    LblSu.BackgroundColor = LblMn.BackgroundColor = LblTu.BackgroundColor = LblWe.BackgroundColor = Color.FromHex("#A3C1E5");
+            //}
+            //lblChart.Text = nmdl.Party_Name + " " + EnumMaster.LblChartTitle;
+            //    ResponseModel rs = StaticMethods.GetLocalSavedData();
+            //    nmdl.User_id = rs.User_Id;
+            //    _payable = await api.PayableTable(nmdl);
+   
+            ////_payable = api.PayableTable(nmdl);
+           
+            
+            //ShowTotalPayble();
+           //});
+        }
+
+        private async void MainMethods(NavigationMdl nmdl)
+        {
             if ((nmdl.Tag_type == "payable_outstanding"))
             {
                 this.Title = "Payable Chart";
@@ -47,16 +79,21 @@ namespace App2.View
                 this.BackgroundColor = Color.FromHex("#A3C1E5");
                 LblSu.BackgroundColor = LblMn.BackgroundColor = LblTu.BackgroundColor = LblWe.BackgroundColor = Color.FromHex("#A3C1E5");
             }
-            lblChart.Text = nmdl.Party_Name + " " + EnumMaster.LblChartTitle;
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+            }
+            else
+            {
+
+                lblChart.Text = nmdl.Party_Name + " " + EnumMaster.LblChartTitle;
                 ResponseModel rs = StaticMethods.GetLocalSavedData();
                 nmdl.User_id = rs.User_Id;
                 _payable = await api.PayableTable(nmdl);
-   
-            //_payable = api.PayableTable(nmdl);
-           
-            
-            ShowTotalPayble();
-            });
+
+                ShowTotalPayble();
+            }
         }
 
         protected override void OnAppearing()
@@ -75,6 +112,7 @@ namespace App2.View
             }
 
         }
+
         public void ShowTotalPayble()
         {
             try
@@ -104,57 +142,65 @@ namespace App2.View
         {
             try
             {
-                isListSelected = false;
-                if (e.NewTextValue != string.Empty)
-                {
-                    navmdl = new NavigationMdl();
-                    ResponseModel rs = StaticMethods.GetLocalSavedData();
-                    navmdl.User_id = rs.User_Id;
-                    navmdl.Device_id = StaticMethods.getDeviceidentifier();
-                    if (navmdl.Device_id == "unknown")
+               
+                    isListSelected = false;
+                    if (e.NewTextValue != string.Empty)
                     {
-                        navmdl.Device_id = "123456";
-                    }
-                    navmdl.Company_name = Helper.EnumMaster.C21_MALHAR;
-                    navmdl.Party_Name = e.NewTextValue;
-                    navmdl.Tag_type = "partylist";
-                    lstLoca = new PartysearchMdl();
-                    ObservableCollection<PartysearchlistMdl> _lst = null;
-                    _lst = new ObservableCollection<PartysearchlistMdl>();
-                    api = new API();
-                    lstLoca = await api.GetParty(navmdl);
-
-                    foreach (var item in lstLoca.Party_List)
-                    {
-                        _lst.Add(new PartysearchlistMdl { Party_Id = item.Party_Id, Party_Name = item.Party_Name});
-                    }
-                    AutoList.ItemsSource = _lst;
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        if (_lst.Count > 0)
+                        navmdl = new NavigationMdl();
+                        ResponseModel rs = StaticMethods.GetLocalSavedData();
+                        navmdl.User_id = rs.User_Id;
+                        navmdl.Device_id = StaticMethods.getDeviceidentifier();
+                        if (navmdl.Device_id == "unknown")
                         {
-                            AutoList.IsVisible = true;
-                            if (AutoList.IsVisible == true)
+                            navmdl.Device_id = "123456";
+                        }
+                        navmdl.Company_name = Helper.EnumMaster.C21_MALHAR;
+                        navmdl.Party_Name = e.NewTextValue;
+                        navmdl.Tag_type = "partylist";
+                        lstLoca = new PartysearchMdl();
+                        ObservableCollection<PartysearchlistMdl> _lst = null;
+                        _lst = new ObservableCollection<PartysearchlistMdl>();
+                        api = new API();
+                    if (!CrossConnectivity.Current.IsConnected)
+                    {
+                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+                    }
+                    else
+                    {
+
+                        lstLoca = await api.GetParty(navmdl);
+                    }
+                        foreach (var item in lstLoca.Party_List)
+                        {
+                            _lst.Add(new PartysearchlistMdl { Party_Id = item.Party_Id, Party_Name = item.Party_Name });
+                        }
+                        AutoList.ItemsSource = _lst;
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            if (_lst.Count > 0)
                             {
-                                imgLogo.IsVisible = false;
-                            }
+                                AutoList.IsVisible = true;
+                                if (AutoList.IsVisible == true)
+                                {
+                                    imgLogo.IsVisible = false;
+                                }
                             //AutoList.ItemsSource = _lst.Select(c => { c.txtWidth = ScreenWidth; return c; }).ToList();
                             AutoList.HeightRequest = 40 * 5;
-                        }
-                        else
-                        {
-                            AutoList.ItemsSource = null;
-                            AutoList.IsVisible = false;
-                        }
-                        await scrollbar.ScrollToAsync(txtAuto, ScrollToPosition.Start, true);
-                    });
+                            }
+                            else
+                            {
+                                AutoList.ItemsSource = null;
+                                AutoList.IsVisible = false;
+                            }
+                            await scrollbar.ScrollToAsync(txtAuto, ScrollToPosition.Start, true);
+                        });
 
-                }
-                else
-                {
-                    AutoList.IsVisible = false;
-                    imgLogo.IsVisible = true;
-                }
+                    }
+                    else
+                    {
+                        AutoList.IsVisible = false;
+                        imgLogo.IsVisible = true;
+                    }
             }
             catch (Exception ex)
             {
@@ -164,8 +210,14 @@ namespace App2.View
 
         private async void txtAuto_Focused(object sender, FocusEventArgs e)
         {
-            await Task.Delay(100);
-
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+            }
+            else
+            {
+                await Task.Delay(100);
+            }
         }
 
         async void txtLocation_Focus(object sender, EventArgs args)

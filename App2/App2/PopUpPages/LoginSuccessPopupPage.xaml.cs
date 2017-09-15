@@ -39,9 +39,12 @@ namespace App2.PopUpPages
                 stkMessage.BackgroundColor = Color.FromHex("#FF2E27");
             }
             lblMessage.Text = msg;
-            await imgAlert.ScaleTo(2, 1000);
-            await lblMessage.ScaleTo(2, 1000);
-            await imgAlert.RotateTo(360, 2000);
+            await Task.Delay(500);
+            await Task.WhenAll(
+             imgAlert.ScaleTo(2, 1000),
+             lblMessage.ScaleTo(1.5, 1000),
+             imgAlert.RotateTo(360, 1000)
+             );
             //await imgAlert.TranslateTo(-100, -100, 1000);
             //await imgAlert.FadeTo(1, 2000);
             //await imgAlert.TranslateTo(-100, 0, 1000);    // Move image left

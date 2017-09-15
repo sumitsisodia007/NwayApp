@@ -11,13 +11,14 @@ namespace App2.APIService
 {
     public class API
     {
-       public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
-      //     public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
+      //      public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
+      public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
 
         #region Login
-        public async Task<ResponseModel> PostLogin(LoginMdl lgmdl)
+        public async Task<LoginResponseMdl> PostLogin(LoginMdl lgmdl)
         {
-            ResponseModel response_model = new ResponseModel();
+            LoginResponseMdl jsonResponse = new LoginResponseMdl();
+          //  ResponseModel response_model = new ResponseModel();
             try
             {
                //var RestURL = BaseURL + "index.php";
@@ -41,15 +42,18 @@ namespace App2.APIService
                 if (response.IsSuccessStatusCode)
                 {
                     // Parse the response body. Blocking!
-                    var dataObjects = response.Content.ReadAsStringAsync().Result;
-                    JObject jObj = JObject.Parse(dataObjects);
-                    response_model.Message = jObj["message"].ToString();
-                    response_model.Error = jObj["error"].ToString();
-                    response_model.FullName = jObj["full_name"].ToString();
-                    response_model.User_Id = jObj["user_id"].ToString();
-                    response_model.Min_Receipt_Amt = jObj["min_receipt_amount"].ToString();
-                    response_model.Notification_Day_Count = jObj["notification_day_count"].ToString();
-                    response_model.TagType = jObj["tagtype"].ToString();
+                    //var dataObjects = response.Content.ReadAsStringAsync().Result;
+                    var jsonresult = response.Content.ReadAsStringAsync().Result;
+                    JObject jObj = JObject.Parse(jsonresult);
+                    jsonResponse = JsonConvert.DeserializeObject<LoginResponseMdl>(jsonresult);
+                    //JObject jObj = JObject.Parse(dataObjects);
+                    //response_model.Message = jObj["message"].ToString();
+                    //response_model.Error = jObj["error"].ToString();
+                    //response_model.FullName = jObj["full_name"].ToString();
+                    //response_model.User_Id = jObj["user_id"].ToString();
+                    //response_model.Min_Receipt_Amt = jObj["min_receipt_amount"].ToString();
+                    //response_model.Notification_Day_Count = jObj["notification_day_count"].ToString();
+                    //response_model.TagType = jObj["tagtype"].ToString();
                 }
 
             }
@@ -61,7 +65,7 @@ namespace App2.APIService
             {
                 //content = null;
             }
-            return response_model;
+            return jsonResponse;
         }
         #endregion
 
@@ -96,7 +100,7 @@ namespace App2.APIService
             }
             catch (Exception ex)
             {
-                StaticMethods.ShowToast(ex.Message);
+               // StaticMethods.ShowToast(ex.Message);
             }
             return jsonResponse;
         }

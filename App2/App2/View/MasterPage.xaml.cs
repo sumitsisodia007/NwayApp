@@ -1,5 +1,7 @@
 ﻿using App2.Model;
+using App2.NativeMathods;
 using App2.PopUpPages;
+using App2.ShowModels;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -16,13 +18,35 @@ namespace App2.View
     public partial class MasterPage : ContentPage
     {
         public List<MasterPageItem> menuList { get; set; }
+        public List<ShowCompanyNameMdl> _companyname { get; set; }
         public MasterPage()
         {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             DrawalMenu();
+           // PickerData();
         }
+        public MasterPage(LoginResponseMdl res)
+        {
+            InitializeComponent();
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            DrawalMenu();
+            PickerData(res);
+        }
+        private void PickerData(LoginResponseMdl res)
+        {
+            _companyname = new List<ShowCompanyNameMdl>();
+            foreach (var item in res._permissions)
+            {
+                _companyname.Add(new ShowCompanyNameMdl {CompanyName=item.Company_name });
+                //item.Company_name;
+                //foreach (var item2 in item._company_site)
+                //{
 
+                //}
+            }
+            MainPickr.ItemsSource = _companyname;
+        }
         protected override void OnAppearing()
         {
             Device.BeginInvokeOnMainThread(() => {
@@ -30,7 +54,8 @@ namespace App2.View
                 {
                     var calcScreenWidth = Application.Current.MainPage.Width;
                     var calcScreenHieght = Application.Current.MainPage.Height;
-                    TI.WidthRequest = C21.WidthRequest = calcScreenWidth / 3;
+                    //TI.WidthRequest = C21.WidthRequest = calcScreenWidth / 3;
+                    MainPickr.WidthRequest = calcScreenWidth -80;
                 }
             });
         }
@@ -92,26 +117,37 @@ namespace App2.View
             
         }
 
-        private void C21_Tapped(object sender, EventArgs e)
+        private void MainPickr_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!(TI.Text == "C21/MALHAR"))
-            {
-                TI.BackgroundColor = Color.White;
-                TI.TextColor = Color.FromHex("#4472C4");
-                C21.BackgroundColor = Color.FromHex("#4472C4");
-                C21.TextColor = Color.White;
-            }
+            var picker = (Picker)sender;
+            //StaticMethods.ShowToast(picker.SelectedItem.ToString());
+            //int selectedIndex = picker.SelectedIndex;
+            //if (selectedIndex != -1)
+            //{
+            //    string ss = (string)picker.ItemsSource[selectedIndex];
+            //}
         }
 
-        private void TI_Tapped(object sender, EventArgs e)
-        {
-            if (!(C21.Text == "TI"))
-            {
-                TI.BackgroundColor = Color.FromHex("#4472C4");
-                TI.TextColor = Color.White;
-                C21.BackgroundColor = Color.White;
-                C21.TextColor = Color.FromHex("#4472C4");
-            }
-        }
+        //private void C21_Tapped(object sender, EventArgs e)
+        //{
+        //    if (!(TI.Text == "C21/MALHAR"))
+        //    {
+        //        TI.BackgroundColor = Color.White;
+        //        TI.TextColor = Color.FromHex("#4472C4");
+        //        C21.BackgroundColor = Color.FromHex("#4472C4");
+        //        C21.TextColor = Color.White;
+        //    }
+        //}
+
+        //private void TI_Tapped(object sender, EventArgs e)
+        //{
+        //    if (!(C21.Text == "TI"))
+        //    {
+        //        TI.BackgroundColor = Color.FromHex("#4472C4");
+        //        TI.TextColor = Color.White;
+        //        C21.BackgroundColor = Color.White;
+        //        C21.TextColor = Color.FromHex("#4472C4");
+        //    }
+        //}
     }
 }
