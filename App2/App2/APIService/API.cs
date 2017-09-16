@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -11,9 +12,9 @@ namespace App2.APIService
 {
     public class API
     {
-      //      public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
-      public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
-
+         // public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
+        public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
+        public List<Site_id_lst> ss { get; set; }
         #region Login
         public async Task<LoginResponseMdl> PostLogin(LoginMdl lgmdl)
         {
@@ -75,11 +76,20 @@ namespace App2.APIService
              NotificationListMdl jsonResponse = new NotificationListMdl();
             try
             {
-                
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(RestURL);
-
-
+                ObservableCollection<UserDetails> _not = new ObservableCollection<UserDetails>();
+                ss = new List<Site_id_lst>();
+                UserDetails us = new UserDetails();
+                us.company_id = "";
+                us.device_id = "";
+                us.party_id = "";
+                us.password = "";
+                us.tagtype = "";
+                us.username = "";
+                us.password = "";
+                ss.Add(new Site_id_lst { Site_id=28});
+                _not.Add(new UserDetails());
                 var values = new Dictionary<string, string>
                 {
                     { "user_id", nav.User_id},
@@ -95,7 +105,7 @@ namespace App2.APIService
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
                     JObject jObj = JObject.Parse(jsonresult);
-                     jsonResponse = JsonConvert.DeserializeObject<NotificationListMdl>(jsonresult);
+                    jsonResponse = JsonConvert.DeserializeObject<NotificationListMdl>(jsonresult);
                 }
             }
             catch (Exception ex)

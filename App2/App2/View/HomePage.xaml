@@ -8,13 +8,19 @@
   
     <StackLayout>
         <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="60" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-
-            <Image Source="manu_w" HeightRequest="28"  WidthRequest="28" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout VerticalOptions="CenterAndExpand" Padding="15">
+            <Image Source="manu_w" HeightRequest="30"  WidthRequest="30" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="MainManuSlide_Tapped"/>
                 </Image.GestureRecognizers>
             </Image>
-            <Label Text="Home" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" FontSize="Large" FontAttributes="Bold"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MainManuSlide_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <Label Text="Home" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" FontSize="Large" FontAttributes="Bold"/>
+            </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                 <Grid Padding="3" BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
                     <Image Source="icon_notification" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" >

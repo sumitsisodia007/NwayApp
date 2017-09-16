@@ -187,8 +187,8 @@ namespace App2.View
         private async void Approval_Clicked(object sender, EventArgs e)
         {
             // DisplayAlert("Message", "Comming Soon, Approval", "ok");
-            await PopupNavigation.PushAsync(new LeftMenu());
-                }
+            await PopupNavigation.PushAsync(new LeftMenu(_newres));
+        }
 
         private void PrepareView()
         {

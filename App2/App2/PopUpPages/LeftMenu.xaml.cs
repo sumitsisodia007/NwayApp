@@ -18,10 +18,17 @@ namespace App2.PopUpPages
     {
          public List<SiteNameMdl> menuList { get; set; }
         public List<string> tmplist { get; set; }
-        
+        LoginResponseMdl _data;
         public LeftMenu()
         {
             InitializeComponent();
+            PrepareLayout();
+            DrawalMenu();
+        }
+        public LeftMenu(LoginResponseMdl data)
+        {
+            InitializeComponent();
+            _data = data;
             PrepareLayout();
             DrawalMenu();
         }
@@ -40,15 +47,14 @@ namespace App2.PopUpPages
         public void DrawalMenu()
         {
             menuList = new List<SiteNameMdl>();
-            menuList.Add(new SiteNameMdl { DefaultText = "Site A", CheckedText = "Checked Site A", UncheckedText = "Unchecked Site A" });
-            menuList.Add(new SiteNameMdl { DefaultText = "Site B", CheckedText = "Checked Site B", UncheckedText = "Unchecked Site B" });
-            menuList.Add(new SiteNameMdl { DefaultText = "Site C", CheckedText = "Checked Site C", UncheckedText = "Unchecked Site C" });
-            menuList.Add(new SiteNameMdl { DefaultText = "Site D", CheckedText = "Checked Site D", UncheckedText = "Unchecked Site D" });
-            menuList.Add(new SiteNameMdl { DefaultText = "Site E", CheckedText = "Checked Site E", UncheckedText = "Unchecked Site E" });
-            menuList.Add(new SiteNameMdl { DefaultText = "Site F", CheckedText = "Checked Site F", UncheckedText = "Unchecked Site F" });
-            menuList.Add(new SiteNameMdl { DefaultText = "Site G", CheckedText = "Checked Site G", UncheckedText = "Unchecked Site G" });
-            menuList.Add(new SiteNameMdl { DefaultText = "Site H", CheckedText = "Checked Site H", UncheckedText = "Unchecked Site H" });
-            menuList.Add(new SiteNameMdl { DefaultText = "Site I", CheckedText = "Checked Site I", UncheckedText = "Unchecked Site I" });
+            foreach (var item in _data._permissions)
+            {
+                foreach (var item2 in item._company_site)
+                {
+                    menuList.Add(new SiteNameMdl { DefaultText = item2.Site_name.ToString(), CheckedText = "Checked Site A", UncheckedText = "Unchecked Site A" });
+                }
+            }
+            
             NavigationList.ItemsSource = menuList;
         }
 
