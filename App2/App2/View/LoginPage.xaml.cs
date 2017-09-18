@@ -98,13 +98,15 @@ namespace App2.View
                 {
                     if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
                     {
-                        res = await api.PostLogin(_login);
+                        res =  api.PostLogin(_login);
+                        StaticMethods._login_response = res;
                         if (res.Error == "false")
                         {
                             rs.Device_Id = _login.DeviceID;
                             rs.Min_Receipt_Amt = res.Min_receipt_amount.ToString();
                             rs.Notification_Day_Count = res.Notification_day_count.ToString();
                             rs.Error = res.Error;
+                            rs.User_Id = res.User_id.ToString();
                             StaticMethods.SaveLocalData(rs);
                             await Navigation.PushPopupAsync(new LoginSuccessPopupPage("S", res.Message));
                             await Navigation.PushModalAsync(new MasterMainPage(res));

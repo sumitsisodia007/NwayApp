@@ -1,4 +1,5 @@
 ﻿using App2.Model;
+using App2.NativeMathods;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -16,7 +17,7 @@ namespace App2.PopUpPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LeftMenu : PopupPage
     {
-         public List<SiteNameMdl> menuList { get; set; }
+         public List<Site_id_Mdl> menuList { get; set; }
         public List<string> tmplist { get; set; }
         LoginResponseMdl _data;
         public LeftMenu()
@@ -46,22 +47,25 @@ namespace App2.PopUpPages
 
         public void DrawalMenu()
         {
-            menuList = new List<SiteNameMdl>();
+            menuList = new List<Site_id_Mdl>();
             foreach (var item in _data._permissions)
             {
-                foreach (var item2 in item._company_site)
+                if (StaticMethods.Set_Company_Name == item.Company_name)
                 {
-                    menuList.Add(new SiteNameMdl { DefaultText = item2.Site_name.ToString(), CheckedText = "Checked Site A", UncheckedText = "Unchecked Site A" });
+                    foreach (var item2 in item._company_site)
+                    {
+
+                        menuList.Add(new Site_id_Mdl{ Site_id = item2.Site_id, SiteName = item2.Site_name });
+                    }
                 }
             }
-            
             NavigationList.ItemsSource = menuList;
         }
 
         private async void NavigationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             CheckBox isCheckedOrNot = (CheckBox)sender;
-            var selectedStudent = isCheckedOrNot.BindingContext as SiteNameMdl;
+           // var selectedStudent = isCheckedOrNot.BindingContext as SiteNameMdl;
         }
 
         protected override void OnAppearing()

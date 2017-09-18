@@ -56,6 +56,9 @@ namespace App2.Droid.DependencyService
                 storage.PutString("Device_Id", um.Device_Id);
                 storage.PutString("NotCount", um.NotCount);
                 storage.PutString("NotCountDate", um.NotCountDate);
+                storage.PutString("UserName", um.UserName);
+                storage.PutString("Password", um.Password);
+                storage.PutString("Company_Name", um.Company_Name); 
                 storage.Commit();
             }
             catch (Exception)
@@ -80,6 +83,10 @@ namespace App2.Droid.DependencyService
                 storage.PutString("Error", "");
                 storage.PutString("NotCount", "");
                 storage.PutString("NotCountDate", "");
+                storage.PutString("UserName", "");
+                storage.PutString("Password", "");
+                storage.PutString("Company_Name", "");
+                
                 storage.Commit();
             }
             catch (Exception)
@@ -104,6 +111,10 @@ namespace App2.Droid.DependencyService
                 um.Error= storage.GetString("Error", null);
                 um.NotCount= storage.GetString("NotCount", null);
                 um.NotCountDate= storage.GetString("NotCountDate", null);
+                um.UserName = storage.GetString("UserName", null);
+                um.Password = storage.GetString("Password", null);
+                um.Company_Name = storage.GetString("Company_Name", null);
+                
                 return um;
             }
             catch (Exception ex)

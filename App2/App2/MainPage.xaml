@@ -10,7 +10,7 @@
 
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                  AbsoluteLayout.LayoutFlags="All">
-            <StackLayout>
+            <!--<StackLayout>
                 <StackLayout Orientation="Horizontal"  x:Name="stkMallName" Spacing="0">
                         <Label x:Name="C21" FontSize="17" Text="C21" TextColor="White" BackgroundColor="#4472C4" HeightRequest="25" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
                             <Label.GestureRecognizers>
@@ -23,7 +23,7 @@
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
-            </StackLayout>
+            </StackLayout>-->
             <ListView  x:Name="GroupedView"
                     GroupDisplayBinding="{Binding Title}"
                     HasUnevenRows="True"

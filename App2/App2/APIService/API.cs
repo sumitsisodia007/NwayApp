@@ -1,4 +1,5 @@
-﻿using App2.Model;
+﻿using App2.Helper;
+using App2.Model;
 using App2.NativeMathods;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -14,9 +15,9 @@ namespace App2.APIService
     {
          // public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
         public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
-        public List<Site_id_lst> ss { get; set; }
+       
         #region Login
-        public async Task<LoginResponseMdl> PostLogin(LoginMdl lgmdl)
+        public LoginResponseMdl PostLogin(LoginMdl lgmdl)
         {
             LoginResponseMdl jsonResponse = new LoginResponseMdl();
           //  ResponseModel response_model = new ResponseModel();
@@ -39,7 +40,7 @@ namespace App2.APIService
 
                 var content = new FormUrlEncodedContent(values);
 
-                var response = await client.PostAsync(RestURL, content);
+                var response =  client.PostAsync(RestURL, content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     // Parse the response body. Blocking!
@@ -78,29 +79,44 @@ namespace App2.APIService
             {
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(RestURL);
-                ObservableCollection<UserDetails> _not = new ObservableCollection<UserDetails>();
-                ss = new List<Site_id_lst>();
-                UserDetails us = new UserDetails();
-                us.company_id = "";
-                us.device_id = "";
-                us.party_id = "";
-                us.password = "";
-                us.tagtype = "";
-                us.username = "";
-                us.password = "";
-                ss.Add(new Site_id_lst { Site_id=28});
-                _not.Add(new UserDetails());
-                var values = new Dictionary<string, string>
+                
+                ResponseModel res = StaticMethods.GetLocalSavedData();
+                
+                ObservableCollection<Site_id_Mdl> lst = new ObservableCollection<Site_id_Mdl>();
+                lst.Add(new Site_id_Mdl{ Site_id = 28 });
+                lst.Add(new Site_id_Mdl{ Site_id = 29 });
+                
+                //Create List of KeyValuePairs
+                List<KeyValuePair<string, string>> bodyProperties = new List<KeyValuePair<string, string>>();
+              
+                //Add 'single' parameters
+                bodyProperties.Add(new KeyValuePair<string, string>("username", "elensoft"));
+                bodyProperties.Add(new KeyValuePair<string, string>("password", "1"));
+                bodyProperties.Add(new KeyValuePair<string, string>("user_id", "1"));
+                bodyProperties.Add(new KeyValuePair<string, string>("device_id", "123456"));
+                bodyProperties.Add(new KeyValuePair<string, string>("company_id", "1"));
+                bodyProperties.Add(new KeyValuePair<string, string>("party_id", "1"));
+                bodyProperties.Add(new KeyValuePair<string, string>("tagtype", "notifications"));
+                //Loop over String array and add all instances to our bodyPoperties
+                foreach (var dir in nav._site_Id)
                 {
-                    { "user_id", nav.User_id},
-                    { "device_id", nav.Device_id},
-                    { "company_name", nav.Company_name},
-                    { "party_id", nav.Party_id},
-                    { "tagtype", nav.Tag_type}
-                };
+                    bodyProperties.Add(new KeyValuePair<string, string>("site_id[]", dir.Site_id.ToString()));
+                }
 
-                var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync(RestURL, content).Result; 
+                //convert your bodyProperties to an object of FormUrlEncodedContent
+                var dataContent = new FormUrlEncodedContent(bodyProperties.ToArray());
+
+                //var values = new Dictionary<string, string>
+                //{
+                //    { "user_id", nav.User_id},
+                //    { "device_id", nav.Device_id},
+                //    { "company_name", nav.Company_name},
+                //    { "party_id", nav.Party_id},
+                //    { "tagtype", nav.Tag_type}
+                //};
+
+                //var content = new FormUrlEncodedContent(values);
+                var response = client.PostAsync(RestURL, dataContent).Result; 
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;

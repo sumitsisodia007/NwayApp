@@ -1,4 +1,5 @@
-﻿using App2.Model;
+﻿using App2.Helper;
+using App2.Model;
 using App2.NativeMathods;
 using App2.PopUpPages;
 using App2.ShowModels;
@@ -29,6 +30,7 @@ namespace App2.View
         public MasterPage(LoginResponseMdl res)
         {
             InitializeComponent();
+
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             DrawalMenu();
             PickerData(res);
@@ -56,6 +58,8 @@ namespace App2.View
                     var calcScreenHieght = Application.Current.MainPage.Height;
                     //TI.WidthRequest = C21.WidthRequest = calcScreenWidth / 3;
                     MainPickr.WidthRequest = calcScreenWidth -80;
+                    ResponseModel res = StaticMethods.GetLocalSavedData();
+                    MainPickr.Title = res.Company_Name;
                 }
             });
         }
@@ -116,16 +120,27 @@ namespace App2.View
             App.MasterDetail.IsPresented = false;
             
         }
-
+        
         private void MainPickr_SelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
             //StaticMethods.ShowToast(picker.SelectedItem.ToString());
-            //int selectedIndex = picker.SelectedIndex;
-            //if (selectedIndex != -1)
-            //{
-            //    string ss = (string)picker.ItemsSource[selectedIndex];
-            //}
+            int selectedIndex = picker.SelectedIndex;
+            if (selectedIndex != -1)
+            {
+                try
+                {
+                    
+                    ResponseModel res = new ResponseModel();
+                    res = StaticMethods.GetLocalSavedData();
+                    res.Company_Name=StaticMethods.Set_Company_Name = (string)picker.Items[selectedIndex];
+                    StaticMethods.SaveLocalData(res);
+                }
+                catch (Exception ex)
+                {
+                }
+                
+            }
         }
 
         //private void C21_Tapped(object sender, EventArgs e)

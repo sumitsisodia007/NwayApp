@@ -12,6 +12,8 @@ namespace App2.NativeMathods
     public static class StaticMethods
     {
         public static int NotificationCount { get; set; }
+        public static string Set_Company_Name { get; set; }
+        public static LoginResponseMdl _login_response{ get; set; }
 
         public static string getNotificationCount()
         {

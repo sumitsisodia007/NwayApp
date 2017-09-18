@@ -44,7 +44,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
-                                <controls:CheckBox DefaultText="{Binding DefaultText}"
+                                <controls:CheckBox DefaultText="{Binding SiteName}"
                                                        HorizontalOptions="FillAndExpand"
                                                        TextColor="Black"
                                                    CheckedChanged="CheckBox_CheckedChanged"

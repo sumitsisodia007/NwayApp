@@ -5,7 +5,6 @@
              x:Class="App2.View.HomePage"
              BackgroundColor="White"
              Title="Home">
-  
     <StackLayout>
         <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="60" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

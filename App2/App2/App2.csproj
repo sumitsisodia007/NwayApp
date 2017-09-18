@@ -55,7 +55,6 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\UserDetails.cs" />
     <Compile Include="Model\LoginMdl.cs" />
     <Compile Include="Model\LoginResponseMdl.cs" />
     <Compile Include="Model\MasterPageItem.cs" />
@@ -64,7 +63,6 @@
     <Compile Include="Model\PartysearchMdl.cs" />
     <Compile Include="Model\PayableNotificationMdl.cs" />
     <Compile Include="Model\ResponseModel.cs" />
-    <Compile Include="Model\SiteNameMdl.cs" />
     <Compile Include="NativeMathods\StaticMethods.cs" />
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>

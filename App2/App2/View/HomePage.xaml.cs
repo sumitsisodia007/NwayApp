@@ -8,6 +8,7 @@ using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -26,74 +27,81 @@ namespace App2.View
         API api = new API();
         LoginResponseMdl _newres;
         NotificationListMdl _notificationModel;
+
         public HomePage()
         {
+            Device.BeginInvokeOnMainThread(() =>
+            {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             PrepareView();
-            Device.BeginInvokeOnMainThread(() => {
+
+            
                 Task.Delay(1000);
                 SetNotificationBadge();
             });
         }
         public HomePage(LoginResponseMdl res)
         {
-            InitializeComponent();
+            
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             _newres = res;
             PrepareView();
-            Device.BeginInvokeOnMainThread(() => {
+
+           
                 Task.Delay(500);
                 SetNotificationBadge();
-           });
+            });
         }
 
         private async void SetNotificationBadge()
         {
-             try
+            try
             {
-            string DateChk = null;
-            string Notcount = "0";
-            ResponseModel rs = StaticMethods.GetLocalSavedData();
-            api = new API();
-            NavigationMdl nav = new NavigationMdl();
-            nav.Device_id = StaticMethods.getDeviceidentifier();
-            if (nav.Device_id == "unknown")
-            {
-                nav.Device_id = "123456";
-            }
-            nav.Company_name = EnumMaster.C21_MALHAR;
-            nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
-
-            nav.User_id = rs.User_Id;
-            _notificationModel = api.PostNotification(nav);
-            
-
-            var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
-            foreach (var item in _notificationModel.ListNotificationDate)
-            {
-                DateChk= item.Date;
-                Notcount= item.NotCount;
-                break;
-            }
-            if (d2.ToString() == DateChk)
-            {
-                rs.NotCount = lblNotificationBadge.Text = Notcount;
-            }
-            else
-            {
-                lblNotificationBadge.Text = "0";
-                        //rs.NotCountDate = DateChk;
-                        //StaticMethods.SaveLocalData(rs);
-                    }
+                string DateChk = null;
+                string Notcount = "0";
+                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                api = new API();
+                NavigationMdl nav = new NavigationMdl();
+                nav.Device_id = StaticMethods.getDeviceidentifier();
+                if (nav.Device_id == "unknown")
+                {
+                    nav.Device_id = "123456";
                 }
+                nav.Company_name = EnumMaster.C21_MALHAR;
+                nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
+
+                nav.User_id = rs.User_Id;
+               // _notificationModel = api.PostNotification(nav);
+
+
+                var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
+                foreach (var item in _notificationModel.ListNotificationDate)
+                {
+                    DateChk = item.Date;
+                    Notcount = item.NotCount;
+                    break;
+                }
+                if (d2.ToString() == DateChk)
+                {
+                    rs.NotCount = lblNotificationBadge.Text = Notcount;
+                }
+                else
+                {
+                    lblNotificationBadge.Text = "0";
+                    //rs.NotCountDate = DateChk;
+                    //StaticMethods.SaveLocalData(rs);
+                }
+            }
             catch (Exception ex)
             {
-             //  await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+                //  await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
             }
         }
-
-
+        
         private async void Receivable_Tapped(object sender, EventArgs e)
         {
             nav = new NavigationMdl();
@@ -155,12 +163,13 @@ namespace App2.View
         {
             try
             {
-                var loadingPage = new LoaderPage();
-                await PopupNavigation.PushAsync(loadingPage);
-                await Task.Delay(1000);
-                await Navigation.PushAsync(new MainPage(_notificationModel));
-                await Navigation.RemovePopupPageAsync(loadingPage);
+                //var loadingPage = new LoaderPage();
+                //await PopupNavigation.PushAsync(loadingPage);
+                //await Task.Delay(1000);
 
+                //await Navigation.PushAsync(new MainPage(_notificationModel));
+                //await Navigation.RemovePopupPageAsync(loadingPage);
+                PrepareAPIData();
             }
             catch (Exception ex)
             {
@@ -187,15 +196,57 @@ namespace App2.View
         private async void Approval_Clicked(object sender, EventArgs e)
         {
             // DisplayAlert("Message", "Comming Soon, Approval", "ok");
+            //PrepareAPIData();
             await PopupNavigation.PushAsync(new LeftMenu(_newres));
         }
+
+        private async void PrepareAPIData()
+        {
+            NavigationMdl nav = new NavigationMdl();
+            Site_id_Mdl site_lst = new Site_id_Mdl();
+            ObservableCollection<Site_id_Mdl> lst = new ObservableCollection<Site_id_Mdl>();
+            ResponseModel res = StaticMethods.GetLocalSavedData();
+            try
+            {
+                foreach (var item in _newres._permissions)
+                {
+                    if (StaticMethods.Set_Company_Name == item.Company_name)
+                    {
+                        foreach (var item2 in item._company_site)
+                        {
+
+                            lst.Add(new Site_id_Mdl { Site_id = item2.Site_id, SiteName = item2.Site_name });
+                        }
+                    nav.Company_Id = item.Company_id.ToString();
+                    }
+                }
+                nav.User_name = res.UserName;
+                nav.Password = res.Password;
+                nav.Device_id= res.Device_Id;
+                nav.User_id= res.User_Id;
+                nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
+                nav._site_Id = lst;
+                nav.Party_id = "1";
+                
+                NotificationListMdl _nmdl = api.PostNotification(nav);
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
+                await Task.Delay(1000);
+                await Navigation.PushAsync(new MainPage(_nmdl));
+                await Navigation.RemovePopupPageAsync(loadingPage);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
 
         private void PrepareView()
         {
             try
             {
 
-                if (App.ScreenWidth > 0 && App.ScreenHeight> 0)
+                if (App.ScreenWidth > 0 && App.ScreenHeight > 0)
                 {
                     var calcScreenWidth = App.ScreenWidth;
                     var calcScreenHieght = App.ScreenHeight;
@@ -204,7 +255,7 @@ namespace App2.View
                     GridCas.HeightRequest =
                     GridCon.HeightRequest =
                     GridExp.HeightRequest =
-                    GridInv.HeightRequest = calcScreenHieght / 4+20;
+                    GridInv.HeightRequest = calcScreenHieght / 4 + 20;
                     GridRec.WidthRequest =
                     GridPay.WidthRequest =
                     GridCas.WidthRequest =
@@ -215,7 +266,7 @@ namespace App2.View
             }
             catch (Exception ex)
             {
-                DisplayAlert("Erro",ex.Message,"ok");
+                DisplayAlert("Erro", ex.Message, "ok");
             }
         }
     }

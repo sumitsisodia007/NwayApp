@@ -20,5 +20,6 @@ namespace App2.Model
         public string DeviceToken { get; set; }
         public string NotCount { get; set; }
         public string NotCountDate { get; set; }
+        public string Company_Name { get; set; }
     }
 }

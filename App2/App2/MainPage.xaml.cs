@@ -36,12 +36,13 @@ namespace App2
         public MainPage()
         {
             InitializeComponent();
-            NotificationMehods();
+           // NotificationMehods( );
         }
-        public MainPage(NotificationListMdl _notificationModel)
+        public MainPage(NotificationListMdl _notification)
         {
             InitializeComponent();
-            NotificationMehods();
+            _notificationModel = _notification;
+            NotificationMehods(_notification);
         }
 
         protected override void OnAppearing()
@@ -73,7 +74,7 @@ namespace App2
             }
         }
 
-        private async void NotificationMehods()
+        private async void NotificationMehods(NotificationListMdl _notification)
         {
             if (!CrossConnectivity.Current.IsConnected)
             {
@@ -93,10 +94,10 @@ namespace App2
             ResponseModel rs = StaticMethods.GetLocalSavedData();
             nav.User_id = rs.User_Id;
 
-            _notificationModel = api.PostNotification(nav); 
+          //  _notificationModel = api.PostNotification(nav); 
 
             ObservableCollection<NotificationGroup> _not = new ObservableCollection<NotificationGroup>();
-            foreach (var item in _notificationModel.ListNotificationDate)
+            foreach (var item in _notification.ListNotificationDate)
             {
                 NotificationGroup group = new NotificationGroup(item.Date + " (" + item.NotCount + ")", "o");
                 foreach (var item2 in item.ListTags)
@@ -354,27 +355,27 @@ namespace App2
             }
         }
 
-        private void C21_Tapped(object sender, EventArgs e)
-        {
-            if (!(MALHAR.Text == "C21"))
-            {
-                MALHAR.BackgroundColor = Color.White;
-                MALHAR.TextColor = Color.FromHex("#4472C4");
-                C21.BackgroundColor = Color.FromHex("#4472C4");
-                C21.TextColor = Color.White;
-            }
-        }
+        //private void C21_Tapped(object sender, EventArgs e)
+        //{
+        //    if (!(MALHAR.Text == "C21"))
+        //    {
+        //        MALHAR.BackgroundColor = Color.White;
+        //        MALHAR.TextColor = Color.FromHex("#4472C4");
+        //        C21.BackgroundColor = Color.FromHex("#4472C4");
+        //        C21.TextColor = Color.White;
+        //    }
+        //}
 
-        private void MALHAR_Tapped(object sender, EventArgs e)
-        {
-            if (!(C21.Text == "MALHAR"))
-            {
-                MALHAR.BackgroundColor = Color.FromHex("#4472C4");
-                MALHAR.TextColor = Color.White;
-                C21.BackgroundColor = Color.White;
-                C21.TextColor = Color.FromHex("#4472C4");
+        //private void MALHAR_Tapped(object sender, EventArgs e)
+        //{
+        //    if (!(C21.Text == "MALHAR"))
+        //    {
+        //        MALHAR.BackgroundColor = Color.FromHex("#4472C4");
+        //        MALHAR.TextColor = Color.White;
+        //        C21.BackgroundColor = Color.White;
+        //        C21.TextColor = Color.FromHex("#4472C4");
                 
-            }
-        }
+        //    }
+        //}
     }
 }
