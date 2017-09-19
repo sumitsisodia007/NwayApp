@@ -1,5 +1,6 @@
 ﻿using App2.Model;
 using App2.NativeMathods;
+using App2.ShowModels;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -19,6 +20,7 @@ namespace App2.PopUpPages
     {
          public List<Site_id_Mdl> menuList { get; set; }
         public List<string> tmplist { get; set; }
+        public List<ShowCompanyNameMdl> _companyname { get; set; }
         LoginResponseMdl _data;
         public LeftMenu()
         {
@@ -30,8 +32,45 @@ namespace App2.PopUpPages
         {
             InitializeComponent();
             _data = data;
-            PrepareLayout();
+            
+            PickerData(data);
             DrawalMenu();
+            PrepareLayout();
+        }
+        private void PickerData(LoginResponseMdl res)
+        {
+            _companyname = new List<ShowCompanyNameMdl>();
+            foreach (var item in res._permissions)
+            {
+                _companyname.Add(new ShowCompanyNameMdl { CompanyName = item.Company_name });
+            }
+            MainPickr.ItemsSource = _companyname;
+        }
+
+        private void MainPickr_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+            if (selectedIndex != -1)
+            {
+                try
+                {
+
+                    ResponseModel res = new ResponseModel();
+                    res = StaticMethods.GetLocalSavedData();
+                    res.Company_Name = lblupdate.Text = StaticMethods.Set_Company_Name = (string)picker.Items[selectedIndex];
+                    res.Company_Index = selectedIndex.ToString();
+                    StaticMethods.SaveLocalData(res);
+                    //  MainPickr.IsVisible = false;
+                    // MainPickr.Unfocus();
+                    
+                    DrawalMenu();
+                }
+                catch (Exception ex)
+                {
+                }
+
+            }
         }
 
         private void PrepareLayout()
@@ -42,6 +81,11 @@ namespace App2.PopUpPages
                 var calcScreenHieght = Application.Current.MainPage.Height;
                 stkMessage.HeightRequest = calcScreenHieght;
                 stkMessage.WidthRequest = calcScreenWidth - 100;
+                ResponseModel res = StaticMethods.GetLocalSavedData();
+                if (res.Company_Index != null)
+                {
+                    MainPickr.SelectedIndex = Convert.ToInt32(res.Company_Index);
+                }
             }
         }
 
@@ -60,9 +104,10 @@ namespace App2.PopUpPages
                 }
             }
             NavigationList.ItemsSource = menuList;
+            lblupdate.Text = StaticMethods.Set_Company_Name;
         }
 
-        private async void NavigationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void NavigationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             CheckBox isCheckedOrNot = (CheckBox)sender;
            // var selectedStudent = isCheckedOrNot.BindingContext as SiteNameMdl;
@@ -82,7 +127,10 @@ namespace App2.PopUpPages
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await PopupNavigation.RemovePageAsync(this);
+            await Task.WhenAll(
+             Navigation.PushModalAsync(new App2.View.MasterMainPage(_data)),
+             PopupNavigation.RemovePageAsync(this)
+            );
         }
 
         protected override bool OnBackgroundClicked()
@@ -92,7 +140,10 @@ namespace App2.PopUpPages
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                MainPickr.Focus();
+            });
         }
 
         private void CheckBox_CheckedChanged(object sender, XLabs.EventArgs<bool> e)

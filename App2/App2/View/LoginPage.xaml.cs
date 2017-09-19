@@ -99,7 +99,7 @@ namespace App2.View
                     if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
                     {
                         res =  api.PostLogin(_login);
-                        StaticMethods._login_response = res;
+                       // StaticMethods._login_response = res;
                         if (res.Error == "false")
                         {
                             rs.Device_Id = _login.DeviceID;

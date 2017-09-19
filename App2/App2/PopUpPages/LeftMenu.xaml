@@ -1,17 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="App2.PopUpPages.LeftMenu"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="App2.PopUpPages.LeftMenu"
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-                xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-                xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"                 
-                xmlns:local="clr-namespace:App2.CustomRenderer"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"                 
+                 xmlns:local="clr-namespace:App2.CustomRenderer"
                  InputTransparent="False"
-                HasSystemPadding="True"
-                CloseWhenBackgroundIsClicked="True"
-                 Padding="100,0,0,0">
+                 HasSystemPadding="True"
+                 CloseWhenBackgroundIsClicked="True"
+                 Padding="20,50">
     <pages:PopupPage.Animation>
-        <animations:MoveAnimation PositionIn="Right" PositionOut="Right"/>
+        <animations:MoveAnimation
+                 PositionIn="Center"
+                 PositionOut="Center"/>
     </pages:PopupPage.Animation>
 
     <StackLayout x:Name="stkMessage"
@@ -19,15 +21,25 @@
                  HorizontalOptions="FillAndExpand"
                  BackgroundColor="White"
                  Padding="0,20">
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="20,10" Spacing="0">
-            <Label Text="Sites Name" Font="17,Bold" HorizontalOptions="StartAndExpand"/>
+        <StackLayout Orientation="Horizontal" 
+                     HorizontalOptions="FillAndExpand" 
+                     Padding="20,10" 
+                     Spacing="0">
+            <!--<Label Text="Sites Name" Font="17,Bold" HorizontalOptions="StartAndExpand"/>-->
             <!--<Label Text="Update" Font="17,Bold" HorizontalOptions="EndAndExpand"/>-->
-            <local:CurvedCornersLabel x:Name="lblupdate" Text=" Update "
-                                                      FontSize="14.5"
-                                                      CurvedBackgroundColor="#008D4C"
-                                                      TextColor="White"
-                                                      HorizontalOptions="EndAndExpand"
-                                                      CurvedCornerRadius="8">
+            <Picker x:Name="MainPickr" 
+                    IsVisible="False" 
+                    Title="Select Company Name" 
+                    ItemDisplayBinding="{Binding CompanyName}" 
+                    SelectedIndexChanged="MainPickr_SelectedIndexChanged" 
+                    TextColor="Black"
+                    HorizontalOptions="FillAndExpand"/>
+            <local:CurvedCornersLabel x:Name="lblupdate" 
+                                    FontSize="14.5"
+                                    CurvedBackgroundColor="#2196F3"
+                                    TextColor="White"
+                                    HorizontalOptions="FillAndExpand"
+                                    CurvedCornerRadius="6">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </Label.GestureRecognizers>
@@ -38,17 +50,17 @@
                           BackgroundColor="White"
                           SeparatorVisibility="None"
                           SeparatorColor="#4472C4"
-                      HasUnevenRows="True"
+                          HasUnevenRows="True"
                           ItemSelected="NavigationList_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
                                 <controls:CheckBox DefaultText="{Binding SiteName}"
-                                                       HorizontalOptions="FillAndExpand"
-                                                       TextColor="Black"
+                                                   HorizontalOptions="FillAndExpand"
+                                                   TextColor="Black"
                                                    CheckedChanged="CheckBox_CheckedChanged"
-                                                       />
+                                                   Checked="True" />
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
@@ -56,13 +68,10 @@
             </ListView>
 
         </StackLayout>
-        <!--<controls:CheckBox CheckedText="{Binding Title}"
-                                                       DefaultText="{Binding Title}"
-                                                       HorizontalOptions="FillAndExpand"
-                                                       TextColor="Blue"
-                                                       UncheckedText="This is Unchecked" />-->
-        <Button VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Text="OK" Clicked="Button_Clicked"/>
-
+        <Button VerticalOptions="EndAndExpand"
+                HorizontalOptions="FillAndExpand" 
+                Text="Update" 
+                Clicked="Button_Clicked"/>
     </StackLayout>
 
 </pages:PopupPage>

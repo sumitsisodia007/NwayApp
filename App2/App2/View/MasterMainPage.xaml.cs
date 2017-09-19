@@ -22,20 +22,22 @@ namespace App2.View
         {
             InitializeComponent();
             _newres = res;
-            this.Master = new MasterPage(res);
-            this.Detail = new NavigationPage(new HomePage(res));
+            this.Master = new MasterPage(_newres);
+            this.Detail = new NavigationPage(new HomePage(_newres));
             App.MasterDetail = this;
         }
+
         public MasterMainPage()
         {
-            MainMethod();
+            MainLogin();
             InitializeComponent();
 
             this.Master = new MasterPage(_newres);
             this.Detail = new NavigationPage(new HomePage(_newres));
             App.MasterDetail = this;
         }
-        private  void MainMethod()
+
+        private  void MainLogin()
         {
             API api = new API();
             LoginResponseMdl res = new LoginResponseMdl();
@@ -61,7 +63,11 @@ namespace App2.View
                     _login.Firebasetoken = "";
                 }
             }
-            _newres= res =  api.PostLogin(_login);
+             res =  api.PostLogin(_login);
+            if (res.Error == "false")
+            {
+                _newres = res;
+            }
         }
     }
 }

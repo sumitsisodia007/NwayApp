@@ -81,10 +81,7 @@
                     <!--End Auto Complete-->
                 <StackLayout BackgroundColor="#A8C4E6">
                     <micro:ChartView x:Name="linechart" HeightRequest="150" BackgroundColor="#A8C4E6"  />
-                    <!--<Image x:Name="imgLogo"
-                            Source="logo"
-                           Aspect="AspectFit"
-                           HeightRequest="150" />-->
+                  
                 </StackLayout>
                     
                     <StackLayout x:Name="stktodaypayable" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">

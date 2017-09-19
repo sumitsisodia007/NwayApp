@@ -20,6 +20,7 @@ namespace App2.View
     {
         public List<MasterPageItem> menuList { get; set; }
         public List<ShowCompanyNameMdl> _companyname { get; set; }
+
         public MasterPage()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace App2.View
             DrawalMenu();
            // PickerData();
         }
+
         public MasterPage(LoginResponseMdl res)
         {
             InitializeComponent();
@@ -34,21 +36,19 @@ namespace App2.View
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             DrawalMenu();
             PickerData(res);
+            PreLayout();
         }
+
         private void PickerData(LoginResponseMdl res)
         {
             _companyname = new List<ShowCompanyNameMdl>();
             foreach (var item in res._permissions)
             {
                 _companyname.Add(new ShowCompanyNameMdl {CompanyName=item.Company_name });
-                //item.Company_name;
-                //foreach (var item2 in item._company_site)
-                //{
-
-                //}
             }
             MainPickr.ItemsSource = _companyname;
         }
+
         protected override void OnAppearing()
         {
             Device.BeginInvokeOnMainThread(() => {
@@ -56,10 +56,29 @@ namespace App2.View
                 {
                     var calcScreenWidth = Application.Current.MainPage.Width;
                     var calcScreenHieght = Application.Current.MainPage.Height;
-                    //TI.WidthRequest = C21.WidthRequest = calcScreenWidth / 3;
                     MainPickr.WidthRequest = calcScreenWidth -80;
                     ResponseModel res = StaticMethods.GetLocalSavedData();
-                    MainPickr.Title = res.Company_Name;
+                    if (res.Company_Index != null)
+                    {
+                        MainPickr.SelectedIndex = Convert.ToInt32(res.Company_Index);
+                    }
+                }
+            });
+        }
+
+        private void PreLayout()
+        {
+            Device.BeginInvokeOnMainThread(() => {
+                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+                {
+                    var calcScreenWidth = Application.Current.MainPage.Width;
+                    var calcScreenHieght = Application.Current.MainPage.Height;
+                    MainPickr.WidthRequest = calcScreenWidth - 80;
+                    ResponseModel res = StaticMethods.GetLocalSavedData();
+                    if (res.Company_Index != null)
+                    {
+                        MainPickr.SelectedIndex = Convert.ToInt32(res.Company_Index);
+                    }
                 }
             });
         }
@@ -124,7 +143,6 @@ namespace App2.View
         private void MainPickr_SelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
-            //StaticMethods.ShowToast(picker.SelectedItem.ToString());
             int selectedIndex = picker.SelectedIndex;
             if (selectedIndex != -1)
             {
@@ -133,7 +151,8 @@ namespace App2.View
                     
                     ResponseModel res = new ResponseModel();
                     res = StaticMethods.GetLocalSavedData();
-                    res.Company_Name=StaticMethods.Set_Company_Name = (string)picker.Items[selectedIndex];
+                    StaticMethods.Set_Company_Name = (string)picker.Items[selectedIndex];
+                    res.Company_Index = selectedIndex.ToString();
                     StaticMethods.SaveLocalData(res);
                 }
                 catch (Exception ex)

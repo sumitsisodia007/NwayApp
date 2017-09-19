@@ -7,6 +7,7 @@ using App2.ShowModels;
 using Microcharts;
 using Plugin.Connectivity;
 using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Services;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -25,15 +26,14 @@ namespace App2.View
     {
         public List<ShowPayableTodayDetail> _payableshowlist { get; set; }
         public List<ShowPayableTotalPayble> _showpayabletotalpayblelist { get; set; }
-        // public List<PayableNotificationMdl> _payablenotificationdata { get; set; }
         public static SKColor ColorsPayable = SKColors.Gray;
         
         public bool Notflag { get; set; }
         PartysearchMdl lstLoca = null;
         bool isListSelected = false;
         ShowPayableTodayDetail toady_notification;
-        NavigationMdl navmdl;
-       
+        NavigationMdl navmdl=  new NavigationMdl();
+
         public double _Width = 0;
         public static int flag = 0;
         API api = new API();
@@ -79,33 +79,40 @@ namespace App2.View
             //});
         }
 
-        private async void MAinMethods(NavigationMdl mdl)
-        {   navmdl = new NavigationMdl();
-            if (mdl.Page_Title == "Receivable")
+        private  void MAinMethods(NavigationMdl mdl)
+        {
+            Device.BeginInvokeOnMainThread(async () =>
             {
-                PredefinedReceived();
-            }
-            else
-            {
-                PredefinedPaid();
-            }
-            if (!CrossConnectivity.Current.IsConnected)
-            {
-                
-                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
-            }
-            else
-            {
-                PayableNotificationMdl _payable = await api.PayableTable(mdl);
-             
-                ResponseModel rs = StaticMethods.GetLocalSavedData();
-                mdl.User_id = rs.User_Id;
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
 
-                toady_notification = new ShowPayableTodayDetail();
+                if (mdl.Page_Title == "Receivable")
+                {
+                    PredefinedReceived();
+                }
+                else
+                {
+                    PredefinedPaid();
+                }
+                if (!CrossConnectivity.Current.IsConnected)
+                {
 
-                ShowPaybleToday(_payable);
-                ShowTotalPayble(_payable);
-            }
+                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+                }
+                else
+                {
+                    PayableNotificationMdl _payable = await api.PayableTable(mdl);
+
+                    ResponseModel rs = StaticMethods.GetLocalSavedData();
+                    mdl.User_id = rs.User_Id;
+
+                    toady_notification = new ShowPayableTodayDetail();
+
+                    ShowPaybleToday(_payable);
+                    ShowTotalPayble(_payable);
+                }
+                await PopupNavigation.RemovePageAsync(loadingPage);
+            });
         }
 
         protected override void OnAppearing()

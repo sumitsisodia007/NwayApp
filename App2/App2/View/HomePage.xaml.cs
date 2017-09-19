@@ -3,6 +3,7 @@ using App2.Helper;
 using App2.Model;
 using App2.NativeMathods;
 using App2.PopUpPages;
+using App2.ShowModels;
 using Plugin.Connectivity;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
@@ -34,7 +35,7 @@ namespace App2.View
             {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            PrepareView();
+            //PrepareView();
 
             
                 Task.Delay(1000);
@@ -49,11 +50,9 @@ namespace App2.View
                 InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             _newres = res;
-            PrepareView();
-
-           
+            PrepareView(res);
                 Task.Delay(500);
-                SetNotificationBadge();
+             //   SetNotificationBadge();
             });
         }
 
@@ -104,39 +103,39 @@ namespace App2.View
         
         private async void Receivable_Tapped(object sender, EventArgs e)
         {
-            nav = new NavigationMdl();
+            //ResponseModel res = new ResponseModel();
+            //nav = new NavigationMdl();
+            //nav.Page_Title = lblReceive.Text;
+
+            //nav.User_id = res.User_Id;
+            //nav.Device_id = res.Device_Id;
+            //if (nav.Device_id == "unknown")
+            //{
+            //    nav.Device_id = "123456";
+            //}
+            //nav.Company_name = res.Company_Name;
+
+            NavigationMdl nav = PrepareAPIData();
+            // PayableNotificationMdl _payable = await api.PayableTable(nav);
             nav.Page_Title = lblReceive.Text;
-            nav.User_id = "";
-            nav.Device_id = StaticMethods.getDeviceidentifier();
-            if (nav.Device_id == "unknown")
-            {
-                nav.Device_id = "123456";
-            }
-            nav.Company_name = EnumMaster.C21_MALHAR;
             nav.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
-            var loadingPage = new LoaderPage();
-            await PopupNavigation.PushAsync(loadingPage);
+           
             await Task.Delay(200);
             await Navigation.PushAsync(new PayablePage(nav));
-            await Navigation.RemovePopupPageAsync(loadingPage);
+            
         }
 
         private async void Payable_Tapped(object sender, EventArgs e)
         {
-            nav = new NavigationMdl();
+            // nav = new NavigationMdl();
+            NavigationMdl nav = PrepareAPIData();
             nav.Page_Title = lblPay.Text;
-            nav.User_id = "";
-            nav.Device_id = StaticMethods.getDeviceidentifier();
-            if (nav.Device_id == "unknown")
-            {
-                nav.Device_id = "123456";
-            }
-            nav.Company_name = EnumMaster.C21_MALHAR;
+            
             nav.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);
             await Navigation.PushAsync(new PayablePage(nav));
-            await Navigation.RemovePopupPageAsync(loadingPage);
+            await PopupNavigation.RemovePageAsync(loadingPage);
         }
 
         private void CashFlow_Tapped(object sender, EventArgs e)
@@ -169,7 +168,20 @@ namespace App2.View
 
                 //await Navigation.PushAsync(new MainPage(_notificationModel));
                 //await Navigation.RemovePopupPageAsync(loadingPage);
-                PrepareAPIData();
+                NavigationMdl nav= PrepareAPIData();
+                NotificationListMdl _nmdl = api.PostNotification(nav);
+                if (_nmdl.Error == "true")
+                {
+                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", _nmdl.Message));
+                }
+                else
+                {
+                    var loadingPage = new LoaderPage();
+                    await PopupNavigation.PushAsync(loadingPage);
+                    await Task.Delay(500);
+                    await Navigation.PushAsync(new MainPage(_nmdl));
+                    await Navigation.RemovePopupPageAsync(loadingPage);
+                }
             }
             catch (Exception ex)
             {
@@ -195,15 +207,12 @@ namespace App2.View
         }
         private async void Approval_Clicked(object sender, EventArgs e)
         {
-            // DisplayAlert("Message", "Comming Soon, Approval", "ok");
-            //PrepareAPIData();
-            await PopupNavigation.PushAsync(new LeftMenu(_newres));
+           await  DisplayAlert("Message", "Comming Soon, Approval", "ok");
         }
 
-        private async void PrepareAPIData()
+        private  NavigationMdl PrepareAPIData()
         {
             NavigationMdl nav = new NavigationMdl();
-            Site_id_Mdl site_lst = new Site_id_Mdl();
             ObservableCollection<Site_id_Mdl> lst = new ObservableCollection<Site_id_Mdl>();
             ResponseModel res = StaticMethods.GetLocalSavedData();
             try
@@ -217,35 +226,40 @@ namespace App2.View
 
                             lst.Add(new Site_id_Mdl { Site_id = item2.Site_id, SiteName = item2.Site_name });
                         }
-                    nav.Company_Id = item.Company_id.ToString();
+                        nav.Company_Id = item.Company_id.ToString();
                     }
                 }
                 nav.User_name = res.UserName;
                 nav.Password = res.Password;
-                nav.Device_id= res.Device_Id;
-                nav.User_id= res.User_Id;
+                nav.Device_id = res.Device_Id;
+                nav.User_id = res.User_Id;
                 nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
                 nav._site_Id = lst;
                 nav.Party_id = "1";
-                
-                NotificationListMdl _nmdl = api.PostNotification(nav);
-                var loadingPage = new LoaderPage();
-                await PopupNavigation.PushAsync(loadingPage);
-                await Task.Delay(1000);
-                await Navigation.PushAsync(new MainPage(_nmdl));
-                await Navigation.RemovePopupPageAsync(loadingPage);
             }
             catch (Exception ex)
             {
             }
+            return nav;
         }
 
-
-        private void PrepareView()
+        private void PrepareView(LoginResponseMdl res)
         {
             try
             {
-
+                ResponseModel res1 = StaticMethods.GetLocalSavedData();
+                if (res1.Company_Name != null)
+                {
+                    lblSetCom_Name.Text = StaticMethods.Set_Company_Name=res1.Company_Name;
+                }
+                else
+                {
+                    foreach (var item in res._permissions)
+                    {
+                        StaticMethods.Set_Company_Name= lblSetCom_Name.Text = item.Company_name;
+                        break;
+                    }
+                }
                 if (App.ScreenWidth > 0 && App.ScreenHeight > 0)
                 {
                     var calcScreenWidth = App.ScreenWidth;
@@ -268,6 +282,11 @@ namespace App2.View
             {
                 DisplayAlert("Erro", ex.Message, "ok");
             }
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await PopupNavigation.PushAsync(new LeftMenu(_newres));
         }
     }
 }

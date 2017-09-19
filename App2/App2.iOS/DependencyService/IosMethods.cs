@@ -60,8 +60,8 @@ namespace App2.iOS.DependencyService
                 storage.Put("NotCountDate", um.NotCountDate);
                 storage.Put("UserName", um.UserName);
                 storage.Put("Password", um.Password);
-                storage.Put("Company_Name", um.Password);
-                
+                storage.Put("Company_Name", um.Company_Name);
+                storage.Put("Company_Index", um.Company_Index);
             }
             catch (Exception)
             {
@@ -84,8 +84,8 @@ namespace App2.iOS.DependencyService
                 um.NotCountDate = storage.Get("NotCountDate", null);
                 um.UserName = storage.Get("UserName", null);
                 um.Password = storage.Get("Password", null);
-                um.Company_Name = storage.Get("Company_Name", null);
-                
+                um.Company_Index = storage.Get("Company_Index", null);
+                um.Company_Name= storage.Get("Company_Name", null);
                 return um;
             }
             catch (Exception)
