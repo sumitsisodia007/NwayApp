@@ -7,8 +7,10 @@ using Firebase.Iid;
 using System.Threading.Tasks;
 using Android.Content;
 using App2.Model;
-using App2.NativeMathods;   
+using App2.NativeMathods;
+using Android.Views;
 
+using System.Linq;
 
 namespace App2.Droid
 {
@@ -62,19 +64,7 @@ namespace App2.Droid
             {
                 LoadApplication(new App());
             }
+           }
         }
-
-        //private void RegisterWithGCM()
-        //{
-        //    // Check to ensure everything's set up right
-        //    GcmClient.CheckDevice(this);
-        //    GcmClient.CheckManifest(this);
-
-        //    // Register for push notifications
-        //    Log.Info("MainActivity", "Registering...");
-        //    GcmClient.Register(this, PushHandlerBroadcastReceiver.SENDER_IDS);
-        //}
-    }
-    
 }
 

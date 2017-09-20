@@ -13,8 +13,8 @@ namespace App2.NativeMathods
     {
         public static int NotificationCount { get; set; }
         public static string Set_Company_Name { get; set; }
-        public static LoginResponseMdl _login_response{ get; set; }
-
+        public static List<string> userCh { get; set; }
+        public static LoginResponseMdl _new_res { get; set; }
         public static string getNotificationCount()
         {
             string strCount = "";

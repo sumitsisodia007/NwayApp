@@ -27,7 +27,7 @@ namespace App2.View
         public List<ShowPayableTodayDetail> _payableshowlist { get; set; }
         public List<ShowPayableTotalPayble> _showpayabletotalpayblelist { get; set; }
         public static SKColor ColorsPayable = SKColors.Gray;
-        
+        NavigationMdl obj_nav = null;
         public bool Notflag { get; set; }
         PartysearchMdl lstLoca = null;
         bool isListSelected = false;
@@ -50,9 +50,17 @@ namespace App2.View
 			InitializeComponent ();
              NavigationPage.SetHasNavigationBar(this, true);
             //NavigationPage.SetTitleIcon(this, "icon.png");
-             this.Title = mdl.Page_Title;
+            try
+            {
+  this.Title = mdl.Page_Title;
             MAinMethods(mdl);
             flag = 1;
+            }
+            catch (Exception ex)
+            {
+                StaticMethods.ShowToast(ex.Message);
+            }
+           
             //Device.BeginInvokeOnMainThread(async () =>
             //{
             //    Notflag = mdl.Is_Notification;
@@ -81,53 +89,68 @@ namespace App2.View
 
         private  void MAinMethods(NavigationMdl mdl)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            try
             {
-                var loadingPage = new LoaderPage();
-                await PopupNavigation.PushAsync(loadingPage);
-
-                if (mdl.Page_Title == "Receivable")
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    PredefinedReceived();
-                }
-                else
-                {
-                    PredefinedPaid();
-                }
-                if (!CrossConnectivity.Current.IsConnected)
-                {
+                     var loadingPage = new LoaderPage();
+                     await PopupNavigation.PushAsync(loadingPage);
 
-                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
-                }
-                else
-                {
-                    PayableNotificationMdl _payable = await api.PayableTable(mdl);
+                    if (mdl.Page_Title == "Receivable")
+                    {
+                        PredefinedReceived();
+                    }
+                    else
+                    {
+                        PredefinedPaid();
+                    }
+                    if (!CrossConnectivity.Current.IsConnected)
+                    {
 
-                    ResponseModel rs = StaticMethods.GetLocalSavedData();
-                    mdl.User_id = rs.User_Id;
+                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+                    }
+                    else
+                    {
+                        PayableNotificationMdl _payable = await api.PayableTable(mdl);
 
-                    toady_notification = new ShowPayableTodayDetail();
+                        ResponseModel rs = StaticMethods.GetLocalSavedData();
+                        mdl.User_id = rs.User_Id;
 
-                    ShowPaybleToday(_payable);
-                    ShowTotalPayble(_payable);
-                }
-                await PopupNavigation.RemovePageAsync(loadingPage);
-            });
+                        toady_notification = new ShowPayableTodayDetail();
+
+                        ShowPaybleToday(_payable);
+                        ShowTotalPayble(_payable);
+                    }
+                    await PopupNavigation.RemovePageAsync(loadingPage);
+                });
+
+            }
+            catch (Exception ex)
+            {
+            }
+            
         }
 
         protected override void OnAppearing()
         {
-            Device.BeginInvokeOnMainThread(() => {
-                flag = 1;
-               
-               
-               
-                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+            try
             {
-                var calcScreenWidth = Application.Current.MainPage.Width;
-                var calcScreenHieght = Application.Current.MainPage.Height;
-                lblparty.WidthRequest = lbloutstanding.WidthRequest = lblTodayReceipt.WidthRequest = lblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
-            }});
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    flag = 1;
+                    if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
+                    {
+                        var calcScreenWidth = Application.Current.MainPage.Width;
+                        var calcScreenHieght = Application.Current.MainPage.Height;
+                        lblparty.WidthRequest = lbloutstanding.WidthRequest = lblTodayReceipt.WidthRequest = lblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                StaticMethods.ShowToast("OnApp Payable "+ ex.Message);
+            }
+            
         }
 
         private void PredefinedPaid()
@@ -260,20 +283,24 @@ namespace App2.View
             navmdl = new NavigationMdl();
             ShowPayableTodayDetail toady_notification = (ShowPayableTodayDetail)e.Item;
            
-            navmdl.Party_id = toady_notification.Show_Party_Id;
-            navmdl.Device_id = StaticMethods.getDeviceidentifier(); 
-            if (navmdl.Device_id == "unknown")
-            {
-                navmdl.Device_id = "123456";
-            }
-            navmdl.Company_name = EnumMaster.C21_MALHAR;
-            navmdl.Party_Name = toady_notification.Show_Pay_Party;
+           
+
+            //navmdl.Device_id = StaticMethods.getDeviceidentifier(); 
+            //if (navmdl.Device_id == "unknown")
+            //{
+            //    navmdl.Device_id = "123456";
+            //}
+            //navmdl.Company_name = EnumMaster.C21_MALHAR;
+            obj_nav = new NavigationMdl();
+            NavigationMdl nav = obj_nav.PrepareAPIData();
+             nav.Party_id = toady_notification.Show_Party_Id;
+              nav.Party_Name = toady_notification.Show_Pay_Party;
             if (this.Title== "Receivable")
-            { navmdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING; }
-            else { navmdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING; }
+            { nav.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING; }
+            else { nav.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING; }
             if (Notflag != true)
             {
-                Navigation.PushAsync(new PayableChart(navmdl));
+                Navigation.PushAsync(new PayableChart(nav));
             }
         }
 
@@ -284,18 +311,18 @@ namespace App2.View
                 isListSelected = false;
                 if (e.NewTextValue != string.Empty)
                 {
-                    navmdl = new NavigationMdl();
-                    ResponseModel rs = StaticMethods.GetLocalSavedData();
-                    navmdl.User_id = rs.User_Id;
-                    navmdl.Device_id = StaticMethods.getDeviceidentifier(); 
-                    if (navmdl.Device_id == "unknown")
-                    {
-                        navmdl.Device_id = "123456";
-                    }
-                    navmdl.Company_name = Helper.EnumMaster.C21_MALHAR;
-                    navmdl.Party_Name = e.NewTextValue;
-                    navmdl.Tag_type = "partylist";
-                    lstLoca = new PartysearchMdl();
+                    //navmdl = new NavigationMdl();
+                    //ResponseModel rs = StaticMethods.GetLocalSavedData();
+                    //navmdl.User_id = rs.User_Id;
+                    //navmdl.Device_id = StaticMethods.getDeviceidentifier(); 
+                    //if (navmdl.Device_id == "unknown")
+                    //{
+                    //    navmdl.Device_id = "123456";
+                    //}
+                    //navmdl.Company_name = Helper.EnumMaster.C21_MALHAR;
+                    //navmdl.Party_Name = e.NewTextValue;
+                    //navmdl.Tag_type = "partylist";
+                    
                     ObservableCollection<PartysearchlistMdl> _lst = new ObservableCollection<PartysearchlistMdl>();
                     api = new API();
                     if (!CrossConnectivity.Current.IsConnected)
@@ -305,7 +332,11 @@ namespace App2.View
                     }
                     else
                     {
-                        lstLoca = await api.GetParty(navmdl);
+                        obj_nav = new NavigationMdl();
+                        NavigationMdl nav = obj_nav.PrepareAPIData();
+                        nav.Party_Name = e.NewTextValue;
+                        lstLoca = new PartysearchMdl();
+                        lstLoca = await api.GetParty(nav);
 
                         foreach (var item in lstLoca.Party_List)
                         {
@@ -389,18 +420,20 @@ namespace App2.View
                 txtAuto.Unfocus();
                 obj = (PartysearchlistMdl)e.Item;
                
-                navmdl.Party_id = obj.Party_Id;
-                navmdl.Device_id = StaticMethods.getDeviceidentifier(); //"123";//
-                if (navmdl.Device_id == "unknown")
-                {
-                    navmdl.Device_id = "123456";
-                }
-                navmdl.Company_name = EnumMaster.C21_MALHAR;
-                navmdl.Party_Name = obj.Party_Name;
+                //navmdl.Device_id = StaticMethods.getDeviceidentifier(); //"123";//
+                //if (navmdl.Device_id == "unknown")
+                //{
+                //    navmdl.Device_id = "123456";
+                //}
+                //navmdl.Company_name = EnumMaster.C21_MALHAR;
+                obj_nav = new NavigationMdl();
+                NavigationMdl nav = obj_nav.PrepareAPIData();
+                nav.Party_Name = obj.Party_Name;
+                nav.Party_id = obj.Party_Id;
                 if (this.Title == "Receivable")
-                { navmdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING; }
-                else { navmdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING; }
-                Navigation.PushAsync(new PayableChart(navmdl));
+                { nav.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING; }
+                else { nav.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING; }
+                Navigation.PushAsync(new PayableChart(nav));
             }
             catch (Exception ex)
             {

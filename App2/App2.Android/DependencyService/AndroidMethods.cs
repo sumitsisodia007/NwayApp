@@ -44,8 +44,6 @@ namespace App2.Droid.DependencyService
         {
             try
             {
-                //store
-
                 var prefs = Android.App.Application.Context.GetSharedPreferences("MyApp", FileCreationMode.Private);
                 var storage = prefs.Edit();
                 storage.PutString("TagType", um.TagType);

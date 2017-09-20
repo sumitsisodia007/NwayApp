@@ -4,16 +4,26 @@
              x:Class="App2.App">
 	<Application.Resources>
 
-		 <!--Application resource dictionary--> 
+        <!--<ResourceDictionary>
+            <ControlTemplate x:Key="MainPageTemplate">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="CenterAndExpand" Padding="15">
+                        <Image Source="manu_w" HeightRequest="30"  WidthRequest="30" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="MainManuSlide_Tapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="MainManuSlide_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <Label Text="Home" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" FontSize="Large" FontAttributes="Bold"/>
+                </StackLayout>
+
+            </ControlTemplate>
+        </ResourceDictionary>-->
+        
             <ResourceDictionary>
-        <!-- Styles -->
-        <!--
-                  <Style TargetType="NavigationPage">
-                    <Setter Property="BarBackgroundColor" Value="#ff5300"/>
-                    <Setter Property="BarTextColor" Value="White"/>
-                  </Style>
-                  -->
-        <!-- Styles -->
             <Style x:Key="buttonStyle" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
@@ -22,7 +32,6 @@
                 <Setter Property="BorderWidth" Value="5" />
                <Setter Property="TextColor" Value="Teal" />
             </Style>
-
         </ResourceDictionary>
 	</Application.Resources>
 </Application>

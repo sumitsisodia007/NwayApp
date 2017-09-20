@@ -19,7 +19,9 @@ namespace App2.PopUpPages
     public partial class LeftMenu : PopupPage
     {
          public List<Site_id_Mdl> menuList { get; set; }
-        public List<string> tmplist { get; set; }
+        private List<string> userChk = new List<string>();
+        
+
         public List<ShowCompanyNameMdl> _companyname { get; set; }
         LoginResponseMdl _data;
         public LeftMenu()
@@ -32,7 +34,6 @@ namespace App2.PopUpPages
         {
             InitializeComponent();
             _data = data;
-            
             PickerData(data);
             DrawalMenu();
             PrepareLayout();
@@ -61,9 +62,6 @@ namespace App2.PopUpPages
                     res.Company_Name = lblupdate.Text = StaticMethods.Set_Company_Name = (string)picker.Items[selectedIndex];
                     res.Company_Index = selectedIndex.ToString();
                     StaticMethods.SaveLocalData(res);
-                    //  MainPickr.IsVisible = false;
-                    // MainPickr.Unfocus();
-                    
                     DrawalMenu();
                 }
                 catch (Exception ex)
@@ -148,10 +146,16 @@ namespace App2.PopUpPages
 
         private void CheckBox_CheckedChanged(object sender, XLabs.EventArgs<bool> e)
         {
-            CheckBox isCheckedOrNot = (CheckBox)sender;
-            var name = isCheckedOrNot.DefaultText;
-            tmplist = new List<string>();
-            tmplist.Add(name);
+            try
+            {
+                CheckBox isCheckedOrNot = (CheckBox)sender;
+                var name = isCheckedOrNot.DefaultText;
+                userChk.Add(name);
+               StaticMethods.userCh = userChk;
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ namespace App2.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        NavigationMdl nav = null;
+        NavigationMdl obj_nav = null;
         LoginMdl _login = new LoginMdl();
         API api = new API();
         LoginResponseMdl _newres;
@@ -44,14 +44,13 @@ namespace App2.View
         }
         public HomePage(LoginResponseMdl res)
         {
-            
             Device.BeginInvokeOnMainThread(() =>
             {
-                InitializeComponent();
+            InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            _newres = res;
+            StaticMethods._new_res = _newres = res;
             PrepareView(res);
-                Task.Delay(500);
+            Task.Delay(500);
              //   SetNotificationBadge();
             });
         }
@@ -114,21 +113,28 @@ namespace App2.View
             //    nav.Device_id = "123456";
             //}
             //nav.Company_name = res.Company_Name;
+            try
+            {
+                obj_nav = new NavigationMdl();
+                NavigationMdl nav = obj_nav.PrepareAPIData();
+                // PayableNotificationMdl _payable = await api.PayableTable(nav);
+                nav.Page_Title = lblReceive.Text;
+                nav.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
+                await Task.Delay(200);
+                await Navigation.PushAsync(new PayablePage(nav));
 
-            NavigationMdl nav = PrepareAPIData();
-            // PayableNotificationMdl _payable = await api.PayableTable(nav);
-            nav.Page_Title = lblReceive.Text;
-            nav.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
-           
-            await Task.Delay(200);
-            await Navigation.PushAsync(new PayablePage(nav));
+            }
+            catch (Exception ex)
+            {
+                StaticMethods.ShowToast(ex.Message);
+            }
             
         }
 
         private async void Payable_Tapped(object sender, EventArgs e)
         {
-            // nav = new NavigationMdl();
-            NavigationMdl nav = PrepareAPIData();
+            obj_nav = new NavigationMdl();
+            NavigationMdl nav = obj_nav.PrepareAPIData();
             nav.Page_Title = lblPay.Text;
             
             nav.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
@@ -168,7 +174,8 @@ namespace App2.View
 
                 //await Navigation.PushAsync(new MainPage(_notificationModel));
                 //await Navigation.RemovePopupPageAsync(loadingPage);
-                NavigationMdl nav= PrepareAPIData();
+                obj_nav = new NavigationMdl();
+                NavigationMdl nav = obj_nav.PrepareAPIData();
                 NotificationListMdl _nmdl = api.PostNotification(nav);
                 if (_nmdl.Error == "true")
                 {
@@ -205,43 +212,44 @@ namespace App2.View
         {
             DisplayAlert("Message", "Comming Soon, Alert", "ok");
         }
+
         private async void Approval_Clicked(object sender, EventArgs e)
         {
            await  DisplayAlert("Message", "Comming Soon, Approval", "ok");
         }
 
-        private  NavigationMdl PrepareAPIData()
-        {
-            NavigationMdl nav = new NavigationMdl();
-            ObservableCollection<Site_id_Mdl> lst = new ObservableCollection<Site_id_Mdl>();
-            ResponseModel res = StaticMethods.GetLocalSavedData();
-            try
-            {
-                foreach (var item in _newres._permissions)
-                {
-                    if (StaticMethods.Set_Company_Name == item.Company_name)
-                    {
-                        foreach (var item2 in item._company_site)
-                        {
+        //private NavigationMdl PrepareAPIData()
+        //{
+        //    NavigationMdl nav = new NavigationMdl();
+        //    ObservableCollection<Site_id_Mdl> lst = new ObservableCollection<Site_id_Mdl>();
+        //    ResponseModel res = StaticMethods.GetLocalSavedData();
+        //    try
+        //    {
+        //        foreach (var item in _newres._permissions)
+        //        {
+        //            if (StaticMethods.Set_Company_Name == item.Company_name)
+        //            {
+        //                foreach (var item2 in item._company_site)
+        //                {
 
-                            lst.Add(new Site_id_Mdl { Site_id = item2.Site_id, SiteName = item2.Site_name });
-                        }
-                        nav.Company_Id = item.Company_id.ToString();
-                    }
-                }
-                nav.User_name = res.UserName;
-                nav.Password = res.Password;
-                nav.Device_id = res.Device_Id;
-                nav.User_id = res.User_Id;
-                nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
-                nav._site_Id = lst;
-                nav.Party_id = "1";
-            }
-            catch (Exception ex)
-            {
-            }
-            return nav;
-        }
+        //                    lst.Add(new Site_id_Mdl { Site_id = item2.Site_id, SiteName = item2.Site_name });
+        //                }
+        //                nav.Company_Id = item.Company_id.ToString();
+        //            }
+        //        }
+        //        nav.User_name = res.UserName;
+        //        nav.Password = res.Password;
+        //        nav.Device_id = res.Device_Id;
+        //        nav.User_id = res.User_Id;
+        //        nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
+        //        nav._site_Id = lst;
+        //        nav.Party_id = "1";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //    }
+        //    return nav;
+        //}
 
         private void PrepareView(LoginResponseMdl res)
         {

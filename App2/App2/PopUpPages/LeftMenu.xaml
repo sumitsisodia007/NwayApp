@@ -72,6 +72,8 @@
                 HorizontalOptions="FillAndExpand" 
                 Text="Update" 
                 Clicked="Button_Clicked"/>
+        
+
     </StackLayout>
 
 </pages:PopupPage>

@@ -1,11 +1,6 @@
-﻿using App2.ExpandableListView;
-using App2.Model;
+﻿using App2.Model;
 using App2.NativeMathods;
 using App2.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -33,11 +28,20 @@ namespace App2
             {
                 MainPage = new LoginPage();
             }
-
+            //MainPage = new NavigationPage(new BackMainPage())
+            //{
+            //    BarBackgroundColor = Color.FromHex("#0081f9"),
+            //    BarTextColor = Color.White,
+            //};
         }
         public App(NavigationMdl mdl)
         {
             InitializeComponent();
+            //App.Current.MainPage = new NavigationPage();
+
+            //App.Current.MainPage.Navigation.PushAsync(new DemoPage(mdl));
+            ////App.Current.MainPage.Navigation.PushAsync();
+
             MainPage =new NavigationPage(new PayableChart(mdl));
         }
             

@@ -25,6 +25,7 @@ namespace App2.View
         public double _Width = 0;
         PayableNotificationMdl _payable;
         NavigationMdl navmdl;
+        NavigationMdl obj_nav = null;
         PartysearchMdl lstLoca = null;
         bool isListSelected = false;
         public static double ScreenWidth = 120;
@@ -40,29 +41,7 @@ namespace App2.View
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, true);
             MainMethods(nmdl);
-            //Device.BeginInvokeOnMainThread(async () => { 
-            //if ((nmdl.Tag_type == "payable_outstanding"))
-            //{
-            //    this.Title = "Payable Chart";
-            //    this.BackgroundColor = Color.FromHex("#ED7D31");
-            //    LblSu.BackgroundColor = LblMn.BackgroundColor = LblTu.BackgroundColor = LblWe.BackgroundColor = Color.FromHex("#ED7D31");
-            //}
-            //else
-            //{
-            //    this.Title = "Receivable Chart";
-            //    this.BackgroundColor = Color.FromHex("#A3C1E5");
-            //    LblSu.BackgroundColor = LblMn.BackgroundColor = LblTu.BackgroundColor = LblWe.BackgroundColor = Color.FromHex("#A3C1E5");
-            //}
-            //lblChart.Text = nmdl.Party_Name + " " + EnumMaster.LblChartTitle;
-            //    ResponseModel rs = StaticMethods.GetLocalSavedData();
-            //    nmdl.User_id = rs.User_Id;
-            //    _payable = await api.PayableTable(nmdl);
-   
-            ////_payable = api.PayableTable(nmdl);
-           
             
-            //ShowTotalPayble();
-           //});
         }
 
         private async void MainMethods(NavigationMdl nmdl)
@@ -140,27 +119,34 @@ namespace App2.View
 
         private async void txtAuto_TextChanged(object sender, TextChangedEventArgs e)
         {
+            obj_nav = new NavigationMdl();
+            api = new API();
             try
             {
                
                     isListSelected = false;
                     if (e.NewTextValue != string.Empty)
                     {
-                        navmdl = new NavigationMdl();
-                        ResponseModel rs = StaticMethods.GetLocalSavedData();
-                        navmdl.User_id = rs.User_Id;
-                        navmdl.Device_id = StaticMethods.getDeviceidentifier();
-                        if (navmdl.Device_id == "unknown")
-                        {
-                            navmdl.Device_id = "123456";
-                        }
-                        navmdl.Company_name = Helper.EnumMaster.C21_MALHAR;
-                        navmdl.Party_Name = e.NewTextValue;
-                        navmdl.Tag_type = "partylist";
-                        lstLoca = new PartysearchMdl();
+
+                    //navmdl = new NavigationMdl();
+                    //ResponseModel rs = StaticMethods.GetLocalSavedData();
+                    //navmdl.User_id = rs.User_Id;
+                    //navmdl.Device_id = StaticMethods.getDeviceidentifier();
+                    //if (navmdl.Device_id == "unknown")
+                    //{
+                    //    navmdl.Device_id = "123456";
+                    //}
+                    //navmdl.Company_name = Helper.EnumMaster.C21_MALHAR;
+                    //
+                    //navmdl.Tag_type = "partylist";
+                    
+                    NavigationMdl nav = obj_nav.PrepareAPIData();
+                    nav.Party_Name = e.NewTextValue;
+
+                    lstLoca = new PartysearchMdl();
                         ObservableCollection<PartysearchlistMdl> _lst = null;
                         _lst = new ObservableCollection<PartysearchlistMdl>();
-                        api = new API();
+                      
                     if (!CrossConnectivity.Current.IsConnected)
                     {
                         await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
@@ -168,7 +154,7 @@ namespace App2.View
                     else
                     {
 
-                        lstLoca = await api.GetParty(navmdl);
+                        lstLoca = await api.GetParty(nav);
                     }
                         foreach (var item in lstLoca.Party_List)
                         {
@@ -255,24 +241,27 @@ namespace App2.View
                 txtAuto.Unfocus();
                 obj = (PartysearchlistMdl)e.Item;
 
-                navmdl.Party_id = obj.Party_Id;
-                navmdl.Device_id = "32132";
-                navmdl.Company_name = EnumMaster.C21_MALHAR;
-                navmdl.Party_Name = obj.Party_Name;
+                //navmdl.Party_id = obj.Party_Id;
+                //navmdl.Device_id = "32132";
+                //navmdl.Company_name = EnumMaster.C21_MALHAR;
+                //navmdl.Party_Name = obj.Party_Name;
 
                 //_payable = api.PayableTable(toady_notification);
-
+                obj_nav = new NavigationMdl();
+                NavigationMdl nav = obj_nav.PrepareAPIData();
+                nav.Party_id = obj.Party_Id;
+                nav.Party_Name = obj.Party_Name;
                 if (this.Title == "Receivable Chart")
                 {
-                    navmdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
+                    nav.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
                 }
                 else
                 {
-                    navmdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
+                    nav.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
                 }
-                ResponseModel rs = StaticMethods.GetLocalSavedData();
-                navmdl.User_id = rs.User_Id;
-                _payable =await api.PayableTable(navmdl);
+                //ResponseModel rs = StaticMethods.GetLocalSavedData();
+                //navmdl.User_id = rs.User_Id;
+                _payable =await api.PayableTable(nav);
              
                 //_payable = api.PayableTable(navmdl);
                 ShowTotalPayble();
