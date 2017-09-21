@@ -82,7 +82,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowModels\NotificationShow.cs" />
     <Compile Include="ShowModels\PartyDetails.cs" />
-    <Compile Include="ShowModels\ShowCompanyNameMdl.cs" />
     <Compile Include="ShowModels\ShowPayableTodayDetail.cs" />
     <Compile Include="ShowModels\ShowPayableTotalPayble.cs" />
     <Compile Include="View\Account.xaml.cs">

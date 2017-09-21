@@ -2,6 +2,7 @@
 using App2.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace App2.NativeMathods
     {
         public static int NotificationCount { get; set; }
         public static string Set_Company_Name { get; set; }
-        public static List<string> userCh { get; set; }
+        public static List<Temp_Site_id_Mdl> userCh { get; set; }
         public static LoginResponseMdl _new_res { get; set; }
         public static string getNotificationCount()
         {

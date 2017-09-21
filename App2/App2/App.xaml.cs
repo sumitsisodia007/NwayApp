@@ -28,29 +28,17 @@ namespace App2
             {
                 MainPage = new LoginPage();
             }
-            //MainPage = new NavigationPage(new BackMainPage())
-            //{
-            //    BarBackgroundColor = Color.FromHex("#0081f9"),
-            //    BarTextColor = Color.White,
-            //};
         }
         public App(NavigationMdl mdl)
         {
             InitializeComponent();
-            //App.Current.MainPage = new NavigationPage();
-
-            //App.Current.MainPage.Navigation.PushAsync(new DemoPage(mdl));
-            ////App.Current.MainPage.Navigation.PushAsync();
-
-            MainPage =new NavigationPage(new PayableChart(mdl));
+            MainPage = new MasterMainPage(mdl);
+           // MainPage =new NavigationPage(new PayableChart(mdl));
         }
             
 
         protected override void OnStart()
         {
-            // Handle when your app starts
-           //ResponseModel rs= StaticMethods.GetLocalSavedData();
-           //StaticMethods.NotificationCount= rs.NotCount;
         } 
 
         protected override void OnSleep()

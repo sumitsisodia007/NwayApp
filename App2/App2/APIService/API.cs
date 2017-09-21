@@ -44,7 +44,6 @@ namespace App2.APIService
                     JObject jObj = JObject.Parse(jsonresult);
                     jsonResponse = JsonConvert.DeserializeObject<LoginResponseMdl>(jsonresult);
                 }
-
             }
             catch (Exception ex)
             {
@@ -54,7 +53,55 @@ namespace App2.APIService
         }
         #endregion
 
-        #region Notification WebService
+        #region Notification WebService Via Upadate Popup
+        public NotificationListMdl PostNotification(NavigationMdl nav, List<Temp_Site_id_Mdl> tempchlst)
+        {
+            NotificationListMdl jsonResponse = new NotificationListMdl();
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(RestURL);
+
+                ResponseModel res = StaticMethods.GetLocalSavedData();
+
+                //Create List of KeyValuePairs
+                List<KeyValuePair<string, string>> _notificationProperties = new List<KeyValuePair<string, string>>();
+
+                //Add 'single' parameters
+                _notificationProperties.Add(new KeyValuePair<string, string>("username", "elensoft"));
+                _notificationProperties.Add(new KeyValuePair<string, string>("password", "1"));
+                _notificationProperties.Add(new KeyValuePair<string, string>("user_id", "1"));
+                _notificationProperties.Add(new KeyValuePair<string, string>("device_id", "123456"));
+                _notificationProperties.Add(new KeyValuePair<string, string>("company_id", "1"));
+                _notificationProperties.Add(new KeyValuePair<string, string>("party_id", "1"));
+                _notificationProperties.Add(new KeyValuePair<string, string>("tagtype", "notifications"));
+                //Loop over String array and add all instances to our bodyPoperties
+                foreach (var dir in tempchlst)
+                {
+                    _notificationProperties.Add(new KeyValuePair<string, string>("site_id[]", dir.Site_id.ToString()));
+                }
+
+                //convert your bodyProperties to an object of FormUrlEncodedContent
+                var dataContent = new FormUrlEncodedContent(_notificationProperties.ToArray());
+
+                //var content = new FormUrlEncodedContent(values);
+                var response = client.PostAsync(RestURL, dataContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonresult = response.Content.ReadAsStringAsync().Result;
+                    JObject jObj = JObject.Parse(jsonresult);
+                    jsonResponse = JsonConvert.DeserializeObject<NotificationListMdl>(jsonresult);
+                }
+            }
+            catch (Exception ex)
+            {
+                // StaticMethods.ShowToast(ex.Message);
+            }
+            return jsonResponse;
+        }
+        #endregion
+
+        #region Notification WebService 
         public NotificationListMdl PostNotification(NavigationMdl nav)
         {
              NotificationListMdl jsonResponse = new NotificationListMdl();

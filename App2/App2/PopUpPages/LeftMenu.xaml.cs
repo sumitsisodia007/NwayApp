@@ -18,12 +18,14 @@ namespace App2.PopUpPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LeftMenu : PopupPage
     {
-         public List<Site_id_Mdl> menuList { get; set; }
-        private List<string> userChk = new List<string>();
+        //   public List<Site_id_Mdl> menuList { get; set; }
+        public List<Company_site> menuList { get; set; }
+        private List<Temp_Site_id_Mdl> tempchlst = null;
         
 
         public List<ShowCompanyNameMdl> _companyname { get; set; }
         LoginResponseMdl _data;
+
         public LeftMenu()
         {
             InitializeComponent();
@@ -89,15 +91,16 @@ namespace App2.PopUpPages
 
         public void DrawalMenu()
         {
-            menuList = new List<Site_id_Mdl>();
+            tempchlst = new List<Temp_Site_id_Mdl>();
+            menuList = new List<Company_site>();
             foreach (var item in _data._permissions)
             {
                 if (StaticMethods.Set_Company_Name == item.Company_name)
                 {
                     foreach (var item2 in item._company_site)
                     {
-
-                        menuList.Add(new Site_id_Mdl{ Site_id = item2.Site_id, SiteName = item2.Site_name });
+                        tempchlst.Add(new Temp_Site_id_Mdl{ Site_id = item2.Site_id, SiteName = item2.Site_name, Site_short_name = item2.Site_short_name });
+                        menuList.Add(new Company_site { Site_id = item2.Site_id, Site_name = item2.Site_name ,Site_short_name=item2.Site_short_name,Chk_id=item2.Chk_id});
                     }
                 }
             }
@@ -125,8 +128,11 @@ namespace App2.PopUpPages
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
+            var data = _data;
+            
+
             await Task.WhenAll(
-             Navigation.PushModalAsync(new App2.View.MasterMainPage(_data)),
+             Navigation.PushModalAsync(new App2.View.MasterMainPage(_data, tempchlst)),
              PopupNavigation.RemovePageAsync(this)
             );
         }
@@ -148,10 +154,37 @@ namespace App2.PopUpPages
         {
             try
             {
-                CheckBox isCheckedOrNot = (CheckBox)sender;
-                var name = isCheckedOrNot.DefaultText;
-                userChk.Add(name);
-               StaticMethods.userCh = userChk;
+                CheckBox isCheckedOrNot = (CheckBox)sender ;
+                var name = (Company_site)isCheckedOrNot.BindingContext;
+                if (isCheckedOrNot.Checked == true)
+                {
+                    
+                    tempchlst.Add(new Temp_Site_id_Mdl { Site_id = name.Site_id, SiteName = name.Site_name, Site_short_name = name.Site_short_name});
+                }
+                else
+                {
+                    var itemToRemove = tempchlst.Single(r => r.Site_id == name.Site_id);
+                    tempchlst.Remove(itemToRemove);
+                }
+
+                foreach (var item in _data._permissions)
+                {
+                    foreach (var item2 in item._company_site)
+                    {
+                        if (item2.Site_name == name.Site_name)
+                        {
+                            if (isCheckedOrNot.Checked == true)
+                            {
+                                item2.Chk_id = true;
+                            }
+                            else
+                            {
+                                item2.Chk_id = false;
+                            }
+                        }
+                    }
+                }
+                StaticMethods.userCh = tempchlst;
             }
             catch (Exception ex)
             {

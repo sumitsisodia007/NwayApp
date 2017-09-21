@@ -56,11 +56,11 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
-                                <controls:CheckBox DefaultText="{Binding SiteName}"
+                                <controls:CheckBox DefaultText="{Binding Site_name}"
                                                    HorizontalOptions="FillAndExpand"
                                                    TextColor="Black"
                                                    CheckedChanged="CheckBox_CheckedChanged"
-                                                   Checked="True" />
+                                                   Checked="{Binding Chk_id}" />
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>

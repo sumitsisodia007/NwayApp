@@ -61,12 +61,22 @@ namespace App2.Model
             }
             return nav;
         }
-
-
     }
     public class Site_id_Mdl
     {
         public int Site_id { get; set; }
         public string SiteName { get; set; }
+        public string Site_short_name { get; set; }
+    }
+    public class Temp_Site_id_Mdl
+    {
+        public int Site_id { get; set; }
+        public string SiteName { get; set; }
+        public string Site_short_name { get; set; }
+    }
+
+    public class ShowCompanyNameMdl
+    {
+        public string CompanyName { get; set; }
     }
 }

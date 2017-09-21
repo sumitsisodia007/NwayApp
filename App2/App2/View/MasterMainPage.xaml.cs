@@ -17,13 +17,33 @@ namespace App2.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MasterMainPage : MasterDetailPage
     {
-        LoginResponseMdl _newres;
+        LoginResponseMdl _newres; 
+
+        public MasterMainPage(LoginResponseMdl res, List<Temp_Site_id_Mdl> tempchlst)
+        {
+            InitializeComponent();
+            _newres = res;
+            this.Master = new MasterPage(_newres);
+            this.Detail = new NavigationPage(new HomePage(_newres, tempchlst));
+            App.MasterDetail = this;
+        }
+
         public MasterMainPage(LoginResponseMdl res)
         {
             InitializeComponent();
             _newres = res;
             this.Master = new MasterPage(_newres);
             this.Detail = new NavigationPage(new HomePage(_newres));
+            App.MasterDetail = this;
+        }
+
+        public MasterMainPage(NavigationMdl mdl)
+        {
+            MainLogin();
+            InitializeComponent();
+
+            this.Master = new MasterPage(_newres);
+            this.Detail = new NavigationPage(new HomePage(_newres, mdl));
             App.MasterDetail = this;
         }
 
@@ -36,6 +56,9 @@ namespace App2.View
             this.Detail = new NavigationPage(new HomePage(_newres));
             App.MasterDetail = this;
         }
+
+
+
 
         private  void MainLogin()
         {

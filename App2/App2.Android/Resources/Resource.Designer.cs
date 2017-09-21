@@ -5439,8 +5439,29 @@ namespace App2.Droid
 			// aapt resource value: 0x7f0a0003
 			public const int day_name_format = 2131361795;
 			
+			// aapt resource value: 0x7f0a0058
+			public const int default_web_client_id = 2131361880;
+			
+			// aapt resource value: 0x7f0a0059
+			public const int firebase_database_url = 2131361881;
+			
 			// aapt resource value: 0x7f0a0006
 			public const int full_date_format = 2131361798;
+			
+			// aapt resource value: 0x7f0a0056
+			public const int gcm_defaultSenderId = 2131361878;
+			
+			// aapt resource value: 0x7f0a005a
+			public const int google_api_key = 2131361882;
+			
+			// aapt resource value: 0x7f0a0057
+			public const int google_app_id = 2131361879;
+			
+			// aapt resource value: 0x7f0a005b
+			public const int google_crash_reporting_api_key = 2131361883;
+			
+			// aapt resource value: 0x7f0a005c
+			public const int google_storage_bucket = 2131361884;
 			
 			// aapt resource value: 0x7f0a0004
 			public const int invalid_date = 2131361796;

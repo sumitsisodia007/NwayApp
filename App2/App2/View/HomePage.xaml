@@ -68,7 +68,7 @@
                 </Grid>
             </StackLayout>
         </StackLayout>
-        <StackLayout  Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+        <StackLayout  Orientation="Vertical" Spacing="5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
             <Label x:Name="lblSetCom_Name" Text="CENTURY 21 TOWN PLANNER PVT" FontAttributes="Bold" TextColor="#2196F3" HorizontalOptions="CenterAndExpand"  >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>

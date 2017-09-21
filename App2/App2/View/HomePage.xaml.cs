@@ -28,6 +28,7 @@ namespace App2.View
         API api = new API();
         LoginResponseMdl _newres;
         NotificationListMdl _notificationModel;
+        List<Temp_Site_id_Mdl> _new_tempchlst;
 
         public HomePage()
         {
@@ -54,6 +55,71 @@ namespace App2.View
              //   SetNotificationBadge();
             });
         }
+
+        public HomePage(LoginResponseMdl res, NavigationMdl mdl)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                InitializeComponent();
+                Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+                
+                PrepareView(res);
+                Task.Delay(500);
+
+                NavigatePageNotification(res,mdl);
+            });
+        }
+        private async void NavigatePageNotification(LoginResponseMdl lgres, NavigationMdl nav)
+        {
+            ObservableCollection<Site_id_Mdl> lst = new ObservableCollection<Site_id_Mdl>();
+            ResponseModel res = StaticMethods.GetLocalSavedData();
+            foreach (var item in lgres._permissions)
+            {
+                if (StaticMethods.Set_Company_Name == item.Company_name)
+                {
+                    foreach (var item2 in item._company_site)
+                    {
+
+                        lst.Add(new Site_id_Mdl { Site_id = item2.Site_id, SiteName = item2.Site_name });
+                    }
+                    nav.Company_Id = item.Company_id.ToString();
+                }
+            }
+            nav.User_name = res.UserName;
+            nav.Password = res.Password;
+            nav.Device_id = res.Device_Id;
+            nav.User_id = res.User_Id;
+            nav._site_Id = lst;
+            nav.Party_id = "1";
+            if (nav.Tag_type == "payable_outstanding")
+            {
+                nav.Page_Title = lblPay.Text;
+                
+            }
+            else if (nav.Tag_type == "receivable_outstanding")
+            {
+                nav.Page_Title = lblReceive.Text;
+            }
+            //nav.Tag_type = nav.Tag_type;
+            await Navigation.PushAsync(new PayablePage(nav));
+        }
+
+        public HomePage(LoginResponseMdl res, List<Temp_Site_id_Mdl> tempchlst)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                InitializeComponent();
+                Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+                StaticMethods._new_res = _newres = res;
+                _new_tempchlst = tempchlst;
+                PrepareView(res);
+                Task.Delay(500);
+                //   SetNotificationBadge();
+            });
+        }
+
+      
+
 
         private async void SetNotificationBadge()
         {
@@ -176,7 +242,7 @@ namespace App2.View
                 //await Navigation.RemovePopupPageAsync(loadingPage);
                 obj_nav = new NavigationMdl();
                 NavigationMdl nav = obj_nav.PrepareAPIData();
-                NotificationListMdl _nmdl = api.PostNotification(nav);
+                NotificationListMdl _nmdl = api.PostNotification(nav,_new_tempchlst);
                 if (_nmdl.Error == "true")
                 {
                     await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", _nmdl.Message));
