@@ -52,13 +52,18 @@ namespace App2.Droid
             {
                 foreach (KeyValuePair<string, string> kvp in message.Data)
                 {
-                    data0 = kvp.Value;
-                    temp = data0;
-                    data0 = data_image;
-                    data_image = data_tital;
-                    data_tital = data_msg;
-                    data_msg = data_onclick;
-                    data_onclick = temp;
+                    if (kvp.Key == "0")
+                    {
+                        data0 = kvp.Value;
+                    }
+                    
+                    //data0 = kvp.Value;
+                    //temp = data0;
+                    //data0 = data_image;
+                    //data_image = data_tital;
+                    //data_tital = data_msg;
+                    //data_msg = data_onclick;
+                    //data_onclick = temp;
                 }
                 JObject jObj = JObject.Parse(data0);
 
@@ -96,17 +101,16 @@ namespace App2.Droid
         {
             Random _random = new Random();
             Int32 ss = _random.Next();
-            
+
             //App.Current.MainPage.Navigation.PushAsync(new PayableChart());
+            var intent = new Intent(this, typeof(MainActivity));
+            intent.PutExtra("tag_type", _tag_type);
+            intent.PutExtra("party_id", _party_id);
+            intent.PutExtra("onclick", _onclick);
+            intent.PutExtra("msg", nmsg);
 
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.N)
             {
-                var intent = new Intent(this, typeof(MainActivity));
-                intent.PutExtra("tag_type", _tag_type);
-                intent.PutExtra("party_id", _party_id);
-                intent.PutExtra("onclick", _onclick);
-                intent.PutExtra("msg", nmsg);
-
                 intent.AddFlags(ActivityFlags.ClearTop);
                 var pendingIntent = PendingIntent.GetActivity(this, ss, intent, PendingIntentFlags.OneShot);
                 var defaultSoundUri = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
@@ -157,8 +161,6 @@ namespace App2.Droid
                 //notificationManager.Notify(ss++, notificationBuilder.Build());
                 var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
                 var uiIntent = new Intent(this, typeof(MainActivity));
-
-
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
                 var notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
                         .SetSmallIcon(Resource.Drawable.n3)

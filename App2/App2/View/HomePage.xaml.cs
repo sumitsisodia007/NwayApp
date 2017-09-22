@@ -62,7 +62,7 @@ namespace App2.View
             {
                 InitializeComponent();
                 Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-                
+                StaticMethods._new_res = _newres = res;
                 PrepareView(res);
                 Task.Delay(500);
 
@@ -72,6 +72,7 @@ namespace App2.View
         private async void NavigatePageNotification(LoginResponseMdl lgres, NavigationMdl nav)
         {
             ObservableCollection<Site_id_Mdl> lst = new ObservableCollection<Site_id_Mdl>();
+            StaticMethods._new_res = _newres = lgres;
             ResponseModel res = StaticMethods.GetLocalSavedData();
             foreach (var item in lgres._permissions)
             {

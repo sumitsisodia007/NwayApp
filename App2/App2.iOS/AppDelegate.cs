@@ -169,6 +169,7 @@ namespace App2.iOS
                         if (buttonArgs.ButtonIndex == 1)
                         {
                             App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
+                           // LoadApplication(new App(mdl));
                         }
                         else
                         {
