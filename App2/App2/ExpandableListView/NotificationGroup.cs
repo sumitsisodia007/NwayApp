@@ -53,15 +53,15 @@ namespace App2.ExpandableListView
 
         //    API api = new API();
         //    NavigationMdl nav = new NavigationMdl();
-        //    nav.Device_id = StaticMethods.getDeviceidentifier(); 
-        //    if (nav.Device_id == "unknown")
+        //    nav.DeviceId = StaticMethods.GetDeviceidentifier(); 
+        //    if (nav.DeviceId == "unknown")
         //    {
-        //        nav.Device_id = "123456";
+        //        nav.DeviceId = "123456";
         //    }
-        //    nav.Company_name = EnumMaster.C21_MALHAR;
-        //    nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
+        //    nav.CompanyName = EnumMaster.C21Malhar;
+        //    nav.TagType = EnumMaster.Tagtypenotifications;
         //    ResponseModel rs = StaticMethods.GetLocalSavedData();
-        //    nav.User_id = rs.User_Id;
+        //    nav.UserId = rs.UserId;
         //   NotificationListMdl mode = api.PostNotification(nav);
         //    ObservableCollection<NotificationGroup> food = new ObservableCollection<NotificationGroup>();
         //    foreach (var item in mode.ListNotificationDate)

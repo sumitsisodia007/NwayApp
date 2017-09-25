@@ -22,28 +22,28 @@ namespace App2.PopUpPages
         public LoginSuccessPopupPage(string mtitle, string msg)
         {
             InitializeComponent();
-            changecolorMsg(mtitle, msg);
+            ChangecolorMsg(mtitle, msg);
         }
-        private async void changecolorMsg(string mtitle, string msg)
+        private async void ChangecolorMsg(string mtitle, string msg)
         {
             if (mtitle=="W")
             {
-                stkMessage.BackgroundColor = Color.FromHex("#0077FF");
+                StkMessage.BackgroundColor = Color.FromHex("#0077FF");
             }else if (mtitle == "S")
             {
-                imgAlert.Source = "check";
-                stkMessage.BackgroundColor = Color.FromHex("#43A047");
+                ImgAlert.Source = "check";
+                StkMessage.BackgroundColor = Color.FromHex("#43A047");
             }else if (mtitle == "E")
             {
-                imgAlert.Source = "cancel";
-                stkMessage.BackgroundColor = Color.FromHex("#FF2E27");
+                ImgAlert.Source = "cancel";
+                StkMessage.BackgroundColor = Color.FromHex("#FF2E27");
             }
-            lblMessage.Text = msg;
+            LblMessage.Text = msg;
             await Task.Delay(500);
             await Task.WhenAll(
-             imgAlert.ScaleTo(2, 1000),
-             lblMessage.ScaleTo(1.5, 1000),
-             imgAlert.RotateTo(360, 1000)
+             ImgAlert.ScaleTo(2, 1000),
+             LblMessage.ScaleTo(1.5, 1000),
+             ImgAlert.RotateTo(360, 1000)
              );
             //await imgAlert.TranslateTo(-100, -100, 1000);
             //await imgAlert.FadeTo(1, 2000);

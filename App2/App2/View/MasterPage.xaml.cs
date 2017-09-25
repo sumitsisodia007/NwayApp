@@ -44,7 +44,7 @@ namespace App2.View
             _companyname = new List<ShowCompanyNameMdl>();
             foreach (var item in res._permissions)
             {
-                _companyname.Add(new ShowCompanyNameMdl {CompanyName=item.Company_name });
+                _companyname.Add(new ShowCompanyNameMdl {CompanyName=item.CompanyName });
             }
             MainPickr.ItemsSource = _companyname;
         }
@@ -58,9 +58,9 @@ namespace App2.View
                     var calcScreenHieght = Application.Current.MainPage.Height;
                     MainPickr.WidthRequest = calcScreenWidth -80;
                     ResponseModel res = StaticMethods.GetLocalSavedData();
-                    if (res.Company_Index != null)
+                    if (res.CompanyIndex != null)
                     {
-                        MainPickr.SelectedIndex = Convert.ToInt32(res.Company_Index);
+                        MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
                     }
                 }
             });
@@ -75,9 +75,9 @@ namespace App2.View
                     var calcScreenHieght = Application.Current.MainPage.Height;
                     MainPickr.WidthRequest = calcScreenWidth - 80;
                     ResponseModel res = StaticMethods.GetLocalSavedData();
-                    if (res.Company_Index != null)
+                    if (res.CompanyIndex != null)
                     {
-                        MainPickr.SelectedIndex = Convert.ToInt32(res.Company_Index);
+                        MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
                     }
                 }
             });
@@ -151,8 +151,8 @@ namespace App2.View
                     
                     ResponseModel res = new ResponseModel();
                     res = StaticMethods.GetLocalSavedData();
-                    StaticMethods.Set_Company_Name = (string)picker.Items[selectedIndex];
-                    res.Company_Index = selectedIndex.ToString();
+                    StaticMethods.SetCompanyName = (string)picker.Items[selectedIndex];
+                    res.CompanyIndex = selectedIndex.ToString();
                     StaticMethods.SaveLocalData(res);
                 }
                 catch (Exception ex)
@@ -164,10 +164,10 @@ namespace App2.View
 
         //private void C21_Tapped(object sender, EventArgs e)
         //{
-        //    if (!(TI.Text == "C21/MALHAR"))
+        //    if (!(Ti.Text == "C21/MALHAR"))
         //    {
-        //        TI.BackgroundColor = Color.White;
-        //        TI.TextColor = Color.FromHex("#4472C4");
+        //        Ti.BackgroundColor = Color.White;
+        //        Ti.TextColor = Color.FromHex("#4472C4");
         //        C21.BackgroundColor = Color.FromHex("#4472C4");
         //        C21.TextColor = Color.White;
         //    }
@@ -175,10 +175,10 @@ namespace App2.View
 
         //private void TI_Tapped(object sender, EventArgs e)
         //{
-        //    if (!(C21.Text == "TI"))
+        //    if (!(C21.Text == "Ti"))
         //    {
-        //        TI.BackgroundColor = Color.FromHex("#4472C4");
-        //        TI.TextColor = Color.White;
+        //        Ti.BackgroundColor = Color.FromHex("#4472C4");
+        //        Ti.TextColor = Color.White;
         //        C21.BackgroundColor = Color.White;
         //        C21.TextColor = Color.FromHex("#4472C4");
         //    }

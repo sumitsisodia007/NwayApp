@@ -42,22 +42,22 @@ namespace App2.Droid
 
             NavigationMdl mdl = new NavigationMdl();
 
-            mdl.Device_id = StaticMethods.getDeviceidentifier();
-            if (mdl.Device_id == "unknown")
+            mdl.DeviceId = StaticMethods.GetDeviceidentifier();
+            if (mdl.DeviceId == "unknown")
             {
-                mdl.Device_id = "123456";
+                mdl.DeviceId = "123456";
             }
-            mdl.Company_name = Helper.EnumMaster.C21_MALHAR;
-            mdl.Party_id = party_id;
+            mdl.CompanyName = Helper.EnumMaster.C21Malhar;
+            mdl.PartyId = party_id;
 
             if (tag_type == "paid")
             {
-                mdl.Tag_type = Helper.EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
+                mdl.TagType = Helper.EnumMaster.TagtypepayableOutstanding;
                 LoadApplication(new App(mdl));
             }
             else if (tag_type == "receipt")
             {
-                mdl.Tag_type = Helper.EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
+                mdl.TagType = Helper.EnumMaster.TagtypereceivableOutstanding;
                 LoadApplication(new App(mdl));
             }
             else

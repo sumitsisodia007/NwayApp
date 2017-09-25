@@ -13,10 +13,10 @@ namespace App2.NativeMathods
     public static class StaticMethods
     {
         public static int NotificationCount { get; set; }
-        public static string Set_Company_Name { get; set; }
-        public static List<Temp_Site_id_Mdl> userCh { get; set; }
+        public static string SetCompanyName { get; set; }
+        public static List<TempSiteIdMdl> userCh { get; set; }
         public static LoginResponseMdl _new_res { get; set; }
-        public static string getNotificationCount()
+        public static string GetNotificationCount()
         {
             string strCount = "";
             if (Device.OS == TargetPlatform.iOS)
@@ -26,7 +26,7 @@ namespace App2.NativeMathods
             return strCount;
         }
 
-        public static string getDeviceidentifier()
+        public static string GetDeviceidentifier()
         {
             string strDeviceIdentifier = "";
             if (Device.OS == TargetPlatform.iOS)
@@ -40,7 +40,7 @@ namespace App2.NativeMathods
             return strDeviceIdentifier;
         }
 
-        public static string getTokan()
+        public static string GetTokan()
         {
             string strDeviceIdentifier = "";
             if (Device.OS == TargetPlatform.iOS)
@@ -64,7 +64,6 @@ namespace App2.NativeMathods
                 }
                 else
                 {
-
                     DependencyService.Get<IAndroidMethods>().ShowToast(msg);
                 }
             });
@@ -90,8 +89,6 @@ namespace App2.NativeMathods
             {
                 return um;
             }
-
-
         }
 
         public static void SaveLocalData(ResponseModel um)
@@ -101,12 +98,10 @@ namespace App2.NativeMathods
                 if (Device.OS == TargetPlatform.iOS)
                 {
                     DependencyService.Get<IIosMethods>().SaveLocalData(um);
-
                 }
                 else
                 {
                     DependencyService.Get<IAndroidMethods>().SaveLocalData(um);
-
                 }
             }
             catch (Exception ex)
@@ -122,12 +117,10 @@ namespace App2.NativeMathods
                 if (Device.OS == TargetPlatform.iOS)
                 {
                     DependencyService.Get<IIosMethods>().DeleteLocalData();
-
                 }
                 else
                 {
                     DependencyService.Get<IAndroidMethods>().DeleteLocalData();
-
                 }
             }
             catch (Exception ex)

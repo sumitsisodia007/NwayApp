@@ -13,14 +13,14 @@ namespace App2.Model
         public string Error { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string Min_Receipt_Amt { get; set; }
-        public string Notification_Day_Count { get; set; }
-        public string User_Id { get; set; }
-        public string Device_Id { get; set; }
+        public string MinReceiptAmt { get; set; }
+        public string NotificationDayCount { get; set; }
+        public string UserId { get; set; }
+        public string DeviceId { get; set; }
         public string DeviceToken { get; set; }
         public string NotCount { get; set; }
         public string NotCountDate { get; set; }
-        public string Company_Index { get; set; }
-        public string Company_Name { get; set; }
+        public string CompanyIndex { get; set; }
+        public string CompanyName { get; set; }
     }
 }

@@ -26,34 +26,32 @@ namespace App2
         private ObservableCollection<NotificationGroup> _allGroups;
         private ObservableCollection<NotificationGroup> _expandedGroups;
         NotificationListMdl _notificationModel;
-        API api = null;
+      //  API _api = null;
        
-        public List<NotificationShow> _receivablList { get; set; }
-        public double _Width = 0;
+        public List<NotificationShow> Shows { get; set; }
+        private double _width = 0;
 
-        public ObservableCollection<NotificationListMdl> _NotificationListMdl;
+       // public ObservableCollection<NotificationListMdl> _NotificationListMdl;
 
         public MainPage()
         {
             InitializeComponent();
            // NotificationMehods( );
         }
-        public MainPage(NotificationListMdl _notification)
+        public MainPage(NotificationListMdl notification)
         {
             InitializeComponent();
-            _notificationModel = _notification;
-            NotificationMehods(_notification);
+            _notificationModel = notification;
+            NotificationMehods(notification);
         }
 
         protected override void OnAppearing()
         {
             Device.BeginInvokeOnMainThread(() => {
-                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
-                {
-                    var calcScreenWidth = Application.Current.MainPage.Width;
-                    var calcScreenHieght = Application.Current.MainPage.Height;
-                    _Width = calcScreenWidth / 2;
-                }
+                if (!(Application.Current.MainPage.Width > 0) || !(Application.Current.MainPage.Height > 0)) return;
+                var calcScreenWidth = Application.Current.MainPage.Width;
+                var calcScreenHieght = Application.Current.MainPage.Height;
+                _width = calcScreenWidth / 2;
             });
             
         }
@@ -74,7 +72,7 @@ namespace App2
             }
         }
 
-        private async void NotificationMehods(NotificationListMdl _notification)
+        private async void NotificationMehods(NotificationListMdl notification)
         {
             if (!CrossConnectivity.Current.IsConnected)
             {
@@ -82,48 +80,59 @@ namespace App2
             }
             else
             {
-                api = new API();
-            NavigationMdl nav = new NavigationMdl();
-            nav.Device_id = StaticMethods.getDeviceidentifier();
-            if (nav.Device_id == "unknown")
-            {
-                nav.Device_id = "123456";
-            }
-            nav.Company_name = EnumMaster.C21_MALHAR;
-            nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
-            ResponseModel rs = StaticMethods.GetLocalSavedData();
-            nav.User_id = rs.User_Id;
+               // _api = new API();
+                NavigationMdl nav = new NavigationMdl
+                {
+                    DeviceId = StaticMethods.GetDeviceidentifier()
+                };
+                if (nav.DeviceId == "unknown")
+                {
+                    nav.DeviceId = "123456";
+                }
+                nav.CompanyName = EnumMaster.C21Malhar;
+                nav.TagType = EnumMaster.Tagtypenotifications;
+                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                nav.UserId = rs.UserId;
 
           //  _notificationModel = api.PostNotification(nav); 
 
-            ObservableCollection<NotificationGroup> _not = new ObservableCollection<NotificationGroup>();
-            foreach (var item in _notification.ListNotificationDate)
+            ObservableCollection<NotificationGroup> notGroup = new ObservableCollection<NotificationGroup>();
+            foreach (var item in notification.ListNotificationDate)
             {
                 NotificationGroup group = new NotificationGroup(item.Date + " (" + item.NotCount + ")", "o");
                 foreach (var item2 in item.ListTags)
                 {
-                    //foreach (var item3 in item2.Notification)
-                    //{
-                    //    item3.Site_short_name
-                    //}
-                    if (item2.Tag == "invoice_cancelletion")
-                    {
-                        item2.Tag = "Invoice_cancelletion";
+                        //foreach (var item3 in item2.Notification)
+                        //{
+                        //    item3.SiteShortName
+                        //}
+                        switch (item2.Tag)
+                        {
+                            case "invoice_cancelletion":
+                                item2.Tag = "Invoice_cancelletion";
+                                break;
+                            case "receipt":
+                                item2.Tag = "Receipt";
+                                break;
+                            case "paid":
+                                item2.Tag = "Paid";
+                                break;
+                            case "booking_entry":
+                                item2.Tag = "Booking_entry";
+                                break;
+                            case "booking_end":
+                                item2.Tag = "Booking_end";
+                                break;
+                            case "invoice_event":
+                                item2.Tag = "Invoice_event";
+                                break;
+                        }
+
+                        group.Add(new NotificationDetails() { Name =  item2.Tag, TagNotCount = ":" + item2.NotCount, TagAmount = item2.Total_Amount, TagDate = item.Date });
                     }
-                    else if (item2.Tag == "receipt")
-                    {
-                        item2.Tag = "Receipt";
-                    }
-                    else if (item2.Tag == "paid") { item2.Tag = "Paid"; }
-                    else if (item2.Tag == "booking_entry") { item2.Tag = "Booking_entry"; }
-                    else if (item2.Tag == "booking_end") { item2.Tag = "Booking_end"; }
-                    else if (item2.Tag == "invoice_event") { item2.Tag = "Invoice_event"; }
-                
-                    group.Add(new NotificationDetails() { Name =  item2.Tag, TagNotCount = ":" + item2.NotCount, Tag_Amount = item2.Total_Amount, Tag_date = item.Date });
+                    notGroup.Add(group);
                 }
-                _not.Add(group);
-            }
-            _allGroups = _not;
+                _allGroups = notGroup;
                 UpdateListContent();
             }
         }
@@ -159,26 +168,26 @@ namespace App2
 
         private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            NotificationDetails food = (NotificationDetails)e.Item;
+            NotificationDetails nItems = (NotificationDetails)e.Item;
             overlay.IsVisible = true;
-            lblName.Text = food.Name;
-            TodayCollationList(food);
+            lblName.Text = nItems.Name;
+            TodayCollationList(nItems);
             await this.ScaleTo(0.95, 50, Easing.CubicOut);
             await this.ScaleTo(1, 50, Easing.CubicIn);
         }
 
-        void OnOKButtonClicked(object sender, EventArgs args)
+        void OnOkButtonClicked(object sender, EventArgs args)
         {
             overlay.IsVisible = false;
-            _receivablList.Clear();
+            Shows.Clear();
         }
 
         public void TodayCollationList(NotificationDetails notdetail)
         {
             try
             {
-            _receivablList = new List<NotificationShow>();
-            var notification = _notificationModel.ListNotificationDate.Where(o => o.Date == notdetail.Tag_date).ToList();
+            Shows = new List<NotificationShow>();
+            var notification = _notificationModel.ListNotificationDate.Where(o => o.Date == notdetail.TagDate).ToList();
 
             foreach (var item in notification)
             {
@@ -186,7 +195,7 @@ namespace App2
                 {
                     foreach (var item3 in item2.Notification)
                     {
-                        if (lblName.Text == "Paid" && item2.Tag == "Paid" && item.Date == notdetail.Tag_date&& item3.Party_name != null)
+                        if (lblName.Text == "Paid" && item2.Tag == "Paid" && item.Date == notdetail.TagDate&& item3.Party_name != null)
                         {
 
                             string tmp;
@@ -199,18 +208,18 @@ namespace App2
                             {
                                 tmp = item3.Party_name;
                             }
-                            _receivablList.Add(new NotificationShow
+                            Shows.Add(new NotificationShow
                             {
-                                show_amount_received = item3.Amount_received,
-                                txtWidth = _Width,
-                                show_sohrtName=item3.Site_short_name+":",
+                                ShowAmountReceived = item3.Amount_received,
+                                TxtWidth = _width,
+                                ShowSohrtName=item3.Site_short_name+":",
 
-                                show_party_name_customer_name = tmp ,
-                                show_party_id_invoice_id = item3.Party_id
+                                ShowPartyNameCustomerName = tmp ,
+                                ShowPartyIdInvoiceId = item3.Party_id
                             });
 
                         }
-                        else if (item2.Tag == "Receipt" && lblName.Text == "Receipt" && item.Date == notdetail.Tag_date && item3.Party_name != null)
+                        else if (item2.Tag == "Receipt" && lblName.Text == "Receipt" && item.Date == notdetail.TagDate && item3.Party_name != null)
                         {
                             string tmp;
                             if (Convert.ToInt32(item3.Party_name.Length) >= 20)
@@ -222,16 +231,16 @@ namespace App2
                             {
                                 tmp = item3.Party_name;
                             }
-                            _receivablList.Add(new NotificationShow
+                            Shows.Add(new NotificationShow
                             {
-                                show_amount_received = item3.Amount_received,
-                                txtWidth = _Width,
-                                show_sohrtName = item3.Site_short_name + ":",
-                                show_party_name_customer_name = tmp ,
-                                show_party_id_invoice_id = item3.Party_id
+                                ShowAmountReceived = item3.Amount_received,
+                                TxtWidth = _width,
+                                ShowSohrtName = item3.Site_short_name + ":",
+                                ShowPartyNameCustomerName = tmp ,
+                                ShowPartyIdInvoiceId = item3.Party_id
                             });
                         }
-                        else if (item2.Tag == "Invoice_cancelletion" && lblName.Text == "Invoice_cancelletion" && item.Date == notdetail.Tag_date && item3.Customer_name!=null)
+                        else if (item2.Tag == "Invoice_cancelletion" && lblName.Text == "Invoice_cancelletion" && item.Date == notdetail.TagDate && item3.Customer_name!=null)
                         {
                             string tmp;
                             if (Convert.ToInt32(item3.Customer_name.Length) >= 20)
@@ -243,19 +252,19 @@ namespace App2
                             {
                                 tmp = item3.Customer_name;
                             }
-                            _receivablList.Add(new NotificationShow
+                            Shows.Add(new NotificationShow
                             {
-                                txtWidth = _Width,
-                                show_party_name_customer_name = tmp ,
-                                show_amount_received = item3.Invoice_code,
-                                show_sohrtName = item3.Site_short_name + ":",
-                                show_party_id_invoice_id = item3.Customer_id,
+                                TxtWidth = _width,
+                                ShowPartyNameCustomerName = tmp ,
+                                ShowAmountReceived = item3.Invoice_code,
+                                ShowSohrtName = item3.Site_short_name + ":",
+                                ShowPartyIdInvoiceId = item3.Customer_id,
                             });
                         }
-                        else if (item2.Tag == "Booking_end" && lblName.Text == "Booking_end" && item.Date == notdetail.Tag_date)
+                        else if (item2.Tag == "Booking_end" && lblName.Text == "Booking_end" && item.Date == notdetail.TagDate)
                         {
                             string tmp;
-                            if (Convert.ToInt32(item3.Party_name.Length) >= 20)
+                            if (item3.Party_name != null && Convert.ToInt32(item3.Party_name.Length) >= 20)
                             {
                                 tmp = item3.Party_name.Substring(0, 20);
                                 tmp = tmp + "...";
@@ -264,19 +273,19 @@ namespace App2
                             {
                                 tmp = item3.Party_name;
                             }
-                            _receivablList.Add(new NotificationShow
+                            Shows.Add(new NotificationShow
                             {
-                                txtWidth = _Width,
-                                show_party_name_customer_name = tmp,
-                                show_sohrtName = item3.Site_short_name + ":",
-                                show_amount_received = item3.Invoice_code,
-                                show_party_id_invoice_id = item3.Customer_id,
+                                TxtWidth = _width,
+                                ShowPartyNameCustomerName = tmp,
+                                ShowSohrtName = item3.Site_short_name + ":",
+                                ShowAmountReceived = item3.Invoice_code,
+                                ShowPartyIdInvoiceId = item3.Customer_id,
                             });
                         }
-                        else if (item2.Tag == "Booking_end" && lblName.Text == "Booking_end" && item.Date == notdetail.Tag_date)
+                        else if (item2.Tag == "Booking_end" && lblName.Text == "Booking_end" && item.Date == notdetail.TagDate)
                         {
                             string tmp;
-                            if (Convert.ToInt32(item3.Party_name.Length) >= 20)
+                            if (item3.Party_name != null && Convert.ToInt32(item3.Party_name.Length) >= 20)
                             {
                                 tmp = item3.Party_name.Substring(0, 20);
                             }
@@ -284,19 +293,19 @@ namespace App2
                             {
                                 tmp = item3.Party_name;
                             }
-                            _receivablList.Add(new NotificationShow
+                            Shows.Add(new NotificationShow
                             {
-                                txtWidth = _Width,
-                                show_party_name_customer_name = tmp + "..",
-                                show_sohrtName = item3.Site_short_name + ":",
-                                show_amount_received = item3.Invoice_code,
-                                show_party_id_invoice_id = item3.Customer_id,
+                                TxtWidth = _width,
+                                ShowPartyNameCustomerName = tmp + "..",
+                                ShowSohrtName = item3.Site_short_name + ":",
+                                ShowAmountReceived = item3.Invoice_code,
+                                ShowPartyIdInvoiceId = item3.Customer_id,
                             });
                         }
                     }
                 }
             }
-            MainlistView.ItemsSource = _receivablList;
+            MainlistView.ItemsSource = Shows;
             }
             catch (Exception ex)
             {
@@ -308,48 +317,48 @@ namespace App2
         {
             NotificationShow obj = (NotificationShow)e.Item;
             NavigationMdl navmdl = new NavigationMdl();
-           // navmdl.Party_id = obj.show_party_id_invoice_id;
-            navmdl.Device_id = StaticMethods.getDeviceidentifier();
+           // navmdl.PartyId = obj.ShowPartyIdInvoiceId;
+            navmdl.DeviceId = StaticMethods.GetDeviceidentifier();
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);
-            if (navmdl.Device_id == "unknown")
+            if (navmdl.DeviceId == "unknown")
             {
-                navmdl.Device_id = "123456";
+                navmdl.DeviceId = "123456";
             }
-            navmdl.Company_name = EnumMaster.C21_MALHAR;
-            navmdl.Party_Name = obj.show_party_name_customer_name;
+            navmdl.CompanyName = EnumMaster.C21Malhar;
+            navmdl.PartyName = obj.ShowPartyNameCustomerName;
             if (lblName.Text == "Receipt")
             {
-                navmdl.Page_Title = "Receivable";
-                navmdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
+                navmdl.PageTitle = "Receivable";
+                navmdl.TagType = EnumMaster.TagtypereceivableOutstanding;
                 await Navigation.PushAsync(new PayablePage(navmdl));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
             else if (lblName.Text == "Paid")
             {
-                navmdl.Page_Title = "Payable";
-                navmdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
+                navmdl.PageTitle = "Payable";
+                navmdl.TagType = EnumMaster.TagtypepayableOutstanding;
                 await Navigation.PushAsync(new PayablePage(navmdl));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
             else if (lblName.Text == "Invoice_cancelletion")
             {
-                navmdl.Page_Title = "Invoice_cancelletion";
-                //navmdl.Tag_type = EnumMaster.TAGTYPEINVOICE_CANCELLETION;
+                navmdl.PageTitle = "Invoice_cancelletion";
+                //navmdl.TagType = EnumMaster.TagtypeinvoiceCancelletion;
                 //Navigation.PushAsync(new PayablePage(navmdl));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
             else if (lblName.Text == "Booking_end")
             {
-                navmdl.Page_Title = "Invoice_cancelletion";
-                //navmdl.Tag_type = EnumMaster.TAGTYPEINVOICE_CANCELLETION;
+                navmdl.PageTitle = "Invoice_cancelletion";
+                //navmdl.TagType = EnumMaster.TagtypeinvoiceCancelletion;
                 //Navigation.PushAsync(new PayablePage(navmdl));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
             else if (lblName.Text == "Booking_entry")
             {
-                navmdl.Page_Title = "Invoice_cancelletion";
-                //navmdl.Tag_type = EnumMaster.TAGTYPEINVOICE_CANCELLETION;
+                navmdl.PageTitle = "Invoice_cancelletion";
+                //navmdl.TagType = EnumMaster.TagtypeinvoiceCancelletion;
                 //Navigation.PushAsync(new PayablePage(navmdl));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
@@ -374,7 +383,7 @@ namespace App2
         //        MALHAR.TextColor = Color.White;
         //        C21.BackgroundColor = Color.White;
         //        C21.TextColor = Color.FromHex("#4472C4");
-                
+
         //    }
         //}
     }

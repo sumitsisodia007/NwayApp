@@ -8,15 +8,15 @@ namespace App2.Helper
 {
     public class EnumMaster
     {
-        public static readonly string SIGNIN = "signin";
-        public static readonly string SETTINGS = "settings";
-        public static readonly string TAGTYPENOTIFICATIONS = "notifications";
-        public static readonly string TAGTYPEPAYABLE_OUTSTANDING = "payable_outstanding";
-        public static readonly string TAGTYPERECEIVABLE_OUTSTANDING = "receivable_outstanding";
-        public static readonly string TAGTYPEINVOICE_CANCELLETION = "invoice_cancelletion";
+        public static readonly string TagtypeSignin = "signin";
+        public static readonly string TagtypeSettings = "settings";
+        public static readonly string Tagtypenotifications = "notifications";
+        public static readonly string TagtypepayableOutstanding = "payable_outstanding";
+        public static readonly string TagtypereceivableOutstanding = "receivable_outstanding";
+        public static readonly string TagtypeinvoiceCancelletion = "invoice_cancelletion";
         //public static readonly string TAGTY_PEPARTY_LIST= "invoice_cancelletion";
-        public static readonly string C21_MALHAR= "CENTURY 21 TOWN PLANNERS PVT. LTD.";
-        public static readonly string TI = "TI";
+        public static readonly string C21Malhar= "CENTURY 21 TOWN PLANNERS PVT. LTD.";
+        public static readonly string Ti = "Ti";
 
         public static readonly string LblChartTitle= "(Monthly Ledger)";
 

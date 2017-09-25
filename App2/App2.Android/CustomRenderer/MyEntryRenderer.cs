@@ -28,7 +28,7 @@ namespace App2.Droid.CustomRenderer
             {
                 Control.SetBackgroundColor(global::Android.Graphics.Color.Transparent);
                 Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
-               if (PayablePage.flag == 1)
+               if (PayablePage.Flag == 1)
                     Control.Gravity = Android.Views.GravityFlags.Center;
             }
             /* if (Control != null)

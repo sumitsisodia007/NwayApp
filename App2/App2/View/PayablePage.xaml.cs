@@ -12,8 +12,6 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -24,19 +22,19 @@ namespace App2.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PayablePage : ContentPage
     {
-        public List<ShowPayableTodayDetail> _payableshowlist { get; set; }
-        public List<ShowPayableTotalPayble> _showpayabletotalpayblelist { get; set; }
+        public List<ShowPayableTodayDetail> Payableshowlist { get; set; }
+        public List<ShowPayableTotalPayble> Showpayabletotalpayblelist { get; set; }
         public static SKColor ColorsPayable = SKColors.Gray;
-        NavigationMdl obj_nav = null;
+        NavigationMdl _objNav = null;
         public bool Notflag { get; set; }
-        PartysearchMdl lstLoca = null;
-        bool isListSelected = false;
-        ShowPayableTodayDetail toady_notification;
-        NavigationMdl navmdl=  new NavigationMdl();
+        PartysearchMdl _lstLoca = null;
+        bool _isListSelected = false;
+        ShowPayableTodayDetail _toadyNotification;
+        NavigationMdl _navmdl=  new NavigationMdl();
 
         public double _Width = 0;
-        public static int flag = 0;
-        API api = new API();
+        public static int Flag = 0;
+        API _api = new API();
 
         public PayablePage()
         {
@@ -52,9 +50,9 @@ namespace App2.View
             //NavigationPage.SetTitleIcon(this, "icon.png");
             try
             {
-  this.Title = mdl.Page_Title;
+  this.Title = mdl.PageTitle;
             MAinMethods(mdl);
-            flag = 1;
+            Flag = 1;
             }
             catch (Exception ex)
             {
@@ -63,11 +61,11 @@ namespace App2.View
            
             //Device.BeginInvokeOnMainThread(async () =>
             //{
-            //    Notflag = mdl.Is_Notification;
+            //    Notflag = mdl.IsNotification;
 
               
             //    navmdl = new NavigationMdl();
-            //    if (mdl.Page_Title == "Receivable")
+            //    if (mdl.PageTitle == "Receivable")
             //    {
             //        PredefinedReceived();
             //    }
@@ -76,7 +74,7 @@ namespace App2.View
             //        PredefinedPaid();
             //    }
             //    ResponseModel rs = StaticMethods.GetLocalSavedData();
-            //    mdl.User_id = rs.User_Id;
+            //    mdl.UserId = rs.UserId;
             //    PayableNotificationMdl _payable = await api.PayableTable(mdl);
 
             //    toady_notification = new ShowPayableTodayDetail();
@@ -96,7 +94,7 @@ namespace App2.View
                      var loadingPage = new LoaderPage();
                      await PopupNavigation.PushAsync(loadingPage);
 
-                    if (mdl.Page_Title == "Receivable")
+                    if (mdl.PageTitle == "Receivable")
                     {
                         PredefinedReceived();
                     }
@@ -111,15 +109,15 @@ namespace App2.View
                     }
                     else
                     {
-                        PayableNotificationMdl _payable = await api.PayableTable(mdl);
+                        PayableNotificationMdl payable = await _api.PayableTable(mdl);
 
                         ResponseModel rs = StaticMethods.GetLocalSavedData();
-                        mdl.User_id = rs.User_Id;
+                        mdl.UserId = rs.UserId;
 
-                        toady_notification = new ShowPayableTodayDetail();
+                        _toadyNotification = new ShowPayableTodayDetail();
 
-                        ShowPaybleToday(_payable);
-                        ShowTotalPayble(_payable);
+                        ShowPaybleToday(payable);
+                        ShowTotalPayble(payable);
                     }
                     await PopupNavigation.RemovePageAsync(loadingPage);
                 });
@@ -137,13 +135,11 @@ namespace App2.View
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    flag = 1;
-                    if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
-                    {
-                        var calcScreenWidth = Application.Current.MainPage.Width;
-                        var calcScreenHieght = Application.Current.MainPage.Height;
-                        lblparty.WidthRequest = lbloutstanding.WidthRequest = lblTodayReceipt.WidthRequest = lblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
-                    }
+                    Flag = 1;
+                    if (!(Application.Current.MainPage.Width > 0) || !(Application.Current.MainPage.Height > 0)) return;
+                    var calcScreenWidth = Application.Current.MainPage.Width;
+                    var calcScreenHieght = Application.Current.MainPage.Height;
+                    Lblparty.WidthRequest = Lbloutstanding.WidthRequest = LblTodayReceipt.WidthRequest = LblCurOutstanding.WidthRequest = _Width = calcScreenWidth / 4 - 10;
                 });
             }
             catch (Exception ex)
@@ -155,69 +151,62 @@ namespace App2.View
 
         private void PredefinedPaid()
         {
-            lblFirstTitle.Text = EnumMaster.LblPaidFirstTitle;
-            lblSecoundTitle.Text = EnumMaster.LblPaidSecoundTitle;
-            lblparty.Text = EnumMaster.LblPaidReceivedParty;
-            lbloutstanding.Text = EnumMaster.LblPaidOutstanding;
-            lblTodayReceipt.Text = EnumMaster.LblPaidTodayPaid;
-            lblCurOutstanding.Text = EnumMaster.LblPaidCurOutstanding;
-            lblSiteName.Text = EnumMaster.LblPaidSiteName;
-            lblTotalDr.Text = EnumMaster.LblPaidTotaleDr;
-            lblTotalCr.Text = EnumMaster.LblPaidTotaleCr;
-            lblBalance.Text = EnumMaster.LblPaidReceivedBalance;
+            LblFirstTitle.Text = EnumMaster.LblPaidFirstTitle;
+            LblSecoundTitle.Text = EnumMaster.LblPaidSecoundTitle;
+            Lblparty.Text = EnumMaster.LblPaidReceivedParty;
+            Lbloutstanding.Text = EnumMaster.LblPaidOutstanding;
+            LblTodayReceipt.Text = EnumMaster.LblPaidTodayPaid;
+            LblCurOutstanding.Text = EnumMaster.LblPaidCurOutstanding;
+            LblSiteName.Text = EnumMaster.LblPaidSiteName;
+            LblTotalDr.Text = EnumMaster.LblPaidTotaleDr;
+            LblTotalCr.Text = EnumMaster.LblPaidTotaleCr;
+            LblBalance.Text = EnumMaster.LblPaidReceivedBalance;
             this.BackgroundColor = Color.FromHex("#ED7D31");
-            lblparty.BackgroundColor = lbloutstanding.BackgroundColor = lblTodayReceipt.BackgroundColor = lblCurOutstanding.BackgroundColor = lblSiteName.BackgroundColor = lblTotalDr.BackgroundColor = lblTotalCr.BackgroundColor = lblBalance.BackgroundColor = Color.FromHex("#ED7D31");
+            ColorsPayable = SKColor.Parse("#ED7D31");
+            Lblparty.BackgroundColor = Lbloutstanding.BackgroundColor = LblTodayReceipt.BackgroundColor = LblCurOutstanding.BackgroundColor = LblSiteName.BackgroundColor = LblTotalDr.BackgroundColor = LblTotalCr.BackgroundColor = LblBalance.BackgroundColor = Color.FromHex("#ED7D31");
         }
 
         private void PredefinedReceived()
         {
-            lblFirstTitle.Text = EnumMaster.LblReceivedFirstTitle;
-            lblSecoundTitle.Text = EnumMaster.LblReceivedSecoundTitle;
-            lblparty.Text = EnumMaster.LblPaidReceivedParty;
-            lbloutstanding.Text = EnumMaster.LblReceivedOutstanding;
-            lblTodayReceipt.Text = EnumMaster.LblReceivedTodayPaid;
-            lblCurOutstanding.Text = EnumMaster.LblReceivedCurOutstanding;
-            lblSiteName.Text = EnumMaster.LblReceivedSiteName;
-            lblTotalDr.Text = EnumMaster.LblReceivedTotaleDr;
-            lblTotalCr.Text = EnumMaster.LblReceivedTotaleCr;
-            lblBalance.Text = EnumMaster.LblPaidReceivedBalance;
+            LblFirstTitle.Text = EnumMaster.LblReceivedFirstTitle;
+            LblSecoundTitle.Text = EnumMaster.LblReceivedSecoundTitle;
+            Lblparty.Text = EnumMaster.LblPaidReceivedParty;
+            Lbloutstanding.Text = EnumMaster.LblReceivedOutstanding;
+            LblTodayReceipt.Text = EnumMaster.LblReceivedTodayPaid;
+            LblCurOutstanding.Text = EnumMaster.LblReceivedCurOutstanding;
+            LblSiteName.Text = EnumMaster.LblReceivedSiteName;
+            LblTotalDr.Text = EnumMaster.LblReceivedTotaleDr;
+            LblTotalCr.Text = EnumMaster.LblReceivedTotaleCr;
+            LblBalance.Text = EnumMaster.LblPaidReceivedBalance;
             this.BackgroundColor = Color.FromHex("#A8C4E6");
-            lblparty.BackgroundColor = lbloutstanding.BackgroundColor = lblTodayReceipt.BackgroundColor = lblCurOutstanding.BackgroundColor = lblSiteName.BackgroundColor = lblTotalDr.BackgroundColor = lblTotalCr.BackgroundColor = lblBalance.BackgroundColor = Color.FromHex("#A8C4E6");
+            ColorsPayable = SKColor.Parse("#A8C4E6");
+            Lblparty.BackgroundColor = Lbloutstanding.BackgroundColor = LblTodayReceipt.BackgroundColor = LblCurOutstanding.BackgroundColor = LblSiteName.BackgroundColor = LblTotalDr.BackgroundColor = LblTotalCr.BackgroundColor = LblBalance.BackgroundColor = Color.FromHex("#A8C4E6");
         }
 
-        public void ShowPaybleToday(PayableNotificationMdl _payable)
+        public void ShowPaybleToday(PayableNotificationMdl payable)
         {
-            _payableshowlist = new List<ShowPayableTodayDetail>();
+            Payableshowlist = new List<ShowPayableTodayDetail>();
             try
             {
-            foreach (var item in _payable.ListPayableNotification)
+            foreach (var item in payable.ListPayableNotification)
             {
                 foreach (var item2 in item.ListPayablemdl)
                 {
-                    if (item2.NotCount == "0")
-                    {
-                        stktodaypayable.IsVisible = false;
-                    }
-                    else
-                    {
-                        stktodaypayable.IsVisible = true;
-                    }
+                    Stktodaypayable.IsVisible = item2.NotCount != "0";
                     foreach (var item3 in item2.Notification)
                     {
-                        if (item3.Party_name!=null)
+                        if (item3.Party_name == null) continue;
+                        string tmp;
+                        if (Convert.ToInt32(item3.Party_name.Length) >= 9)
                         {
-                            string tmp;
-                            if (Convert.ToInt32(item3.Party_name.Length) >= 9)
-                            {
-                                tmp = item3.Party_name.Substring(0, 10);
-                                tmp= tmp + "...";
-                            }
-                            else
-                            {
-                                tmp = item3.Party_name;
-                            }
-                            _payableshowlist.Add(new ShowPayableTodayDetail() { Show_Party_Id = item3.Party_id, txtWidth = _Width, Show_Pay_Party = tmp , Show_Pay_Outstanding = item3.Party_outstanding, Show_Amount_Received = item3.Amount_received, Show_Cur_Outstanding = item3.Current_outstanding });
+                            tmp = item3.Party_name.Substring(0, 10);
+                            tmp= tmp + "...";
                         }
+                        else
+                        {
+                            tmp = item3.Party_name;
+                        }
+                        Payableshowlist.Add(new ShowPayableTodayDetail() { ShowPartyId = item3.Party_id, TxtWidth = _Width, ShowPayParty = tmp , ShowPayOutstanding = item3.Party_outstanding, ShowAmountReceived = item3.Amount_received, ShowCurOutstanding = item3.Current_outstanding });
                     }
                 }
             }
@@ -228,20 +217,20 @@ namespace App2.View
             {
               //  StaticMethods.ShowToast("Internal Error Payble Today" + ex.Message);
             }
-            list_today_payble.ItemsSource = _payableshowlist;
+            PaybleItemSource.ItemsSource = Payableshowlist;
             
         }
 
-        public void ShowTotalPayble(PayableNotificationMdl _payable)
+        public void ShowTotalPayble(PayableNotificationMdl payable)
         {
-            _showpayabletotalpayblelist = new List<ShowPayableTotalPayble>();
+            Showpayabletotalpayblelist = new List<ShowPayableTotalPayble>();
             try
             {
-            foreach (var item in _payable.ListPayablemdl)
+            foreach (var item in payable.ListPayablemdl)
             {
-                string tmp = null;
-                if (lblSiteName.Text != "Particular")
+                if (LblSiteName.Text != "Particular")
                 {
+                    string tmp = null;
                     if (Convert.ToInt32(item.Site_name.Length) >= 9)
                     {
                         tmp = item.Site_name.Substring(0, 10);
@@ -251,53 +240,51 @@ namespace App2.View
                     {
                         tmp = item.Site_name;
                     }
-                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = tmp, Show_Balance = item.Balance, Show_Total_cr = item.Total_cr, Show_Total_dr = item.Total_dr });
+                    Showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { TxtWidth = _Width, ShowSiteName = tmp, ShowBalance = item.Balance, ShowTotalCr = item.Total_cr, ShowTotalDr = item.Total_dr });
                 }
                 else
                 {
 
-                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = item.Perticular, Show_Balance = item.Balance, Show_Total_cr = item.Receive, Show_Total_dr = item.Total_Due});
+                    Showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { TxtWidth = _Width, ShowSiteName = item.Perticular, ShowBalance = item.Balance, ShowTotalCr = item.Receive, ShowTotalDr = item.Total_Due});
                 }
             }
 
-                if (lblSiteName.Text != "Particular")
+                if (LblSiteName.Text != "Particular")
                 {
-                    var charts = CreateQuickstart1(_showpayabletotalpayblelist);
-                    linechart.Chart = charts[0];
+                    var charts = CreateQuickstart1(Showpayabletotalpayblelist);
+                    Linechart.Chart = charts[0];
                 }
                 else
                 {
-                    var charts = CreateQuickstart(_showpayabletotalpayblelist);
-                    linechart.Chart = charts[0];
+                    var charts = CreateQuickstart(Showpayabletotalpayblelist);
+                    Linechart.Chart = charts[0];
                 }
                 }
             catch (Exception ex)
             {
-             //   StaticMethods.ShowToast("Internal Error ShowTotal" + ex.Message);
+                StaticMethods.ShowToast("Internal Error ShowTotal" + ex.Message);
             }
-            list_totalpayble.ItemsSource = _showpayabletotalpayblelist;
+            list_totalpayble.ItemsSource = Showpayabletotalpayblelist;
         }
 
         private void list_today_payble_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            navmdl = new NavigationMdl();
-            ShowPayableTodayDetail toady_notification = (ShowPayableTodayDetail)e.Item;
-           
-           
+            _navmdl = new NavigationMdl();
+            ShowPayableTodayDetail localToadyNotification = (ShowPayableTodayDetail)e.Item;
 
-            //navmdl.Device_id = StaticMethods.getDeviceidentifier(); 
-            //if (navmdl.Device_id == "unknown")
+            //navmdl.DeviceId = StaticMethods.GetDeviceidentifier(); 
+            //if (navmdl.DeviceId == "unknown")
             //{
-            //    navmdl.Device_id = "123456";
+            //    navmdl.DeviceId = "123456";
             //}
-            //navmdl.Company_name = EnumMaster.C21_MALHAR;
-            obj_nav = new NavigationMdl();
-            NavigationMdl nav = obj_nav.PrepareAPIData();
-             nav.Party_id = toady_notification.Show_Party_Id;
-              nav.Party_Name = toady_notification.Show_Pay_Party;
+            //navmdl.CompanyName = EnumMaster.C21Malhar;
+            _objNav = new NavigationMdl();
+            NavigationMdl nav = _objNav.PrepareApiData();
+             nav.PartyId = localToadyNotification.ShowPartyId;
+              nav.PartyName = localToadyNotification.ShowPayParty;
             if (this.Title== "Receivable")
-            { nav.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING; }
-            else { nav.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING; }
+            { nav.TagType = EnumMaster.TagtypereceivableOutstanding; }
+            else { nav.TagType = EnumMaster.TagtypepayableOutstanding; }
             if (Notflag != true)
             {
                 Navigation.PushAsync(new PayableChart(nav));
@@ -308,23 +295,23 @@ namespace App2.View
         {
             try
             {
-                isListSelected = false;
+                _isListSelected = false;
                 if (e.NewTextValue != string.Empty)
                 {
                     //navmdl = new NavigationMdl();
                     //ResponseModel rs = StaticMethods.GetLocalSavedData();
-                    //navmdl.User_id = rs.User_Id;
-                    //navmdl.Device_id = StaticMethods.getDeviceidentifier(); 
-                    //if (navmdl.Device_id == "unknown")
+                    //navmdl.UserId = rs.UserId;
+                    //navmdl.DeviceId = StaticMethods.GetDeviceidentifier(); 
+                    //if (navmdl.DeviceId == "unknown")
                     //{
-                    //    navmdl.Device_id = "123456";
+                    //    navmdl.DeviceId = "123456";
                     //}
-                    //navmdl.Company_name = Helper.EnumMaster.C21_MALHAR;
-                    //navmdl.Party_Name = e.NewTextValue;
-                    //navmdl.Tag_type = "partylist";
+                    //navmdl.CompanyName = Helper.EnumMaster.C21Malhar;
+                    //navmdl.PartyName = e.NewTextValue;
+                    //navmdl.TagType = "partylist";
                     
-                    ObservableCollection<PartysearchlistMdl> _lst = new ObservableCollection<PartysearchlistMdl>();
-                    api = new API();
+                    ObservableCollection<PartysearchlistMdl> lst = new ObservableCollection<PartysearchlistMdl>();
+                    _api = new API();
                     if (!CrossConnectivity.Current.IsConnected)
                     {
 
@@ -332,25 +319,25 @@ namespace App2.View
                     }
                     else
                     {
-                        obj_nav = new NavigationMdl();
-                        NavigationMdl nav = obj_nav.PrepareAPIData();
-                        nav.Party_Name = e.NewTextValue;
-                        lstLoca = new PartysearchMdl();
-                        lstLoca = await api.GetParty(nav);
+                        _objNav = new NavigationMdl();
+                        NavigationMdl nav = _objNav.PrepareApiData();
+                        nav.PartyName = e.NewTextValue;
+                        _lstLoca = new PartysearchMdl();
+                        _lstLoca = await _api.GetParty(nav);
 
-                        foreach (var item in lstLoca.Party_List)
+                        foreach (var item in _lstLoca.Party_List)
                         {
-                            _lst.Add(new PartysearchlistMdl { Party_Id = item.Party_Id, Party_Name = item.Party_Name });
+                            lst.Add(new PartysearchlistMdl { Party_Id = item.Party_Id, Party_Name = item.Party_Name });
                         }
-                        AutoList.ItemsSource = _lst;
+                        AutoList.ItemsSource = lst;
                         Device.BeginInvokeOnMainThread(() =>
                         {
-                            if (_lst.Count > 0)
+                            if (lst.Count > 0)
                             {
                                 AutoList.IsVisible = true;
                                 if (AutoList.IsVisible == true)
                                 {
-                                    linechart.IsVisible = false;
+                                    Linechart.IsVisible = false;
                                 }
                                 AutoList.HeightRequest = 40 * 5;
                             }
@@ -365,7 +352,7 @@ namespace App2.View
                 else
                 {
                     AutoList.IsVisible = false;
-                    linechart.IsVisible = true;
+                    Linechart.IsVisible = true;
                 }
             }
             catch (Exception ex)
@@ -395,7 +382,7 @@ namespace App2.View
 
         private void txtAuto_Unfocused(object sender, FocusEventArgs e)
         {
-            if (!isListSelected)
+            if (!_isListSelected)
             {
                 txtAuto.TextChanged -= txtAuto_TextChanged;
                 txtAuto.Text = string.Empty;
@@ -403,7 +390,7 @@ namespace App2.View
             }
             
             AutoList.IsVisible = false;
-            linechart.IsVisible = true;
+            Linechart.IsVisible = true;
             txtAuto.Placeholder = "Select Party";
 
         }
@@ -411,28 +398,28 @@ namespace App2.View
         private void AutoList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             PartysearchlistMdl obj = null;
-            navmdl = new NavigationMdl();
+            _navmdl = new NavigationMdl();
             try
             {
-                isListSelected = true;
+                _isListSelected = true;
                 AutoList.IsVisible = false;
                 txtAuto.TextChanged -= txtAuto_TextChanged;
                 txtAuto.Unfocus();
                 obj = (PartysearchlistMdl)e.Item;
                
-                //navmdl.Device_id = StaticMethods.getDeviceidentifier(); //"123";//
-                //if (navmdl.Device_id == "unknown")
+                //navmdl.DeviceId = StaticMethods.GetDeviceidentifier(); //"123";//
+                //if (navmdl.DeviceId == "unknown")
                 //{
-                //    navmdl.Device_id = "123456";
+                //    navmdl.DeviceId = "123456";
                 //}
-                //navmdl.Company_name = EnumMaster.C21_MALHAR;
-                obj_nav = new NavigationMdl();
-                NavigationMdl nav = obj_nav.PrepareAPIData();
-                nav.Party_Name = obj.Party_Name;
-                nav.Party_id = obj.Party_Id;
+                //navmdl.CompanyName = EnumMaster.C21Malhar;
+                _objNav = new NavigationMdl();
+                NavigationMdl nav = _objNav.PrepareApiData();
+                nav.PartyName = obj.Party_Name;
+                nav.PartyId = obj.Party_Id;
                 if (this.Title == "Receivable")
-                { nav.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING; }
-                else { nav.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING; }
+                { nav.TagType = EnumMaster.TagtypereceivableOutstanding; }
+                else { nav.TagType = EnumMaster.TagtypepayableOutstanding; }
                 Navigation.PushAsync(new PayableChart(nav));
             }
             catch (Exception ex)
@@ -452,13 +439,13 @@ namespace App2.View
             //List<ShowPayableTotalPayble>  _showlist = new List<ShowPayableTotalPayble>();
             //foreach (var item in data.ListPayablemdl)
             //{
-            ColorsPayable = SKColor.Parse("#A8C4E6");
+            
             //        _showlist.Add(new ShowPayableTotalPayble() { Show_Site_name = item.Perticular, Show_Balance = item.Balance, Show_Total_cr = item.Receive, Show_Total_dr = item.Total_Due });
             //}
-            float a1 = Convert.ToSingle(data[0].Show_Balance);
-            float b1 = Convert.ToSingle(data[1].Show_Balance);
-            float c1 = Convert.ToSingle(data[2].Show_Balance);
-            float d1 = Convert.ToSingle(data[3].Show_Balance);
+            var a1 = Convert.ToSingle(data[0].ShowBalance);
+            var b1 = Convert.ToSingle(data[1].ShowBalance);
+            var c1 = Convert.ToSingle(data[2].ShowBalance);
+            var d1 = Convert.ToSingle(data[3].ShowBalance);
 
             var  entries = new[]
             {
@@ -466,26 +453,26 @@ namespace App2.View
                             new Microcharts.Entry(a1)
                             {
 
-                                    Label = data[0].Show_Site_name,
+                                    Label = data[0].ShowSiteName,
                                     ValueLabel = a1.ToString(),
                                     Color = SKColor.Parse("#266489"), TextColor=SKColor.Parse("#EC792B"),
                             },
                             new Microcharts.Entry(b1)
                             {
-                                    Label = data[1].Show_Site_name,
+                                    Label = data[1].ShowSiteName,
                                     ValueLabel = b1.ToString(),
                                     Color = SKColor.Parse("#68B9C0"), TextColor=SKColor.Parse("#EC792B"),
                             },
                             new Microcharts.Entry(c1)
                             {
-                                    Label = data[2].Show_Site_name,
+                                    Label = data[2].ShowSiteName,
                                     ValueLabel = c1.ToString(),
                                     Color = SKColor.Parse("#90D585"),
                                     TextColor=SKColor.Parse("#EC792B"),
                             },
                             new Microcharts.Entry(d1)
                             {
-                                    Label = data[3].Show_Site_name,
+                                    Label = data[3].ShowSiteName,
                                     ValueLabel = d1.ToString(),
                                     Color = SKColor.Parse("#90D585"),
                                     TextColor=SKColor.Parse("#EC792B"),
@@ -512,49 +499,36 @@ namespace App2.View
 
         public static Chart[] CreateQuickstart1(List<ShowPayableTotalPayble> data)
         {
-
-            //List<ShowPayableTotalPayble> _showlist = new List<ShowPayableTotalPayble>();
-            //foreach (var item in data.ListPayablemdl)
-            //{
-                
             ColorsPayable = SKColor.Parse("#EC792B");
-            //        _showlist.Add(new ShowPayableTotalPayble() { Show_Site_name = item.Site_name, Show_Balance = item.Balance, Show_Total_cr = item.Total_cr, Show_Total_dr = item.Total_dr });
-            //}
-            float a1 = Convert.ToSingle(data[0].Show_Balance);
-            float b1 = Convert.ToSingle(data[1].Show_Balance);
-            float c1 = Convert.ToSingle(data[2].Show_Balance);
-            
-
+            var a1 = Convert.ToSingle(100);
+            var b1 = Convert.ToSingle(200);
+            var c1 = Convert.ToSingle(300);
             var entries = new[]
             {
 
                             new Microcharts.Entry(a1)
                             {
 
-                                    Label = data[0].Show_Site_name,
+                                    Label = "ShowSiteName 1",//data[0].ShowSiteName,
                                     ValueLabel = a1.ToString(),
                                     Color = SKColor.Parse("#266489"), TextColor=SKColor.Parse("#2A83C6"),
                             },
                             new Microcharts.Entry(b1)
                             {
-                                    Label = data[1].Show_Site_name,
+                                    Label ="ShowSiteName 2",// data[1].ShowSiteName,
                                     ValueLabel = b1.ToString(),
                                     Color = SKColor.Parse("#68B9C0"), TextColor=SKColor.Parse("#2A83C6"),
                             },
                             new Microcharts.Entry(c1)
                             {
-                                    Label = data[2].Show_Site_name,
+                                    Label = "ShowSiteName 3",//data[2].ShowSiteName,
                                     ValueLabel = c1.ToString(),
                                     Color = SKColor.Parse("#90D585"),
                                     TextColor=SKColor.Parse("#2A83C6"),
                             },
-                           
                         };
-
             return new Chart[]
             {
-                                //new BarChart() { Entries = entries },
-                                //new PointChart() { Entries = entries },
                                 new LineChart() { Entries = entries ,
 
                                                   BackgroundColor =ColorsPayable,
@@ -563,9 +537,6 @@ namespace App2.View
                                                   LineSize =3,
                                                   PointMode =PointMode.Circle,
                                                   LineMode=LineMode.Straight},
-                                //new DonutChart() { Entries = entries },
-                                //new RadialGaugeChart() { Entries = entries },
-                               
             };
         }
     }

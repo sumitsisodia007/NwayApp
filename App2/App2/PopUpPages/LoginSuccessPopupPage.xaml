@@ -11,21 +11,21 @@
     <pages:PopupPage.Animation>
         <animations:MoveAnimation PositionIn="Top" PositionOut="Top"/>
     </pages:PopupPage.Animation>
-    <StackLayout x:Name="stkMessage"
+    <StackLayout x:Name="StkMessage"
                  Orientation="Horizontal"
                 VerticalOptions="Start"
                 BackgroundColor="#43A047"
                 HeightRequest="50"
                 Padding="20,0">
       
-        <Image x:Name="imgAlert"
+        <Image x:Name="ImgAlert"
                             Source="check"
                            Aspect="AspectFit"
                            HeightRequest="42"
                         HorizontalOptions="Start"
       VerticalOptions="EndAndExpand"/>
       
-        <Label    x:Name="lblMessage"
+        <Label    x:Name="LblMessage"
                   TextColor="White"
                   HorizontalOptions="CenterAndExpand"
                   VerticalOptions="CenterAndExpand"

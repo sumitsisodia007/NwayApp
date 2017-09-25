@@ -13,8 +13,8 @@ namespace App2.APIService
 {
     public class API
     {
-         // public readonly string RestURL = @"http://c21.enway.co.in//webservice/index.php";
-        public readonly string RestURL = @"http://192.168.1.2/enway_real/webservice/index.php";
+         // public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
+        public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
        
         #region Login WebService
         public LoginResponseMdl PostLogin(LoginMdl lgmdl)
@@ -22,22 +22,25 @@ namespace App2.APIService
             LoginResponseMdl jsonResponse = new LoginResponseMdl();
             try
             {
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(RestURL);
-
-                var values = new Dictionary<string, string>
+                HttpResponseMessage response;
+                using (HttpClient client = new HttpClient())
                 {
-                    { "username", lgmdl.Username},
-                    { "password", lgmdl.Password },
-                    { "firebasetoken", lgmdl.Firebasetoken},
-                    { "iosdevicetoken", lgmdl.IosToken},
-                    { "device_id", lgmdl.DeviceID},
-                    { "tagtype", lgmdl.Tagtype}
-                };
+                    client.BaseAddress = new Uri(RestUrl);
 
-                var content = new FormUrlEncodedContent(values);
+                    var values = new Dictionary<string, string>
+                    {
+                        { "username", lgmdl.Username},
+                        { "password", lgmdl.Password },
+                        { "firebasetoken", lgmdl.Firebasetoken},
+                        { "iosdevicetoken", lgmdl.IosToken},
+                        { "device_id", lgmdl.DeviceId},
+                        { "tagtype", lgmdl.Tagtype}
+                    };
 
-                var response =  client.PostAsync(RestURL, content).Result;
+                    var content = new FormUrlEncodedContent(values);
+
+                    response = client.PostAsync(RestUrl, content).Result;
+                }
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
@@ -54,38 +57,39 @@ namespace App2.APIService
         #endregion
 
         #region Notification WebService Via Upadate Popup
-        public NotificationListMdl PostNotification(NavigationMdl nav, List<Temp_Site_id_Mdl> tempchlst)
+        public NotificationListMdl PostNotification(NavigationMdl nav, List<TempSiteIdMdl> tempchlst)
         {
             NotificationListMdl jsonResponse = new NotificationListMdl();
             try
             {
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(RestURL);
+                HttpClient client = new HttpClient {BaseAddress = new Uri(RestUrl)};
 
                 ResponseModel res = StaticMethods.GetLocalSavedData();
 
                 //Create List of KeyValuePairs
-                List<KeyValuePair<string, string>> _notificationProperties = new List<KeyValuePair<string, string>>();
+                List<KeyValuePair<string, string>> notificationProperties = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("username", "elensoft"),
+                    new KeyValuePair<string, string>("password", "1"),
+                    new KeyValuePair<string, string>("user_id", "1"),
+                    new KeyValuePair<string, string>("device_id", "123456"),
+                    new KeyValuePair<string, string>("company_id", "1"),
+                    new KeyValuePair<string, string>("party_id", "1"),
+                    new KeyValuePair<string, string>("tagtype", "notifications")
+                };
 
                 //Add 'single' parameters
-                _notificationProperties.Add(new KeyValuePair<string, string>("username", "elensoft"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("password", "1"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("user_id", "1"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("device_id", "123456"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("company_id", "1"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("party_id", "1"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("tagtype", "notifications"));
                 //Loop over String array and add all instances to our bodyPoperties
                 foreach (var dir in tempchlst)
                 {
-                    _notificationProperties.Add(new KeyValuePair<string, string>("site_id[]", dir.Site_id.ToString()));
+                    notificationProperties.Add(new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
                 }
 
                 //convert your bodyProperties to an object of FormUrlEncodedContent
-                var dataContent = new FormUrlEncodedContent(_notificationProperties.ToArray());
+                var dataContent = new FormUrlEncodedContent(notificationProperties.ToArray());
 
                 //var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync(RestURL, dataContent).Result;
+                var response = client.PostAsync(RestUrl, dataContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
@@ -107,33 +111,34 @@ namespace App2.APIService
              NotificationListMdl jsonResponse = new NotificationListMdl();
             try
             {
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(RestURL);
-                
+                HttpClient client = new HttpClient {BaseAddress = new Uri(RestUrl)};
+
                 ResponseModel res = StaticMethods.GetLocalSavedData();
                 
                 //Create List of KeyValuePairs
-                List<KeyValuePair<string, string>> _notificationProperties = new List<KeyValuePair<string, string>>();
-              
-                //Add 'single' parameters
-                _notificationProperties.Add(new KeyValuePair<string, string>("username", "elensoft"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("password", "1"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("user_id", "1"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("device_id", "123456"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("company_id", "1"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("party_id", "1"));
-                _notificationProperties.Add(new KeyValuePair<string, string>("tagtype", "notifications"));
-                //Loop over String array and add all instances to our bodyPoperties
-                foreach (var dir in nav._site_Id)
+                List<KeyValuePair<string, string>> notificationProperties = new List<KeyValuePair<string, string>>
                 {
-                    _notificationProperties.Add(new KeyValuePair<string, string>("site_id[]", dir.Site_id.ToString()));
+                    new KeyValuePair<string, string>("username", "elensoft"),
+                    new KeyValuePair<string, string>("password", "1"),
+                    new KeyValuePair<string, string>("user_id", "1"),
+                    new KeyValuePair<string, string>("device_id", "123456"),
+                    new KeyValuePair<string, string>("company_id", "1"),
+                    new KeyValuePair<string, string>("party_id", "1"),
+                    new KeyValuePair<string, string>("tagtype", "notifications")
+                };
+
+                //Add 'single' parameters
+                //Loop over String array and add all instances to our bodyPoperties
+                foreach (var dir in nav.SiteIdMdls)
+                {
+                    notificationProperties.Add(new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
                 }
 
                 //convert your bodyProperties to an object of FormUrlEncodedContent
-                var dataContent = new FormUrlEncodedContent(_notificationProperties.ToArray());
+                var dataContent = new FormUrlEncodedContent(notificationProperties.ToArray());
 
                 //var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync(RestURL, dataContent).Result; 
+                var response = client.PostAsync(RestUrl, dataContent).Result; 
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
@@ -151,26 +156,25 @@ namespace App2.APIService
 
         #region Notification Setting WebService
 
-        public async Task<string> NotificationSetting(NavigationMdl td_ntf)
+        public async Task<string> NotificationSetting(NavigationMdl navigation)
         {
             string msg=null;
             try
             {
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(RestURL);
+                HttpClient client = new HttpClient {BaseAddress = new Uri(RestUrl)};
                 var values = new Dictionary<string, string>
                         {
-                            { "user_id", td_ntf.User_id},
-                            { "device_id", td_ntf.Device_id},
-                            { "min_receipt_amount", td_ntf.Min_Receipt_Amount},
-                            { "notification_day_count", td_ntf.Notification_Day_Count},
-                            { "tagtype", td_ntf.Tag_type}
+                            { "user_id", navigation.UserId},
+                            { "device_id", navigation.DeviceId},
+                            { "min_receipt_amount", navigation.MinReceiptAmount},
+                            { "notification_day_count", navigation.NotificationDayCount},
+                            { "tagtype", navigation.TagType}
                         };
 
 
                 var content = new FormUrlEncodedContent(values);
 
-                var response = await client.PostAsync(RestURL, content);
+                var response = await client.PostAsync(RestUrl, content);
                 if (response.IsSuccessStatusCode)
                 {
                     
@@ -190,95 +194,97 @@ namespace App2.APIService
         #region Payable Today and Total Collection WebService
         public async Task<PayableNotificationMdl> PayableTable(NavigationMdl nav)
         {
-            PayableNotificationMdl response_model = new PayableNotificationMdl();
+            PayableNotificationMdl responseModel = new PayableNotificationMdl();
             try
             {
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(RestURL);
+                HttpClient client = new HttpClient {BaseAddress = new Uri(RestUrl)};
 
-                List<KeyValuePair<string, string>> _notificationProperties = new List<KeyValuePair<string, string>>();
+                List<KeyValuePair<string, string>> payableProperties = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("username", nav.UserName),
+                    new KeyValuePair<string, string>("password", nav.Password),
+                    new KeyValuePair<string, string>("user_id", nav.UserId),
+                    new KeyValuePair<string, string>("device_id", nav.DeviceId),
+                    new KeyValuePair<string, string>("company_id", nav.CompanyId),
+                    new KeyValuePair<string, string>("party_id", nav.PartyId),
+                    new KeyValuePair<string, string>("tagtype", nav.TagType)
+                };
 
                 //Add 'single' parameters
-                _notificationProperties.Add(new KeyValuePair<string, string>("username", nav.User_name));
-                _notificationProperties.Add(new KeyValuePair<string, string>("password", nav.Password));
-                _notificationProperties.Add(new KeyValuePair<string, string>("user_id", nav.User_id));
-                _notificationProperties.Add(new KeyValuePair<string, string>("device_id", nav.Device_id));
-                _notificationProperties.Add(new KeyValuePair<string, string>("company_id", nav.Company_Id));
-                _notificationProperties.Add(new KeyValuePair<string, string>("party_id",nav.Party_id));
-                _notificationProperties.Add(new KeyValuePair<string, string>("tagtype", nav.Tag_type));
                 //Loop over String array and add all instances to our bodyPoperties
-                foreach (var dir in nav._site_Id)
+                foreach (var dir in nav.SiteIdMdls)
                 {
-                    _notificationProperties.Add(new KeyValuePair<string, string>("site_id[]", dir.Site_id.ToString()));
+                    payableProperties.Add(new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
                 }
 
                 //convert your bodyProperties to an object of FormUrlEncodedContent
                // var dataContent = new FormUrlEncodedContent(_notificationProperties.ToArray());
 
 
-                var content = new FormUrlEncodedContent(_notificationProperties.ToArray());
+                var content = new FormUrlEncodedContent(payableProperties.ToArray());
 
-                var response =await client.PostAsync(RestURL, content); 
+                var response =await client.PostAsync(RestUrl, content); 
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
                     JObject jObj = JObject.Parse(jsonresult);
-                    response_model = JsonConvert.DeserializeObject<PayableNotificationMdl>(jsonresult);
+                    responseModel = JsonConvert.DeserializeObject<PayableNotificationMdl>(jsonresult);
                 }
             }
             catch (Exception ex)
             {
                 StaticMethods.ShowToast(ex.Message);
             }
-            return response_model;
+            return responseModel;
         }
         #endregion
 
         #region GetParty AutoComplete WebService
         public async Task<PartysearchMdl> GetParty(NavigationMdl nav)
         {
-            PartysearchMdl _partysearchlistmdl = new PartysearchMdl();
+            PartysearchMdl partysearchlistmdl = new PartysearchMdl();
             try
             {
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(RestURL);
-                List<KeyValuePair<string, string>> _getParty_Prop = new List<KeyValuePair<string, string>>();
-
-                _getParty_Prop.Add(new KeyValuePair<string, string>("username", nav.User_name));
-                _getParty_Prop.Add(new KeyValuePair<string, string>("password", nav.Password));
-                _getParty_Prop.Add(new KeyValuePair<string, string>("user_id", nav.User_id));
-                _getParty_Prop.Add(new KeyValuePair<string, string>("device_id", nav.Device_id));
-                _getParty_Prop.Add(new KeyValuePair<string, string>("company_id", nav.Company_Id));
-                _getParty_Prop.Add(new KeyValuePair<string, string>("party_name", nav.Party_Name));
-                _getParty_Prop.Add(new KeyValuePair<string, string>("tagtype", "partylist"));
-
-                foreach (var dir in nav._site_Id)
+                HttpClient client = new HttpClient {BaseAddress = new Uri(RestUrl)};
+                List<KeyValuePair<string, string>> partyProp = new List<KeyValuePair<string, string>>
                 {
-                    _getParty_Prop.Add(new KeyValuePair<string, string>("site_id[]", dir.Site_id.ToString()));
+                    new KeyValuePair<string, string>("username", nav.UserName),
+                    new KeyValuePair<string, string>("password", nav.Password),
+                    new KeyValuePair<string, string>("user_id", nav.UserId),
+                    new KeyValuePair<string, string>("device_id", nav.DeviceId),
+                    new KeyValuePair<string, string>("company_id", nav.CompanyId),
+                    new KeyValuePair<string, string>("party_name", nav.PartyName),
+                    new KeyValuePair<string, string>("tagtype", "partylist")
+                };
+
+
+                foreach (var dir in nav.SiteIdMdls)
+                {
+                    partyProp.Add(new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
                 }
                 //var values = new Dictionary<string, string>
                 //        {
-                //            { "user_id", keyName.User_id},
-                //            { "device_id",keyName.Device_id},
-                //            { "company_name", keyName.Company_name},
-                //            { "party_name", keyName.Party_Name},
+                //            { "user_id", keyName.UserId},
+                //            { "device_id",keyName.DeviceId},
+                //            { "company_name", keyName.CompanyName},
+                //            { "party_name", keyName.PartyName},
                 //            { "tagtype", "partylist"}
                 //        };
 
-                var content = new FormUrlEncodedContent(_getParty_Prop);
-                var response = await client.PostAsync(RestURL, content);
+                var content = new FormUrlEncodedContent(partyProp);
+                var response = await client.PostAsync(RestUrl, content);
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
                     JObject jObj = JObject.Parse(jsonresult);
-                    _partysearchlistmdl = JsonConvert.DeserializeObject<PartysearchMdl>(jsonresult);
+                    partysearchlistmdl = JsonConvert.DeserializeObject<PartysearchMdl>(jsonresult);
                 }
             }
             catch (Exception ex)
             {
                 StaticMethods.ShowToast(ex.Message);
             }
-            return _partysearchlistmdl;
+            return partysearchlistmdl;
         }
         #endregion
     }

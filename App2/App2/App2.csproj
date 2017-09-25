@@ -90,6 +90,9 @@
     <Compile Include="View\ApprovelsPage.xaml.cs">
       <DependentUpon>ApprovelsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CashFlowPage.xaml.cs">
+      <DependentUpon>CashFlowPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Ele_CunsPage.xaml.cs">
       <DependentUpon>Ele_CunsPage.xaml</DependentUpon>
     </Compile>
@@ -352,6 +355,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="PopUpPages\LeftMenu.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\CashFlowPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

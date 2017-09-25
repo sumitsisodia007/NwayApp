@@ -12,25 +12,28 @@ namespace App2.Model
     {
         public string Tagtype { get; set; }
         public string Error { get; set; }
-        public int User_id { get; set; }
-        public string User_name { get; set; }
-        public string User_type { get; set; }
-        public int Employee_id { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string UserType { get; set; }
+        public int EmployeeId { get; set; }
         public string Message { get; set; }
-        public float Min_receipt_amount { get; set; }
-        public  int Notification_day_count { get; set; }
+        public float MinReceiptAmount { get; set; }
+        public  int NotificationDayCount { get; set; }
         [JsonProperty("permissions")]
         public ObservableCollection<Permissions> _permissions { get; set; }
     }
     public class Permissions
     {
-        public string Company_name { get; set; }
-        public string Company_short_name  { get; set; }
-        public int    Company_id			{ get; set; }
+        [JsonProperty("company_name")]
+        public string CompanyName { get; set; }
+        [JsonProperty("company_short_name")]
+        public string CompanyShortName { get; set; }
+        [JsonProperty("company_id")]
+        public int CompanyId { get; set; }
         [JsonProperty("company_site")]
-        public ObservableCollection<Company_site> _company_site { get; set; }
+        public ObservableCollection<CompanySite> Sites { get; set; }
     }
-    public class Company_site
+    public class CompanySite
     {
         public string Site_name { get; set; }
         public string Site_short_name { get; set; }

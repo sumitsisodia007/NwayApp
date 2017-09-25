@@ -27,12 +27,12 @@
                 <Label Text="Logout!" FontAttributes="Bold" FontSize="17" TextColor="Black" HorizontalOptions="CenterAndExpand"/>
                 <Label Text="Do you want to logout from App?" FontSize="15" HorizontalOptions="CenterAndExpand"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                    <Label x:Name="lblCancle" Text="Cancel" FontAttributes="Bold" FontSize="17" TextColor="#4472C4" HorizontalOptions="CenterAndExpand">
+                    <Label x:Name="LblCancle" Text="Cancel" FontAttributes="Bold" FontSize="17" TextColor="#4472C4" HorizontalOptions="CenterAndExpand">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Cancel_Tapped"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <Label x:Name="lblLogout" Text="Logout" FontAttributes="Bold" FontSize="17" TextColor="#4472C4" HorizontalOptions="CenterAndExpand">
+                    <Label x:Name="LblLogout" Text="Logout" FontAttributes="Bold" FontSize="17" TextColor="#4472C4" HorizontalOptions="CenterAndExpand">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Logout_Tapped"/>
                         </Label.GestureRecognizers>

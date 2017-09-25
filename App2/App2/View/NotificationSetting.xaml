@@ -45,7 +45,7 @@
             <StackLayout>
                 <Frame  HasShadow="True"  BackgroundColor="White"  Padding="1" OutlineColor="Gray">
                     <StackLayout Padding="0,2">
-                        <Label Text="Current Settings" FontSize="17" TextColor="Black" HorizontalOptions="CenterAndExpand" />
+                        <Label Text="Current TagtypeSettings" FontSize="17" TextColor="Black" HorizontalOptions="CenterAndExpand" />
                         <StackLayout HorizontalOptions="FillAndExpand"  Orientation="Horizontal" VerticalOptions="StartAndExpand">
                             <StackLayout HorizontalOptions="FillAndExpand"  Orientation="Vertical" VerticalOptions="StartAndExpand" Padding="0,0,.5,0">
 

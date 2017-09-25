@@ -8,10 +8,10 @@ namespace App2.ShowModels
 {
     public class ShowPayableTotalPayble
     {
-        public string Show_Site_name { get; set; }
-        public string Show_Total_dr { get; set; }
-        public string Show_Total_cr { get; set; }
-        public string Show_Balance { get; set; }
-        public double txtWidth { get; set; }
+        public string ShowSiteName { get; set; }
+        public string ShowTotalDr { get; set; }
+        public string ShowTotalCr { get; set; }
+        public string ShowBalance { get; set; }
+        public double TxtWidth { get; set; }
     }
 }

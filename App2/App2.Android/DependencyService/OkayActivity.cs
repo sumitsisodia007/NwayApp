@@ -30,16 +30,16 @@ namespace App2.Droid.DependencyService
             NavigationMdl mdl = new NavigationMdl();
             if (tag_type == "paid")
             {
-                mdl.Tag_type =Helper.EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
+                mdl.TagType =Helper.EnumMaster.TagtypepayableOutstanding;
             }
             else if (tag_type== "receipt")
             {
-                mdl.Tag_type = Helper.EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
+                mdl.TagType = Helper.EnumMaster.TagtypereceivableOutstanding;
             }
 
-            mdl.Device_id = "123";
-            mdl.Company_name = Helper.EnumMaster.C21_MALHAR;
-            mdl.Party_id = party_id;
+            mdl.DeviceId = "123";
+            mdl.CompanyName = Helper.EnumMaster.C21Malhar;
+            mdl.PartyId = party_id;
 
             var navPage = new NavigationPage(new LoginPage());
             App.Current.MainPage = navPage;

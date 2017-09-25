@@ -8,11 +8,11 @@ namespace App2.ShowModels
 {
     public class ShowPayableTodayDetail
     {
-        public string Show_Pay_Party { get; set; }
-        public string Show_Pay_Outstanding { get; set; }
-        public string Show_Amount_Received { get; set; }
-        public string Show_Cur_Outstanding { get; set; }
-        public string Show_Party_Id { get; set; }
-        public double txtWidth { get; set; }
+        public string ShowPayParty { get; set; }
+        public string ShowPayOutstanding { get; set; }
+        public string ShowAmountReceived { get; set; }
+        public string ShowCurOutstanding { get; set; }
+        public string ShowPartyId { get; set; }
+        public double TxtWidth { get; set; }
     }
 }

@@ -94,7 +94,7 @@
                                HorizontalOptions="FillAndExpand" 
                                VerticalOptions="FillAndExpand" >
                     <!--<Label x:Name="lblNotificationType" BackgroundColor="#E2F5F9" Font="24,Bold" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="Notification" />-->
-                    <Label x:Name="lblName" BackgroundColor="#E2F5F9" Font="20,Bold" TextColor="Black" HorizontalOptions="Fill" HorizontalTextAlignment="Center" Text="" />
+                    <Label x:Name="lblName" BackgroundColor="#E2F5F9" Font="20,Bold" TextColor="Black" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Text="" />
                     <BoxView BackgroundColor="#BBBBBB" HeightRequest="1"/>
                     <ListView x:Name="MainlistView"                            
                               HasUnevenRows="True"                              
@@ -118,16 +118,16 @@
                                                    HorizontalOptions="Start" 
                                                    FontSize="20"
                                                    FontAttributes="Bold"
-                                                   Text="{Binding show_sohrtName}" 
+                                                   Text="{Binding ShowSohrtName}" 
                                                    TextColor="Black" 
                                                    HorizontalTextAlignment="Start" />
                                             <Label BackgroundColor="#E2F5F9" 
                                                    HorizontalOptions="StartAndExpand" 
                                                    FontSize="17" 
-                                                   Text="{Binding show_party_name_customer_name}" 
+                                                   Text="{Binding ShowPartyNameCustomerName}" 
                                                    TextColor="Black" HorizontalTextAlignment="Start" />
                                             <Label  BackgroundColor="#E2F5F9" WidthRequest="105" 
-                                                    FontSize="17" Text="{Binding show_amount_received, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
+                                                    FontSize="17" Text="{Binding ShowAmountReceived, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
 
                                         </StackLayout>
                                         <BoxView BackgroundColor="#BBBBBB" HeightRequest="1"/>
@@ -142,7 +142,7 @@
                                 FontAttributes="Bold"
                                 VerticalOptions="CenterAndExpand"
                                 HorizontalOptions="FillAndExpand"
-                                Clicked="OnOKButtonClicked"/>
+                                Clicked="OnOkButtonClicked"/>
                     </StackLayout>
 
                 </StackLayout>

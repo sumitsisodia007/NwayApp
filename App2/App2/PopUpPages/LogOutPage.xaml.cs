@@ -17,9 +17,9 @@ namespace App2.PopUpPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LogOutPage : PopupPage
     {
-        API api = null;
-        App2.Model.ResponseModel res=null;
-        App2.Model.NavigationMdl nav = null;
+        //API api = null;
+        //App2.Model.ResponseModel res=null;
+        //App2.Model.NavigationMdl nav = null;
         public LogOutPage()
         {
             InitializeComponent();
@@ -50,8 +50,8 @@ namespace App2.PopUpPages
             //nav = new Model.NavigationMdl();
             //res = StaticMethods.GetLocalSavedData();
             StaticMethods.DeleteLocalData();
-            var MyAppsFirstPage = new LoginPage();
-            Application.Current.MainPage = new NavigationPage(MyAppsFirstPage);
+            var myAppsFirstPage = new LoginPage();
+            Application.Current.MainPage = new NavigationPage(myAppsFirstPage);
         }
         protected override bool OnBackgroundClicked()
         {

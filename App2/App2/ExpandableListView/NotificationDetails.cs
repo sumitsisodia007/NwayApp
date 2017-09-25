@@ -11,9 +11,9 @@ namespace App2.ExpandableListView
     {
         public string Name { get; set; }
         public string TagNotCount { get; set; }
-        public string Tag_Amount { get; set; }
+        public string TagAmount { get; set; }
         public bool IsVisible { get; set; }
-        public string Tag_date { get; set; }
+        public string TagDate { get; set; }
         public string Description { get; set; }
     }
   }

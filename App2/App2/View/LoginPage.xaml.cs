@@ -20,14 +20,14 @@ namespace App2.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        API api = new API();
-        LoginMdl _login = new LoginMdl();
+        private API api = new API();
+        private LoginMdl _login = new LoginMdl();
 
         public LoginPage(NavigationMdl mdl)
         {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            if (mdl.Tag_type == "paid")
+            if (mdl.TagType == "paid")
             {
                 Navigation.PushModalAsync(new PayableChart());
             }
@@ -68,11 +68,11 @@ namespace App2.View
             _Loading.IsRunning = true;
            rs.UserName= _login.Username = txtFName.Text;
            rs.Password= _login.Password = txtPass.Text;
-            _login.Tagtype = EnumMaster.SIGNIN;
-            _login.DeviceID = StaticMethods.getDeviceidentifier(); 
-            if (_login.DeviceID == "unknown")
+            _login.Tagtype = EnumMaster.TagtypeSignin;
+            _login.DeviceId = StaticMethods.GetDeviceidentifier(); 
+            if (_login.DeviceId == "unknown")
             {
-                _login.DeviceID = "123456";
+                _login.DeviceId = "123456";
             }
             if (Device.OS == TargetPlatform.iOS)
             {
@@ -102,11 +102,11 @@ namespace App2.View
                        // StaticMethods._login_response = res;
                         if (res.Error == "false")
                         {
-                            rs.Device_Id = _login.DeviceID;
-                            rs.Min_Receipt_Amt = res.Min_receipt_amount.ToString();
-                            rs.Notification_Day_Count = res.Notification_day_count.ToString();
+                            rs.DeviceId = _login.DeviceId;
+                            rs.MinReceiptAmt = res.MinReceiptAmount.ToString();
+                            rs.NotificationDayCount = res.NotificationDayCount.ToString();
                             rs.Error = res.Error;
-                            rs.User_Id = res.User_id.ToString();
+                            rs.UserId = res.UserId.ToString();
                             StaticMethods.SaveLocalData(rs);
                             await Navigation.PushPopupAsync(new LoginSuccessPopupPage("S", res.Message));
                             await Navigation.PushModalAsync(new MasterMainPage(res));

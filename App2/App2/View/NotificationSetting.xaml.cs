@@ -18,8 +18,8 @@ namespace App2.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotificationSetting : ContentPage
     {
-        NavigationMdl nav = null;
-        API api = null;
+        private NavigationMdl nav = null;
+        private API api = null;
 
         public NotificationSetting()
         {
@@ -33,7 +33,7 @@ namespace App2.View
             _Loading.IsRunning = false;
         }
 
-        async Task SettingNotification()
+        private async Task SettingNotification()
         {
             string rs = null;
             nav = new NavigationMdl();
@@ -41,15 +41,15 @@ namespace App2.View
 
             ResponseModel res = StaticMethods.GetLocalSavedData();
 
-            nav.Tag_type = App2.Helper.EnumMaster.SETTINGS;
-            nav.User_id = res.User_Id;
-            nav.Device_id = StaticMethods.getDeviceidentifier(); //"123";//
-            if (nav.Device_id == "unknown")
+            nav.TagType = App2.Helper.EnumMaster.TagtypeSettings;
+            nav.UserId = res.UserId;
+            nav.DeviceId = StaticMethods.GetDeviceidentifier(); //"123";//
+            if (nav.DeviceId == "unknown")
             {
-                nav.Device_id = "123456";
+                nav.DeviceId = "123456";
             }
-            res.Min_Receipt_Amt= lblMinAmt.Text = nav.Min_Receipt_Amount = txtMinimumAmt.Text + ".00";
-           res.Notification_Day_Count= lblpreDays.Text = nav.Notification_Day_Count = txtDaysOfno.Text;
+            res.MinReceiptAmt= lblMinAmt.Text = nav.MinReceiptAmount = txtMinimumAmt.Text + ".00";
+           res.NotificationDayCount= lblpreDays.Text = nav.NotificationDayCount = txtDaysOfno.Text;
             if (!CrossConnectivity.Current.IsConnected)
             {
                 await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
@@ -71,8 +71,8 @@ namespace App2.View
         {
             base.OnAppearing();
             ResponseModel rs = StaticMethods.GetLocalSavedData();
-            lblMinAmt.Text = rs.Min_Receipt_Amt;
-            lblpreDays.Text = rs.Notification_Day_Count;
+            lblMinAmt.Text = rs.MinReceiptAmt;
+            lblpreDays.Text = rs.NotificationDayCount;
 
         }
     }

@@ -15,64 +15,65 @@ namespace App2.Model
         {
         }
         public string Password{ get; set; }
-        public string User_name { get; set; }
-        public string User_id { get; set; }
-        public string Company_name { get; set; }
-        public string Company_Id { get; set; }
-        public string Device_id { get; set; }
-        public string Tag_type { get; set; }
-        public string Party_id { get; set; }
-        public string Party_Name { get; set; }
-        public string Min_Receipt_Amount { get; set; }
-        public string Notification_Day_Count { get; set; }
-        public string Page_Title { get; set; }
-        public bool Is_Notification{ get; set; }
-        public ObservableCollection<Site_id_Mdl> _site_Id { get; set; }
+        public string UserName { get; set; }
+        public string UserId { get; set; }
+        public string CompanyName { get; set; }
+        public string CompanyId { get; set; }
+        public string DeviceId { get; set; }
+        public string TagType { get; set; }
+        public string PartyId { get; set; }
+        public string PartyName { get; set; }
+        public string MinReceiptAmount { get; set; }
+        public string NotificationDayCount { get; set; }
+        public string PageTitle { get; set; }
+        public bool IsNotification{ get; set; }
+        public ObservableCollection<SiteIdMdl> SiteIdMdls { get; set; }
 
-        public NavigationMdl PrepareAPIData()
+        public NavigationMdl PrepareApiData()
         {
             NavigationMdl nav = new NavigationMdl();
-            ObservableCollection<Site_id_Mdl> lst = new ObservableCollection<Site_id_Mdl>();
+            ObservableCollection<SiteIdMdl> lst = new ObservableCollection<SiteIdMdl>();
             ResponseModel res = StaticMethods.GetLocalSavedData();
             try
             {
                 foreach (var item in StaticMethods._new_res._permissions)
                 {
-                    if (StaticMethods.Set_Company_Name == item.Company_name)
+                    if (StaticMethods.SetCompanyName == item.CompanyName)
                     {
-                        foreach (var item2 in item._company_site)
+                        foreach (var item2 in item.Sites)
                         {
 
-                            lst.Add(new Site_id_Mdl { Site_id = item2.Site_id, SiteName = item2.Site_name });
+                            lst.Add(new SiteIdMdl { SiteId = item2.Site_id, SiteName = item2.Site_name });
                         }
-                        nav.Company_Id = item.Company_id.ToString();
+                        nav.CompanyId = item.CompanyId.ToString();
                     }
                 }
-                nav.User_name = res.UserName;
+                nav.UserName = res.UserName;
                 nav.Password = res.Password;
-                nav.Device_id = res.Device_Id;
-                nav.User_id = res.User_Id;
-                nav.Tag_type = EnumMaster.TAGTYPENOTIFICATIONS;
-                nav._site_Id = lst;
-                nav.Party_id = "1";
+                nav.DeviceId = res.DeviceId;
+                nav.UserId = res.UserId;
+                nav.TagType = EnumMaster.Tagtypenotifications;
+                nav.SiteIdMdls = lst;
+                nav.PartyId = "1";
             }
             catch (Exception ex)
             {
+                StaticMethods.ShowToast(ex.Message);
             }
             return nav;
         }
     }
-    public class Site_id_Mdl
+    public class SiteIdMdl
     {
-        public int Site_id { get; set; }
+        public int SiteId { get; set; }
         public string SiteName { get; set; }
-        public string Site_short_name { get; set; }
+        public string SiteShortName { get; set; }
     }
-    public class Temp_Site_id_Mdl
+    public class TempSiteIdMdl
     {
-        public int Site_id { get; set; }
+        public int SiteId { get; set; }
         public string SiteName { get; set; }
-        public string Site_short_name { get; set; }
+        public string SiteShortName { get; set; }
     }
 
     public class ShowCompanyNameMdl

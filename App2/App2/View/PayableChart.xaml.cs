@@ -23,13 +23,13 @@ namespace App2.View
 	{
         public List<ShowPayableTotalPayble> _showpayabletotalpayblelist { get; set; }
         public double _Width = 0;
-        PayableNotificationMdl _payable;
-        NavigationMdl navmdl;
-        NavigationMdl obj_nav = null;
-        PartysearchMdl lstLoca = null;
-        bool isListSelected = false;
+	    private PayableNotificationMdl _payable;
+	    private NavigationMdl navmdl;
+	    private NavigationMdl obj_nav = null;
+	    private PartysearchMdl lstLoca = null;
+	    private bool isListSelected = false;
         public static double ScreenWidth = 120;
-        API api = new API();
+	    private API api = new API();
 
 		public PayableChart ()
 		{
@@ -46,7 +46,7 @@ namespace App2.View
 
         private async void MainMethods(NavigationMdl nmdl)
         {
-            if ((nmdl.Tag_type == "payable_outstanding"))
+            if ((nmdl.TagType == "payable_outstanding"))
             {
                 this.Title = "Payable Chart";
                 this.BackgroundColor = Color.FromHex("#ED7D31");
@@ -66,9 +66,9 @@ namespace App2.View
             else
             {
 
-                lblChart.Text = nmdl.Party_Name + " " + EnumMaster.LblChartTitle;
+                lblChart.Text = nmdl.PartyName + " " + EnumMaster.LblChartTitle;
                 ResponseModel rs = StaticMethods.GetLocalSavedData();
-                nmdl.User_id = rs.User_Id;
+                nmdl.UserId = rs.UserId;
                 _payable = await api.PayableTable(nmdl);
 
                 ShowTotalPayble();
@@ -101,11 +101,11 @@ namespace App2.View
             {
                 if (this.Title == "Payable Chart")
                 {
-                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = item.Site_name, Show_Balance = item.Balance, Show_Total_cr = item.Total_cr, Show_Total_dr = item.Total_dr });
+                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { TxtWidth = _Width, ShowSiteName = item.Site_name, ShowBalance = item.Balance, ShowTotalCr = item.Total_cr, ShowTotalDr = item.Total_dr });
                 }
                 else
                 {
-                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { txtWidth = _Width, Show_Site_name = item.Perticular, Show_Balance = item.Balance, Show_Total_cr = item.Receive, Show_Total_dr = item.Total_Due });
+                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { TxtWidth = _Width, ShowSiteName = item.Perticular, ShowBalance = item.Balance, ShowTotalCr = item.Receive, ShowTotalDr = item.Total_Due });
                 }
                 
             }
@@ -130,18 +130,18 @@ namespace App2.View
 
                     //navmdl = new NavigationMdl();
                     //ResponseModel rs = StaticMethods.GetLocalSavedData();
-                    //navmdl.User_id = rs.User_Id;
-                    //navmdl.Device_id = StaticMethods.getDeviceidentifier();
-                    //if (navmdl.Device_id == "unknown")
+                    //navmdl.UserId = rs.UserId;
+                    //navmdl.DeviceId = StaticMethods.GetDeviceidentifier();
+                    //if (navmdl.DeviceId == "unknown")
                     //{
-                    //    navmdl.Device_id = "123456";
+                    //    navmdl.DeviceId = "123456";
                     //}
-                    //navmdl.Company_name = Helper.EnumMaster.C21_MALHAR;
+                    //navmdl.CompanyName = Helper.EnumMaster.C21Malhar;
                     //
-                    //navmdl.Tag_type = "partylist";
+                    //navmdl.TagType = "partylist";
                     
-                    NavigationMdl nav = obj_nav.PrepareAPIData();
-                    nav.Party_Name = e.NewTextValue;
+                    NavigationMdl nav = obj_nav.PrepareApiData();
+                    nav.PartyName = e.NewTextValue;
 
                     lstLoca = new PartysearchMdl();
                         ObservableCollection<PartysearchlistMdl> _lst = null;
@@ -170,7 +170,7 @@ namespace App2.View
                                 {
                                     imgLogo.IsVisible = false;
                                 }
-                            //AutoList.ItemsSource = _lst.Select(c => { c.txtWidth = ScreenWidth; return c; }).ToList();
+                            //AutoList.ItemsSource = _lst.Select(c => { c.TxtWidth = ScreenWidth; return c; }).ToList();
                             AutoList.HeightRequest = 40 * 5;
                             }
                             else
@@ -206,7 +206,7 @@ namespace App2.View
             }
         }
 
-        async void txtLocation_Focus(object sender, EventArgs args)
+	    private async void txtLocation_Focus(object sender, EventArgs args)
         {
             await Task.Delay(2000);
             txtAuto.Unfocus();
@@ -241,26 +241,26 @@ namespace App2.View
                 txtAuto.Unfocus();
                 obj = (PartysearchlistMdl)e.Item;
 
-                //navmdl.Party_id = obj.Party_Id;
-                //navmdl.Device_id = "32132";
-                //navmdl.Company_name = EnumMaster.C21_MALHAR;
-                //navmdl.Party_Name = obj.Party_Name;
+                //navmdl.PartyId = obj.Party_Id;
+                //navmdl.DeviceId = "32132";
+                //navmdl.CompanyName = EnumMaster.C21Malhar;
+                //navmdl.PartyName = obj.PartyName;
 
                 //_payable = api.PayableTable(toady_notification);
                 obj_nav = new NavigationMdl();
-                NavigationMdl nav = obj_nav.PrepareAPIData();
-                nav.Party_id = obj.Party_Id;
-                nav.Party_Name = obj.Party_Name;
+                NavigationMdl nav = obj_nav.PrepareApiData();
+                nav.PartyId = obj.Party_Id;
+                nav.PartyName = obj.Party_Name;
                 if (this.Title == "Receivable Chart")
                 {
-                    nav.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
+                    nav.TagType = EnumMaster.TagtypereceivableOutstanding;
                 }
                 else
                 {
-                    nav.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
+                    nav.TagType = EnumMaster.TagtypepayableOutstanding;
                 }
                 //ResponseModel rs = StaticMethods.GetLocalSavedData();
-                //navmdl.User_id = rs.User_Id;
+                //navmdl.UserId = rs.UserId;
                 _payable =await api.PayableTable(nav);
              
                 //_payable = api.PayableTable(navmdl);

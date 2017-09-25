@@ -17,9 +17,9 @@ namespace App2.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MasterMainPage : MasterDetailPage
     {
-        LoginResponseMdl _newres; 
+        private LoginResponseMdl _newres; 
 
-        public MasterMainPage(LoginResponseMdl res, List<Temp_Site_id_Mdl> tempchlst)
+        public MasterMainPage(LoginResponseMdl res, List<TempSiteIdMdl> tempchlst)
         {
             InitializeComponent();
             _newres = res;
@@ -68,11 +68,11 @@ namespace App2.View
             ResponseModel rs = StaticMethods.GetLocalSavedData();
             _login.Username = rs.UserName;
             _login.Password = rs.Password;
-            _login.Tagtype = EnumMaster.SIGNIN;
-            _login.DeviceID = StaticMethods.getDeviceidentifier();
-            if (_login.DeviceID == "unknown")
+            _login.Tagtype = EnumMaster.TagtypeSignin;
+            _login.DeviceId = StaticMethods.GetDeviceidentifier();
+            if (_login.DeviceId == "unknown")
             {
-                _login.DeviceID = "123456";
+                _login.DeviceId = "123456";
             }
             if (Device.OS == TargetPlatform.iOS)
             {

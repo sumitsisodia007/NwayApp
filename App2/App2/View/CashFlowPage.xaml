@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.View.CashFlowPage"
+             xmlns:local="clr-namespace:App2.CustomRenderer"
+             Title="Cash Flow"
+             Icon="icon.png"
+             Padding="10"
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ListHeaderLabelStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="#6DB040"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="Margin" Value=".5"/>
+            </Style>
+
+            <Style x:Key="ListLabelStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="Margin" Value=".5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
+            <local:CurvedCornersLabel x:Name="lblupdate" 
+                                      FontSize="14.5"
+                                      CurvedBackgroundColor="#6DB040"
+                                      TextColor="White"
+                                      Text="CENTURY 21 TOWN PLANNERS PVT. LTD."
+                                      HorizontalOptions="FillAndExpand"
+                                      CurvedCornerRadius="12"
+                                      HeightRequest="30"
+                                      HorizontalTextAlignment="Center"
+                                      VerticalTextAlignment="Center"/>
+                <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
+                <ScrollView Orientation="Horizontal" >
+                    <ListView x:Name="listView"
+                                      HeightRequest="120"
+                                      HasUnevenRows="True"
+                                      BackgroundColor="White"
+                                      SeparatorVisibility="None">
+                        <ListView.Header>
+                            <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0"  BackgroundColor="Black">
+                                <Label x:Name="LblSiteName" WidthRequest="{Binding TxtWidth}"  Text="Site Name" Style="{StaticResource ListHeaderLabelStyle}" />
+                                <Label x:Name="LblSiteBank"   WidthRequest="{Binding TxtWidth}" Text="Total Dr." Style="{StaticResource ListHeaderLabelStyle}" />
+                                <Label x:Name="LblSiteAmt"   WidthRequest="{Binding TxtWidth}" Text="Total Cr." Style="{StaticResource ListHeaderLabelStyle}" />
+                            </StackLayout>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="0"  BackgroundColor="Black">
+                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SitesName}" />
+                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteBank}" />
+                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteAmount}" />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollView>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

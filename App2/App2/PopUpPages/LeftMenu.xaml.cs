@@ -18,9 +18,9 @@ namespace App2.PopUpPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LeftMenu : PopupPage
     {
-        //   public List<Site_id_Mdl> menuList { get; set; }
-        public List<Company_site> menuList { get; set; }
-        private List<Temp_Site_id_Mdl> tempchlst = null;
+        //   public List<SiteIdMdl> menuList { get; set; }
+        public List<CompanySite> menuList { get; set; }
+        private List<TempSiteIdMdl> tempchlst = null;
         
 
         public List<ShowCompanyNameMdl> _companyname { get; set; }
@@ -45,7 +45,7 @@ namespace App2.PopUpPages
             _companyname = new List<ShowCompanyNameMdl>();
             foreach (var item in res._permissions)
             {
-                _companyname.Add(new ShowCompanyNameMdl { CompanyName = item.Company_name });
+                _companyname.Add(new ShowCompanyNameMdl { CompanyName = item.CompanyName });
             }
             MainPickr.ItemsSource = _companyname;
         }
@@ -61,8 +61,8 @@ namespace App2.PopUpPages
 
                     ResponseModel res = new ResponseModel();
                     res = StaticMethods.GetLocalSavedData();
-                    res.Company_Name = lblupdate.Text = StaticMethods.Set_Company_Name = (string)picker.Items[selectedIndex];
-                    res.Company_Index = selectedIndex.ToString();
+                    res.CompanyName = lblupdate.Text = StaticMethods.SetCompanyName = (string)picker.Items[selectedIndex];
+                    res.CompanyIndex = selectedIndex.ToString();
                     StaticMethods.SaveLocalData(res);
                     DrawalMenu();
                 }
@@ -82,30 +82,30 @@ namespace App2.PopUpPages
                 stkMessage.HeightRequest = calcScreenHieght;
                 stkMessage.WidthRequest = calcScreenWidth - 100;
                 ResponseModel res = StaticMethods.GetLocalSavedData();
-                if (res.Company_Index != null)
+                if (res.CompanyIndex != null)
                 {
-                    MainPickr.SelectedIndex = Convert.ToInt32(res.Company_Index);
+                    MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
                 }
             }
         }
 
         public void DrawalMenu()
         {
-            tempchlst = new List<Temp_Site_id_Mdl>();
-            menuList = new List<Company_site>();
+            tempchlst = new List<TempSiteIdMdl>();
+            menuList = new List<CompanySite>();
             foreach (var item in _data._permissions)
             {
-                if (StaticMethods.Set_Company_Name == item.Company_name)
+                if (StaticMethods.SetCompanyName == item.CompanyName)
                 {
-                    foreach (var item2 in item._company_site)
+                    foreach (var item2 in item.Sites)
                     {
-                        tempchlst.Add(new Temp_Site_id_Mdl{ Site_id = item2.Site_id, SiteName = item2.Site_name, Site_short_name = item2.Site_short_name });
-                        menuList.Add(new Company_site { Site_id = item2.Site_id, Site_name = item2.Site_name ,Site_short_name=item2.Site_short_name,Chk_id=item2.Chk_id});
+                        tempchlst.Add(new TempSiteIdMdl{ SiteId = item2.Site_id, SiteName = item2.Site_name, SiteShortName = item2.Site_short_name });
+                        menuList.Add(new CompanySite { Site_id = item2.Site_id, Site_name = item2.Site_name ,Site_short_name=item2.Site_short_name,Chk_id=item2.Chk_id});
                     }
                 }
             }
             NavigationList.ItemsSource = menuList;
-            lblupdate.Text = StaticMethods.Set_Company_Name;
+            lblupdate.Text = StaticMethods.SetCompanyName;
         }
 
         private void NavigationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -155,21 +155,21 @@ namespace App2.PopUpPages
             try
             {
                 CheckBox isCheckedOrNot = (CheckBox)sender ;
-                var name = (Company_site)isCheckedOrNot.BindingContext;
+                var name = (CompanySite)isCheckedOrNot.BindingContext;
                 if (isCheckedOrNot.Checked == true)
                 {
                     
-                    tempchlst.Add(new Temp_Site_id_Mdl { Site_id = name.Site_id, SiteName = name.Site_name, Site_short_name = name.Site_short_name});
+                    tempchlst.Add(new TempSiteIdMdl { SiteId = name.Site_id, SiteName = name.Site_name, SiteShortName = name.Site_short_name});
                 }
                 else
                 {
-                    var itemToRemove = tempchlst.Single(r => r.Site_id == name.Site_id);
+                    var itemToRemove = tempchlst.Single(r => r.SiteId == name.Site_id);
                     tempchlst.Remove(itemToRemove);
                 }
 
                 foreach (var item in _data._permissions)
                 {
-                    foreach (var item2 in item._company_site)
+                    foreach (var item2 in item.Sites)
                     {
                         if (item2.Site_name == name.Site_name)
                         {
