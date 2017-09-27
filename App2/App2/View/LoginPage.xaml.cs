@@ -61,7 +61,7 @@ namespace App2.View
         private async void btnLogin_Clicked(object sender, EventArgs e)
         {
            
-            btnLogin.IsEnabled = false;
+          //  btnLogin.IsEnabled = false;
             ResponseModel rs = new ResponseModel();
             LoginResponseMdl res = new LoginResponseMdl();
             _Loading.Color = Color.FromHex("#4472C4");
@@ -112,6 +112,11 @@ namespace App2.View
                             await Navigation.PushModalAsync(new MasterMainPage(res));
                             txtFName.Text = txtPass.Text = string.Empty;
                         }
+                        else if (res.Error == "true")
+                        {
+                            await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", res.Message));
+                        }
+                        
                     }
                     else if (txtFName.Text == string.Empty && txtPass.Text == string.Empty)
                     {
@@ -127,7 +132,7 @@ namespace App2.View
                     }
                 }
                 _Loading.IsRunning = false;
-                btnLogin.IsEnabled = true;
+              //  btnLogin.IsEnabled = true;
             }
             catch (Exception ex)
             {

@@ -10,7 +10,7 @@
             <Image Source="logo" HeightRequest="120"/>
             <Frame HorizontalOptions="CenterAndExpand" Margin="0" OutlineColor="Black" Padding="0">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" x:Name="stkMallName">
-                    <Picker x:Name="MainPickr" Title="Select Company Name" ItemDisplayBinding="{Binding CompanyName}" SelectedIndexChanged="MainPickr_SelectedIndexChanged" TextColor="Black" HorizontalOptions="FillAndExpand"/>
+                    <!--<Picker x:Name="MainPickr" Title="Select Company Name" ItemDisplayBinding="{Binding CompanyName}" SelectedIndexChanged="MainPickr_SelectedIndexChanged" TextColor="Black" HorizontalOptions="FillAndExpand"/>-->
                     <!--<Label x:Name="C21" FontSize="17" Text="C21/MALHAR" TextColor="White" BackgroundColor="#4472C4" HeightRequest="25" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="C21_Tapped"/>

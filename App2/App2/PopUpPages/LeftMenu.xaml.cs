@@ -8,10 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using AsNum.XFControls;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XLabs.Forms.Controls;
+
 
 namespace App2.PopUpPages
 {
@@ -58,9 +58,7 @@ namespace App2.PopUpPages
             {
                 try
                 {
-
-                    ResponseModel res = new ResponseModel();
-                    res = StaticMethods.GetLocalSavedData();
+                    var res = StaticMethods.GetLocalSavedData();
                     res.CompanyName = lblupdate.Text = StaticMethods.SetCompanyName = (string)picker.Items[selectedIndex];
                     res.CompanyIndex = selectedIndex.ToString();
                     StaticMethods.SaveLocalData(res);
@@ -128,8 +126,8 @@ namespace App2.PopUpPages
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            var data = _data;
-            
+             var data = _data;
+            var mychkArray= tempchlst.Select(x => x.SiteName).ToArray();
 
             await Task.WhenAll(
              Navigation.PushModalAsync(new App2.View.MasterMainPage(_data, tempchlst)),
@@ -150,37 +148,37 @@ namespace App2.PopUpPages
             });
         }
 
-        private void CheckBox_CheckedChanged(object sender, XLabs.EventArgs<bool> e)
+        private void CheckBox_CheckedChanged(object sender, EventArgs eventArgs)
         {
             try
             {
                 CheckBox isCheckedOrNot = (CheckBox)sender ;
                 var name = (CompanySite)isCheckedOrNot.BindingContext;
-                if (isCheckedOrNot.Checked == true)
-                {
-                    
-                    tempchlst.Add(new TempSiteIdMdl { SiteId = name.Site_id, SiteName = name.Site_name, SiteShortName = name.Site_short_name});
-                }
-                else
-                {
-                    var itemToRemove = tempchlst.Single(r => r.SiteId == name.Site_id);
-                    tempchlst.Remove(itemToRemove);
-                }
+                //if (isCheckedOrNot.Checked == true)
+                //{
+                //    tempchlst.Add(new TempSiteIdMdl { SiteId = name.Site_id, SiteName = name.Site_name, SiteShortName = name.Site_short_name});
+                //}
+                //else
+                //{
+                //    var itemToRemove = tempchlst.Single(r => r.SiteId == name.Site_id);
+                //    tempchlst.Remove(itemToRemove);
+                //}
 
                 foreach (var item in _data._permissions)
                 {
                     foreach (var item2 in item.Sites)
                     {
-                        if (item2.Site_name == name.Site_name)
+                        if (item2.Site_name != name.Site_name) continue;
+                        if (isCheckedOrNot.Checked == true)
                         {
-                            if (isCheckedOrNot.Checked == true)
-                            {
-                                item2.Chk_id = true;
-                            }
-                            else
-                            {
-                                item2.Chk_id = false;
-                            }
+                            item2.Chk_id = true;
+                            tempchlst.Add(new TempSiteIdMdl { SiteId = name.Site_id, SiteName = name.Site_name, SiteShortName = name.Site_short_name });
+                        }
+                        else
+                        {
+                            item2.Chk_id = false;
+                            var itemToRemove = tempchlst.Single(r => r.SiteId == name.Site_id);
+                            tempchlst.Remove(itemToRemove);
                         }
                     }
                 }

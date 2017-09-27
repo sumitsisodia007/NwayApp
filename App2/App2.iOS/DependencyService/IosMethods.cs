@@ -50,18 +50,18 @@ namespace App2.iOS.DependencyService
             try
             {
                 var storage = SimpleStorage.EditGroup(Key);
-                storage.Put("Min_Receipt_Amt", um.Min_Receipt_Amt);
-                storage.Put("Notification_Day_Count", um.Notification_Day_Count);
+                storage.Put("MinReceiptAmt", um.MinReceiptAmt);
+                storage.Put("NotificationDayCount", um.NotificationDayCount);
                 storage.Put("TagType", um.TagType);
-                storage.Put("User_Id", um.User_Id);
-                storage.Put("Device_Id", um.Device_Id);
+                storage.Put("UserId", um.UserId);
+                storage.Put("DeviceId", um.DeviceId);
                 storage.Put("Error", um.Error);
                 storage.Put("NotCount", um.NotCount);
                 storage.Put("NotCountDate", um.NotCountDate);
                 storage.Put("UserName", um.UserName);
                 storage.Put("Password", um.Password);
-                storage.Put("Company_Name", um.Company_Name);
-                storage.Put("Company_Index", um.Company_Index);
+                storage.Put("CompanyName", um.CompanyName);
+                storage.Put("CompanyIndex", um.CompanyIndex);
             }
             catch (Exception)
             {
@@ -74,18 +74,18 @@ namespace App2.iOS.DependencyService
             try
             {
                 var storage = SimpleStorage.EditGroup(Key);
-                um.Min_Receipt_Amt = Convert.ToString(storage.Get("Min_Receipt_Amt", null));
-                um.Notification_Day_Count = storage.Get("Notification_Day_Count", null);
+                um.MinReceiptAmt = Convert.ToString(storage.Get("MinReceiptAmt", null));
+                um.NotificationDayCount = storage.Get("NotificationDayCount", null);
                 um.TagType = storage.Get("TagType", null);
-                um.User_Id = storage.Get("User_Id", null);
-                um.Device_Id = storage.Get("Device_Id", null);
+                um.UserId = storage.Get("UserId", null);
+                um.DeviceId = storage.Get("DeviceId", null);
                 um.Error = storage.Get("Error", null);
                 um.NotCount = storage.Get("NotCount", null);
                 um.NotCountDate = storage.Get("NotCountDate", null);
                 um.UserName = storage.Get("UserName", null);
                 um.Password = storage.Get("Password", null);
-                um.Company_Index = storage.Get("Company_Index", null);
-                um.Company_Name= storage.Get("Company_Name", null);
+                um.CompanyIndex = storage.Get("CompanyIndex", null);
+                um.CompanyName= storage.Get("CompanyName", null);
                 return um;
             }
             catch (Exception)

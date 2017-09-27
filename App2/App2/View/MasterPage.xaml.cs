@@ -19,7 +19,7 @@ namespace App2.View
     public partial class MasterPage : ContentPage
     {
         public List<MasterPageItem> menuList { get; set; }
-        public List<ShowCompanyNameMdl> _companyname { get; set; }
+        public List<ShowCompanyNameMdl> Companyname { get; set; }
 
         public MasterPage()
         {
@@ -41,12 +41,13 @@ namespace App2.View
 
         private void PickerData(LoginResponseMdl res)
         {
-            _companyname = new List<ShowCompanyNameMdl>();
+            Companyname = new List<ShowCompanyNameMdl>();
             foreach (var item in res._permissions)
             {
-                _companyname.Add(new ShowCompanyNameMdl {CompanyName=item.CompanyName });
+                Companyname.Add(new ShowCompanyNameMdl {CompanyName=item.CompanyName });
             }
-            MainPickr.ItemsSource = _companyname;
+            //SSS 27-Sep
+            //MainPickr.ItemsSource = _companyname;
         }
 
         protected override void OnAppearing()
@@ -56,12 +57,13 @@ namespace App2.View
                 {
                     var calcScreenWidth = Application.Current.MainPage.Width;
                     var calcScreenHieght = Application.Current.MainPage.Height;
-                    MainPickr.WidthRequest = calcScreenWidth -80;
-                    ResponseModel res = StaticMethods.GetLocalSavedData();
-                    if (res.CompanyIndex != null)
-                    {
-                        MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
-                    }
+                    //SSS 27-Sep
+                    //MainPickr.WidthRequest = calcScreenWidth -80;
+                    //ResponseModel res = StaticMethods.GetLocalSavedData();
+                    //if (res.CompanyIndex != null)
+                    //{
+                    //    MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
+                    //}
                 }
             });
         }
@@ -73,12 +75,13 @@ namespace App2.View
                 {
                     var calcScreenWidth = Application.Current.MainPage.Width;
                     var calcScreenHieght = Application.Current.MainPage.Height;
-                    MainPickr.WidthRequest = calcScreenWidth - 80;
-                    ResponseModel res = StaticMethods.GetLocalSavedData();
-                    if (res.CompanyIndex != null)
-                    {
-                        MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
-                    }
+                    //SSS 27-Sep
+                    //MainPickr.WidthRequest = calcScreenWidth - 80;
+                    //ResponseModel res = StaticMethods.GetLocalSavedData();
+                    //if (res.CompanyIndex != null)
+                    //{
+                    //    MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
+                    //}
                 }
             });
         }

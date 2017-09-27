@@ -327,18 +327,20 @@ namespace App2
             }
             navmdl.CompanyName = EnumMaster.C21Malhar;
             navmdl.PartyName = obj.ShowPartyNameCustomerName;
+            NavigationMdl objNav=new NavigationMdl();
+            NavigationMdl nav = objNav.PrepareApiData();
             if (lblName.Text == "Receipt")
             {
-                navmdl.PageTitle = "Receivable";
-                navmdl.TagType = EnumMaster.TagtypereceivableOutstanding;
-                await Navigation.PushAsync(new PayablePage(navmdl));
+                nav.PageTitle = "Receivable";
+                nav.TagType = EnumMaster.TagtypereceivableOutstanding;
+                await Navigation.PushAsync(new PayablePage(nav));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
             else if (lblName.Text == "Paid")
             {
-                navmdl.PageTitle = "Payable";
-                navmdl.TagType = EnumMaster.TagtypepayableOutstanding;
-                await Navigation.PushAsync(new PayablePage(navmdl));
+                nav.PageTitle = "Payable";
+                nav.TagType = EnumMaster.TagtypepayableOutstanding;
+                await Navigation.PushAsync(new PayablePage(nav));
                 await Navigation.RemovePopupPageAsync(loadingPage);
             }
             else if (lblName.Text == "Invoice_cancelletion")

@@ -31,7 +31,7 @@ namespace App2.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            
             ImageCircleRenderer.Init();
             if (options != null)
             {
@@ -131,24 +131,24 @@ namespace App2.iOS
                     }
 
                     NavigationMdl mdl = new NavigationMdl();
-                    mdl.Device_id = StaticMethods.getDeviceidentifier();
-                    if (mdl.Device_id == "unknown")
+                    mdl.DeviceId = StaticMethods.GetDeviceidentifier();
+                    if (mdl.DeviceId == "unknown")
                     {
-                        mdl.Device_id = "123456";
+                        mdl.DeviceId = "123456";
                     }
-                    mdl.Company_name = Company_name;
-                    mdl.Party_id = Party_id;
-                    mdl.Is_Notification = true;
+                    mdl.CompanyName= Company_name;
+                    mdl.PartyId = Party_id;
+                    mdl.IsNotification = true;
                     if (TagType == "receipt")
                     {
-                        mdl.Page_Title = "Receivable";
-                        mdl.Tag_type = EnumMaster.TAGTYPERECEIVABLE_OUTSTANDING;
+                        mdl.PageTitle = "Receivable";
+                        mdl.TagType= EnumMaster.TagtypereceivableOutstanding;
                       //  App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
                     }
                     else if (TagType == "paid")
                     {
-                        mdl.Page_Title = "Payable";
-                        mdl.Tag_type = EnumMaster.TAGTYPEPAYABLE_OUTSTANDING;
+                        mdl.PageTitle = "Payable";
+                        mdl.TagType = EnumMaster.TagtypepayableOutstanding;
                       //  App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
                     }
                     else if (TagType == "booking_entry")

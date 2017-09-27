@@ -13,8 +13,8 @@ namespace App2.APIService
 {
     public class API
     {
-         // public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
-        public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
+       public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
+        //   public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
        
         #region Login WebService
         public LoginResponseMdl PostLogin(LoginMdl lgmdl)
@@ -44,7 +44,7 @@ namespace App2.APIService
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
-                    JObject jObj = JObject.Parse(jsonresult);
+                    JObject.Parse(jsonresult);
                     jsonResponse = JsonConvert.DeserializeObject<LoginResponseMdl>(jsonresult);
                 }
             }
@@ -69,12 +69,12 @@ namespace App2.APIService
                 //Create List of KeyValuePairs
                 List<KeyValuePair<string, string>> notificationProperties = new List<KeyValuePair<string, string>>
                 {
-                    new KeyValuePair<string, string>("username", "elensoft"),
-                    new KeyValuePair<string, string>("password", "1"),
-                    new KeyValuePair<string, string>("user_id", "1"),
-                    new KeyValuePair<string, string>("device_id", "123456"),
-                    new KeyValuePair<string, string>("company_id", "1"),
-                    new KeyValuePair<string, string>("party_id", "1"),
+                    new KeyValuePair<string, string>("username", nav.UserName),
+                    new KeyValuePair<string, string>("password", nav.Password),
+                    new KeyValuePair<string, string>("user_id", nav.UserId),
+                    new KeyValuePair<string, string>("device_id", nav.DeviceId),
+                    new KeyValuePair<string, string>("company_id", nav.CompanyId),
+                    new KeyValuePair<string, string>("party_id", nav.PartyId),
                     new KeyValuePair<string, string>("tagtype", "notifications")
                 };
 
@@ -93,7 +93,7 @@ namespace App2.APIService
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
-                    JObject jObj = JObject.Parse(jsonresult);
+                    JObject.Parse(jsonresult);
                     jsonResponse = JsonConvert.DeserializeObject<NotificationListMdl>(jsonresult);
                 }
             }
@@ -118,12 +118,12 @@ namespace App2.APIService
                 //Create List of KeyValuePairs
                 List<KeyValuePair<string, string>> notificationProperties = new List<KeyValuePair<string, string>>
                 {
-                    new KeyValuePair<string, string>("username", "elensoft"),
-                    new KeyValuePair<string, string>("password", "1"),
-                    new KeyValuePair<string, string>("user_id", "1"),
-                    new KeyValuePair<string, string>("device_id", "123456"),
-                    new KeyValuePair<string, string>("company_id", "1"),
-                    new KeyValuePair<string, string>("party_id", "1"),
+                    new KeyValuePair<string, string>("username", nav.UserName),
+                    new KeyValuePair<string, string>("password", nav.Password),
+                    new KeyValuePair<string, string>("user_id", nav.UserId),
+                    new KeyValuePair<string, string>("device_id", nav.DeviceId),
+                    new KeyValuePair<string, string>("company_id", nav.CompanyId),
+                    new KeyValuePair<string, string>("party_id", nav.PartyId),
                     new KeyValuePair<string, string>("tagtype", "notifications")
                 };
 
@@ -142,7 +142,7 @@ namespace App2.APIService
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
-                    JObject jObj = JObject.Parse(jsonresult);
+                    JObject.Parse(jsonresult);
                     jsonResponse = JsonConvert.DeserializeObject<NotificationListMdl>(jsonresult);
                 }
             }
@@ -227,7 +227,7 @@ namespace App2.APIService
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
-                    JObject jObj = JObject.Parse(jsonresult);
+                    JObject.Parse(jsonresult);
                     responseModel = JsonConvert.DeserializeObject<PayableNotificationMdl>(jsonresult);
                 }
             }
@@ -276,7 +276,7 @@ namespace App2.APIService
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
-                    JObject jObj = JObject.Parse(jsonresult);
+                    JObject.Parse(jsonresult);
                     partysearchlistmdl = JsonConvert.DeserializeObject<PartysearchMdl>(jsonresult);
                 }
             }
