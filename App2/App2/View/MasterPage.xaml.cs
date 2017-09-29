@@ -41,11 +41,19 @@ namespace App2.View
 
         private void PickerData(LoginResponseMdl res)
         {
-            Companyname = new List<ShowCompanyNameMdl>();
-            foreach (var item in res._permissions)
+            try
             {
-                Companyname.Add(new ShowCompanyNameMdl {CompanyName=item.CompanyName });
+                Companyname = new List<ShowCompanyNameMdl>();
+                foreach (var item in res._permissions)
+                {
+                    Companyname.Add(new ShowCompanyNameMdl { CompanyName = item.CompanyName });
+                }
             }
+            catch (Exception exception)
+            {
+                StaticMethods.ShowToast("Internal Error in Picker"+exception.Message);
+            }
+            
             //SSS 27-Sep
             //MainPickr.ItemsSource = _companyname;
         }

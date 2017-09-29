@@ -39,5 +39,6 @@ namespace App2.Model
         public string Site_short_name { get; set; }
         public int    Site_id		{ get; set; }
         public bool Chk_id { get; set; } = true;
+        public string ImgName { get; set; } = "on_btn";
     }
 }

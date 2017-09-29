@@ -9,6 +9,7 @@ using App2.NativeMathods;
 using Xamarin.Forms;
 using App2.Model;
 using App2.Helper;
+using AsNum.XFControls.iOS;
 using ImageCircle.Forms.Plugin.iOS;
 using ObjCRuntime;
 
@@ -31,7 +32,7 @@ namespace App2.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-            
+            AsNumAssemblyHelper.HoldAssembly();
             ImageCircleRenderer.Init();
             if (options != null)
             {

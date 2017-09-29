@@ -97,8 +97,17 @@ namespace App2.PopUpPages
                 {
                     foreach (var item2 in item.Sites)
                     {
-                        tempchlst.Add(new TempSiteIdMdl{ SiteId = item2.Site_id, SiteName = item2.Site_name, SiteShortName = item2.Site_short_name });
-                        menuList.Add(new CompanySite { Site_id = item2.Site_id, Site_name = item2.Site_name ,Site_short_name=item2.Site_short_name,Chk_id=item2.Chk_id});
+                        //if (StaticMethods.userCh == null)
+                        //{
+                        //    tempchlst.Add(new TempSiteIdMdl { SiteId = item2.Site_id, SiteName = item2.Site_name, SiteShortName = item2.Site_short_name ,ChkId = item2.Chk_id});
+                        //}
+                        string imgesource = null;
+                        imgesource = item2.Chk_id == true ? "on_btn.png" : "off_btn.png";
+                        menuList.Add(new CompanySite { Site_id = item2.Site_id,
+                                                        Site_name = item2.Site_name ,
+                                                        Site_short_name =item2.Site_short_name,
+                                                        Chk_id =item2.Chk_id,ImgName = imgesource
+                        });
                     }
                 }
             }
@@ -108,8 +117,14 @@ namespace App2.PopUpPages
 
         private void NavigationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            CheckBox isCheckedOrNot = (CheckBox)sender;
-           // var selectedStudent = isCheckedOrNot.BindingContext as SiteNameMdl;
+            try
+            {
+                // CheckBox isCheckedOrNot = (CheckBox)sender;
+                ((ListView)sender).SelectedItem = null;
+            }
+            catch (Exception exception)
+            {
+            }
         }
 
         protected override void OnAppearing()
@@ -128,7 +143,7 @@ namespace App2.PopUpPages
         {
              var data = _data;
             var mychkArray= tempchlst.Select(x => x.SiteName).ToArray();
-
+            StaticMethods.userCh = tempchlst;
             await Task.WhenAll(
              Navigation.PushModalAsync(new App2.View.MasterMainPage(_data, tempchlst)),
              PopupNavigation.RemovePageAsync(this)
@@ -152,8 +167,8 @@ namespace App2.PopUpPages
         {
             try
             {
-                CheckBox isCheckedOrNot = (CheckBox)sender ;
-                var name = (CompanySite)isCheckedOrNot.BindingContext;
+               // CheckBox isCheckedOrNot = (CheckBox)sender ;
+               // var name = (CompanySite)isCheckedOrNot.BindingContext;
                 //if (isCheckedOrNot.Checked == true)
                 //{
                 //    tempchlst.Add(new TempSiteIdMdl { SiteId = name.Site_id, SiteName = name.Site_name, SiteShortName = name.Site_short_name});
@@ -163,29 +178,95 @@ namespace App2.PopUpPages
                 //    var itemToRemove = tempchlst.Single(r => r.SiteId == name.Site_id);
                 //    tempchlst.Remove(itemToRemove);
                 //}
-
-                foreach (var item in _data._permissions)
-                {
+                Device.BeginInvokeOnMainThread(() => {
+                    CheckBox isCheckedOrNot = (CheckBox)sender;
+                    var name = (CompanySite)isCheckedOrNot.BindingContext;
+                    foreach (var item in _data._permissions)
+                    {
                     foreach (var item2 in item.Sites)
                     {
                         if (item2.Site_name != name.Site_name) continue;
                         if (isCheckedOrNot.Checked == true)
                         {
-                            item2.Chk_id = true;
-                            tempchlst.Add(new TempSiteIdMdl { SiteId = name.Site_id, SiteName = name.Site_name, SiteShortName = name.Site_short_name });
-                        }
+                            //if (item2.Chk_id == false)
+                            //{
+                            //    tempchlst.Add(new TempSiteIdMdl
+                            //    {
+                            //        SiteId = name.Site_id,
+                            //        SiteName = name.Site_name,
+                            //        SiteShortName = name.Site_short_name
+                            //    });
+                            //}
+                                item2.Chk_id = true;
+                           
+                          //  tempchlst.AsEnumerable().Distinct().ToList();
+                            }
                         else
                         {
-                            item2.Chk_id = false;
-                            var itemToRemove = tempchlst.Single(r => r.SiteId == name.Site_id);
-                            tempchlst.Remove(itemToRemove);
-                        }
+                           
+                            //var itemToRemove = tempchlst.Single(r => r.SiteId == name.Site_id);
+                            //tempchlst.Remove(itemToRemove);
+                                item2.Chk_id = false;
+                            //tempchlst.AsEnumerable().Distinct().ToList();
+                            }
                     }
                 }
-                StaticMethods.userCh = tempchlst;
+                    
+                });
             }
             catch (Exception ex)
             {
+            }
+        }
+
+
+        private async void SwitchButton_OnTapped(object sender, EventArgs e)
+        {
+            try
+            {
+                // CheckBox isCheckedOrNot = (CheckBox)sender ;
+                // var name = (CompanySite)isCheckedOrNot.BindingContext;
+                Xamarin.Forms.Image img = (Xamarin.Forms.Image)sender;
+                var  data= (CompanySite)img.BindingContext;
+                Xamarin.Forms.FileImageSource objFileImageSource = (Xamarin.Forms.FileImageSource)img.Source;
+                
+
+                string strFileName = objFileImageSource.File;
+                foreach (var item in _data._permissions)
+                {
+                    foreach (var item2 in item.Sites)
+                    {
+                        if (item2.Site_name != data.Site_name) continue;
+                        //if (data.ImgName == "off_btn.png")
+                        //{
+                        //    img.Source = "off_btn.png";
+                        //    item2.Chk_id = false;
+                        //    item2.ImgName = "off_btn.png";
+                        //}
+                        //else
+                        //{
+                        //   img.Source = "on_btn.png";
+                        //   item2.Chk_id = true;
+                        //   item2.ImgName = "on_btn.png";
+                        //}
+                        if (objFileImageSource == "off_btn.png")
+                        {
+                            img.Source = "on_btn.png";
+                            item2.Chk_id = true;
+                            item2.ImgName = "on_btn.png";
+                        }
+                        else
+                        {
+                            img.Source = "off_btn.png";
+                            item2.Chk_id = false;
+                            item2.ImgName = "off_btn.png";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                StaticMethods.ShowToast(ex.Message);
             }
         }
     }

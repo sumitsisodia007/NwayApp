@@ -38,10 +38,9 @@ namespace App2.View
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             //PrepareView();
-
-            
-                Task.Delay(1000);
-               // SetNotificationBadge();
+                Task.Delay(500);
+                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                LblNotificationBadge.Text = rs.NotCount;
             });
         }
         public HomePage(LoginResponseMdl res)
@@ -53,7 +52,8 @@ namespace App2.View
             StaticMethods._new_res = _newres = res;
             PrepareView(res);
             Task.Delay(500);
-             //   SetNotificationBadge();
+                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                LblNotificationBadge.Text = rs.NotCount;
             });
         }
 
@@ -65,7 +65,8 @@ namespace App2.View
                 Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
                 StaticMethods._new_res = _newres = res;
                 PrepareView(res);
-                Task.Delay(500);
+                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                LblNotificationBadge.Text = rs.NotCount;
 
                 NavigatePageNotification(res,mdl);
             });
@@ -115,7 +116,9 @@ namespace App2.View
                 StaticMethods._new_res = _newres = res;
                 _newTempchlst = tempchlst;
                 PrepareView(res);
-                Task.Delay(500);
+                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                LblNotificationBadge.Text = rs.NotCount;
+                //Task.Delay(500);
                 //   SetNotificationBadge();
             });
         }
@@ -234,8 +237,8 @@ namespace App2.View
         {
             try
             {
-                //var loadingPage = new LoaderPage();
-                //await PopupNavigation.PushAsync(loadingPage);
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
                 //await Task.Delay(1000);
 
                 //await Navigation.PushAsync(new MainPage(_notificationModel));
@@ -243,7 +246,8 @@ namespace App2.View
                 _objNav = new NavigationMdl();
                 NavigationMdl nav = _objNav.PrepareApiData();
                 NotificationListMdl nmdl = null;
-                nmdl = _newTempchlst == null ? _api.PostNotification(nav) : _api.PostNotification(nav, _newTempchlst);
+
+                nmdl =  _api.PostNotification(nav);
                   
                 
                 if (nmdl.Error == "true")
@@ -252,9 +256,9 @@ namespace App2.View
                 }
                 else
                 {
-                    var loadingPage = new LoaderPage();
-                    await PopupNavigation.PushAsync(loadingPage);
-                    await Task.Delay(500);
+                    //var loadingPage = new LoaderPage();
+                    //await PopupNavigation.PushAsync(loadingPage);
+                    //await Task.Delay(500);
                     await Navigation.PushAsync(new MainPage(nmdl));
                     await Navigation.RemovePopupPageAsync(loadingPage);
                 }

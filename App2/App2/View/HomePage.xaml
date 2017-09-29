@@ -9,7 +9,7 @@
         <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="60" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <StackLayout VerticalOptions="CenterAndExpand" Padding="15">
-            <Image Source="manu_w" HeightRequest="30"  WidthRequest="30" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
+                  <Image Source="manu_w" HeightRequest="30"  WidthRequest="30" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="MainManuSlide_Tapped"/>
                 </Image.GestureRecognizers>
@@ -68,12 +68,13 @@
                 </Grid>
             </StackLayout>
         </StackLayout>
-        <StackLayout  Orientation="Vertical" Spacing="5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-            <Label x:Name="LblSetComName" HeightRequest="45" Text="CENTURY 21 TOWN PLANNER PVT" Margin="0,10" FontAttributes="Bold" TextColor="#2196F3" HorizontalOptions="CenterAndExpand"  >
+        <StackLayout  Orientation="Vertical" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+            <Label x:Name="LblSetComName" HeightRequest="45" Text="CENTURY 21 TOWN PLANNER PVT" FontAttributes="Bold" TextColor="#2196F3" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </Label.GestureRecognizers>
             </Label>
+           
             <ScrollView>
             <StackLayout Padding="0,15" Orientation="Vertical" Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
                     

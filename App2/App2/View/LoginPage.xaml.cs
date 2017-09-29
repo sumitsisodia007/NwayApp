@@ -6,6 +6,7 @@ using App2.NativeMathods;
 using App2.PopUpPages;
 using Plugin.Connectivity;
 using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,12 +61,15 @@ namespace App2.View
 
         private async void btnLogin_Clicked(object sender, EventArgs e)
         {
-           
-          //  btnLogin.IsEnabled = false;
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
+            
+            
+            //  btnLogin.IsEnabled = false;
             ResponseModel rs = new ResponseModel();
             LoginResponseMdl res = new LoginResponseMdl();
             _Loading.Color = Color.FromHex("#4472C4");
-            _Loading.IsRunning = true;
+           // _Loading.IsRunning = true;
            rs.UserName= _login.Username = txtFName.Text;
            rs.Password= _login.Password = txtPass.Text;
             _login.Tagtype = EnumMaster.TagtypeSignin;
@@ -106,6 +110,7 @@ namespace App2.View
                             rs.MinReceiptAmt = res.MinReceiptAmount.ToString();
                             rs.NotificationDayCount = res.NotificationDayCount.ToString();
                             rs.Error = res.Error;
+                            rs.DeviceToken = _login.Firebasetoken = _login.Firebasetoken;
                             rs.UserId = res.UserId.ToString();
                             StaticMethods.SaveLocalData(rs);
                             await Navigation.PushPopupAsync(new LoginSuccessPopupPage("S", res.Message));
@@ -131,8 +136,9 @@ namespace App2.View
                         await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "Please Fill Password"));
                     }
                 }
-                _Loading.IsRunning = false;
-              //  btnLogin.IsEnabled = true;
+               // _Loading.IsRunning = false;
+                //  btnLogin.IsEnabled = true;
+                await PopupNavigation.RemovePageAsync(loadingPage);
             }
             catch (Exception ex)
             {

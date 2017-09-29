@@ -135,8 +135,8 @@
     <Reference Include="BTProgressHUD, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\BTProgressHUD.1.2.0.5\lib\Xamarin.iOS10\BTProgressHUD.dll</HintPath>
     </Reference>
-    <Reference Include="ExifLib, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ExifLib.PCL.1.0.1\lib\portable-net45+sl50+win+WindowsPhoneApp81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\ExifLib.dll</HintPath>
+    <Reference Include="ExifLib, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ExifLib.PCL.1.0.2-pre01\lib\netstandard1.0\ExifLib.dll</HintPath>
     </Reference>
     <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\Xamarin.iOS10\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
@@ -196,11 +196,11 @@
       <HintPath>..\..\packages\Xamarin.Forms.2.3.4.270\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="XLabs.Core, Version=2.0.5782.12218, Culture=neutral, PublicKeyToken=d65109b36e5040e4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XLabs.Core.2.0.5782\lib\Xamarin.iOS10\XLabs.Core.dll</HintPath>
+    <Reference Include="XLabs.Core, Version=2.0.5743.21364, Culture=neutral, PublicKeyToken=d65109b36e5040e4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XLabs.Core.2.0.5743-pre8\lib\Xamarin.iOS10\XLabs.Core.dll</HintPath>
     </Reference>
-    <Reference Include="XLabs.Forms, Version=2.0.5782.12218, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XLabs.Forms.2.0.5782\lib\Xamarin.iOS10\XLabs.Forms.dll</HintPath>
+    <Reference Include="XLabs.Forms, Version=2.0.5743.21365, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XLabs.Forms.2.0.5743-pre8\lib\Xamarin.iOS10\XLabs.Forms.dll</HintPath>
     </Reference>
     <Reference Include="XLabs.Forms.Charting, Version=2.0.5782.12218, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\XLabs.Forms.Charting.2.0.5782\lib\Xamarin.iOS10\XLabs.Forms.Charting.dll</HintPath>
@@ -208,20 +208,20 @@
     <Reference Include="XLabs.Forms.Charting.iOS, Version=2.0.5782.12240, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\XLabs.Forms.Charting.2.0.5782\lib\Xamarin.iOS10\XLabs.Forms.Charting.iOS.dll</HintPath>
     </Reference>
-    <Reference Include="XLabs.Forms.iOS, Version=2.0.5782.12247, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XLabs.Forms.2.0.5782\lib\Xamarin.iOS10\XLabs.Forms.iOS.dll</HintPath>
+    <Reference Include="XLabs.Forms.iOS, Version=2.0.5743.21401, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XLabs.Forms.2.0.5743-pre8\lib\Xamarin.iOS10\XLabs.Forms.iOS.dll</HintPath>
     </Reference>
-    <Reference Include="XLabs.Ioc, Version=2.0.5782.12218, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XLabs.IoC.2.0.5782\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Ioc.dll</HintPath>
+    <Reference Include="XLabs.Ioc, Version=2.0.5743.21364, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XLabs.IoC.2.0.5743-pre8\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Ioc.dll</HintPath>
     </Reference>
-    <Reference Include="XLabs.Platform, Version=2.0.5782.12218, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XLabs.Platform.2.0.5782\lib\Xamarin.iOS10\XLabs.Platform.dll</HintPath>
+    <Reference Include="XLabs.Platform, Version=2.0.5743.21364, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XLabs.Platform.2.0.5743-pre8\lib\Xamarin.iOS10\XLabs.Platform.dll</HintPath>
     </Reference>
-    <Reference Include="XLabs.Platform.iOS, Version=2.0.5782.12247, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XLabs.Platform.2.0.5782\lib\Xamarin.iOS10\XLabs.Platform.iOS.dll</HintPath>
+    <Reference Include="XLabs.Platform.iOS, Version=2.0.5743.21399, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XLabs.Platform.2.0.5743-pre8\lib\Xamarin.iOS10\XLabs.Platform.iOS.dll</HintPath>
     </Reference>
-    <Reference Include="XLabs.Serialization, Version=2.0.5782.15703, Culture=neutral, PublicKeyToken=d65109b36e5040e4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XLabs.Serialization.2.0.5782\lib\Xamarin.iOS10\XLabs.Serialization.dll</HintPath>
+    <Reference Include="XLabs.Serialization, Version=2.0.5743.21364, Culture=neutral, PublicKeyToken=d65109b36e5040e4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XLabs.Serialization.2.0.5743-pre8\lib\Xamarin.iOS10\XLabs.Serialization.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -567,6 +567,36 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ck2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Images\Checkbox\checked_checkbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Images\Checkbox\checked_checkbox%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Images\Checkbox\unchecked_checkbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Images\Checkbox\unchecked_checkbox%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\off_btn%401x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\off_btn%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\off_btn%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\on_btn%401x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\on_btn%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\on_btn%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

@@ -43,7 +43,7 @@ namespace App2.Model
                         foreach (var item2 in item.Sites)
                         {
 
-                            lst.Add(new SiteIdMdl { SiteId = item2.Site_id, SiteName = item2.Site_name });
+                            lst.Add(new SiteIdMdl { SiteId = item2.Site_id, SiteName = item2.Site_name ,ChkId = item2.Chk_id});
                         }
                         nav.CompanyId = item.CompanyId.ToString();
                     }
@@ -68,12 +68,15 @@ namespace App2.Model
         public int SiteId { get; set; }
         public string SiteName { get; set; }
         public string SiteShortName { get; set; }
+        public bool ChkId { get; set; }
+        public string ImgName { get; set; }
     }
     public class TempSiteIdMdl
     {
         public int SiteId { get; set; }
         public string SiteName { get; set; }
         public string SiteShortName { get; set; }
+        public bool ChkId { get; set; }
     }
 
     public class ShowCompanyNameMdl

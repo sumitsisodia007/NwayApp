@@ -17,8 +17,9 @@ namespace App2.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MasterMainPage : MasterDetailPage
     {
-        private LoginResponseMdl _newres; 
-
+        private LoginResponseMdl _newres;
+        private NavigationMdl _objNav = null;
+        readonly API _api = new API();
         public MasterMainPage(LoginResponseMdl res, List<TempSiteIdMdl> tempchlst)
         {
             InitializeComponent();
@@ -31,7 +32,9 @@ namespace App2.View
         public MasterMainPage(LoginResponseMdl res)
         {
             InitializeComponent();
-            _newres = res;
+            //_newres = res;
+            StaticMethods._new_res = _newres = res;
+            SetBedge();
             this.Master = new MasterPage(_newres);
             this.Detail = new NavigationPage(new HomePage(_newres));
             App.MasterDetail = this;
@@ -62,9 +65,10 @@ namespace App2.View
 
         private  void MainLogin()
         {
-            API api = new API();
+           
             LoginResponseMdl res = new LoginResponseMdl();
             LoginMdl _login = new LoginMdl();
+           
             ResponseModel rs = StaticMethods.GetLocalSavedData();
             _login.Username = rs.UserName;
             _login.Password = rs.Password;
@@ -86,11 +90,33 @@ namespace App2.View
                     _login.Firebasetoken = "";
                 }
             }
-             res =  api.PostLogin(_login);
+            res = _api.PostLogin(_login);
             if (res.Error == "false")
             {
-                _newres = res;
+                //_newres = res;
+                StaticMethods._new_res = _newres = res;
             }
+            SetBedge();
+        }
+
+        private void SetBedge()
+        {
+            ResponseModel rs = StaticMethods.GetLocalSavedData();
+            _objNav = new NavigationMdl();
+            NavigationMdl nav = _objNav.PrepareApiData();
+
+            NotificationListMdl notificationModel = _api.PostNotification(nav);
+            var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
+            string dateChk = null;
+            string notcount = "0";
+            foreach (var item in notificationModel.ListNotificationDate)
+            {
+                dateChk = item.Date;
+                notcount = item.NotCount;
+                break;
+            }
+            rs.NotCount = d2.ToString() == dateChk ? notcount : "0";
+            StaticMethods.SaveLocalData(rs);
         }
     }
 }

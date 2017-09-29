@@ -55,55 +55,7 @@ namespace App2.APIService
             return jsonResponse;
         }
         #endregion
-
-        #region Notification WebService Via Upadate Popup
-        public NotificationListMdl PostNotification(NavigationMdl nav, List<TempSiteIdMdl> tempchlst)
-        {
-            NotificationListMdl jsonResponse = new NotificationListMdl();
-            try
-            {
-                HttpClient client = new HttpClient {BaseAddress = new Uri(RestUrl)};
-
-                ResponseModel res = StaticMethods.GetLocalSavedData();
-
-                //Create List of KeyValuePairs
-                List<KeyValuePair<string, string>> notificationProperties = new List<KeyValuePair<string, string>>
-                {
-                    new KeyValuePair<string, string>("username", nav.UserName),
-                    new KeyValuePair<string, string>("password", nav.Password),
-                    new KeyValuePair<string, string>("user_id", nav.UserId),
-                    new KeyValuePair<string, string>("device_id", nav.DeviceId),
-                    new KeyValuePair<string, string>("company_id", nav.CompanyId),
-                    new KeyValuePair<string, string>("party_id", nav.PartyId),
-                    new KeyValuePair<string, string>("tagtype", "notifications")
-                };
-
-                //Add 'single' parameters
-                //Loop over String array and add all instances to our bodyPoperties
-                foreach (var dir in tempchlst)
-                {
-                    notificationProperties.Add(new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
-                }
-
-                //convert your bodyProperties to an object of FormUrlEncodedContent
-                var dataContent = new FormUrlEncodedContent(notificationProperties.ToArray());
-
-                //var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync(RestUrl, dataContent).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var jsonresult = response.Content.ReadAsStringAsync().Result;
-                    JObject.Parse(jsonresult);
-                    jsonResponse = JsonConvert.DeserializeObject<NotificationListMdl>(jsonresult);
-                }
-            }
-            catch (Exception ex)
-            {
-                // StaticMethods.ShowToast(ex.Message);
-            }
-            return jsonResponse;
-        }
-        #endregion
+        
 
         #region Notification WebService 
         public NotificationListMdl PostNotification(NavigationMdl nav)
@@ -131,7 +83,11 @@ namespace App2.APIService
                 //Loop over String array and add all instances to our bodyPoperties
                 foreach (var dir in nav.SiteIdMdls)
                 {
-                    notificationProperties.Add(new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
+                    if (dir.ChkId == true)
+                    {
+                        notificationProperties.Add(
+                            new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
+                    }
                 }
 
                 //convert your bodyProperties to an object of FormUrlEncodedContent
@@ -214,11 +170,15 @@ namespace App2.APIService
                 //Loop over String array and add all instances to our bodyPoperties
                 foreach (var dir in nav.SiteIdMdls)
                 {
-                    payableProperties.Add(new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
+                    if (dir.ChkId == true)
+                    {
+                        payableProperties.Add(
+                            new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
+                    }
                 }
 
                 //convert your bodyProperties to an object of FormUrlEncodedContent
-               // var dataContent = new FormUrlEncodedContent(_notificationProperties.ToArray());
+                // var dataContent = new FormUrlEncodedContent(_notificationProperties.ToArray());
 
 
                 var content = new FormUrlEncodedContent(payableProperties.ToArray());
@@ -260,16 +220,12 @@ namespace App2.APIService
 
                 foreach (var dir in nav.SiteIdMdls)
                 {
-                    partyProp.Add(new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
+                    if (dir.ChkId == true)
+                    {
+                        partyProp.Add(
+                            new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
+                    }
                 }
-                //var values = new Dictionary<string, string>
-                //        {
-                //            { "user_id", keyName.UserId},
-                //            { "device_id",keyName.DeviceId},
-                //            { "company_name", keyName.CompanyName},
-                //            { "party_name", keyName.PartyName},
-                //            { "tagtype", "partylist"}
-                //        };
 
                 var content = new FormUrlEncodedContent(partyProp);
                 var response = await client.PostAsync(RestUrl, content);
