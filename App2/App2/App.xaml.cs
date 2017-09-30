@@ -2,6 +2,7 @@
 using App2.NativeMathods;
 using App2.View;
 using System.Threading.Tasks;
+using App2.SQLite;
 using Xamarin.Forms;
 
 namespace App2
@@ -16,6 +17,20 @@ namespace App2
             App.MasterDetail.IsPresented = false;
             await App.MasterDetail.Detail.Navigation.PushAsync(page);
         }
+
+        static CompanyDB _cmpdatabase;
+        public static CompanyDB CmpDatabase
+        {
+            get
+            {
+                if (_cmpdatabase == null)
+                {
+                    _cmpdatabase = new CompanyDB(DependencyService.Get<ISQLiteHelper>().GetLocalFilePath("CompanyERP.db3"));
+                }
+                return _cmpdatabase;
+            }
+        }
+
         public App()
         {
             InitializeComponent();
@@ -50,7 +65,7 @@ namespace App2
         protected override void OnResume()
         {
             // Handle when your app resumes
-            //ResponseModel rs = StaticMethods.GetLocalSavedData();
+            //UserModel rs = StaticMethods.GetLocalSavedData();
             //StaticMethods.NotificationCount = rs.NotCount;
         }
     }

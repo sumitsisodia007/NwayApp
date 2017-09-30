@@ -73,7 +73,7 @@ namespace App2.View
             //    {
             //        PredefinedPaid();
             //    }
-            //    ResponseModel rs = StaticMethods.GetLocalSavedData();
+            //    UserModel rs = StaticMethods.GetLocalSavedData();
             //    mdl.UserId = rs.UserId;
             //    PayableNotificationMdl _payable = await api.PayableTable(mdl);
 
@@ -111,7 +111,7 @@ namespace App2.View
                     {
                         PayableNotificationMdl payable = await _api.PayableTable(mdl);
 
-                        ResponseModel rs = StaticMethods.GetLocalSavedData();
+                        UserModel rs = StaticMethods.GetLocalSavedData();
                         mdl.UserId = rs.UserId;
 
                         _toadyNotification = new ShowPayableTodayDetail();
@@ -262,7 +262,7 @@ namespace App2.View
             }
             catch (Exception ex)
             {
-                StaticMethods.ShowToast("Internal Error ShowTotal" + ex.Message);
+               // StaticMethods.ShowToast("Internal Error ShowTotal" + ex.Message);
             }
             list_totalpayble.ItemsSource = Showpayabletotalpayblelist;
         }
@@ -270,7 +270,7 @@ namespace App2.View
         private void list_today_payble_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             _navmdl = new NavigationMdl();
-            ShowPayableTodayDetail localToadyNotification = (ShowPayableTodayDetail)e.Item;
+            var localToadyNotification = (ShowPayableTodayDetail)e.Item;
 
             //navmdl.DeviceId = StaticMethods.GetDeviceidentifier(); 
             //if (navmdl.DeviceId == "unknown")
@@ -282,9 +282,7 @@ namespace App2.View
             NavigationMdl nav = _objNav.PrepareApiData();
             nav.PartyId = localToadyNotification.ShowPartyId;
             nav.PartyName = localToadyNotification.ShowPayParty;
-            if (this.Title == "Receivable")
-            { nav.TagType = EnumMaster.TagtypereceivableOutstanding; }
-            else { nav.TagType = EnumMaster.TagtypepayableOutstanding; }
+            nav.TagType = this.Title == "Receivable" ? EnumMaster.TagtypereceivableOutstanding : EnumMaster.TagtypepayableOutstanding;
             if (Notflag != true)
             {
                 Navigation.PushAsync(new PayableChart(nav));
@@ -299,7 +297,7 @@ namespace App2.View
                 if (e.NewTextValue != string.Empty)
                 {
                     //navmdl = new NavigationMdl();
-                    //ResponseModel rs = StaticMethods.GetLocalSavedData();
+                    //UserModel rs = StaticMethods.GetLocalSavedData();
                     //navmdl.UserId = rs.UserId;
                     //navmdl.DeviceId = StaticMethods.GetDeviceidentifier(); 
                     //if (navmdl.DeviceId == "unknown")
@@ -427,9 +425,7 @@ namespace App2.View
                 NavigationMdl nav = _objNav.PrepareApiData();
                 nav.PartyName = obj.Party_Name;
                 nav.PartyId = obj.Party_Id;
-                if (this.Title == "Receivable")
-                { nav.TagType = EnumMaster.TagtypereceivableOutstanding; }
-                else { nav.TagType = EnumMaster.TagtypepayableOutstanding; }
+                nav.TagType = this.Title == "Receivable" ? EnumMaster.TagtypereceivableOutstanding : EnumMaster.TagtypepayableOutstanding;
                 Navigation.PushAsync(new PayableChart(nav));
             }
             catch (Exception ex)

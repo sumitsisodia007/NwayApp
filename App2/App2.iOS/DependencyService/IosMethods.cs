@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Foundation;
-using UIKit;
 using App2.iOS.DependencyService;
 using App2.Interface;
 using BigTed;
 using App2.Model;
+using App2.NativeMathods;
 using PerpetualEngine.Storage;
 
 [assembly: Xamarin.Forms.Dependency(typeof(IosMethods))]
@@ -16,11 +11,6 @@ namespace App2.iOS.DependencyService
 {
     public class IosMethods : IIosMethods
     {
-        
-        public IosMethods()
-        {
-        }
-
         public string GetIdentifier()
         {
             var id = UIKit.UIDevice.CurrentDevice.IdentifierForVendor.AsString();
@@ -45,17 +35,19 @@ namespace App2.iOS.DependencyService
             BTProgressHUD.Dismiss();
         }/**/
 
-        public void SaveLocalData(ResponseModel um)
+        public void SaveLocalData(UserModel um)
         {
             try
             {
                 var storage = SimpleStorage.EditGroup(Key);
                 storage.Put("MinReceiptAmt", um.MinReceiptAmt);
                 storage.Put("NotificationDayCount", um.NotificationDayCount);
+
                 storage.Put("TagType", um.TagType);
+                storage.Put("Error", um.Error);
+
                 storage.Put("UserId", um.UserId);
                 storage.Put("DeviceId", um.DeviceId);
-                storage.Put("Error", um.Error);
                 storage.Put("NotCount", um.NotCount);
                 storage.Put("NotCountDate", um.NotCountDate);
                 storage.Put("UserName", um.UserName);
@@ -63,23 +55,26 @@ namespace App2.iOS.DependencyService
                 storage.Put("CompanyName", um.CompanyName);
                 storage.Put("CompanyIndex", um.CompanyIndex);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-
+                StaticMethods.ShowToast(exception.Message);
             }
         }
-        public ResponseModel RetriveLocalData()
+
+        public UserModel RetriveLocalData()
         {
-            ResponseModel um = new ResponseModel();
+            UserModel um = new UserModel();
             try
             {
                 var storage = SimpleStorage.EditGroup(Key);
                 um.MinReceiptAmt = Convert.ToString(storage.Get("MinReceiptAmt", null));
                 um.NotificationDayCount = storage.Get("NotificationDayCount", null);
                 um.TagType = storage.Get("TagType", null);
+                um.Error = storage.Get("Error", null);
+
                 um.UserId = storage.Get("UserId", null);
                 um.DeviceId = storage.Get("DeviceId", null);
-                um.Error = storage.Get("Error", null);
+                
                 um.NotCount = storage.Get("NotCount", null);
                 um.NotCountDate = storage.Get("NotCountDate", null);
                 um.UserName = storage.Get("UserName", null);
@@ -93,18 +88,19 @@ namespace App2.iOS.DependencyService
                 return um;
             }
         }
+
         private string Key = "fazza_driver";
+
         public void DeleteLocalData()
         {
-            string values = string.Empty;
             try
             {
                 var storage = SimpleStorage.EditGroup(Key);
                 storage.Delete(Key);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-
+                StaticMethods.ShowToast(exception.Message);
             }
         }
     }

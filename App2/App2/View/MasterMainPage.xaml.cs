@@ -19,6 +19,7 @@ namespace App2.View
     {
         private LoginResponseMdl _newres;
         private NavigationMdl _objNav = null;
+        private CompanyTbl cmpTbl = null;
         readonly API _api = new API();
         public MasterMainPage(LoginResponseMdl res, List<TempSiteIdMdl> tempchlst)
         {
@@ -69,7 +70,7 @@ namespace App2.View
             LoginResponseMdl res = new LoginResponseMdl();
             LoginMdl _login = new LoginMdl();
            
-            ResponseModel rs = StaticMethods.GetLocalSavedData();
+            UserModel rs = StaticMethods.GetLocalSavedData();
             _login.Username = rs.UserName;
             _login.Password = rs.Password;
             _login.Tagtype = EnumMaster.TagtypeSignin;
@@ -99,9 +100,13 @@ namespace App2.View
             SetBedge();
         }
 
+        
         private void SetBedge()
         {
-            ResponseModel rs = StaticMethods.GetLocalSavedData();
+            try
+            {
+
+            UserModel rs = StaticMethods.GetLocalSavedData();
             _objNav = new NavigationMdl();
             NavigationMdl nav = _objNav.PrepareApiData();
 
@@ -109,6 +114,7 @@ namespace App2.View
             var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
             string dateChk = null;
             string notcount = "0";
+            
             foreach (var item in notificationModel.ListNotificationDate)
             {
                 dateChk = item.Date;
@@ -117,6 +123,11 @@ namespace App2.View
             }
             rs.NotCount = d2.ToString() == dateChk ? notcount : "0";
             StaticMethods.SaveLocalData(rs);
+
+            }
+            catch (Exception e)
+            {
+            }
         }
     }
 }

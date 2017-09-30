@@ -5,7 +5,6 @@
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
                  xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"    
-                 xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
                  xmlns:local="clr-namespace:App2.CustomRenderer"
                  InputTransparent="False"
                  HasSystemPadding="True"
@@ -24,7 +23,7 @@
                  Padding="0,20">
         <StackLayout Orientation="Horizontal" 
                      HorizontalOptions="FillAndExpand" 
-                     Padding="20,10" 
+                     Padding="20,0" 
                      Spacing="0">
             <!--<Label Text="Sites Name" Font="17,Bold" HorizontalOptions="StartAndExpand"/>-->
             <!--<Label Text="Update" Font="17,Bold" HorizontalOptions="EndAndExpand"/>-->
@@ -54,7 +53,7 @@
                 </Label.GestureRecognizers>
             </local:CurvedCornersLabel>
         </StackLayout>
-        
+
         <StackLayout >
             <ListView x:Name="NavigationList"
                           BackgroundColor="White"
@@ -71,16 +70,9 @@
                                                    TextColor="Black"
                                                    CheckedChanged="CheckBox_CheckedChanged"
                                                    Checked="{Binding Chk_id}" />-->
-                               
-                                <!--<ctrls:CheckBox 
-                                    ShowLabel="True"
-                                    Text="{Binding Site_name}"
-                                    HorizontalOptions="FillAndExpand"
-                                    CheckChanged="CheckBox_CheckedChanged"
-                                    
-                                    Margin="20,5"
-                                    Checked="{Binding Chk_id}"/>-->
-                                <StackLayout Orientation="Vertical"  >
+
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <BoxView Color="Black" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="1"/>
                                     <StackLayout  VerticalOptions="FillAndExpand"
                                                   Orientation="Horizontal"
                                                   Padding="20,0"
@@ -106,7 +98,7 @@
                                             </Image.GestureRecognizers>
                                         </Image>
                                     </StackLayout>
-                                    <BoxView Color="#ffffff" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="1"/>
+                                    <BoxView Color="Black" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="1"/>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>
@@ -115,11 +107,7 @@
             </ListView>
 
         </StackLayout>
-        <!--<controls:CheckBox DefaultText="ssss"
-                           HorizontalOptions="FillAndExpand"
-                           TextColor="Black"
-                           CheckedChanged="CheckBox_CheckedChanged"
-                           Checked="True" />-->
+     
         <Button VerticalOptions="EndAndExpand"
                 HorizontalOptions="FillAndExpand" 
                 Text="Update" 
@@ -127,7 +115,7 @@
                 FontAttributes="Bold"
                 BackgroundColor="#459FD5"
                 Clicked="Button_Clicked"/>
-        
+
 
     </StackLayout>
 

@@ -1,22 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using App2.Droid.DependencyService;
 using App2.Interface;
 using Xamarin.Forms;
-using Android.Graphics.Drawables;
 using App2.Model;
+using App2.NativeMathods;
 
 
-[assembly: Xamarin.Forms.Dependency(typeof(AndroidMethods))]
+[assembly: Dependency(typeof(AndroidMethods))]
 namespace App2.Droid.DependencyService
 {
     public class AndroidMethods : IAndroidMethods
@@ -40,7 +32,7 @@ namespace App2.Droid.DependencyService
             
         }
 
-        public void SaveLocalData(ResponseModel um)
+        public void SaveLocalData(UserModel um)
         {
             try
             {
@@ -60,9 +52,9 @@ namespace App2.Droid.DependencyService
                 storage.PutString("CompanyName", um.CompanyName);
                 storage.Commit();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-
+                StaticMethods.ShowToast(exception.Message);
             }
         }
 
@@ -88,15 +80,15 @@ namespace App2.Droid.DependencyService
                 storage.PutString("CompanyName", "");
                 storage.Commit();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-
+                StaticMethods.ShowToast(exception.Message);
             }
         }
 
-        public ResponseModel RetriveLocalData()
+        public UserModel RetriveLocalData()
         {
-            ResponseModel um = new ResponseModel();
+            UserModel um = new UserModel();
             try
             {
                 //retreive 
@@ -116,7 +108,7 @@ namespace App2.Droid.DependencyService
                 um.CompanyName = storage.GetString("CompanyName", null);
                 return um;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return um;
             }

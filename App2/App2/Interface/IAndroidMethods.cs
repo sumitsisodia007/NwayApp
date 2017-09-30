@@ -12,8 +12,8 @@ namespace App2.Interface
         string GetIdentifier();
         string GetTokan();
         void ShowToast(string msg);
-        ResponseModel RetriveLocalData();
-        void SaveLocalData(ResponseModel um);
+        UserModel RetriveLocalData();
+        void SaveLocalData(UserModel um);
         void DeleteLocalData();
     }
 }

@@ -61,15 +61,12 @@ namespace App2.View
 
         private async void btnLogin_Clicked(object sender, EventArgs e)
         {
+            UserModel userModel=new UserModel();
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);
-            
-            
-            //  btnLogin.IsEnabled = false;
-            ResponseModel rs = new ResponseModel();
-            LoginResponseMdl res = new LoginResponseMdl();
+            UserModel rs = new UserModel();
+            LoginResponseMdl res;
             _Loading.Color = Color.FromHex("#4472C4");
-           // _Loading.IsRunning = true;
            rs.UserName= _login.Username = txtFName.Text;
            rs.Password= _login.Password = txtPass.Text;
             _login.Tagtype = EnumMaster.TagtypeSignin;
@@ -84,11 +81,7 @@ namespace App2.View
             }
             else
             {
-                _login.Firebasetoken = DependencyService.Get<IAndroidMethods>().GetTokan();
-                if (_login.Firebasetoken == null)
-                {
-                    _login.Firebasetoken = "";
-                }
+                _login.Firebasetoken = DependencyService.Get<IAndroidMethods>().GetTokan() ?? "";
             }
            
 
@@ -113,6 +106,7 @@ namespace App2.View
                             rs.DeviceToken = _login.Firebasetoken = _login.Firebasetoken;
                             rs.UserId = res.UserId.ToString();
                             StaticMethods.SaveLocalData(rs);
+                           await userModel.SaveLocalCompanyData(res);
                             await Navigation.PushPopupAsync(new LoginSuccessPopupPage("S", res.Message));
                             await Navigation.PushModalAsync(new MasterMainPage(res));
                             txtFName.Text = txtPass.Text = string.Empty;
@@ -121,7 +115,6 @@ namespace App2.View
                         {
                             await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", res.Message));
                         }
-                        
                     }
                     else if (txtFName.Text == string.Empty && txtPass.Text == string.Empty)
                     {
@@ -136,7 +129,7 @@ namespace App2.View
                         await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "Please Fill Password"));
                     }
                 }
-               // _Loading.IsRunning = false;
+                // _Loading.IsRunning = false;
                 //  btnLogin.IsEnabled = true;
                 await PopupNavigation.RemovePageAsync(loadingPage);
             }

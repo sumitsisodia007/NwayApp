@@ -91,7 +91,7 @@ namespace App2
                 }
                 nav.CompanyName = EnumMaster.C21Malhar;
                 nav.TagType = EnumMaster.Tagtypenotifications;
-                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                UserModel rs = StaticMethods.GetLocalSavedData();
                 nav.UserId = rs.UserId;
 
           //  _notificationModel = api.PostNotification(nav); 

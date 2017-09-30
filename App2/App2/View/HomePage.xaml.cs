@@ -39,7 +39,7 @@ namespace App2.View
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             //PrepareView();
                 Task.Delay(500);
-                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                UserModel rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
             });
         }
@@ -52,7 +52,7 @@ namespace App2.View
             StaticMethods._new_res = _newres = res;
             PrepareView(res);
             Task.Delay(500);
-                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                UserModel rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
             });
         }
@@ -65,7 +65,7 @@ namespace App2.View
                 Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
                 StaticMethods._new_res = _newres = res;
                 PrepareView(res);
-                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                UserModel rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
 
                 NavigatePageNotification(res,mdl);
@@ -75,7 +75,7 @@ namespace App2.View
         {
             ObservableCollection<SiteIdMdl> lst = new ObservableCollection<SiteIdMdl>();
             StaticMethods._new_res = _newres = lgres;
-            ResponseModel res = StaticMethods.GetLocalSavedData();
+            UserModel res = StaticMethods.GetLocalSavedData();
             foreach (var item in lgres._permissions)
             {
                 if (StaticMethods.SetCompanyName == item.CompanyName)
@@ -116,62 +116,15 @@ namespace App2.View
                 StaticMethods._new_res = _newres = res;
                 _newTempchlst = tempchlst;
                 PrepareView(res);
-                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                UserModel rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
-                //Task.Delay(500);
-                //   SetNotificationBadge();
+               
             });
         }
-
-
-        //private async void SetNotificationBadge()
-        //{
-        //    try
-        //    {
-        //        string dateChk = null;
-        //        string notcount = "0";
-        //        ResponseModel rs = StaticMethods.GetLocalSavedData();
-        //        _api = new API();
-        //        NavigationMdl nav = new NavigationMdl();
-        //        nav.DeviceId = StaticMethods.GetDeviceidentifier();
-        //        if (nav.DeviceId == "unknown")
-        //        {
-        //            nav.DeviceId = "123456";
-        //        }
-        //        nav.CompanyName = EnumMaster.C21Malhar;
-        //        nav.TagType = EnumMaster.Tagtypenotifications;
-
-        //        nav.UserId = rs.UserId;
-        //       // _notificationModel = api.PostNotification(nav);
-
-
-        //        var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
-        //        foreach (var item in _notificationModel.ListNotificationDate)
-        //        {
-        //            dateChk = item.Date;
-        //            notcount = item.NotCount;
-        //            break;
-        //        }
-        //        if (d2.ToString() == dateChk)
-        //        {
-        //            rs.NotCount = LblNotificationBadge.Text = notcount;
-        //        }
-        //        else
-        //        {
-        //            LblNotificationBadge.Text = "0";
-        //            //rs.NotCountDate = DateChk;
-        //            //StaticMethods.SaveLocalData(rs);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //  await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
-        //    }
-        //}
         
         private async void Receivable_Tapped(object sender, EventArgs e)
         {
-            //ResponseModel res = new ResponseModel();
+            //UserModel res = new UserModel();
             //nav = new NavigationMdl();
             //nav.PageTitle = LblReceive.Text;
 
@@ -290,45 +243,12 @@ namespace App2.View
         {
            await  DisplayAlert("Message", "Comming Soon, Approval", "ok");
         }
-
-        //private NavigationMdl PrepareAPIData()
-        //{
-        //    NavigationMdl nav = new NavigationMdl();
-        //    ObservableCollection<SiteIdMdl> lst = new ObservableCollection<SiteIdMdl>();
-        //    ResponseModel res = StaticMethods.GetLocalSavedData();
-        //    try
-        //    {
-        //        foreach (var item in _newres._permissions)
-        //        {
-        //            if (StaticMethods.SetCompanyName == item.CompanyName)
-        //            {
-        //                foreach (var item2 in item.Sites)
-        //                {
-
-        //                    lst.Add(new SiteIdMdl { SiteId = item2.SiteId, SiteName = item2.Site_name });
-        //                }
-        //                nav.CompanyId = item.Company_id.ToString();
-        //            }
-        //        }
-        //        nav.UserName = res.UserName;
-        //        nav.Password = res.Password;
-        //        nav.DeviceId = res.DeviceId;
-        //        nav.UserId = res.UserId;
-        //        nav.TagType = EnumMaster.Tagtypenotifications;
-        //        nav.SiteIdMdls = lst;
-        //        nav.PartyId = "1";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //    }
-        //    return nav;
-        //}
-
+        
         private void PrepareView(LoginResponseMdl res)
         {
             try
             {
-                ResponseModel res1 = StaticMethods.GetLocalSavedData();
+                var res1 = StaticMethods.GetLocalSavedData();
                 if (res1.CompanyName != null)
                 {
                     LblSetComName.Text = StaticMethods.SetCompanyName=res1.CompanyName;
@@ -341,27 +261,25 @@ namespace App2.View
                         break;
                     }
                 }
-                if (App.ScreenWidth > 0 && App.ScreenHeight > 0)
-                {
-                    var calcScreenWidth = App.ScreenWidth;
-                    var calcScreenHieght = App.ScreenHeight;
-                    GridRec.HeightRequest =
+                if (!(App.ScreenWidth > 0) || !(App.ScreenHeight > 0)) return;
+                var calcScreenWidth = App.ScreenWidth;
+                var calcScreenHieght = App.ScreenHeight;
+                GridRec.HeightRequest =
                     GridPay.HeightRequest =
-                    GridCas.HeightRequest =
-                    GridCon.HeightRequest =
-                    GridExp.HeightRequest =
-                    GridInv.HeightRequest = calcScreenHieght / 4 + 20;
-                    GridRec.WidthRequest =
+                        GridCas.HeightRequest =
+                            GridCon.HeightRequest =
+                                GridExp.HeightRequest =
+                                    GridInv.HeightRequest = calcScreenHieght / 4 + 20;
+                GridRec.WidthRequest =
                     GridPay.WidthRequest =
-                    GridCas.WidthRequest =
-                    GridCon.WidthRequest =
-                    GridExp.WidthRequest =
-                    GridInv.WidthRequest = calcScreenWidth / 3;
-                }
+                        GridCas.WidthRequest =
+                            GridCon.WidthRequest =
+                                GridExp.WidthRequest =
+                                    GridInv.WidthRequest = calcScreenWidth / 3;
             }
             catch (Exception ex)
             {
-                DisplayAlert("Erro", ex.Message, "ok");
+                DisplayAlert("Error", ex.Message, "ok");
             }
         }
 

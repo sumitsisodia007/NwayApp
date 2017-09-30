@@ -39,7 +39,7 @@ namespace App2.View
             nav = new NavigationMdl();
             api = new API();
 
-            ResponseModel res = StaticMethods.GetLocalSavedData();
+            UserModel res = StaticMethods.GetLocalSavedData();
 
             nav.TagType = App2.Helper.EnumMaster.TagtypeSettings;
             nav.UserId = res.UserId;
@@ -70,7 +70,7 @@ namespace App2.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ResponseModel rs = StaticMethods.GetLocalSavedData();
+            var rs = StaticMethods.GetLocalSavedData();
             lblMinAmt.Text = rs.MinReceiptAmt;
             lblpreDays.Text = rs.NotificationDayCount;
 

@@ -60,7 +60,7 @@ namespace App2.ExpandableListView
         //    }
         //    nav.CompanyName = EnumMaster.C21Malhar;
         //    nav.TagType = EnumMaster.Tagtypenotifications;
-        //    ResponseModel rs = StaticMethods.GetLocalSavedData();
+        //    UserModel rs = StaticMethods.GetLocalSavedData();
         //    nav.UserId = rs.UserId;
         //   NotificationListMdl mode = api.PostNotification(nav);
         //    ObservableCollection<NotificationGroup> food = new ObservableCollection<NotificationGroup>();

@@ -16,6 +16,7 @@ namespace App2.NativeMathods
         public static string SetCompanyName { get; set; }
         public static List<TempSiteIdMdl> userCh { get; set; }
         public static LoginResponseMdl _new_res { get; set; }
+
         public static string GetNotificationCount()
         {
             string strCount = "";
@@ -69,9 +70,9 @@ namespace App2.NativeMathods
             });
         }
 
-        public static ResponseModel GetLocalSavedData()
+        public static UserModel GetLocalSavedData()
         {
-            ResponseModel um = null;
+            UserModel um = null;
             try
             {
                 if (Device.OS == TargetPlatform.iOS)
@@ -91,7 +92,7 @@ namespace App2.NativeMathods
             }
         }
 
-        public static void SaveLocalData(ResponseModel um)
+        public static void SaveLocalData(UserModel um)
         {
             try
             {

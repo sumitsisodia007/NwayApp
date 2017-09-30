@@ -1,11 +1,9 @@
-﻿using App2.Helper;
-using App2.Model;
+﻿using App2.Model;
 using App2.NativeMathods;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -13,8 +11,8 @@ namespace App2.APIService
 {
     public class API
     {
-       public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
-        //   public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
+           public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
+      // public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
        
         #region Login WebService
         public LoginResponseMdl PostLogin(LoginMdl lgmdl)
@@ -38,7 +36,6 @@ namespace App2.APIService
                     };
 
                     var content = new FormUrlEncodedContent(values);
-
                     response = client.PostAsync(RestUrl, content).Result;
                 }
                 if (response.IsSuccessStatusCode)
@@ -65,7 +62,7 @@ namespace App2.APIService
             {
                 HttpClient client = new HttpClient {BaseAddress = new Uri(RestUrl)};
 
-                ResponseModel res = StaticMethods.GetLocalSavedData();
+                UserModel res = StaticMethods.GetLocalSavedData();
                 
                 //Create List of KeyValuePairs
                 List<KeyValuePair<string, string>> notificationProperties = new List<KeyValuePair<string, string>>

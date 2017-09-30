@@ -61,36 +61,32 @@ namespace App2.View
         protected override void OnAppearing()
         {
             Device.BeginInvokeOnMainThread(() => {
-                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
-                {
-                    var calcScreenWidth = Application.Current.MainPage.Width;
-                    var calcScreenHieght = Application.Current.MainPage.Height;
-                    //SSS 27-Sep
-                    //MainPickr.WidthRequest = calcScreenWidth -80;
-                    //ResponseModel res = StaticMethods.GetLocalSavedData();
-                    //if (res.CompanyIndex != null)
-                    //{
-                    //    MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
-                    //}
-                }
+                if (!(Application.Current.MainPage.Width > 0) || !(Application.Current.MainPage.Height > 0)) return;
+                var calcScreenWidth = Application.Current.MainPage.Width;
+                var calcScreenHieght = Application.Current.MainPage.Height;
+                //SSS 27-Sep
+                //MainPickr.WidthRequest = calcScreenWidth -80;
+                //UserModel res = StaticMethods.GetLocalSavedData();
+                //if (res.CompanyIndex != null)
+                //{
+                //    MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
+                //}
             });
         }
 
         private void PreLayout()
         {
             Device.BeginInvokeOnMainThread(() => {
-                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
-                {
-                    var calcScreenWidth = Application.Current.MainPage.Width;
-                    var calcScreenHieght = Application.Current.MainPage.Height;
-                    //SSS 27-Sep
-                    //MainPickr.WidthRequest = calcScreenWidth - 80;
-                    //ResponseModel res = StaticMethods.GetLocalSavedData();
-                    //if (res.CompanyIndex != null)
-                    //{
-                    //    MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
-                    //}
-                }
+                if (!(Application.Current.MainPage.Width > 0) || !(Application.Current.MainPage.Height > 0)) return;
+                var calcScreenWidth = Application.Current.MainPage.Width;
+                var calcScreenHieght = Application.Current.MainPage.Height;
+                //SSS 27-Sep
+                //MainPickr.WidthRequest = calcScreenWidth - 80;
+                //UserModel res = StaticMethods.GetLocalSavedData();
+                //if (res.CompanyIndex != null)
+                //{
+                //    MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
+                //}
             });
         }
 
@@ -123,14 +119,10 @@ namespace App2.View
             menuList.Add(page10);
             // Setting our list to be ItemSource for ListView in MainPage.xaml
             NavigationList.ItemsSource = menuList;
-            try
-            {
+           
                 // Initial navigation, this can be used for our home page
                // Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(HomePage)));
-            }
-            catch (Exception ex)
-            {
-            }
+          
         }
 
         private async void NavigationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -155,21 +147,18 @@ namespace App2.View
         {
             var picker = (Picker)sender;
             int selectedIndex = picker.SelectedIndex;
-            if (selectedIndex != -1)
+            if (selectedIndex == -1) return;
+            try
             {
-                try
-                {
                     
-                    ResponseModel res = new ResponseModel();
-                    res = StaticMethods.GetLocalSavedData();
-                    StaticMethods.SetCompanyName = (string)picker.Items[selectedIndex];
-                    res.CompanyIndex = selectedIndex.ToString();
-                    StaticMethods.SaveLocalData(res);
-                }
-                catch (Exception ex)
-                {
-                }
-                
+                UserModel res = new UserModel();
+                res = StaticMethods.GetLocalSavedData();
+                StaticMethods.SetCompanyName = (string)picker.Items[selectedIndex];
+                res.CompanyIndex = selectedIndex.ToString();
+                StaticMethods.SaveLocalData(res);
+            }
+            catch (Exception ex)
+            {
             }
         }
 

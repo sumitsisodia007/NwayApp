@@ -18,7 +18,7 @@ namespace App2.PopUpPages
     public partial class LogOutPage : PopupPage
     {
         //API api = null;
-        //App2.Model.ResponseModel res=null;
+        //App2.Model.UserModel res=null;
         //App2.Model.NavigationMdl nav = null;
         public LogOutPage()
         {

@@ -33,7 +33,7 @@ namespace App2.Model
         {
             NavigationMdl nav = new NavigationMdl();
             ObservableCollection<SiteIdMdl> lst = new ObservableCollection<SiteIdMdl>();
-            ResponseModel res = StaticMethods.GetLocalSavedData();
+            UserModel res = StaticMethods.GetLocalSavedData();
             try
             {
                 foreach (var item in StaticMethods._new_res._permissions)

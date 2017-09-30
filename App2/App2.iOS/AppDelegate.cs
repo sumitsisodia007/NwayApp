@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 using Foundation;
 using UIKit;
-using App2.View;
 using App2.NativeMathods;
-using Xamarin.Forms;
 using App2.Model;
 using App2.Helper;
-using AsNum.XFControls.iOS;
 using ImageCircle.Forms.Plugin.iOS;
-using ObjCRuntime;
 
 namespace App2.iOS
 {
@@ -32,7 +26,7 @@ namespace App2.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-            AsNumAssemblyHelper.HoldAssembly();
+            
             ImageCircleRenderer.Init();
             if (options != null)
             {
@@ -85,30 +79,47 @@ namespace App2.iOS
                     int Notification_count = -1;
                     string Party_id = "";
                     string Party_name = "";
+                    int Site_id = -1;
                     int Party_outstanding = -1;
-                    if (extra.ContainsKey(new NSString("tagtype")))
+                    string SiteName = "";
+                    string SiteShortName = "";
+                    if (extra != null && extra.ContainsKey(new NSString("tagtype")))
                     {
                         TagType = (extra[new NSString("tagtype")] as NSObject).ToString();
                     }
-                    if (extra.ContainsKey(new NSString("amount_received")))
+                    if (extra != null && extra.ContainsKey(new NSString("amount_received")))
                     {
-                        string amtrec = (extra[new NSString("amount_received")] as NSObject).ToString();
+                        var amtrec = (extra[new NSString("amount_received")] as NSObject).ToString();
                         int.TryParse(amtrec, out Amount_received);
                     }
-                    if (extra.ContainsKey(new NSString("company_name")))
+                    if (extra != null && extra.ContainsKey(new NSString("site_id")))
+                    {
+                        var siteid = (extra[new NSString("site_id")] as NSObject).ToString();
+                        int.TryParse(siteid, out Site_id);
+                    }
+                    if (extra != null && extra.ContainsKey(new NSString("site_name")))
+                    {
+                        SiteName = (extra[new NSString("site_name")] as NSObject).ToString();
+                    }
+                    if (extra != null && extra.ContainsKey(new NSString("site_short_name")))
+                    {
+                        SiteShortName = (extra[new NSString("site_short_name")] as NSObject).ToString();
+                    }
+
+                    if (extra != null && extra.ContainsKey(new NSString("company_name")))
                     {
                         Company_name = (extra[new NSString("company_name")] as NSObject).ToString();
                     }
-                    if (extra.ContainsKey(new NSString("current_outstanding")))
+                    if (extra != null && extra.ContainsKey(new NSString("current_outstanding")))
                     {
-                        string curout = (extra[new NSString("current_outstanding")] as NSObject).ToString();
+                        var curout = (extra[new NSString("current_outstanding")] as NSObject).ToString();
                         int.TryParse(curout, out Current_outstanding);
                     }
-                    if (extra.ContainsKey(new NSString("notification_count")))
+                    if (extra != null && extra.ContainsKey(new NSString("notification_count")))
                     {
-                        string notcount = (extra[new NSString("notification_count")] as NSObject).ToString();
+                        var notcount = (extra[new NSString("notification_count")] as NSObject).ToString();
                         int.TryParse(notcount, out Notification_count);
-                        ResponseModel res = StaticMethods.GetLocalSavedData();
+                        UserModel res = StaticMethods.GetLocalSavedData();
                         var d2 = DateTime.Now.ToString("dd/MM/yyyy");
                         res.NotCountDate = d2.ToString();
                        // StaticMethods.NotificationCount= Notification_count;
@@ -116,23 +127,25 @@ namespace App2.iOS
                         StaticMethods.SaveLocalData(res);
 
                     }
-                    if (extra.ContainsKey(new NSString("party_id")))
+                    if (extra != null && extra.ContainsKey(new NSString("party_id")))
                     {
                         Party_id = (extra[new NSString("party_id")] as NSObject).ToString();
                         //int.TryParse(pId, out Party_id);
                     }
-                    if (extra.ContainsKey(new NSString("party_name")))
+                    if (extra != null && extra.ContainsKey(new NSString("party_name")))
                     {
                         Party_name = (extra[new NSString("party_name")] as NSObject).ToString();
                     }
-                    if (extra.ContainsKey(new NSString("party_outstanding")))
+                    if (extra != null && extra.ContainsKey(new NSString("party_outstanding")))
                     {
                         string pOut = (extra[new NSString("party_outstanding")] as NSObject).ToString();
                         int.TryParse(pOut, out Party_outstanding);
                     }
 
-                    NavigationMdl mdl = new NavigationMdl();
-                    mdl.DeviceId = StaticMethods.GetDeviceidentifier();
+                    NavigationMdl mdl = new NavigationMdl
+                    {
+                        DeviceId = StaticMethods.GetDeviceidentifier()
+                    };
                     if (mdl.DeviceId == "unknown")
                     {
                         mdl.DeviceId = "123456";
@@ -140,6 +153,15 @@ namespace App2.iOS
                     mdl.CompanyName= Company_name;
                     mdl.PartyId = Party_id;
                     mdl.IsNotification = true;
+                    foreach (var item in mdl.SiteIdMdls)
+                    {
+                       mdl.SiteIdMdls.Add(new SiteIdMdl
+                       {
+                           SiteShortName = SiteShortName,
+                           SiteName = SiteName,
+                           SiteId = Site_id,
+                       });
+                    }
                     if (TagType == "receipt")
                     {
                         mdl.PageTitle = "Receivable";
@@ -169,8 +191,8 @@ namespace App2.iOS
                     {
                         if (buttonArgs.ButtonIndex == 1)
                         {
-                            App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
-                           // LoadApplication(new App(mdl));
+                            //App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
+                            LoadApplication(new App(mdl));
                         }
                         else
                         {

@@ -67,7 +67,7 @@ namespace App2.View
             {
 
                 lblChart.Text = nmdl.PartyName + " " + EnumMaster.LblChartTitle;
-                ResponseModel rs = StaticMethods.GetLocalSavedData();
+                var rs = StaticMethods.GetLocalSavedData();
                 nmdl.UserId = rs.UserId;
                 _payable = await api.PayableTable(nmdl);
 
@@ -79,12 +79,10 @@ namespace App2.View
         {
             try
             {
-                if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
-                {
-                    var calcScreenWidth = Application.Current.MainPage.Width;
-                    var calcScreenHieght = Application.Current.MainPage.Height;
-                    LblMn.WidthRequest = LblSu.WidthRequest = LblTu.WidthRequest = LblWe.WidthRequest = _Width = calcScreenWidth / 4 - 10;
-                }
+                if (!(Application.Current.MainPage.Width > 0) || !(Application.Current.MainPage.Height > 0)) return;
+                var calcScreenWidth = Application.Current.MainPage.Width;
+                var calcScreenHieght = Application.Current.MainPage.Height;
+                LblMn.WidthRequest = LblSu.WidthRequest = LblTu.WidthRequest = LblWe.WidthRequest = _Width = calcScreenWidth / 4 - 10;
             }
             catch (Exception ex)
             {
@@ -99,15 +97,23 @@ namespace App2.View
             _showpayabletotalpayblelist = new List<ShowPayableTotalPayble>();
             foreach (var item in _payable.ListPayablemdl)
             {
-                if (this.Title == "Payable Chart")
-                {
-                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { TxtWidth = _Width, ShowSiteName = item.Site_name, ShowBalance = item.Balance, ShowTotalCr = item.Total_cr, ShowTotalDr = item.Total_dr });
-                }
-                else
-                {
-                    _showpayabletotalpayblelist.Add(new ShowPayableTotalPayble() { TxtWidth = _Width, ShowSiteName = item.Perticular, ShowBalance = item.Balance, ShowTotalCr = item.Receive, ShowTotalDr = item.Total_Due });
-                }
-                
+                _showpayabletotalpayblelist.Add(this.Title == "Payable Chart"
+                    ? new ShowPayableTotalPayble()
+                    {
+                        TxtWidth = _Width,
+                        ShowSiteName = item.Site_name,
+                        ShowBalance = item.Balance,
+                        ShowTotalCr = item.Total_cr,
+                        ShowTotalDr = item.Total_dr
+                    }
+                    : new ShowPayableTotalPayble()
+                    {
+                        TxtWidth = _Width,
+                        ShowSiteName = item.Perticular,
+                        ShowBalance = item.Balance,
+                        ShowTotalCr = item.Receive,
+                        ShowTotalDr = item.Total_Due
+                    });
             }
                 listView.ItemsSource = _showpayabletotalpayblelist;
             }
@@ -129,7 +135,7 @@ namespace App2.View
                     {
 
                     //navmdl = new NavigationMdl();
-                    //ResponseModel rs = StaticMethods.GetLocalSavedData();
+                    //UserModel rs = StaticMethods.GetLocalSavedData();
                     //navmdl.UserId = rs.UserId;
                     //navmdl.DeviceId = StaticMethods.GetDeviceidentifier();
                     //if (navmdl.DeviceId == "unknown")
@@ -144,8 +150,8 @@ namespace App2.View
                     nav.PartyName = e.NewTextValue;
 
                     lstLoca = new PartysearchMdl();
-                        ObservableCollection<PartysearchlistMdl> _lst = null;
-                        _lst = new ObservableCollection<PartysearchlistMdl>();
+                        ObservableCollection<PartysearchlistMdl> lst = null;
+                        lst = new ObservableCollection<PartysearchlistMdl>();
                       
                     if (!CrossConnectivity.Current.IsConnected)
                     {
@@ -158,12 +164,12 @@ namespace App2.View
                     }
                         foreach (var item in lstLoca.Party_List)
                         {
-                            _lst.Add(new PartysearchlistMdl { Party_Id = item.Party_Id, Party_Name = item.Party_Name });
+                            lst.Add(new PartysearchlistMdl { Party_Id = item.Party_Id, Party_Name = item.Party_Name });
                         }
-                        AutoList.ItemsSource = _lst;
+                        AutoList.ItemsSource = lst;
                         Device.BeginInvokeOnMainThread(async () =>
                         {
-                            if (_lst.Count > 0)
+                            if (lst.Count > 0)
                             {
                                 AutoList.IsVisible = true;
                                 if (AutoList.IsVisible == true)
@@ -221,10 +227,8 @@ namespace App2.View
                 txtAuto.Text = string.Empty;
                 txtAuto.TextChanged += txtAuto_TextChanged;
             }
-
             AutoList.IsVisible = false;
             imgLogo.IsVisible = true;
-            //PM 18-2-2017
             txtAuto.Placeholder = "Select Party";
 
         }
@@ -251,15 +255,8 @@ namespace App2.View
                 NavigationMdl nav = obj_nav.PrepareApiData();
                 nav.PartyId = obj.Party_Id;
                 nav.PartyName = obj.Party_Name;
-                if (this.Title == "Receivable Chart")
-                {
-                    nav.TagType = EnumMaster.TagtypereceivableOutstanding;
-                }
-                else
-                {
-                    nav.TagType = EnumMaster.TagtypepayableOutstanding;
-                }
-                //ResponseModel rs = StaticMethods.GetLocalSavedData();
+                nav.TagType = this.Title == "Receivable Chart" ? EnumMaster.TagtypereceivableOutstanding : EnumMaster.TagtypepayableOutstanding;
+                //UserModel rs = StaticMethods.GetLocalSavedData();
                 //navmdl.UserId = rs.UserId;
                 _payable =await api.PayableTable(nav);
              
