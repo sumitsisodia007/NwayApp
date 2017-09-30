@@ -36,7 +36,7 @@ namespace App2.PopUpPages
             InitializeComponent();
             _data = data;
             PickerData(data);
-            DrawalMenu();
+         //   DrawalMenu();
             PrepareLayout();
         }
 
@@ -62,7 +62,6 @@ namespace App2.PopUpPages
                 res.CompanyIndex = selectedIndex.ToString();
                 StaticMethods.SaveLocalData(res);
                 DrawalMenu();
-                menuList.Clear();
             }
             catch (Exception ex)
             {
@@ -119,10 +118,10 @@ namespace App2.PopUpPages
             //        });
             //    }
             //}
-            
-            NavigationList.ItemsSource = menuList;
-          
+
+            NavigationList.ItemsSource = menuList.AsEnumerable().Distinct(); 
             lblupdate.Text = StaticMethods.SetCompanyName;
+            
         }
 
         private void NavigationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
