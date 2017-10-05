@@ -22,7 +22,7 @@
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                 <Grid Padding="3" BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="EndAndExpand">
-                    <Image Source="icon_notification" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" >
+                    <Image Source="icon_notification" HeightRequest="32" Margin="1" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Notification_Clicked"/>
                         </Image.GestureRecognizers>
@@ -37,7 +37,7 @@
                     </Grid.GestureRecognizers>
                 </Grid>
                 <Grid Padding="3" BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="End">
-                    <Image Source="alert" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" >
+                    <Image Source="alert" HeightRequest="32" Margin="1" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Alert_Tapped"/>
                         </Image.GestureRecognizers>
@@ -52,7 +52,7 @@
                     </Grid.GestureRecognizers>
                 </Grid>
                 <Grid Padding="3" BackgroundColor="#2196F3" HeightRequest="33" VerticalOptions="Start" HorizontalOptions="End">
-                    <Image Source="approval" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" >
+                    <Image Source="approval" Margin="1" HeightRequest="32" WidthRequest="32" HorizontalOptions="End" VerticalOptions="Start" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Approval_Clicked"/>
                         </Image.GestureRecognizers>

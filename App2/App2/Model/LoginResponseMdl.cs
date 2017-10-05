@@ -33,6 +33,7 @@ namespace App2.Model
         [JsonProperty("company_site")]
         public ObservableCollection<CompanySite> Sites { get; set; }
     }
+
     public class CompanySite
     {
         public string Site_name { get; set; }

@@ -1,12 +1,10 @@
 ﻿using App2.Model;
 using App2.NativeMathods;
-using App2.ShowModels;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,7 +17,6 @@ namespace App2.PopUpPages
     {
         private List<CompanySite> menuList { get; set; }
         private List<TempSiteIdMdl> tempchlst = null;//not now used Date 29 Sep SSS
-
 
         private List<ShowCompanyNameMdl> Companyname { get; set; }
         LoginResponseMdl _data;
@@ -36,7 +33,7 @@ namespace App2.PopUpPages
             InitializeComponent();
             _data = data;
             PickerData(data);
-         //   DrawalMenu();
+            DrawalMenu();
             PrepareLayout();
         }
 
@@ -61,7 +58,11 @@ namespace App2.PopUpPages
                 res.CompanyName = lblupdate.Text = StaticMethods.SetCompanyName = (string)picker.Items[selectedIndex];
                 res.CompanyIndex = selectedIndex.ToString();
                 StaticMethods.SaveLocalData(res);
-                DrawalMenu();
+                if (res.CompanyName != picker.SelectedItem)
+                {
+                    //DrawalMenu();
+
+                }
             }
             catch (Exception ex)
             {
@@ -88,18 +89,46 @@ namespace App2.PopUpPages
 
             menuList = new List<CompanySite>();
             var cmpTblTbl = await App.CmpDatabase.GetItemsAsync();
-            foreach (var companyites in cmpTblTbl)
+            if (cmpTblTbl == null)
             {
-                if(companyites.CompanyName==StaticMethods.SetCompanyName)
-                menuList.Add(new CompanySite
+                foreach (var item in _data._permissions)
                 {
-                    Site_id = Convert.ToInt32(companyites.SiteId),
-                    Site_name = companyites.SiteName,
-                    Site_short_name = companyites.SiteShortName,
-                    Chk_id = companyites.IsSiteSelected,
-                    ImgName = companyites.ImageSrc
-                });
+                    if (StaticMethods.SetCompanyName != item.CompanyName) continue;
+                    foreach (var item2 in item.Sites)
+                    {
+                        //if (StaticMethods.userCh == null)
+                        //{
+                        //    tempchlst.Add(new TempSiteIdMdl { SiteId = item2.Site_id, SiteName = item2.Site_name, SiteShortName = item2.Site_short_name ,ChkId = item2.Chk_id});
+                        //}
+                        string imgesource = null;
+                        imgesource = item2.Chk_id == true ? "on_btn.png" : "off_btn.png";
+                        menuList.Add(new CompanySite
+                        {
+                            Site_id = item2.Site_id,
+                            Site_name = item2.Site_name,
+                            Site_short_name = item2.Site_short_name,
+                            Chk_id = item2.Chk_id,
+                            ImgName = imgesource
+                        });
+                    }
+                }
+
             }
+            else
+            {
+                foreach (var companyites in cmpTblTbl)
+                {
+                    if (companyites.CompanyName == StaticMethods.SetCompanyName)
+                        menuList.Add(new CompanySite
+                        {
+                            Site_id = Convert.ToInt32(companyites.SiteId),
+                            Site_name = companyites.SiteName,
+                            Site_short_name = companyites.SiteShortName,
+                            Chk_id = companyites.IsSiteSelected,
+                            ImgName = companyites.ImageSrc
+                        });
+                }
+            } 
             //foreach (var item in _data._permissions)
             //{
             //    if (StaticMethods.SetCompanyName != item.CompanyName) continue;
@@ -118,7 +147,6 @@ namespace App2.PopUpPages
             //        });
             //    }
             //}
-
             NavigationList.ItemsSource = menuList.AsEnumerable().Distinct(); 
             lblupdate.Text = StaticMethods.SetCompanyName;
             
@@ -143,6 +171,7 @@ namespace App2.PopUpPages
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
+            StaticMethods._new_res = _data;
             await Task.WhenAll(
              Navigation.PushModalAsync(new App2.View.MasterMainPage(_data, tempchlst)),
              PopupNavigation.RemovePageAsync(this)
@@ -166,6 +195,7 @@ namespace App2.PopUpPages
         {
             try
             {
+                Device.BeginInvokeOnMainThread(async () => { 
                 Xamarin.Forms.Image img = (Xamarin.Forms.Image)sender;
                 var  selectdata= (CompanySite)img.BindingContext;
                 Xamarin.Forms.FileImageSource objFileImageSource = (Xamarin.Forms.FileImageSource)img.Source;
@@ -208,7 +238,7 @@ namespace App2.PopUpPages
                     }
                 }
 
-
+                });
             }
             catch (Exception ex)
             {

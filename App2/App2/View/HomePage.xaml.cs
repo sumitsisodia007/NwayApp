@@ -14,7 +14,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using App2.Interface;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -52,9 +52,78 @@ namespace App2.View
             StaticMethods._new_res = _newres = res;
             PrepareView(res);
             Task.Delay(500);
+                
                 UserModel rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
             });
+        }
+
+        protected override void OnAppearing()
+        {
+            HidePopup();
+        }
+        private async void HidePopup()
+        {
+            try
+            {
+                var rs = StaticMethods.GetLocalSavedData();
+                //if (rs.DeviceToken == null)
+                //{
+                    await Task.Delay(2000);
+                    await MainTokanReg();
+                //}
+            }
+            catch (Exception exception)
+            {
+            }
+
+        }
+        private Task<int> MainTokanReg()
+        {
+            try
+            {
+
+                LoginResponseMdl res = new LoginResponseMdl();
+                LoginMdl _login = new LoginMdl();
+
+                UserModel rs = StaticMethods.GetLocalSavedData();
+                _login.Username = rs.UserName;
+                _login.Password = rs.Password;
+                _login.Tagtype = EnumMaster.TagtypeSignin;
+                _login.DeviceId = StaticMethods.GetDeviceidentifier();
+                if (_login.DeviceId == "unknown")
+                {
+                    _login.DeviceId = "123456";
+                }
+                if (Device.OS == TargetPlatform.iOS)
+                {
+                    _login.IosToken = DependencyService.Get<IIosMethods>().GetTokan();
+                    rs.DeviceToken = _login.IosToken;
+                }
+                else
+                {
+                    _login.Firebasetoken = DependencyService.Get<IAndroidMethods>().GetTokan();
+                    if (_login.Firebasetoken == null)
+                    {
+                        _login.Firebasetoken = "";
+                    }
+                }
+                res = _api.PostLogin(_login);
+                if (res.Error == "false")
+                {
+                    //_newres = res;
+                    StaticMethods._new_res = _newres = res;
+                    if (rs.DeviceToken == null)
+                    {
+                        
+                        StaticMethods.SaveLocalData(rs);
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+            return null;
         }
 
         public HomePage(LoginResponseMdl res, NavigationMdl mdl)
@@ -71,6 +140,7 @@ namespace App2.View
                 NavigatePageNotification(res,mdl);
             });
         }
+
         private async void NavigatePageNotification(LoginResponseMdl lgres, NavigationMdl nav)
         {
             ObservableCollection<SiteIdMdl> lst = new ObservableCollection<SiteIdMdl>();
@@ -93,15 +163,15 @@ namespace App2.View
             nav.DeviceId = res.DeviceId;
             nav.UserId = res.UserId;
             nav.SiteIdMdls = lst;
-            nav.PartyId = "1";
-            if (nav.TagType == "payable_outstanding")
+            
+            switch (nav.TagType)
             {
-                nav.PageTitle = LblPay.Text;
-                
-            }
-            else if (nav.TagType == "receivable_outstanding")
-            {
-                nav.PageTitle = LblReceive.Text;
+                case "payable_outstanding":
+                    nav.PageTitle = LblPay.Text;
+                    break;
+                case "receivable_outstanding":
+                    nav.PageTitle = LblReceive.Text;
+                    break;
             }
             //nav.TagType = nav.TagType;
             await Navigation.PushAsync(new PayablePage(nav));
@@ -168,7 +238,7 @@ namespace App2.View
 
         private async void CashFlow_Tapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CashFlowPage());
+            await Navigation.PushAsync(new CashFlowSitePage());
         }
 
         private async void Elect_Tapped(object sender, EventArgs e)

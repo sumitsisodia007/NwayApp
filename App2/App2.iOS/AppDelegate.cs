@@ -79,10 +79,10 @@ namespace App2.iOS
                     int Notification_count = -1;
                     string Party_id = "";
                     string Party_name = "";
-                    int Site_id = -1;
+                    int siteId = -1;
                     int Party_outstanding = -1;
-                    string SiteName = "";
-                    string SiteShortName = "";
+                    string siteName = "";
+                    string siteShortName = "";
                     if (extra != null && extra.ContainsKey(new NSString("tagtype")))
                     {
                         TagType = (extra[new NSString("tagtype")] as NSObject).ToString();
@@ -92,18 +92,19 @@ namespace App2.iOS
                         var amtrec = (extra[new NSString("amount_received")] as NSObject).ToString();
                         int.TryParse(amtrec, out Amount_received);
                     }
+
                     if (extra != null && extra.ContainsKey(new NSString("site_id")))
                     {
                         var siteid = (extra[new NSString("site_id")] as NSObject).ToString();
-                        int.TryParse(siteid, out Site_id);
+                        int.TryParse(siteid, out siteId);
                     }
                     if (extra != null && extra.ContainsKey(new NSString("site_name")))
                     {
-                        SiteName = (extra[new NSString("site_name")] as NSObject).ToString();
+                        siteName = (extra[new NSString("site_name")] as NSObject).ToString();
                     }
                     if (extra != null && extra.ContainsKey(new NSString("site_short_name")))
                     {
-                        SiteShortName = (extra[new NSString("site_short_name")] as NSObject).ToString();
+                        siteShortName = (extra[new NSString("site_short_name")] as NSObject).ToString();
                     }
 
                     if (extra != null && extra.ContainsKey(new NSString("company_name")))
@@ -153,35 +154,42 @@ namespace App2.iOS
                     mdl.CompanyName= Company_name;
                     mdl.PartyId = Party_id;
                     mdl.IsNotification = true;
-                    foreach (var item in mdl.SiteIdMdls)
+
+                    //foreach (var item in mdl.SiteIdMdls)
+                    //{
+                    //    mdl.SiteIdMdls.Add(new SiteIdMdl
+                    //    {
+                    //        SiteShortName = siteShortName,
+                    //        SiteName = siteName,
+                    //        SiteId = siteId,
+                    //    });
+                    //}
+
+                    switch (TagType)
                     {
-                       mdl.SiteIdMdls.Add(new SiteIdMdl
-                       {
-                           SiteShortName = SiteShortName,
-                           SiteName = SiteName,
-                           SiteId = Site_id,
-                       });
+                        case "receipt":
+                            mdl.PageTitle = "Receivable";
+                            mdl.TagType= EnumMaster.TagtypereceivableOutstanding;
+                            //  App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
+                            break;
+                        case "paid":
+                            mdl.PageTitle = "Payable";
+                            mdl.TagType = EnumMaster.TagtypepayableOutstanding;
+                            //  App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
+                            break;
+                        case "booking_entry":
+                            LoadApplication(new App());
+                            break;
+                        case "booking_end":
+                            LoadApplication(new App());
+                            break;
+                        case "invoice_cancelletion":
+                            LoadApplication(new App());
+                            break;
+                        case "invoice_event":
+                            LoadApplication(new App());
+                            break;
                     }
-                    if (TagType == "receipt")
-                    {
-                        mdl.PageTitle = "Receivable";
-                        mdl.TagType= EnumMaster.TagtypereceivableOutstanding;
-                      //  App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
-                    }
-                    else if (TagType == "paid")
-                    {
-                        mdl.PageTitle = "Payable";
-                        mdl.TagType = EnumMaster.TagtypepayableOutstanding;
-                      //  App.Current.MainPage.Navigation.PushModalAsync(new View.PayablePage(mdl));
-                    }
-                    else if (TagType == "booking_entry")
-                    { LoadApplication(new App()); }
-                    else if (TagType == "booking_end")
-                    { LoadApplication(new App()); }
-                    else if (TagType == "invoice_cancelletion")
-                    { LoadApplication(new App()); }
-                    else if (TagType == "invoice_event")
-                    { LoadApplication(new App()); }
                     // StaticMethods.SaveLocalNotification(mdl);
 
                     UIAlertView alert = new UIAlertView("You have Receive Notification.", null, null, NSBundle.MainBundle.LocalizedString("Cancel", "Cancel"),

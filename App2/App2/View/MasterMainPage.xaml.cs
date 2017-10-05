@@ -53,20 +53,37 @@ namespace App2.View
 
         public MasterMainPage()
         {
-            MainLogin();
+           
             InitializeComponent();
-
+           
+            MainLogin();
             this.Master = new MasterPage(_newres);
             this.Detail = new NavigationPage(new HomePage(_newres));
             App.MasterDetail = this;
         }
 
 
-
-
-        private  void MainLogin()
+        //protected override void OnAppearing()
+        //{
+        //    HidePopup();
+        //}
+        private async void HidePopup()
         {
-           
+            try
+            {
+             await Task.Delay(7000);
+            await MainLogin();
+            }
+            catch (Exception exception)
+            {
+            }
+          
+        }
+        private Task<int>  MainLogin()
+        {
+            try
+            {
+
             LoginResponseMdl res = new LoginResponseMdl();
             LoginMdl _login = new LoginMdl();
            
@@ -81,7 +98,11 @@ namespace App2.View
             }
             if (Device.OS == TargetPlatform.iOS)
             {
-                _login.IosToken = DependencyService.Get<IIosMethods>().GetTokan();
+               _login.IosToken = DependencyService.Get<IIosMethods>().GetTokan();
+                if (_login.IosToken == null)
+                {
+                    _login.IosToken = rs.DeviceToken;
+                }
             }
             else
             {
@@ -95,9 +116,14 @@ namespace App2.View
             if (res.Error == "false")
             {
                 //_newres = res;
-                StaticMethods._new_res = _newres = res;
+                 StaticMethods._new_res = _newres = res;
             }
             SetBedge();
+            }
+            catch (Exception exception)
+            {
+            }
+            return null;
         }
 
         

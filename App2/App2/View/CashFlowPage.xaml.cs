@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using App2.NativeMathods;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,41 +20,27 @@ namespace App2.View
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
-                var calcScreenHieght = Application.Current.MainPage.Height;
 
                 LblSiteName.WidthRequest =
                     LblSiteAmt.WidthRequest =
-                        LblSiteBank.WidthRequest =_Width = calcScreenWidth / 4 - 20;
+                        LblSiteBank.WidthRequest = _Width = calcScreenWidth / 4 - 20;
             }
             TodayCollationList();
         }
         public void TodayCollationList()
         {
-
             CashFlowDetailses = new List<CashFlowDetails>();
             try
             {
                 CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width,SiteAmount ="160000", SitesName= "Indore-C21", SiteBank= "ICICI" });
                 CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width,SiteAmount ="1200000", SitesName= "Ujjain-C21", SiteBank= "HDFC" });
                 CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width,SiteAmount ="200000", SitesName= "Mandsaur-C21", SiteBank= "SBI" });
-                CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width,SiteAmount ="750000", SitesName= "Ratlam-C21", SiteBank = "BOM" });
-                //CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width, SiteAmount = "900000", SitesName = "Devas-C21", SiteBank = "AXIS" });
-                //CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width, SiteAmount = "160000", SitesName = "Indore-C21", SiteBank = "BOI" });
-                //CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width, SiteAmount = "1200000", SitesName = "Ujjain-C21", SiteBank = "OBC" });
-                //CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width, SiteAmount = "200000", SitesName = "Mandsaur-C21", SiteBank = "UNION" });
-                //CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width, SiteAmount = "750000", SitesName = "Ratlam-C21", SiteBank = "ALLAH" });
-                //CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width, SiteAmount = "900000", SitesName = "Devas-C21", SiteBank = "UBOI" });
-                //CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width, SiteAmount = "900000", SitesName = "Nagda-C21", SiteBank = "UCO" });
-                //CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width, SiteAmount = "900000", SitesName = "Lucknow-C21", SiteBank = "SYND" });
-                //CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width, SiteAmount = "900000", SitesName = "Delhi-C21", SiteBank = "PNB" });
-                //CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width, SiteAmount = "900000", SitesName = "Ajmer-C21", SiteBank = "IDBI" });
-                //CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width, SiteAmount = "900000", SitesName = "Kota-C21", SiteBank = "CORP" });
+                CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width,SiteAmount ="750000", SitesName= "Ratlam-C21", SiteBank = "CORP" });
                 listView.ItemsSource = CashFlowDetailses;
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-
-
+                StaticMethods.ShowToast(exception.Message);
             }
         }
 
@@ -118,6 +104,7 @@ namespace App2.View
            // LabelAmt.Text = amt;
             Spanamt.Text = "  "+amt;
         }
+        
     }
 
     public class CashFlowDetails

@@ -103,7 +103,7 @@ namespace App2.View
                             rs.MinReceiptAmt = res.MinReceiptAmount.ToString();
                             rs.NotificationDayCount = res.NotificationDayCount.ToString();
                             rs.Error = res.Error;
-                            rs.DeviceToken = _login.Firebasetoken = _login.Firebasetoken;
+                          //  rs.DeviceToken = _login.Firebasetoken = _login.IosToken;
                             rs.UserId = res.UserId.ToString();
                             StaticMethods.SaveLocalData(rs);
                            await userModel.SaveLocalCompanyData(res);

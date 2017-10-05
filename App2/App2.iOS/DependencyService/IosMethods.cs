@@ -45,7 +45,7 @@ namespace App2.iOS.DependencyService
 
                 storage.Put("TagType", um.TagType);
                 storage.Put("Error", um.Error);
-
+                storage.Put("DeviceToken", um.DeviceToken);
                 storage.Put("UserId", um.UserId);
                 storage.Put("DeviceId", um.DeviceId);
                 storage.Put("NotCount", um.NotCount);
@@ -71,7 +71,7 @@ namespace App2.iOS.DependencyService
                 um.NotificationDayCount = storage.Get("NotificationDayCount", null);
                 um.TagType = storage.Get("TagType", null);
                 um.Error = storage.Get("Error", null);
-
+                um.DeviceToken = storage.Get("DeviceToken", null);
                 um.UserId = storage.Get("UserId", null);
                 um.DeviceId = storage.Get("DeviceId", null);
                 

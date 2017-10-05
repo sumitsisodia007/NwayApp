@@ -11,8 +11,8 @@ namespace App2.APIService
 {
     public class API
     {
-           public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
-      // public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
+        public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
+           //       public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
        
         #region Login WebService
         public LoginResponseMdl PostLogin(LoginMdl lgmdl)
@@ -53,7 +53,6 @@ namespace App2.APIService
         }
         #endregion
         
-
         #region Notification WebService 
         public NotificationListMdl PostNotification(NavigationMdl nav)
         {
@@ -238,6 +237,60 @@ namespace App2.APIService
                 StaticMethods.ShowToast(ex.Message);
             }
             return partysearchlistmdl;
+        }
+        #endregion
+
+
+        #region CashFlow WebService 
+        public CashFlowMdl CashFlowDetails(NavigationMdl nav)
+        {
+            var jsonResponse = new CashFlowMdl();
+            try
+            {
+                var client = new HttpClient { BaseAddress = new Uri(RestUrl) };
+
+                var res = StaticMethods.GetLocalSavedData();
+
+                //Create List of KeyValuePairs
+                var notificationProperties = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("username", nav.UserName),
+                    new KeyValuePair<string, string>("password", nav.Password),
+                    new KeyValuePair<string, string>("user_id", nav.UserId),
+                    new KeyValuePair<string, string>("device_id", nav.DeviceId),
+                    new KeyValuePair<string, string>("company_id", nav.CompanyId),
+                    new KeyValuePair<string, string>("party_id", nav.PartyId),
+                    //new KeyValuePair<string, string>("tagtype", "notifications")
+                };
+
+                //Add 'single' parameters
+                //Loop over String array and add all instances to our bodyPoperties
+                foreach (var dir in nav.SiteIdMdls)
+                {
+                    if (dir.ChkId == true)
+                    {
+                        notificationProperties.Add(
+                            new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
+                    }
+                }
+
+                //convert your bodyProperties to an object of FormUrlEncodedContent
+                var dataContent = new FormUrlEncodedContent(notificationProperties.ToArray());
+
+                //var content = new FormUrlEncodedContent(values);
+                var response = client.PostAsync(RestUrl, dataContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonresult = response.Content.ReadAsStringAsync().Result;
+                    JObject.Parse(jsonresult);
+                    jsonResponse = JsonConvert.DeserializeObject<CashFlowMdl>(jsonresult);
+                }
+            }
+            catch (Exception ex)
+            {
+                // StaticMethods.ShowToast(ex.Message);
+            }
+            return jsonResponse;
         }
         #endregion
     }

@@ -8,6 +8,7 @@ using Firebase.Messaging;
 using Android.Media;
 using Android.Support.V4.App;
 using App2.Droid.DependencyService;
+using App2.Model;
 using Newtonsoft.Json.Linq;
 using App2.NativeMathods;
 
@@ -78,17 +79,25 @@ namespace App2.Droid
                 string CURRENT_OUTSTANDING = jObj["current_outstanding"].ToString();
                 string INFORMATION_TYPE = jObj["information_type"].ToString();
                 string PARTY_OUTSTANDING = jObj["party_outstanding"].ToString();
-
-                string New_Msg = PARTY_NAME.ToUpper() + " : " + AMOUNT_RECEIVED;
-                string New_Title;
-                if (TAGTYPE == "paid")
-                { New_Title = "PAID"; }
-                else if(TAGTYPE == "receipt")
-                { New_Title = "RECEIVED"; }
-                else{ New_Title = "CANCELED"; }
+                UserModel rs = new UserModel {NotCount = jObj["notification_count"].ToString()};
+                StaticMethods.SaveLocalData(rs);
+                string newMsg = PARTY_NAME.ToUpper() + " : " + AMOUNT_RECEIVED;
+                string newTitle;
+                switch (TAGTYPE)
+                {
+                    case "paid":
+                        newTitle = "PAID";
+                        break;
+                    case "receipt":
+                        newTitle = "RECEIVED";
+                        break;
+                    default:
+                        newTitle = "CANCELED";
+                        break;
+                }
 
                 //StaticMethods.NotificationCount++;
-                SendNotification( data_onclick, New_Msg, New_Title,PARTY_ID,TAGTYPE);
+                SendNotification( data_onclick, newMsg, newTitle,PARTY_ID,TAGTYPE);
             }
             catch (Exception ex)
             {
