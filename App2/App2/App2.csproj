@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="Model\CashFlowMdl.cs" />
     <Compile Include="Model\CompanyTbl.cs" />
+    <Compile Include="Model\ElectricityMdl.cs" />
     <Compile Include="Model\LoginMdl.cs" />
     <Compile Include="Model\LoginResponseMdl.cs" />
     <Compile Include="Model\MasterPageItem.cs" />
@@ -93,6 +94,9 @@
     </Compile>
     <Compile Include="View\ApprovelsPage.xaml.cs">
       <DependentUpon>ApprovelsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CashFlowAccountType.xaml.cs">
+      <DependentUpon>CashFlowAccountType.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CashFlowPage.xaml.cs">
       <DependentUpon>CashFlowPage.xaml</DependentUpon>
@@ -386,6 +390,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\CashFlowSitePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\CashFlowAccountType.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

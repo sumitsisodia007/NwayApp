@@ -40,8 +40,22 @@ namespace App2.View
             CashFlowDetailses = new List<CashFlowSite>();
             try
             {
-                CashFlowDetailses.Add(new CashFlowSite { TxtWidth = _Width, SiteTotalAmt= "160000", SitesName = "C21 BUSINESS PARK" });
-                CashFlowDetailses.Add(new CashFlowSite { TxtWidth = _Width, SiteTotalAmt = "1200000", SitesName = "CENTURY 21 TOWN PLANNERS PVT. LTD." });
+                var cash = StaticMethods.BankRes;
+                foreach (var items in cash.ListCashFlowSite)
+                {
+                    if (items.CompanyName == StaticMethods.SetCompanyName)
+                    {
+                        foreach (var collection in items.ListSiteAccountMdls)
+                        {
+                            CashFlowDetailses.Add(new CashFlowSite
+                            {
+                                TxtWidth = _Width,
+                                SiteTotalAmt = collection.Amt+" "+ collection.AmtType,
+                                SitesName = collection.SiteName,
+                            });
+                        }
+                    }
+                }
                 ListCashSite.ItemsSource = CashFlowDetailses;
             }
             catch (Exception exception)
@@ -52,13 +66,16 @@ namespace App2.View
 
         private async void ListCashSite_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync(new CashFlowPage());
+          var lstItems= (CashFlowSite)e.Item;
+         //   var page = new CashFlowAccountType();
+            await Navigation.PushAsync(new CashFlowAccountType(lstItems));
         }
     }
     public class CashFlowSite
     {
         public string SitesName { get; set; }
         public string SiteTotalAmt { get; set; }
+        public string AmtType { get; set; }
         public double TxtWidth { get; set; }
     }
 }

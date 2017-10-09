@@ -192,7 +192,8 @@ namespace App2.View
                 {
                     foreach (var item2 in item.ListPayablemdl)
                     {
-                        Stktodaypayable.IsVisible = item2.NotCount != "0";
+                        //Total Payble List Show
+                        Stktodaypayable.IsVisible = item2.Notification != null;
                         foreach (var item3 in item2.Notification)
                         {
                             if (item3.Party_name == null) continue;

@@ -14,9 +14,10 @@ namespace App2.View
     {
         public List<CashFlowDetails> CashFlowDetailses { get; set; }
         public double _Width = 0;
-        public CashFlowPage()
+        public CashFlowPage(CashFlowAccountTypeMdl item)
         {
             InitializeComponent();
+            LblAccGroup.Text = item.AccountType;
             if (Application.Current.MainPage.Width > 0 && Application.Current.MainPage.Height > 0)
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
@@ -25,17 +26,37 @@ namespace App2.View
                     LblSiteAmt.WidthRequest =
                         LblSiteBank.WidthRequest = _Width = calcScreenWidth / 4 - 20;
             }
-            TodayCollationList();
+            TodayCollationList(item);
         }
-        public void TodayCollationList()
+        public void TodayCollationList(CashFlowAccountTypeMdl cfAccountTypeMdl)
         {
             CashFlowDetailses = new List<CashFlowDetails>();
             try
             {
-                CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width,SiteAmount ="160000", SitesName= "Indore-C21", SiteBank= "ICICI" });
-                CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width,SiteAmount ="1200000", SitesName= "Ujjain-C21", SiteBank= "HDFC" });
-                CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width,SiteAmount ="200000", SitesName= "Mandsaur-C21", SiteBank= "SBI" });
-                CashFlowDetailses.Add(new CashFlowDetails { TxtWidth = _Width,SiteAmount ="750000", SitesName= "Ratlam-C21", SiteBank = "CORP" });
+                var cash = StaticMethods.BankRes;
+                foreach (var items in cash.ListCashFlowSite)
+                {
+                    foreach (var SitesDetailes in items.ListSiteAccountMdls)
+                    {
+                        foreach (var accountType in SitesDetailes.ListSiteAccountTypeMdls)
+                        {
+                            if (accountType.AccountHeadName == cfAccountTypeMdl.AccountType)
+                            {
+                                foreach (var bankDetails in accountType.ListSiteAccountBankMdl)
+                                {
+                                    CashFlowDetailses.Add(new CashFlowDetails
+                                    {
+                                        TxtWidth = _Width,
+                                        SiteAmount = bankDetails.Amt+" "+bankDetails.AmtType,
+                                        SitesName = bankDetails.AccountId.ToString(),
+                                        SiteBank = bankDetails.AccountName
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 listView.ItemsSource = CashFlowDetailses;
             }
             catch (Exception exception)
@@ -100,7 +121,7 @@ namespace App2.View
                     bankname = "https://vanihegde.files.wordpress.com/2013/06/corp.jpg";
                     break;
             }
-            ImageBank.Source = bankname;
+            //ImageBank.Source = bankname;
            // LabelAmt.Text = amt;
             Spanamt.Text = "  "+amt;
         }

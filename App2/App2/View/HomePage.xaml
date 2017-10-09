@@ -151,7 +151,7 @@
                                         <TapGestureRecognizer Tapped="CashFlow_Tapped" />
                                     </Image.GestureRecognizers>
                                 </Image>
-                                <Label x:Name="Lblcashflow" Text="Bank" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
+                                <Label x:Name="LblBank" Text="Bank" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22"   VerticalOptions="StartAndExpand" FontSize="13">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="CashFlow_Tapped"/>
                                     </Label.GestureRecognizers>
@@ -160,7 +160,7 @@
                                     <TapGestureRecognizer Tapped="CashFlow_Tapped" />
                                 </StackLayout.GestureRecognizers>
                             </StackLayout>
-                            <Label Text="1120000" HeightRequest="22" BackgroundColor="#6DB040"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                                <Label x:Name="LblBankAmt" Text="1120000" HeightRequest="22" BackgroundColor="#6DB040"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="CashFlow_Tapped"/>
                                 </Label.GestureRecognizers>

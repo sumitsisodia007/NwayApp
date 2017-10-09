@@ -4,7 +4,7 @@
              x:Class="App2.View.CashFlowSitePage"
              xmlns:local="clr-namespace:App2.CustomRenderer"
              Title="Cash Flow Site"
-             Padding="20">
+             Padding="10,20">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="ListHeaderLabelStyle" TargetType="Label">
@@ -67,6 +67,7 @@
                                                  Spacing="0"  BackgroundColor="Black">
                                         <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SitesName}" />
                                         <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteTotalAmt}" />
+                                        
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

@@ -34,7 +34,7 @@ namespace App2.View
         {
             InitializeComponent();
             //_newres = res;
-            StaticMethods._new_res = _newres = res;
+            StaticMethods.NewRes = _newres = res;
             SetBedge();
             this.Master = new MasterPage(_newres);
             this.Detail = new NavigationPage(new HomePage(_newres));
@@ -116,7 +116,7 @@ namespace App2.View
             if (res.Error == "false")
             {
                 //_newres = res;
-                 StaticMethods._new_res = _newres = res;
+                 StaticMethods.NewRes = _newres = res;
             }
             SetBedge();
             }
@@ -127,16 +127,23 @@ namespace App2.View
         }
 
         
-        private void SetBedge()
+        private async void SetBedge()
         {
             try
             {
 
             UserModel rs = StaticMethods.GetLocalSavedData();
             _objNav = new NavigationMdl();
+             
             NavigationMdl nav = _objNav.PrepareApiData();
 
             NotificationListMdl notificationModel = _api.PostNotification(nav);
+            var cashdetails =  _api.CashFlowDetails(nav);
+            if (cashdetails.Error == "false")
+            {
+                StaticMethods.BankRes = cashdetails;
+            }
+           
             var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
             string dateChk = null;
             string notcount = "0";

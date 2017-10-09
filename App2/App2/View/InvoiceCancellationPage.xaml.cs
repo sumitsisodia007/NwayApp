@@ -32,16 +32,16 @@ namespace App2.View
             _receivablList = new List<PartyDetails>();
             try
             {
-                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold  30 seconds" });
-                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for  seconds" });
-                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 " });
-                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "for 30 seconds" });
-                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
-                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold  30 seconds" });
-                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for  seconds" });
-                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 " });
-                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "for 30 seconds" });
-                _receivablList.Add(new PartyDetails { txtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
+                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold  30 seconds" });
+                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for  seconds" });
+                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 " });
+                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "for 30 seconds" });
+                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
+                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold  30 seconds" });
+                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for  seconds" });
+                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 " });
+                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "for 30 seconds" });
+                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
                 InvoceCancellation.ItemsSource = _receivablList;
                 
             }

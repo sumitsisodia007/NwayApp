@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App2.APIService;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -61,7 +62,6 @@ namespace App2.PopUpPages
                 if (res.CompanyName != picker.SelectedItem)
                 {
                     //DrawalMenu();
-
                 }
             }
             catch (Exception ex)
@@ -86,7 +86,6 @@ namespace App2.PopUpPages
         public async void DrawalMenu()
         {
             //tempchlst = new List<TempSiteIdMdl>();
-
             menuList = new List<CompanySite>();
             var cmpTblTbl = await App.CmpDatabase.GetItemsAsync();
             if (cmpTblTbl == null)
@@ -112,7 +111,6 @@ namespace App2.PopUpPages
                         });
                     }
                 }
-
             }
             else
             {
@@ -128,7 +126,7 @@ namespace App2.PopUpPages
                             ImgName = companyites.ImageSrc
                         });
                 }
-            } 
+            }
             //foreach (var item in _data._permissions)
             //{
             //    if (StaticMethods.SetCompanyName != item.CompanyName) continue;
@@ -147,14 +145,14 @@ namespace App2.PopUpPages
             //        });
             //    }
             //}
-            NavigationList.ItemsSource = menuList.AsEnumerable().Distinct(); 
+            NavigationList.ItemsSource = menuList.AsEnumerable().Distinct();
             lblupdate.Text = StaticMethods.SetCompanyName;
-            
+
         }
 
         private void NavigationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-              ((ListView)sender).SelectedItem = null;
+            ((ListView)sender).SelectedItem = null;
         }
 
         protected override void OnAppearing()
@@ -168,10 +166,19 @@ namespace App2.PopUpPages
             await Task.Delay(2000);
             await PopupNavigation.RemovePageAsync(this);
         }
-
+        private NavigationMdl _objNav = null;
+        readonly API _api = new API();
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            StaticMethods._new_res = _data;
+            StaticMethods.NewRes = _data;
+            _objNav = new NavigationMdl();
+
+            var nav = _objNav.PrepareApiData();
+            var cashdetails = _api.CashFlowDetails(nav);
+            if (cashdetails.Error == "false")
+            {
+                StaticMethods.BankRes = cashdetails;
+            }
             await Task.WhenAll(
              Navigation.PushModalAsync(new App2.View.MasterMainPage(_data, tempchlst)),
              PopupNavigation.RemovePageAsync(this)
@@ -195,49 +202,52 @@ namespace App2.PopUpPages
         {
             try
             {
-                Device.BeginInvokeOnMainThread(async () => { 
-                Xamarin.Forms.Image img = (Xamarin.Forms.Image)sender;
-                var  selectdata= (CompanySite)img.BindingContext;
-                Xamarin.Forms.FileImageSource objFileImageSource = (Xamarin.Forms.FileImageSource)img.Source;
-                var cmpTblTbl = await App.CmpDatabase.GetItemsAsync();
-              
-              //  if (movementListTbl.Count == 0)
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    Xamarin.Forms.Image img = (Xamarin.Forms.Image)sender;
+                    var selectdata = (CompanySite)img.BindingContext;
+                    Xamarin.Forms.FileImageSource objFileImageSource = (Xamarin.Forms.FileImageSource)img.Source;
+                    var cmpTblTbl = await App.CmpDatabase.GetItemsAsync();
+
+                    //  if (movementListTbl.Count == 0)
                     // string strFileName = objFileImageSource.File;
                     foreach (var item in _data._permissions)
-                {
-                    foreach (var item2 in item.Sites)
                     {
-                        if (item2.Site_name != selectdata.Site_name) continue;
-                        foreach (var items in cmpTblTbl.Where(ml => ml.SiteName == selectdata.Site_name))
+                        foreach (var item2 in item.Sites)
                         {
-                            if (objFileImageSource == "off_btn.png")
+                            if (item2.Site_name != selectdata.Site_name) continue;
+                            foreach (var items in cmpTblTbl.Where(ml => ml.SiteName == selectdata.Site_name))
                             {
-                            //await img.FadeTo(0, 100);
-                            img.Source = "on_btn.png";
-                            //await img.FadeTo(1, 100);
-
-                           items.IsSiteSelected= item2.Chk_id = true;
-                                items.ImageSrc = item2.ImgName = "on_btn.png";
-                              
-                            //foreach (var itemcmp in cmpTblTbl.Where(ml => ml.Selected == true))
-                            //{
-                            //    await App.CmpDatabase.SaveItemAsync(itemcmp);
-                            //}
+                                if (objFileImageSource == "off_btn.png")
+                                {
+                                    //await img.FadeTo(0, 100);
+                                    img.Source = "on_btn.png";
+                                    //await img.FadeTo(1, 100);
+                                    items.IsSiteSelected = item2.Chk_id = true;
+                                    items.ImageSrc = item2.ImgName = "on_btn.png";
+                                    //foreach (var itemcmp in cmpTblTbl.Where(ml => ml.Selected == true))
+                                    //{
+                                    //    await App.CmpDatabase.SaveItemAsync(itemcmp);
+                                    //}
+                                }
+                                else
+                                {
+                                    //await img.FadeTo(0, 100);
+                                    img.Source = "off_btn.png";
+                                    //await img.FadeTo(1, 100);
+                                    items.IsSiteSelected = item2.Chk_id = false;
+                                    items.ImageSrc = item2.ImgName = "off_btn.png";
+                                    //Below Code is for checkbox animation
+                                    //{
+                                    //await Imgcheck.ScaleTo(1.5, 100);
+                                    //Imgcheck.Source = "unchecked.png";
+                                    //await Imgcheck.ScaleTo(1, 100);
+                                    //}
+                                }
+                                await App.CmpDatabase.UpdateItemAsync(items);
+                            }
                         }
-                        else
-                        {
-                            //await img.FadeTo(0, 100);
-                            img.Source = "off_btn.png";
-                            //await img.FadeTo(1, 100);
-                           items.IsSiteSelected= item2.Chk_id = false;
-                           items.ImageSrc= item2.ImgName = "off_btn.png";
-                        }
-                            await App.CmpDatabase.UpdateItemAsync(items);
-                        }
-
                     }
-                }
-
                 });
             }
             catch (Exception ex)

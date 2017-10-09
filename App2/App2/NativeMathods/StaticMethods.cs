@@ -14,8 +14,9 @@ namespace App2.NativeMathods
     {
         public static int NotificationCount { get; set; }
         public static string SetCompanyName { get; set; }
-        public static List<TempSiteIdMdl> userCh { get; set; }
-        public static LoginResponseMdl _new_res { get; set; }
+        public static List<TempSiteIdMdl> UserCh { get; set; }
+        public static LoginResponseMdl NewRes { get; set; }
+        public static CashFlowMdl BankRes { get; set; }
 
         public static string GetNotificationCount()
         {
@@ -29,7 +30,7 @@ namespace App2.NativeMathods
 
         public static string GetDeviceidentifier()
         {
-            string strDeviceIdentifier = "";
+            string strDeviceIdentifier;
             if (Device.OS == TargetPlatform.iOS)
             {
                 strDeviceIdentifier = DependencyService.Get<IIosMethods>().GetIdentifier();

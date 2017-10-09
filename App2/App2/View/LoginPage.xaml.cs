@@ -96,14 +96,20 @@ namespace App2.View
                     if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
                     {
                         res =  api.PostLogin(_login);
-                       // StaticMethods._login_response = res;
+                        //var cashdetails = await api.CashFlowDetails(nav);
+                        //if (cashdetails.Error == "false")
+                        //{
+                        //    StaticMethods.BankRes = cashdetails;
+                        //}
+                        // StaticMethods._login_response = res;
                         if (res.Error == "false")
                         {
+                            StaticMethods.NewRes = res;
                             rs.DeviceId = _login.DeviceId;
                             rs.MinReceiptAmt = res.MinReceiptAmount.ToString();
                             rs.NotificationDayCount = res.NotificationDayCount.ToString();
                             rs.Error = res.Error;
-                          //  rs.DeviceToken = _login.Firebasetoken = _login.IosToken;
+                            //  rs.DeviceToken = _login.Firebasetoken = _login.IosToken;
                             rs.UserId = res.UserId.ToString();
                             StaticMethods.SaveLocalData(rs);
                            await userModel.SaveLocalCompanyData(res);

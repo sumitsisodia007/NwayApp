@@ -2,7 +2,7 @@
 {
    public class PartyDetails
     {
-        public double   txtWidth          { get; set; }
+        public double   TxtWidth          { get; set; }
         public string   Party           { get; set; }
         public string   Pre_Outstanding { get; set; }
         public string   Today_Receipt   { get; set; }

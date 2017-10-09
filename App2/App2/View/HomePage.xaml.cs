@@ -3,16 +3,11 @@ using App2.Helper;
 using App2.Model;
 using App2.NativeMathods;
 using App2.PopUpPages;
-using App2.ShowModels;
-using Plugin.Connectivity;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using App2.Interface;
 using Xamarin.Forms;
@@ -43,18 +38,17 @@ namespace App2.View
                 LblNotificationBadge.Text = rs.NotCount;
             });
         }
+
         public HomePage(LoginResponseMdl res)
         {
             Device.BeginInvokeOnMainThread(() =>
             {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            StaticMethods._new_res = _newres = res;
+            StaticMethods.NewRes = _newres = res;
             PrepareView(res);
             Task.Delay(500);
-                
-                UserModel rs = StaticMethods.GetLocalSavedData();
-                LblNotificationBadge.Text = rs.NotCount;
+                PrepareBankAmount();
             });
         }
 
@@ -62,6 +56,7 @@ namespace App2.View
         {
             HidePopup();
         }
+
         private async void HidePopup()
         {
             try
@@ -73,19 +68,18 @@ namespace App2.View
                     await MainTokanReg();
                 //}
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
             }
-
         }
+
         private Task<int> MainTokanReg()
         {
             try
             {
-
                 LoginResponseMdl res = new LoginResponseMdl();
                 LoginMdl _login = new LoginMdl();
-
+               
                 UserModel rs = StaticMethods.GetLocalSavedData();
                 _login.Username = rs.UserName;
                 _login.Password = rs.Password;
@@ -109,10 +103,12 @@ namespace App2.View
                     }
                 }
                 res = _api.PostLogin(_login);
+                
+
                 if (res.Error == "false")
                 {
                     //_newres = res;
-                    StaticMethods._new_res = _newres = res;
+                    StaticMethods.NewRes = _newres = res;
                     if (rs.DeviceToken == null)
                     {
                         
@@ -132,7 +128,7 @@ namespace App2.View
             {
                 InitializeComponent();
                 Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-                StaticMethods._new_res = _newres = res;
+                StaticMethods.NewRes = _newres = res;
                 PrepareView(res);
                 UserModel rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
@@ -144,7 +140,7 @@ namespace App2.View
         private async void NavigatePageNotification(LoginResponseMdl lgres, NavigationMdl nav)
         {
             ObservableCollection<SiteIdMdl> lst = new ObservableCollection<SiteIdMdl>();
-            StaticMethods._new_res = _newres = lgres;
+            StaticMethods.NewRes = _newres = lgres;
             UserModel res = StaticMethods.GetLocalSavedData();
             foreach (var item in lgres._permissions)
             {
@@ -183,12 +179,12 @@ namespace App2.View
             {
                 InitializeComponent();
                 Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-                StaticMethods._new_res = _newres = res;
+                StaticMethods.NewRes = _newres = res;
                 _newTempchlst = tempchlst;
                 PrepareView(res);
-                UserModel rs = StaticMethods.GetLocalSavedData();
+                var rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
-               
+                PrepareBankAmount();
             });
         }
         
@@ -357,5 +353,28 @@ namespace App2.View
         {
             await PopupNavigation.PushAsync(new LeftMenu(_newres));
         }
+
+        private void PrepareBankAmount()
+        {
+            try
+            {
+                var rs = StaticMethods.GetLocalSavedData();
+                var cash = StaticMethods.BankRes;
+
+                foreach (var items in cash.ListCashFlowSite)
+                {
+                    if (StaticMethods.SetCompanyName == items.CompanyName)
+                    {
+                        LblBankAmt.Text = items.Amt + " " + items.AmtType;
+                    }
+                }
+                LblNotificationBadge.Text = rs.NotCount;
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+
     }
 }

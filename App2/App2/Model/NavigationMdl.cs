@@ -36,8 +36,12 @@ namespace App2.Model
             UserModel res = StaticMethods.GetLocalSavedData();
             try
             {
-                foreach (var item in StaticMethods._new_res._permissions)
+                foreach (var item in StaticMethods.NewRes._permissions)
                 {
+                    if (StaticMethods.SetCompanyName == null)
+                    {
+                        StaticMethods.SetCompanyName = "CENTURY 21 TOWN PLANNERS PVT. LTD.";
+                    }
                     if (StaticMethods.SetCompanyName == item.CompanyName)
                     {
                         foreach (var item2 in item.Sites)

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="App2.View.CashFlowPage"
+             x:Class="App2.View.CashFlowAccountType"
              xmlns:local="clr-namespace:App2.CustomRenderer"
-             Title="Cash Flow"
-             Padding="10">
+             Title="Account Type"
+             Padding="10,20">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="ListHeaderLabelStyle" TargetType="Label">
@@ -31,7 +31,7 @@
 
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
-            <local:CurvedCornersLabel x:Name="LblAccGroup" 
+            <local:CurvedCornersLabel x:Name="LblAccType" 
                                       FontSize="14.5"
                                       CurvedBackgroundColor="#6DB040"
                                       TextColor="White"
@@ -41,27 +41,21 @@
                                       HeightRequest="30"
                                       HorizontalTextAlignment="Center"
                                       VerticalTextAlignment="Center"/>
-            <!--<Image x:Name="ImageBank" Source="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW67x2gPlX6auWxrEjIIQrGQbG8ek0NMFq6b8QPTy6hBXnpmnILw"
-                       HeightRequest="100"
-                       WidthRequest="100" />-->
-           
-    
+
             <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
-               
-                    <ScrollView Orientation="Horizontal" >
-                    <ListView x:Name="listView"
-                                      HeightRequest="200"
+                <ScrollView Orientation="Horizontal" >
+                    <ListView x:Name="ListCashSite"
                                       HasUnevenRows="True"
+                                      HeightRequest="200"
                                       BackgroundColor="White"
                                       SeparatorVisibility="None"
-                              ItemTapped="ListView_OnItemTapped">
+                                      ItemTapped="ListCashAccount_OnItemTapped">
                         <ListView.Header>
                             <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0"  BackgroundColor="Black">
-                                <Label x:Name="LblSiteName" WidthRequest="{Binding TxtWidth}"  Text="Account Id" Style="{StaticResource ListHeaderLabelStyle}" />
-                                <Label x:Name="LblSiteBank" WidthRequest="{Binding TxtWidth}" Text="Bank Name" Style="{StaticResource ListHeaderLabelStyle}" />
-                                <Label x:Name="LblSiteAmt" WidthRequest="{Binding TxtWidth}" Text="Amount" Style="{StaticResource ListHeaderLabelStyle}" />
+                                <Label x:Name="LblSiteName" WidthRequest="{Binding TxtWidth}"  Text="Account Type" Style="{StaticResource ListHeaderLabelStyle}" />
+                                <Label x:Name="LblSiteBank" WidthRequest="{Binding TxtWidth}" Text="Total Amount" Style="{StaticResource ListHeaderLabelStyle}" />
                             </StackLayout>
                         </ListView.Header>
                         <ListView.ItemTemplate>
@@ -70,9 +64,8 @@
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0"  BackgroundColor="Black">
-                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SitesName}" />
-                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteBank}" />
-                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteAmount}" />
+                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding AccountType}" />
+                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding TotalAmt}" />
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
@@ -80,23 +73,7 @@
                     </ListView>
                 </ScrollView>
             </Frame>
-
-            <local:CurvedCornersLabel FontSize="14.5"
-                                      CurvedBackgroundColor="#6DB040"
-                                      TextColor="White"
-                                      HorizontalOptions="FillAndExpand"
-                                      CurvedCornerRadius="12"
-                                      HeightRequest="30"
-                                      HorizontalTextAlignment="Center"
-                                      VerticalTextAlignment="Center">
-                <local:CurvedCornersLabel.FormattedText>
-                    <FormattedString>
-                        <Span Text="&#x20b9;"  />
-                        <Span x:Name="Spanamt"  FontAttributes="Bold"/>
-                    </FormattedString>
-                </local:CurvedCornersLabel.FormattedText>
-            </local:CurvedCornersLabel>
-
         </StackLayout>
     </ContentPage.Content>
+
 </ContentPage>

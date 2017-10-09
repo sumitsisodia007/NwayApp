@@ -12,7 +12,7 @@ namespace App2.APIService
     public class API
     {
         public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
-           //       public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
+       //       public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
        
         #region Login WebService
         public LoginResponseMdl PostLogin(LoginMdl lgmdl)
@@ -98,7 +98,7 @@ namespace App2.APIService
                     jsonResponse = JsonConvert.DeserializeObject<NotificationListMdl>(jsonresult);
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                // StaticMethods.ShowToast(ex.Message);
             }
@@ -240,7 +240,6 @@ namespace App2.APIService
         }
         #endregion
 
-
         #region CashFlow WebService 
         public CashFlowMdl CashFlowDetails(NavigationMdl nav)
         {
@@ -259,8 +258,8 @@ namespace App2.APIService
                     new KeyValuePair<string, string>("user_id", nav.UserId),
                     new KeyValuePair<string, string>("device_id", nav.DeviceId),
                     new KeyValuePair<string, string>("company_id", nav.CompanyId),
-                    new KeyValuePair<string, string>("party_id", nav.PartyId),
-                    //new KeyValuePair<string, string>("tagtype", "notifications")
+                    new KeyValuePair<string, string>("tagtype", "bank_transaction"),
+
                 };
 
                 //Add 'single' parameters
@@ -284,6 +283,55 @@ namespace App2.APIService
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
                     JObject.Parse(jsonresult);
                     jsonResponse = JsonConvert.DeserializeObject<CashFlowMdl>(jsonresult);
+                }
+            }
+            catch (Exception ex)
+            {
+                // StaticMethods.ShowToast(ex.Message);
+            }
+            return jsonResponse;
+        }
+        #endregion
+
+        #region Electricity Consumption WebService 
+        public ElectricityMdl ElectricityCuns(NavigationMdl nav)
+        {
+            var jsonResponse = new ElectricityMdl();
+            try
+            {
+                var client = new HttpClient { BaseAddress = new Uri(RestUrl) };
+
+                var res = StaticMethods.GetLocalSavedData();
+
+                //Create List of KeyValuePairs
+                var notificationProperties = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("username", nav.UserName),
+                    new KeyValuePair<string, string>("password", nav.Password),
+                    new KeyValuePair<string, string>("user_id", nav.UserId),
+                    new KeyValuePair<string, string>("device_id", nav.DeviceId),
+                    new KeyValuePair<string, string>("company_id", nav.CompanyId),
+                    new KeyValuePair<string, string>("tagtype", ""),
+
+                };
+
+                foreach (var dir in nav.SiteIdMdls)
+                {
+                    if (dir.ChkId == true)
+                    {
+                        notificationProperties.Add(
+                            new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
+                    }
+                }
+
+                var dataContent = new FormUrlEncodedContent(notificationProperties.ToArray());
+
+                var response = client.PostAsync(RestUrl, dataContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonresult = response.Content.ReadAsStringAsync().Result;
+                    JObject.Parse(jsonresult);
+                    jsonResponse = JsonConvert.DeserializeObject<ElectricityMdl>(jsonresult);
                 }
             }
             catch (Exception ex)

@@ -4,12 +4,11 @@
                  x:Class="App2.PopUpPages.LeftMenu"
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-                 xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"    
                  xmlns:local="clr-namespace:App2.CustomRenderer"
                  InputTransparent="False"
                  HasSystemPadding="True"
                  CloseWhenBackgroundIsClicked="True"
-                 Padding="20,50">
+                 Padding="20,100">
     <pages:PopupPage.Animation>
         <animations:MoveAnimation
                  PositionIn="Center"
