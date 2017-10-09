@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using App2.APIService;
 
 namespace App2.Model
 {
@@ -36,11 +37,12 @@ namespace App2.Model
             UserModel res = StaticMethods.GetLocalSavedData();
             try
             {
+                var umdl = StaticMethods.GetLocalSavedData();
                 foreach (var item in StaticMethods.NewRes._permissions)
                 {
                     if (StaticMethods.SetCompanyName == null)
                     {
-                        StaticMethods.SetCompanyName = "CENTURY 21 TOWN PLANNERS PVT. LTD.";
+                        StaticMethods.SetCompanyName = umdl.CompanyName;
                     }
                     if (StaticMethods.SetCompanyName == item.CompanyName)
                     {
@@ -66,7 +68,46 @@ namespace App2.Model
             }
             return nav;
         }
+        private NavigationMdl _objNav = null;
+        readonly API _api = new API();
+        public  void SetBedge()
+        {
+            try
+            {
+
+                UserModel rs = StaticMethods.GetLocalSavedData();
+                _objNav = new NavigationMdl();
+
+                NavigationMdl nav = _objNav.PrepareApiData();
+
+                NotificationListMdl notificationModel = _api.PostNotification(nav);
+                var cashdetails = _api.CashFlowDetails(nav);
+                if (cashdetails.Error == "false")
+                {
+                    StaticMethods.BankRes = cashdetails;
+                }
+
+                var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
+                string dateChk = null;
+                string notcount = "0";
+
+                foreach (var item in notificationModel.ListNotificationDate)
+                {
+                    dateChk = item.Date;
+                    notcount = item.NotCount;
+                    break;
+                }
+                rs.NotCount = d2.ToString() == dateChk ? notcount : "0";
+                StaticMethods.SaveLocalData(rs);
+
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
     }
+
     public class SiteIdMdl
     {
         public int SiteId { get; set; }

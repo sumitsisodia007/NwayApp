@@ -38,7 +38,7 @@
                                       Text="CENTURY 21 TOWN PLANNERS PVT. LTD."
                                       HorizontalOptions="FillAndExpand"
                                       CurvedCornerRadius="12"
-                                      HeightRequest="30"
+                                      HeightRequest="40"
                                       HorizontalTextAlignment="Center"
                                       VerticalTextAlignment="Center"/>
             <!--<Image x:Name="ImageBank" Source="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW67x2gPlX6auWxrEjIIQrGQbG8ek0NMFq6b8QPTy6hBXnpmnILw"
@@ -51,6 +51,7 @@
                     <ScrollView Orientation="Horizontal" >
                     <ListView x:Name="listView"
                                       HeightRequest="200"
+                              RowHeight="35"
                                       HasUnevenRows="True"
                                       BackgroundColor="White"
                                       SeparatorVisibility="None"
@@ -92,7 +93,7 @@
                 <local:CurvedCornersLabel.FormattedText>
                     <FormattedString>
                         <Span Text="&#x20b9;"  />
-                        <Span x:Name="Spanamt"  FontAttributes="Bold"/>
+                        <Span x:Name="Spanamt" Text="0.00" FontAttributes="Bold"/>
                     </FormattedString>
                 </local:CurvedCornersLabel.FormattedText>
             </local:CurvedCornersLabel>

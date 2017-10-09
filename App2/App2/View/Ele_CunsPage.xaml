@@ -59,8 +59,8 @@
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0"  BackgroundColor="Black">
-                                        <Label x:Name="LblSu" WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListHeaderLabelStyle}" Text="Particular"/>
-                                        <Label x:Name="LblMn" WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListHeaderLabelStyle}" Text="Opening Reading"/>
+                                        <Label x:Name="LblMn" WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListHeaderLabelStyle}" Text="Particular"/>
+                                        <Label x:Name="LblSu" WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListHeaderLabelStyle}" Text="Opening Reading"/>
                                         <Label x:Name="LblTu" WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListHeaderLabelStyle}" Text="Closing Reading" />
                                         <Label x:Name="LblWe" WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListHeaderLabelStyle}" Text="Consumption" />
 
@@ -72,10 +72,10 @@
                                             <StackLayout Orientation="Horizontal"
                                                          HorizontalOptions="FillAndExpand"
                                                          Spacing="0" BackgroundColor="Black">
-                                                <Label WidthRequest="{Binding TxtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Particular}" Style="{StaticResource ListLabelStyle}" />
-                                                <Label WidthRequest="{Binding TxtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding OpeningReading}" Style="{StaticResource ListLabelStyle}" />
-                                                <Label WidthRequest="{Binding TxtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding ClosingReading}" Style="{StaticResource ListLabelStyle}" />
-                                                <Label WidthRequest="{Binding TxtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Consumption}" Style="{StaticResource ListLabelStyle}" />
+                                                <Label WidthRequest="{Binding TxtWidth}" Text="{Binding Particular}" Style="{StaticResource ListLabelStyle}" />
+                                                <Label WidthRequest="{Binding TxtWidth}" Text="{Binding OpeningReading}" Style="{StaticResource ListLabelStyle}" />
+                                                <Label WidthRequest="{Binding TxtWidth}" Text="{Binding ClosingReading}" Style="{StaticResource ListLabelStyle}" />
+                                                <Label WidthRequest="{Binding TxtWidth}" Text="{Binding Consumption}" Style="{StaticResource ListLabelStyle}" />
                                             </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>

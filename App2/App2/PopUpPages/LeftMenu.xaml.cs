@@ -33,6 +33,7 @@ namespace App2.PopUpPages
         {
             InitializeComponent();
             _data = data;
+            lblupdate.Text = StaticMethods.SetCompanyName;
             PickerData(data);
             DrawalMenu();
             PrepareLayout();
@@ -171,14 +172,28 @@ namespace App2.PopUpPages
         private async void Button_Clicked(object sender, EventArgs e)
         {
             StaticMethods.NewRes = _data;
+            var umdl = StaticMethods.GetLocalSavedData();
+            foreach (var item in _data._permissions)
+            {
+                if (lblupdate.Text == item.CompanyName)
+                {
+                  umdl.CompanyName=  StaticMethods.SetCompanyName = lblupdate.Text;
+                }
+            }
+            StaticMethods.SaveLocalData(umdl);
+
             _objNav = new NavigationMdl();
+           
 
             var nav = _objNav.PrepareApiData();
+
             var cashdetails = _api.CashFlowDetails(nav);
             if (cashdetails.Error == "false")
             {
                 StaticMethods.BankRes = cashdetails;
             }
+
+
             await Task.WhenAll(
              Navigation.PushModalAsync(new App2.View.MasterMainPage(_data, tempchlst)),
              PopupNavigation.RemovePageAsync(this)
@@ -247,6 +262,7 @@ namespace App2.PopUpPages
                                 await App.CmpDatabase.UpdateItemAsync(items);
                             }
                         }
+                        
                     }
                 });
             }

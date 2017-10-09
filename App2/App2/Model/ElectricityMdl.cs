@@ -10,9 +10,12 @@ namespace App2.Model
 {
    public class ElectricityMdl
     {
-        public string Tagtype { get; set; }
-        public string Error { get; set; }
-        public string Message { get; set; }
+        public double TxtWidth { get; set; }
+        public string Particular { get; set; }
+        public string OpeningReading { get; set; }
+        public string ClosingReading { get; set; }
+        public string Consumption { get; set; }
+
         [JsonProperty("list")]
         public ObservableCollection<ElectricitySiteMdl> ListElectricitySite { get; set; }
     }

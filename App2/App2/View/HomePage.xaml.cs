@@ -267,10 +267,9 @@ namespace App2.View
                 NotificationListMdl nmdl = null;
 
                 nmdl =  _api.PostNotification(nav);
-                  
-                
                 if (nmdl.Error == "true")
                 {
+                    
                     await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", nmdl.Message));
                 }
                 else
@@ -278,6 +277,20 @@ namespace App2.View
                     //var loadingPage = new LoaderPage();
                     //await PopupNavigation.PushAsync(loadingPage);
                     //await Task.Delay(500);
+                    UserModel rs = StaticMethods.GetLocalSavedData();
+                    var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
+                    string dateChk = null;
+                    string notcount = "0";
+
+                    foreach (var item in nmdl.ListNotificationDate)
+                    {
+                        dateChk = item.Date;
+                        notcount = item.NotCount;
+                        break;
+                    }
+                    rs.NotCount = d2.ToString() == dateChk ? notcount : "0";
+                    LblNotificationBadge.Text = rs.NotCount;
+                    StaticMethods.SaveLocalData(rs);
                     await Navigation.PushAsync(new MainPage(nmdl));
                     await Navigation.RemovePopupPageAsync(loadingPage);
                 }
@@ -323,10 +336,12 @@ namespace App2.View
                 {
                     foreach (var item in res._permissions)
                     {
-                        StaticMethods.SetCompanyName= LblSetComName.Text = item.CompanyName;
+                       res1.CompanyName= StaticMethods.SetCompanyName= LblSetComName.Text = item.CompanyName;
+                       res1.CompanyIndex = item.CompanyId.ToString();
                         break;
                     }
                 }
+                StaticMethods.SaveLocalData(res1);
                 if (!(App.ScreenWidth > 0) || !(App.ScreenHeight > 0)) return;
                 var calcScreenWidth = App.ScreenWidth;
                 var calcScreenHieght = App.ScreenHeight;
@@ -351,6 +366,7 @@ namespace App2.View
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
+            StaticMethods.SetCompanyName = LblSetComName.Text;
             await PopupNavigation.PushAsync(new LeftMenu(_newres));
         }
 
@@ -363,7 +379,7 @@ namespace App2.View
 
                 foreach (var items in cash.ListCashFlowSite)
                 {
-                    if (StaticMethods.SetCompanyName == items.CompanyName)
+                    if (LblSetComName.Text == items.CompanyName)
                     {
                         LblBankAmt.Text = items.Amt + " " + items.AmtType;
                     }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.View.Ele_CunsPageCont"
              BackgroundColor="#A5A5A5"
-             Title="Payable">
+             Title="Electricity">
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         

@@ -39,7 +39,7 @@
                                       Text="CENTURY 21 TOWN PLANNERS PVT. LTD."
                                       HorizontalOptions="FillAndExpand"
                                       CurvedCornerRadius="12"
-                                      HeightRequest="30"
+                                      HeightRequest="40"
                                       HorizontalTextAlignment="Center"
                                       VerticalTextAlignment="Center"/>
            
@@ -47,6 +47,7 @@
                 <ScrollView Orientation="Horizontal" >
                     <ListView x:Name="ListCashSite"
                                       HeightRequest="120"
+                              RowHeight="35"
                                       HasUnevenRows="True"
                                       BackgroundColor="White"
                                       SeparatorVisibility="None"

@@ -23,7 +23,7 @@ namespace App2.iOS.CustomRenderer
                 Control.SpellCheckingType = UITextSpellCheckingType.No;             // No Spellchecking
                 Control.AutocorrectionType = UITextAutocorrectionType.No;           // No Autocorrection
                 Control.AutocapitalizationType = UITextAutocapitalizationType.None; // No Autocapitalization
-                 if (PayablePage.Flag== 1)
+                if (PayablePage.Flag == 1)
                     Control.TextAlignment = UITextAlignment.Center;
             }
         }

@@ -21,13 +21,17 @@ namespace App2.View
         private NavigationMdl _objNav = null;
         private CompanyTbl cmpTbl = null;
         readonly API _api = new API();
+        private NavigationMdl navmdl = null;
         public MasterMainPage(LoginResponseMdl res, List<TempSiteIdMdl> tempchlst)
         {
             InitializeComponent();
             _newres = res;
+            navmdl = new NavigationMdl();
+            navmdl.SetBedge();
             this.Master = new MasterPage(_newres);
             this.Detail = new NavigationPage(new HomePage(_newres, tempchlst));
             App.MasterDetail = this;
+           // navmdl.SetBedge();
         }
 
         public MasterMainPage(LoginResponseMdl res)
@@ -35,7 +39,9 @@ namespace App2.View
             InitializeComponent();
             //_newres = res;
             StaticMethods.NewRes = _newres = res;
-            SetBedge();
+
+            navmdl = new NavigationMdl();
+            navmdl.SetBedge();
             this.Master = new MasterPage(_newres);
             this.Detail = new NavigationPage(new HomePage(_newres));
             App.MasterDetail = this;
@@ -83,7 +89,7 @@ namespace App2.View
         {
             try
             {
-
+                navmdl = new NavigationMdl();
             LoginResponseMdl res = new LoginResponseMdl();
             LoginMdl _login = new LoginMdl();
            
@@ -118,7 +124,8 @@ namespace App2.View
                 //_newres = res;
                  StaticMethods.NewRes = _newres = res;
             }
-            SetBedge();
+
+                navmdl.SetBedge();
             }
             catch (Exception exception)
             {
@@ -127,40 +134,40 @@ namespace App2.View
         }
 
         
-        private async void SetBedge()
-        {
-            try
-            {
+        //private async void SetBedge()
+        //{
+        //    try
+        //    {
 
-            UserModel rs = StaticMethods.GetLocalSavedData();
-            _objNav = new NavigationMdl();
+        //    UserModel rs = StaticMethods.GetLocalSavedData();
+        //    _objNav = new NavigationMdl();
              
-            NavigationMdl nav = _objNav.PrepareApiData();
+        //    NavigationMdl nav = _objNav.PrepareApiData();
 
-            NotificationListMdl notificationModel = _api.PostNotification(nav);
-            var cashdetails =  _api.CashFlowDetails(nav);
-            if (cashdetails.Error == "false")
-            {
-                StaticMethods.BankRes = cashdetails;
-            }
+        //    NotificationListMdl notificationModel = _api.PostNotification(nav);
+        //    var cashdetails =  _api.CashFlowDetails(nav);
+        //    if (cashdetails.Error == "false")
+        //    {
+        //        StaticMethods.BankRes = cashdetails;
+        //    }
            
-            var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
-            string dateChk = null;
-            string notcount = "0";
+        //    var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
+        //    string dateChk = null;
+        //    string notcount = "0";
             
-            foreach (var item in notificationModel.ListNotificationDate)
-            {
-                dateChk = item.Date;
-                notcount = item.NotCount;
-                break;
-            }
-            rs.NotCount = d2.ToString() == dateChk ? notcount : "0";
-            StaticMethods.SaveLocalData(rs);
+        //    foreach (var item in notificationModel.ListNotificationDate)
+        //    {
+        //        dateChk = item.Date;
+        //        notcount = item.NotCount;
+        //        break;
+        //    }
+        //    rs.NotCount = d2.ToString() == dateChk ? notcount : "0";
+        //    StaticMethods.SaveLocalData(rs);
 
-            }
-            catch (Exception e)
-            {
-            }
-        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //    }
+        //}
     }
 }

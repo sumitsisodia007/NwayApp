@@ -125,6 +125,7 @@ namespace App2.View
            // LabelAmt.Text = amt;
             Spanamt.Text = "  "+amt;
         }
+
         
     }
 
