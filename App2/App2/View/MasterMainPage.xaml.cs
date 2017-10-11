@@ -22,17 +22,17 @@ namespace App2.View
         private CompanyTbl cmpTbl = null;
         readonly API _api = new API();
         private NavigationMdl navmdl = null;
-        public MasterMainPage(LoginResponseMdl res, List<TempSiteIdMdl> tempchlst)
-        {
-            InitializeComponent();
-            _newres = res;
-            navmdl = new NavigationMdl();
-            navmdl.SetBedge();
-            this.Master = new MasterPage(_newres);
-            this.Detail = new NavigationPage(new HomePage(_newres, tempchlst));
-            App.MasterDetail = this;
-           // navmdl.SetBedge();
-        }
+        //public MasterMainPage(LoginResponseMdl res, List<TempSiteIdMdl> tempchlst)
+        //{
+        //    InitializeComponent();
+        //    _newres = res;
+        //    navmdl = new NavigationMdl();
+        //    navmdl.SetBedge();
+        //    this.Master = new MasterPage(_newres);
+        //    this.Detail = new NavigationPage(new HomePage(_newres, tempchlst));
+        //    App.MasterDetail = this;
+        //   // navmdl.SetBedge();
+        //}
 
         public MasterMainPage(LoginResponseMdl res)
         {

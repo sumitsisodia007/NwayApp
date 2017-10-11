@@ -72,10 +72,10 @@
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#2196F3">
                 <local:CurvedCornersLabel x:Name="LblSetComName" 
                                       FontSize="12"
-                                      CurvedBackgroundColor="#2196F3"
+                                      CurvedBackgroundColor="Transparent"
                                       TextColor="White"
                                       Text="CENTURY 21 TOWN PLANNER PVT"
-                                      Margin="0,7"
+                                      Margin="0,10"
                                       HorizontalTextAlignment="Center"
                                       VerticalTextAlignment="Center"
                                       HorizontalOptions="EndAndExpand"
@@ -89,6 +89,9 @@
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                     </Image.GestureRecognizers>
                 </Image>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </StackLayout.GestureRecognizers>
             </StackLayout>
             <!--<Label x:Name="LblSetComName" HeightRequest="45" Text="CENTURY 21 TOWN PLANNER PVT" FontAttributes="Bold" TextColor="#2196F3" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
                 <Label.GestureRecognizers>

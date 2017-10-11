@@ -23,19 +23,22 @@ namespace App2.View
         private readonly API _api = new API();
 
         private LoginResponseMdl _newres;
-       //NotificationListMdl _notificationModel;
-        private List<TempSiteIdMdl> _newTempchlst;
+        //NotificationListMdl _notificationModel;
+//private List<TempSiteIdMdl> _newTempchlst;
 
         public HomePage()
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-            InitializeComponent();
-            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            //PrepareView();
+                InitializeComponent();
+                Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+                //PrepareView();
                 Task.Delay(500);
                 UserModel rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
+                LblSetComName.Text = rs.CompanyName;
+                PrepareBankAmount();
+                PrepareMeterReading();
             });
         }
 
@@ -43,15 +46,48 @@ namespace App2.View
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-            InitializeComponent();
-            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            StaticMethods.NewRes = _newres = res;
-            PrepareView(res);
-            Task.Delay(500);
+                InitializeComponent();
+                Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+                StaticMethods.NewRes = _newres = res;
+                PrepareView(res);
+                Task.Delay(500);
                 PrepareBankAmount();
                 PrepareMeterReading();
             });
         }
+        
+        public HomePage(LoginResponseMdl res, NavigationMdl mdl)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                InitializeComponent();
+                Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+                StaticMethods.NewRes = _newres = res;
+                PrepareView(res);
+                UserModel rs = StaticMethods.GetLocalSavedData();
+                LblNotificationBadge.Text = rs.NotCount;
+
+                NavigatePageNotification(res, mdl);
+            });
+        }
+
+        //public HomePage(LoginResponseMdl res, List<TempSiteIdMdl> tempchlst)
+        //{
+        //    Device.BeginInvokeOnMainThread(() =>
+        //    {
+        //        InitializeComponent();
+        //        Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+        //        StaticMethods.NewRes = _newres = res;
+        //        _newTempchlst = tempchlst;
+        //        PrepareView(res);
+        //        var rs = StaticMethods.GetLocalSavedData();
+        //        LblNotificationBadge.Text = rs.NotCount;
+        //        PrepareBankAmount();
+        //        PrepareMeterReading();
+        //    });
+        //}
+
+
 
         protected override void OnAppearing()
         {
@@ -65,12 +101,13 @@ namespace App2.View
                 var rs = StaticMethods.GetLocalSavedData();
                 //if (rs.DeviceToken == null)
                 //{
-                    await Task.Delay(2000);
-                    await MainTokanReg();
+                await Task.Delay(2000);
+                await MainTokanReg();
                 //}
             }
             catch (Exception ex)
             {
+               // StaticMethods.ShowToast("Error HidePopup Method(Home)" + ex.Message);
             }
         }
 
@@ -78,9 +115,10 @@ namespace App2.View
         {
             try
             {
+               // int unique = 1;
                 LoginResponseMdl res = new LoginResponseMdl();
                 LoginMdl _login = new LoginMdl();
-               
+
                 UserModel rs = StaticMethods.GetLocalSavedData();
                 _login.Username = rs.UserName;
                 _login.Password = rs.Password;
@@ -97,14 +135,10 @@ namespace App2.View
                 }
                 else
                 {
-                    _login.Firebasetoken = DependencyService.Get<IAndroidMethods>().GetTokan();
-                    if (_login.Firebasetoken == null)
-                    {
-                        _login.Firebasetoken = "";
-                    }
+                    _login.Firebasetoken = DependencyService.Get<IAndroidMethods>().GetTokan() ?? "";
                 }
                 res = _api.PostLogin(_login);
-                
+
 
                 if (res.Error == "false")
                 {
@@ -112,90 +146,69 @@ namespace App2.View
                     StaticMethods.NewRes = _newres = res;
                     if (rs.DeviceToken == null)
                     {
-                        
+
                         StaticMethods.SaveLocalData(rs);
                     }
                 }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
+                StaticMethods.ShowToast("Error MainTokanReg Method(Home)" + ex.Message);
             }
             return null;
         }
 
-        public HomePage(LoginResponseMdl res, NavigationMdl mdl)
-        {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                InitializeComponent();
-                Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-                StaticMethods.NewRes = _newres = res;
-                PrepareView(res);
-                UserModel rs = StaticMethods.GetLocalSavedData();
-                LblNotificationBadge.Text = rs.NotCount;
-
-                NavigatePageNotification(res,mdl);
-            });
-        }
-
+        #region Via Notification
         private async void NavigatePageNotification(LoginResponseMdl lgres, NavigationMdl nav)
         {
-            ObservableCollection<SiteIdMdl> lst = new ObservableCollection<SiteIdMdl>();
-            StaticMethods.NewRes = _newres = lgres;
-            UserModel res = StaticMethods.GetLocalSavedData();
-            foreach (var item in lgres._permissions)
+            try
             {
-                if (StaticMethods.SetCompanyName == item.CompanyName)
+                ObservableCollection<SiteIdMdl> lst = new ObservableCollection<SiteIdMdl>();
+                StaticMethods.NewRes = _newres = lgres;
+                UserModel res = StaticMethods.GetLocalSavedData();
+                foreach (var item in lgres._permissions)
                 {
-                    foreach (var item2 in item.Sites)
+                    if (StaticMethods.SetCompanyName == item.CompanyName)
                     {
+                        foreach (var item2 in item.Sites)
+                        {
 
-                        lst.Add(new SiteIdMdl { SiteId = item2.Site_id, SiteName = item2.Site_name });
+                            lst.Add(new SiteIdMdl { SiteId = item2.Site_id, SiteName = item2.Site_name });
+                        }
+                        nav.CompanyId = item.CompanyId.ToString();
                     }
-                    nav.CompanyId = item.CompanyId.ToString();
                 }
-            }
-            nav.UserName = res.UserName;
-            nav.Password = res.Password;
-            nav.DeviceId = res.DeviceId;
-            nav.UserId = res.UserId;
-            nav.SiteIdMdls = lst;
-            
-            switch (nav.TagType)
-            {
-                case "payable_outstanding":
-                    nav.PageTitle = LblPay.Text;
-                    break;
-                case "receivable_outstanding":
-                    nav.PageTitle = LblReceive.Text;
-                    break;
-            }
-            //nav.TagType = nav.TagType;
-            await Navigation.PushAsync(new PayablePage(nav));
-        }
+                nav.UserName = res.UserName;
+                nav.Password = res.Password;
+                nav.DeviceId = res.DeviceId;
+                nav.UserId = res.UserId;
+                nav.SiteIdMdls = lst;
 
-        public HomePage(LoginResponseMdl res, List<TempSiteIdMdl> tempchlst)
-        {
-            Device.BeginInvokeOnMainThread(() =>
+                switch (nav.TagType)
+                {
+                    case "payable_outstanding":
+                        nav.PageTitle = LblPay.Text;
+                        break;
+                    case "receivable_outstanding":
+                        nav.PageTitle = LblReceive.Text;
+                        break;
+                }
+                //nav.TagType = nav.TagType;
+                await Navigation.PushAsync(new PayablePage(nav));
+
+            }
+            catch (Exception ex)
             {
-                InitializeComponent();
-                Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-                StaticMethods.NewRes = _newres = res;
-                _newTempchlst = tempchlst;
-                PrepareView(res);
-                var rs = StaticMethods.GetLocalSavedData();
-                LblNotificationBadge.Text = rs.NotCount;
-                PrepareBankAmount();
-                PrepareMeterReading();
-            });
+                StaticMethods.ShowToast("Error NavigatePage via Not Method(Home)" + ex.Message);
+            }
         }
-        
+        #endregion
+      
         private async void Receivable_Tapped(object sender, EventArgs e)
         {
             //UserModel res = new UserModel();
             //nav = new NavigationMdl();
             //nav.PageTitle = LblReceive.Text;
-
             //nav.UserId = res.UserId;
             //nav.DeviceId = res.DeviceId;
             //if (nav.DeviceId == "unknown")
@@ -205,6 +218,8 @@ namespace App2.View
             //nav.CompanyName = res.CompanyName;
             try
             {
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
                 _objNav = new NavigationMdl();
                 NavigationMdl nav = _objNav.PrepareApiData();
                 // PayableNotificationMdl _payable = await api.PayableTable(nav);
@@ -212,26 +227,34 @@ namespace App2.View
                 nav.TagType = EnumMaster.TagtypereceivableOutstanding;
                 await Task.Delay(200);
                 await Navigation.PushAsync(new PayablePage(nav));
+                await PopupNavigation.RemovePageAsync(loadingPage);
 
             }
             catch (Exception ex)
             {
-                StaticMethods.ShowToast(ex.Message);
+                StaticMethods.ShowToast("Error Receivable_Tapped Method(Home)" + ex.Message);
             }
-            
+
         }
 
         private async void Payable_Tapped(object sender, EventArgs e)
         {
-            _objNav = new NavigationMdl();
-            NavigationMdl nav = _objNav.PrepareApiData();
-            nav.PageTitle = LblPay.Text;
-            
-            nav.TagType = EnumMaster.TagtypepayableOutstanding;
-            var loadingPage = new LoaderPage();
-            await PopupNavigation.PushAsync(loadingPage);
-            await Navigation.PushAsync(new PayablePage(nav));
-            await PopupNavigation.RemovePageAsync(loadingPage);
+            try
+            {
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
+                _objNav = new NavigationMdl();
+                NavigationMdl nav = _objNav.PrepareApiData();
+                nav.PageTitle = LblPay.Text;
+                nav.TagType = EnumMaster.TagtypepayableOutstanding;
+                await Navigation.PushAsync(new PayablePage(nav));
+                await PopupNavigation.RemovePageAsync(loadingPage);
+
+            }
+            catch (Exception ex)
+            {
+                StaticMethods.ShowToast("Error Payable_Tapped Method(Home)" + ex.Message);
+            }
         }
 
         private async void CashFlow_Tapped(object sender, EventArgs e)
@@ -260,25 +283,18 @@ namespace App2.View
             {
                 var loadingPage = new LoaderPage();
                 await PopupNavigation.PushAsync(loadingPage);
-                //await Task.Delay(1000);
-
-                //await Navigation.PushAsync(new MainPage(_notificationModel));
-                //await Navigation.RemovePopupPageAsync(loadingPage);
                 _objNav = new NavigationMdl();
                 NavigationMdl nav = _objNav.PrepareApiData();
                 NotificationListMdl nmdl = null;
 
-                nmdl =  _api.PostNotification(nav);
+                nmdl = _api.PostNotification(nav);
                 if (nmdl.Error == "true")
                 {
-                    
                     await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", nmdl.Message));
                 }
                 else
                 {
-                    //var loadingPage = new LoaderPage();
-                    //await PopupNavigation.PushAsync(loadingPage);
-                    //await Task.Delay(500);
+
                     UserModel rs = StaticMethods.GetLocalSavedData();
                     var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
                     string dateChk = null;
@@ -299,6 +315,7 @@ namespace App2.View
             }
             catch (Exception ex)
             {
+                StaticMethods.ShowToast("Error Notification_Clicked Method(Home)" + ex.Message);
             }
         }
 
@@ -322,9 +339,9 @@ namespace App2.View
 
         private async void Approval_Clicked(object sender, EventArgs e)
         {
-           await  DisplayAlert("Message", "Comming Soon, Approval", "ok");
+            await DisplayAlert("Message", "Comming Soon, Approval", "ok");
         }
-        
+
         private void PrepareView(LoginResponseMdl res)
         {
             try
@@ -332,14 +349,14 @@ namespace App2.View
                 var res1 = StaticMethods.GetLocalSavedData();
                 if (res1.CompanyName != null)
                 {
-                    LblSetComName.Text = StaticMethods.SetCompanyName=res1.CompanyName;
+                    LblSetComName.Text = StaticMethods.SetCompanyName = res1.CompanyName;
                 }
                 else
                 {
                     foreach (var item in res._permissions)
                     {
-                       res1.CompanyName= StaticMethods.SetCompanyName= LblSetComName.Text = item.CompanyName;
-                       res1.CompanyIndex = item.CompanyId.ToString();
+                        res1.CompanyName = StaticMethods.SetCompanyName = LblSetComName.Text = item.CompanyName;
+                        res1.CompanyIndex = item.CompanyId.ToString();
                         break;
                     }
                 }
@@ -362,14 +379,17 @@ namespace App2.View
             }
             catch (Exception ex)
             {
-                DisplayAlert("Error", ex.Message, "ok");
+                StaticMethods.ShowToast("Error PrepareView Method(Home)" + ex.Message);
             }
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
             StaticMethods.SetCompanyName = LblSetComName.Text;
             await PopupNavigation.PushAsync(new LeftMenu(_newres));
+            await PopupNavigation.RemovePageAsync(loadingPage);
         }
 
         private void PrepareBankAmount()
@@ -378,10 +398,9 @@ namespace App2.View
             {
                 var rs = StaticMethods.GetLocalSavedData();
                 var cash = StaticMethods.BankRes;
-
                 foreach (var items in cash.ListCashFlowSite)
                 {
-                    if (LblSetComName.Text == items.CompanyName)
+                    if (rs.CompanyName == items.CompanyName)
                     {
                         LblBankAmt.Text = items.Amt + " " + items.AmtType;
                     }
@@ -390,6 +409,7 @@ namespace App2.View
             }
             catch (Exception e)
             {
+                StaticMethods.ShowToast("Error PrepareBankAmount Method(Home)" + e.Message);
             }
         }
 

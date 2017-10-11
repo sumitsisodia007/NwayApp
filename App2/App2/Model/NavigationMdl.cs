@@ -121,13 +121,13 @@ namespace App2.Model
         public bool ChkId { get; set; }
         public string ImgName { get; set; }
     }
-    public class TempSiteIdMdl
-    {
-        public int SiteId { get; set; }
-        public string SiteName { get; set; }
-        public string SiteShortName { get; set; }
-        public bool ChkId { get; set; }
-    }
+    //public class TempSiteIdMdl
+    //{
+    //    public int SiteId { get; set; }
+    //    public string SiteName { get; set; }
+    //    public string SiteShortName { get; set; }
+    //    public bool ChkId { get; set; }
+    //}
 
     public class ShowCompanyNameMdl
     {

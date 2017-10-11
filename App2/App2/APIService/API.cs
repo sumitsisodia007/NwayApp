@@ -12,8 +12,8 @@ namespace App2.APIService
 {
     public class API
     {
-              //      public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
-              public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
+               public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
+             //      public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
        
         #region Login WebService
         public LoginResponseMdl PostLogin(LoginMdl lgmdl)

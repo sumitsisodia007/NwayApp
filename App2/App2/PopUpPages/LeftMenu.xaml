@@ -23,10 +23,7 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#2196F3">
             <!--<Label Text="Sites Name" Font="17,Bold" HorizontalOptions="StartAndExpand"/>-->
             <!--<Label Text="Update" Font="17,Bold" HorizontalOptions="EndAndExpand"/>-->
-            <!--<controls:CheckBox DefaultText="sumit"
-                               HorizontalOptions="FillAndExpand"
-                               TextColor="Black"
-                               Checked="True" />-->
+           
             <Picker x:Name="MainPickr" 
                     IsVisible="False" 
                     Title="Select Company Name" 
@@ -36,9 +33,9 @@
                     HorizontalOptions="FillAndExpand"/>
             <local:CurvedCornersLabel x:Name="lblupdate" 
                                       FontSize="12"
-                                      CurvedBackgroundColor="#2196F3"
+                                      CurvedBackgroundColor="Transparent"
                                       TextColor="White"
-                                      Margin="0,7"
+                                      Margin="0,10"
                                       HorizontalTextAlignment="Center"
                                       VerticalTextAlignment="Center"
                                       HorizontalOptions="EndAndExpand"
@@ -52,6 +49,9 @@
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </Image.GestureRecognizers>
             </Image>
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </StackLayout.GestureRecognizers>
         </StackLayout>
 
         <StackLayout >
@@ -65,12 +65,6 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
-                                <!--<controls:CheckBox DefaultText="{Binding Site_name}"
-                                                   HorizontalOptions="FillAndExpand"
-                                                   TextColor="Black"
-                                                   CheckedChanged="CheckBox_CheckedChanged"
-                                                   Checked="{Binding Chk_id}" />-->
-
                                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                     <BoxView Color="Black" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="1"/>
                                     <StackLayout  VerticalOptions="FillAndExpand"

@@ -67,7 +67,7 @@
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0"  BackgroundColor="Black">
                                         <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SitesName}" />
-                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteTotalAmt}" HorizontalTextAlignment="End" />
+                                    <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteTotalAmt}" HorizontalTextAlignment="End" />
                                         
                                     </StackLayout>
                                 </ViewCell>

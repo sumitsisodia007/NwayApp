@@ -17,7 +17,7 @@ namespace App2.PopUpPages
     public partial class LeftMenu : PopupPage
     {
         private List<CompanySite> menuList { get; set; }
-        private List<TempSiteIdMdl> tempchlst = null;//not now used Date 29 Sep SSS
+       // private List<TempSiteIdMdl> tempchlst = null;//not now used Date 29 Sep SSS
         private string ComIndex { get; set; }
         private List<ShowCompanyNameMdl> Companyname { get; set; }
         LoginResponseMdl _data;
@@ -85,7 +85,15 @@ namespace App2.PopUpPages
             stkMessage.HeightRequest = calcScreenHieght;
             stkMessage.WidthRequest = calcScreenWidth - 100;
             //UserModel res = StaticMethods.GetLocalSavedData();
-            MainPickr.SelectedIndex = LocalCompanyName == "M.P. ENTERTAINMENT & DEVELOPERS PVT. LTD." ? 1 : 0;
+            if (LocalCompanyName == "M.P. ENTERTAINMENT & DEVELOPERS PVT. LTD.")
+            {
+                MainPickr.SelectedIndex = 1;
+            }
+            else
+            {
+                MainPickr.SelectedIndex = 0;
+            }
+            //MainPickr.SelectedIndex = LocalCompanyName == "M.P. ENTERTAINMENT & DEVELOPERS PVT. LTD." ? 1 : 0;
         }
 
         public async void DrawalMenu()
@@ -152,6 +160,7 @@ namespace App2.PopUpPages
 
         private NavigationMdl _objNav = null;
         readonly API _api = new API();
+
         private async void Button_Clicked(object sender, EventArgs e)
         {
             var loadingPage = new LoaderPage();
@@ -176,8 +185,9 @@ namespace App2.PopUpPages
             {
                 StaticMethods.BankRes = cashdetails;
             }
-            await Task.WhenAll(
-             Navigation.PushModalAsync(new App2.View.MasterMainPage(_data, tempchlst)),
+             await Task.WhenAll(
+             //Navigation.PushModalAsync(new App2.View.MasterMainPage(_data, tempchlst)),
+             Navigation.PushModalAsync(new App2.View.MasterMainPage(_data)),
              PopupNavigation.RemovePageAsync(this)
             );
             await PopupNavigation.RemovePageAsync(loadingPage);
