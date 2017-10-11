@@ -10,24 +10,53 @@ namespace App2.Model
 {
    public class ElectricityMdl
     {
-        public double TxtWidth { get; set; }
-        public string Particular { get; set; }
-        public string OpeningReading { get; set; }
-        public string ClosingReading { get; set; }
-        public string Consumption { get; set; }
-
+        [JsonProperty("tagtype")]
+        public string Tagtype { get; set; }
+        [JsonProperty("error")]
+        public bool Error { get; set; }
         [JsonProperty("list")]
-        public ObservableCollection<ElectricitySiteMdl> ListElectricitySite { get; set; }
+        public ElectricityGroupMdl ListElectricityGroupMdl { get; set; }
+        [JsonProperty("message")]
+        public string Message { get; set; }
+
     }
 
-    public class ElectricitySiteMdl
+    public class ElectricityGroupMdl
     {
-        [JsonProperty("company_id")]
-        public string CompanyId { get; set; }
-        public string Amt { get; set; }
-        [JsonProperty("company_name")]
-        public string CompanyName { get; set; }
-        [JsonProperty("amt_type")]
-        public string AmtType { get; set; }
+        [JsonProperty("mpeb")]
+        public ObservableCollection<ElectricityMpebMdl> ListElectricityMpebMdl { get; set; }
+
+        [JsonProperty("mpeb_total_consumption")]
+        public int MpebTotalConsumption { get; set; }
+
+        [JsonProperty("other")]
+        public ObservableCollection<ElectricityOtherMdl> ListElectricityOtherMdl { get; set; }
+
+        [JsonProperty("other_total_consumption")]
+        public int OtherTotalConsumption { get; set; }
+    }
+
+    public class ElectricityMpebMdl
+    {
+        [JsonProperty("meter_type")]
+        public string MeterType { get; set; }
+        [JsonProperty("opening")]
+        public int Opening { get; set; }
+        [JsonProperty("closing")]
+        public int Closing { get; set; }
+        [JsonProperty("consumption")]
+        public int Consumption { get; set; }
+    }
+
+    public class ElectricityOtherMdl
+    {
+        [JsonProperty("meter_type")]
+        public string MeterType { get; set; }
+        [JsonProperty("opening")]
+        public int Opening { get; set; }
+        [JsonProperty("closing")]
+        public int Closing { get; set; }
+        [JsonProperty("consumption")]
+        public int Consumption { get; set; }
     }
 }

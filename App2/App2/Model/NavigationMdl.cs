@@ -82,6 +82,11 @@ namespace App2.Model
 
                 NotificationListMdl notificationModel = _api.PostNotification(nav);
                 var cashdetails = _api.CashFlowDetails(nav);
+                var electrCons = _api.ElectricityCuns(nav);
+                if (electrCons.Error== false)
+                {
+                    StaticMethods.ElectricityResp = electrCons;
+                }
                 if (cashdetails.Error == "false")
                 {
                     StaticMethods.BankRes = cashdetails;

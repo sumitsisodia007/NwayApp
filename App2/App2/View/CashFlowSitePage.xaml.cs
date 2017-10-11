@@ -50,7 +50,7 @@ namespace App2.View
                             CashFlowDetailses.Add(new CashFlowSite
                             {
                                 TxtWidth = _Width,
-                                SiteTotalAmt = collection.Amt+" "+ collection.AmtType,
+                                SiteTotalAmt = collection.Amt+" "+ collection.AmtType+"   ",
                                 SitesName = collection.SiteName,
                             });
                         }

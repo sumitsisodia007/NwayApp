@@ -14,10 +14,9 @@ namespace App2.NativeMathods
     {
         public static int NotificationCount { get; set; }
         public static string SetCompanyName { get; set; }
-        public static List<TempSiteIdMdl> UserCh { get; set; }
         public static LoginResponseMdl NewRes { get; set; }
         public static CashFlowMdl BankRes { get; set; }
-
+        public static ElectricityMdl ElectricityResp { get; set; }
         public static string GetNotificationCount()
         {
             string strCount = "";

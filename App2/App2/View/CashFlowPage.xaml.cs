@@ -22,7 +22,6 @@ namespace App2.View
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
 
-                LblSiteName.WidthRequest =
                     LblSiteAmt.WidthRequest =
                         LblSiteBank.WidthRequest = _Width = calcScreenWidth / 4 - 20;
             }
@@ -47,7 +46,7 @@ namespace App2.View
                                     CashFlowDetailses.Add(new CashFlowDetails
                                     {
                                         TxtWidth = _Width,
-                                        SiteAmount = bankDetails.Amt+" "+bankDetails.AmtType,
+                                        SiteAmount = bankDetails.Amt+" "+bankDetails.AmtType+"   ",
                                         SitesName = bankDetails.AccountId.ToString(),
                                         SiteBank = bankDetails.AccountName
                                     });
@@ -68,6 +67,7 @@ namespace App2.View
         private void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             CashFlowDetails bankdetails = (CashFlowDetails)e.Item;
+            LabelAmt.IsVisible = true;
             BankImage(bankdetails.SiteBank, bankdetails.SiteAmount);
         }
 

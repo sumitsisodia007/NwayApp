@@ -48,7 +48,7 @@
     
             <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                
-                    <ScrollView Orientation="Horizontal" >
+                    <!--<ScrollView Orientation="Horizontal" >-->
                     <ListView x:Name="listView"
                                       HeightRequest="200"
                               RowHeight="35"
@@ -60,7 +60,7 @@
                             <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0"  BackgroundColor="Black">
-                                <Label x:Name="LblSiteName" WidthRequest="{Binding TxtWidth}"  Text="Account Id" Style="{StaticResource ListHeaderLabelStyle}" />
+                                <!--<Label x:Name="LblSiteName" WidthRequest="{Binding TxtWidth}"  Text="Account Id" Style="{StaticResource ListHeaderLabelStyle}" />-->
                                 <Label x:Name="LblSiteBank" WidthRequest="{Binding TxtWidth}" Text="Bank Name" Style="{StaticResource ListHeaderLabelStyle}" />
                                 <Label x:Name="LblSiteAmt" WidthRequest="{Binding TxtWidth}" Text="Amount" Style="{StaticResource ListHeaderLabelStyle}" />
                             </StackLayout>
@@ -71,25 +71,27 @@
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0"  BackgroundColor="Black">
-                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SitesName}" />
+                                        <!--<Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SitesName}" />-->
                                         <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteBank}" />
-                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteAmount}" />
+                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteAmount}" HorizontalTextAlignment="End"  />
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </ScrollView>
+                <!--</ScrollView>-->
             </Frame>
 
-            <local:CurvedCornersLabel FontSize="14.5"
+            <local:CurvedCornersLabel x:Name="LabelAmt"
+                                      FontSize="14.5"
                                       CurvedBackgroundColor="#6DB040"
                                       TextColor="White"
                                       HorizontalOptions="FillAndExpand"
                                       CurvedCornerRadius="12"
                                       HeightRequest="30"
                                       HorizontalTextAlignment="Center"
-                                      VerticalTextAlignment="Center">
+                                      VerticalTextAlignment="Center"
+                                      IsVisible="False">
                 <local:CurvedCornersLabel.FormattedText>
                     <FormattedString>
                         <Span Text="&#x20b9;"  />

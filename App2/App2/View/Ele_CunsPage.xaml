@@ -33,7 +33,7 @@
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <ScrollView>
                 <StackLayout HorizontalOptions="FillAndExpand" Padding="0,10" VerticalOptions="FillAndExpand">
-                    <Label  FontSize="20"
+                    <!--<Label  FontSize="20"
                             BackgroundColor="#575757" 
                             HorizontalOptions="FillAndExpand" 
                             TextColor="White"
@@ -41,7 +41,7 @@
                             Margin="5,2"
                             HorizontalTextAlignment="Center"
                             VerticalTextAlignment="Center"
-							HeightRequest="40"/>
+							HeightRequest="40"/>-->
                     <Image Source="logo"
                            Aspect="AspectFit"
                            HeightRequest="150" />
@@ -84,7 +84,7 @@
                             </ScrollView>
                         </Frame>
                     </StackLayout>
-                    <Button Text="Continue" VerticalOptions="End" BackgroundColor="#575757"  Clicked="Button_Clicked"/>
+                    <!--<Button Text="Continue" VerticalOptions="End" BackgroundColor="#575757"  Clicked="Button_Clicked"/>-->
                 </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="23">

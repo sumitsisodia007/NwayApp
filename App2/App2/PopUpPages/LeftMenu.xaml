@@ -20,10 +20,7 @@
                  HorizontalOptions="FillAndExpand"
                  BackgroundColor="White"
                  Padding="0,20">
-        <StackLayout Orientation="Horizontal" 
-                     HorizontalOptions="FillAndExpand" 
-                     Padding="20,0" 
-                     Spacing="0">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#2196F3">
             <!--<Label Text="Sites Name" Font="17,Bold" HorizontalOptions="StartAndExpand"/>-->
             <!--<Label Text="Update" Font="17,Bold" HorizontalOptions="EndAndExpand"/>-->
             <!--<controls:CheckBox DefaultText="sumit"
@@ -38,19 +35,23 @@
                     TextColor="Black"
                     HorizontalOptions="FillAndExpand"/>
             <local:CurvedCornersLabel x:Name="lblupdate" 
-                                      FontSize="16"
+                                      FontSize="12"
                                       CurvedBackgroundColor="#2196F3"
                                       TextColor="White"
-                                      Margin="0,10"
-                                      HeightRequest="45"
+                                      Margin="0,7"
                                       HorizontalTextAlignment="Center"
                                       VerticalTextAlignment="Center"
-                                      HorizontalOptions="FillAndExpand"
+                                      HorizontalOptions="EndAndExpand"
                                       CurvedCornerRadius="6">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </Label.GestureRecognizers>
             </local:CurvedCornersLabel>
+            <Image Source="edit1.png" Aspect="AspectFit" HorizontalOptions="CenterAndExpand">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Image.GestureRecognizers>
+            </Image>
         </StackLayout>
 
         <StackLayout >

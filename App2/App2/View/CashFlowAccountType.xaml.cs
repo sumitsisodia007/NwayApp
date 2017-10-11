@@ -54,7 +54,7 @@ namespace App2.View
                                 AccountTypeDetailses.Add(new CashFlowAccountTypeMdl
                                 {
                                     TxtWidth = _Width,
-                                    TotalAmt = accountType.Amt+" "+accountType.AmtType,
+                                    TotalAmt = accountType.Amt+" "+accountType.AmtType+"   ",
                                     AccountType = accountType.AccountHeadName
                                 });
                             }

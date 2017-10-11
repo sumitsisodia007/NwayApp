@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.View.CashFlowSitePage"
              xmlns:local="clr-namespace:App2.CustomRenderer"
-             Title="Cash Flow Site"
+             Title="Bank"
              Padding="10,20">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -44,7 +44,7 @@
                                       VerticalTextAlignment="Center"/>
            
             <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
-                <ScrollView Orientation="Horizontal" >
+                <!--<ScrollView Orientation="Horizontal" >-->
                     <ListView x:Name="ListCashSite"
                                       HeightRequest="120"
                               RowHeight="35"
@@ -67,14 +67,14 @@
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0"  BackgroundColor="Black">
                                         <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SitesName}" />
-                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteTotalAmt}" />
+                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding SiteTotalAmt}" HorizontalTextAlignment="End" />
                                         
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </ScrollView>
+                <!--</ScrollView>-->
             </Frame>
         </StackLayout>
     </ContentPage.Content>

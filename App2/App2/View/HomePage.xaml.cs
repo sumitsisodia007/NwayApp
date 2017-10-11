@@ -49,6 +49,7 @@ namespace App2.View
             PrepareView(res);
             Task.Delay(500);
                 PrepareBankAmount();
+                PrepareMeterReading();
             });
         }
 
@@ -185,6 +186,7 @@ namespace App2.View
                 var rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
                 PrepareBankAmount();
+                PrepareMeterReading();
             });
         }
         
@@ -239,7 +241,7 @@ namespace App2.View
 
         private async void Elect_Tapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Ele_CunsPage());
+            await Navigation.PushAsync(new Ele_CunsPageCont());
         }
 
         private void Expired_Tapped(object sender, EventArgs e)
@@ -391,6 +393,13 @@ namespace App2.View
             }
         }
 
+        private void PrepareMeterReading()
+        {
+            var cash = StaticMethods.ElectricityResp;
+            var ss = cash.ListElectricityGroupMdl.MpebTotalConsumption.ToString() + "/ " +
+                        cash.ListElectricityGroupMdl.OtherTotalConsumption.ToString();
 
+            LblElecReading.Text = ss; //rs.NotCount;
+        }
     }
 }

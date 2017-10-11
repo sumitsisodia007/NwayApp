@@ -18,10 +18,11 @@ namespace App2.PopUpPages
     {
         private List<CompanySite> menuList { get; set; }
         private List<TempSiteIdMdl> tempchlst = null;//not now used Date 29 Sep SSS
-
+        private string ComIndex { get; set; }
         private List<ShowCompanyNameMdl> Companyname { get; set; }
         LoginResponseMdl _data;
-
+        private int Counter = 0;
+        private static string LocalCompanyName { get; set; }
         public LeftMenu()
         {
             InitializeComponent();
@@ -33,9 +34,10 @@ namespace App2.PopUpPages
         {
             InitializeComponent();
             _data = data;
-            lblupdate.Text = StaticMethods.SetCompanyName;
+            LocalCompanyName = lblupdate.Text = StaticMethods.SetCompanyName;
+            Task.Delay(100);
             PickerData(data);
-            DrawalMenu();
+            //DrawalMenu();
             PrepareLayout();
         }
 
@@ -52,18 +54,23 @@ namespace App2.PopUpPages
         private void MainPickr_SelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
+            
             int selectedIndex = picker.SelectedIndex;
             if (selectedIndex == -1) return;
             try
             {
-                var res = StaticMethods.GetLocalSavedData();
-                res.CompanyName = lblupdate.Text = StaticMethods.SetCompanyName = (string)picker.Items[selectedIndex];
-                res.CompanyIndex = selectedIndex.ToString();
-                StaticMethods.SaveLocalData(res);
-                if (res.CompanyName != picker.SelectedItem)
+
+                LocalCompanyName = (string)picker.Items[selectedIndex];
+                
+                ComIndex= selectedIndex.ToString();
+
+                if (ComIndex == picker.SelectedItem) return;
+                if (Counter ==0)
                 {
-                    //DrawalMenu();
+                    Task.Delay(100);
+                    DrawalMenu();
                 }
+                Counter--;
             }
             catch (Exception ex)
             {
@@ -77,29 +84,23 @@ namespace App2.PopUpPages
             var calcScreenHieght = Application.Current.MainPage.Height;
             stkMessage.HeightRequest = calcScreenHieght;
             stkMessage.WidthRequest = calcScreenWidth - 100;
-            UserModel res = StaticMethods.GetLocalSavedData();
-            if (res.CompanyIndex != null)
-            {
-                MainPickr.SelectedIndex = Convert.ToInt32(res.CompanyIndex);
-            }
+            //UserModel res = StaticMethods.GetLocalSavedData();
+            MainPickr.SelectedIndex = LocalCompanyName == "M.P. ENTERTAINMENT & DEVELOPERS PVT. LTD." ? 1 : 0;
         }
 
         public async void DrawalMenu()
         {
-            //tempchlst = new List<TempSiteIdMdl>();
+           await Task.Delay(200);
+            Counter ++;
             menuList = new List<CompanySite>();
             var cmpTblTbl = await App.CmpDatabase.GetItemsAsync();
             if (cmpTblTbl == null)
             {
                 foreach (var item in _data._permissions)
                 {
-                    if (StaticMethods.SetCompanyName != item.CompanyName) continue;
+                    if (LocalCompanyName != item.CompanyName) continue;
                     foreach (var item2 in item.Sites)
                     {
-                        //if (StaticMethods.userCh == null)
-                        //{
-                        //    tempchlst.Add(new TempSiteIdMdl { SiteId = item2.Site_id, SiteName = item2.Site_name, SiteShortName = item2.Site_short_name ,ChkId = item2.Chk_id});
-                        //}
                         string imgesource = null;
                         imgesource = item2.Chk_id == true ? "on_btn.png" : "off_btn.png";
                         menuList.Add(new CompanySite
@@ -117,7 +118,7 @@ namespace App2.PopUpPages
             {
                 foreach (var companyites in cmpTblTbl)
                 {
-                    if (companyites.CompanyName == StaticMethods.SetCompanyName)
+                    if (companyites.CompanyName == LocalCompanyName)
                         menuList.Add(new CompanySite
                         {
                             Site_id = Convert.ToInt32(companyites.SiteId),
@@ -128,27 +129,8 @@ namespace App2.PopUpPages
                         });
                 }
             }
-            //foreach (var item in _data._permissions)
-            //{
-            //    if (StaticMethods.SetCompanyName != item.CompanyName) continue;
-            //    foreach (var item2 in item.Sites)
-            //    {
-            //        //if (StaticMethods.userCh == null)
-            //        //{
-            //        //    tempchlst.Add(new TempSiteIdMdl { SiteId = item2.Site_id, SiteName = item2.Site_name, SiteShortName = item2.Site_short_name ,ChkId = item2.Chk_id});
-            //        //}
-            //        string imgesource = null;
-            //        imgesource = item2.Chk_id == true ? "on_btn.png" : "off_btn.png";
-            //        menuList.Add(new CompanySite { Site_id = item2.Site_id,
-            //                                        Site_name = item2.Site_name ,
-            //                                        Site_short_name =item2.Site_short_name,
-            //                                        Chk_id =item2.Chk_id,ImgName = imgesource
-            //        });
-            //    }
-            //}
             NavigationList.ItemsSource = menuList.AsEnumerable().Distinct();
-            lblupdate.Text = StaticMethods.SetCompanyName;
-
+            lblupdate.Text = LocalCompanyName;
         }
 
         private void NavigationList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -167,37 +149,38 @@ namespace App2.PopUpPages
             await Task.Delay(2000);
             await PopupNavigation.RemovePageAsync(this);
         }
+
         private NavigationMdl _objNav = null;
         readonly API _api = new API();
         private async void Button_Clicked(object sender, EventArgs e)
         {
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
             StaticMethods.NewRes = _data;
             var umdl = StaticMethods.GetLocalSavedData();
-            foreach (var item in _data._permissions)
-            {
-                if (lblupdate.Text == item.CompanyName)
-                {
-                  umdl.CompanyName=  StaticMethods.SetCompanyName = lblupdate.Text;
-                }
-            }
+            //foreach (var item in _data._permissions)
+            //{
+            //    if (lblupdate.Text == item.CompanyName)
+            //    {
+            //      umdl.CompanyName=  StaticMethods.SetCompanyName = lblupdate.Text;
+            //    }
+            //}
+           StaticMethods.SetCompanyName= umdl.CompanyName = LocalCompanyName;
+            umdl.CompanyIndex = ComIndex;
             StaticMethods.SaveLocalData(umdl);
 
             _objNav = new NavigationMdl();
-           
-
             var nav = _objNav.PrepareApiData();
-
             var cashdetails = _api.CashFlowDetails(nav);
             if (cashdetails.Error == "false")
             {
                 StaticMethods.BankRes = cashdetails;
             }
-
-
             await Task.WhenAll(
              Navigation.PushModalAsync(new App2.View.MasterMainPage(_data, tempchlst)),
              PopupNavigation.RemovePageAsync(this)
             );
+            await PopupNavigation.RemovePageAsync(loadingPage);
         }
 
         protected override bool OnBackgroundClicked()

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -11,8 +12,8 @@ namespace App2.APIService
 {
     public class API
     {
-        public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
-       //       public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
+              //      public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
+              public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
        
         #region Login WebService
         public LoginResponseMdl PostLogin(LoginMdl lgmdl)
@@ -302,8 +303,6 @@ namespace App2.APIService
                 var client = new HttpClient { BaseAddress = new Uri(RestUrl) };
 
                 var res = StaticMethods.GetLocalSavedData();
-
-                //Create List of KeyValuePairs
                 var notificationProperties = new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("username", nav.UserName),
@@ -311,10 +310,9 @@ namespace App2.APIService
                     new KeyValuePair<string, string>("user_id", nav.UserId),
                     new KeyValuePair<string, string>("device_id", nav.DeviceId),
                     new KeyValuePair<string, string>("company_id", nav.CompanyId),
-                    new KeyValuePair<string, string>("tagtype", ""),
+                    new KeyValuePair<string, string>("tagtype", "elec_consumption"),
 
                 };
-
                 foreach (var dir in nav.SiteIdMdls)
                 {
                     if (dir.ChkId == true)
@@ -325,7 +323,6 @@ namespace App2.APIService
                 }
 
                 var dataContent = new FormUrlEncodedContent(notificationProperties.ToArray());
-
                 var response = client.PostAsync(RestUrl, dataContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -341,5 +338,6 @@ namespace App2.APIService
             return jsonResponse;
         }
         #endregion
+
     }
 }

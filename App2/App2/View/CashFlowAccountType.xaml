@@ -43,7 +43,7 @@
                                       VerticalTextAlignment="Center"/>
 
             <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
-                <ScrollView Orientation="Horizontal" >
+                <!--<ScrollView Orientation="Horizontal" >-->
                     <ListView x:Name="ListCashSite"
                                       HasUnevenRows="True"
                                       HeightRequest="200"
@@ -66,13 +66,13 @@
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0"  BackgroundColor="Black">
                                         <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding AccountType}" />
-                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding TotalAmt}" />
+                                        <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding TotalAmt}" HorizontalTextAlignment="End" />
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </ScrollView>
+                <!--</ScrollView>-->
             </Frame>
         </StackLayout>
     </ContentPage.Content>
