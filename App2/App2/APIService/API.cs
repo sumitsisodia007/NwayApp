@@ -251,7 +251,6 @@ namespace App2.APIService
 
                 var res = StaticMethods.GetLocalSavedData();
 
-                //Create List of KeyValuePairs
                 var notificationProperties = new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("username", nav.UserName),
@@ -263,8 +262,6 @@ namespace App2.APIService
 
                 };
 
-                //Add 'single' parameters
-                //Loop over String array and add all instances to our bodyPoperties
                 foreach (var dir in nav.SiteIdMdls)
                 {
                     if (dir.ChkId == true)
@@ -274,10 +271,8 @@ namespace App2.APIService
                     }
                 }
 
-                //convert your bodyProperties to an object of FormUrlEncodedContent
                 var dataContent = new FormUrlEncodedContent(notificationProperties.ToArray());
 
-                //var content = new FormUrlEncodedContent(values);
                 var response = client.PostAsync(RestUrl, dataContent).Result;
                 if (response.IsSuccessStatusCode)
                 {

@@ -178,13 +178,13 @@ namespace App2.PopUpPages
             umdl.CompanyIndex = ComIndex;
             StaticMethods.SaveLocalData(umdl);
 
-            _objNav = new NavigationMdl();
-            var nav = _objNav.PrepareApiData();
-            var cashdetails = _api.CashFlowDetails(nav);
-            if (cashdetails.Error == "false")
-            {
-                StaticMethods.BankRes = cashdetails;
-            }
+            //_objNav = new NavigationMdl();
+            //var nav = _objNav.PrepareApiData();
+            //var cashdetails = _api.CashFlowDetails(nav);
+            //if (cashdetails.Error == "false")
+            //{
+            //    StaticMethods.BankRes = cashdetails;
+            //}
              await Task.WhenAll(
              //Navigation.PushModalAsync(new App2.View.MasterMainPage(_data, tempchlst)),
              Navigation.PushModalAsync(new App2.View.MasterMainPage(_data)),
