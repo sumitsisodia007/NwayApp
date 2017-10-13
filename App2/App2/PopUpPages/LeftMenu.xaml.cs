@@ -217,8 +217,6 @@ namespace App2.PopUpPages
                     Xamarin.Forms.FileImageSource objFileImageSource = (Xamarin.Forms.FileImageSource)img.Source;
                     var cmpTblTbl = await App.CmpDatabase.GetItemsAsync();
 
-                    //  if (movementListTbl.Count == 0)
-                    // string strFileName = objFileImageSource.File;
                     foreach (var item in _data._permissions)
                     {
                         foreach (var item2 in item.Sites)

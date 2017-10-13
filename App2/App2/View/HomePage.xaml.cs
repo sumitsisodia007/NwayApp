@@ -24,7 +24,7 @@ namespace App2.View
 
         private LoginResponseMdl _newres;
         //NotificationListMdl _notificationModel;
-//private List<TempSiteIdMdl> _newTempchlst;
+        //private List<TempSiteIdMdl> _newTempchlst;
 
         public HomePage()
         {
@@ -101,7 +101,7 @@ namespace App2.View
                 var rs = StaticMethods.GetLocalSavedData();
                 //if (rs.DeviceToken == null)
                 //{
-                await Task.Delay(2000);
+                await Task.Delay(3000);
                 await MainTokanReg();
                 //}
             }
@@ -116,38 +116,38 @@ namespace App2.View
             try
             {
                // int unique = 1;
-                LoginResponseMdl res = new LoginResponseMdl();
-                LoginMdl _login = new LoginMdl();
+                LoginResponseMdl login;
+                var lgnmdl = new LoginMdl();
 
-                UserModel rs = StaticMethods.GetLocalSavedData();
-                _login.Username = rs.UserName;
-                _login.Password = rs.Password;
-                _login.Tagtype = EnumMaster.TagtypeSignin;
-                _login.DeviceId = StaticMethods.GetDeviceidentifier();
-                if (_login.DeviceId == "unknown")
+                var userModel = StaticMethods.GetLocalSavedData();
+                lgnmdl.Username = userModel.UserName;
+                lgnmdl.Password = userModel.Password;
+                lgnmdl.Tagtype = EnumMaster.TagtypeSignin;
+                lgnmdl.DeviceId = StaticMethods.GetDeviceidentifier();
+                if (lgnmdl.DeviceId == "unknown")
                 {
-                    _login.DeviceId = "123456";
+                    lgnmdl.DeviceId = "123456";
                 }
                 if (Device.OS == TargetPlatform.iOS)
                 {
-                    _login.IosToken = DependencyService.Get<IIosMethods>().GetTokan();
-                    rs.DeviceToken = _login.IosToken;
+                    lgnmdl.IosToken = DependencyService.Get<IIosMethods>().GetTokan();
+                    userModel.DeviceToken = lgnmdl.IosToken;
                 }
                 else
                 {
-                    _login.Firebasetoken = DependencyService.Get<IAndroidMethods>().GetTokan() ?? "";
+                    lgnmdl.Firebasetoken = DependencyService.Get<IAndroidMethods>().GetTokan() ?? "";
                 }
-                res = _api.PostLogin(_login);
+                login = _api.PostLogin(lgnmdl);
 
 
-                if (res.Error == "false")
+                if (login.Error == "false")
                 {
                     //_newres = res;
-                    StaticMethods.NewRes = _newres = res;
-                    if (rs.DeviceToken == null)
+                    StaticMethods.NewRes = _newres = login;
+                    if (userModel.DeviceToken == null)
                     {
 
-                        StaticMethods.SaveLocalData(rs);
+                        StaticMethods.SaveLocalData(userModel);
                     }
                 }
             }
@@ -259,22 +259,34 @@ namespace App2.View
 
         private async void CashFlow_Tapped(object sender, EventArgs e)
         {
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
             await Navigation.PushAsync(new CashFlowSitePage());
+            await PopupNavigation.RemovePageAsync(loadingPage);
         }
 
         private async void Elect_Tapped(object sender, EventArgs e)
         {
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
             await Navigation.PushAsync(new Ele_CunsPageCont());
+            await PopupNavigation.RemovePageAsync(loadingPage);
         }
 
-        private void Expired_Tapped(object sender, EventArgs e)
+        private async void Expired_Tapped(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new ExpiredSoon());
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
+            await Navigation.PushAsync(new ExpiredSoon());
+            await PopupNavigation.RemovePageAsync(loadingPage);
         }
 
-        private void Canceled_Tapped(object sender, EventArgs e)
+        private async void Canceled_Tapped(object sender, EventArgs e)
         {
-            DisplayAlert("Message", "Comming Soon", "ok");
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
+            await DisplayAlert("Message", "Comming Soon", "ok");
+            await PopupNavigation.RemovePageAsync(loadingPage);
         }
 
         private async void Notification_Clicked(object sender, EventArgs e)
@@ -332,14 +344,20 @@ namespace App2.View
             }
         }
 
-        private void Alert_Tapped(object sender, EventArgs e)
+        private async void Alert_Tapped(object sender, EventArgs e)
         {
-            DisplayAlert("Message", "Comming Soon, Alert", "ok");
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
+            await DisplayAlert("Message", "Comming Soon, Alert", "ok");
+            await PopupNavigation.RemovePageAsync(loadingPage);
         }
 
         private async void Approval_Clicked(object sender, EventArgs e)
         {
+            var loadingPage = new LoaderPage();
+            await PopupNavigation.PushAsync(loadingPage);
             await DisplayAlert("Message", "Comming Soon, Approval", "ok");
+            await PopupNavigation.RemovePageAsync(loadingPage);
         }
 
         private void PrepareView(LoginResponseMdl res)

@@ -44,10 +44,10 @@ namespace App2
                 MainPage = new LoginPage();
             }
         }
-        public App(NavigationMdl mdl)
+        public App(NavigationMdl navmdl)
         {
             InitializeComponent();
-            MainPage = new MasterMainPage(mdl);
+            MainPage = new MasterMainPage(navmdl);
            // MainPage =new NavigationPage(new PayableChart(mdl));
         }
             

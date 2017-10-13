@@ -47,13 +47,14 @@ namespace App2.View
             App.MasterDetail = this;
         }
 
-        public MasterMainPage(NavigationMdl mdl)
+        public MasterMainPage(NavigationMdl navmdl)
         {
-            MainLogin();
+            
             InitializeComponent();
 
+            MainLogin();
             this.Master = new MasterPage(_newres);
-            this.Detail = new NavigationPage(new HomePage(_newres, mdl));
+            this.Detail = new NavigationPage(new HomePage(_newres));
             App.MasterDetail = this;
         }
 
