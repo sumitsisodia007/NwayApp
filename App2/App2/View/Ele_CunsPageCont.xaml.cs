@@ -42,7 +42,7 @@ namespace App2.View
                         TxtWidth = _Width,
                         Particular = mpebMdl.MeterType ,
                         ClosingReading = mpebMdl.Closing.ToString(),
-                        OpeningReading = mpebMdl.Closing.ToString(),
+                        OpeningReading = mpebMdl.Opening.ToString(),
                         Consumption = mpebMdl.Consumption.ToString()
                     });
                 }
@@ -53,7 +53,7 @@ namespace App2.View
                         TxtWidth = _Width,
                         Particular = otherMdl.MeterType,
                         ClosingReading = otherMdl.Closing.ToString(),
-                        OpeningReading = otherMdl.Closing.ToString(),
+                        OpeningReading = otherMdl.Opening.ToString(),
                         Consumption = otherMdl.Consumption.ToString()
                     });
                 }

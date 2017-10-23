@@ -27,6 +27,7 @@ namespace App2.View
 
                     LblSiteName.WidthRequest =
                     LblSiteBank.WidthRequest = _Width = calcScreenWidth / 2 - 20;
+                    LblCashSite.Text = StaticMethods.SetCompanyName;
                 }
                 TodayCollationList();
             }

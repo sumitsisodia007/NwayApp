@@ -37,8 +37,9 @@ namespace App2.View
                 UserModel rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
                 LblSetComName.Text = rs.CompanyName;
-                PrepareBankAmount();
-                PrepareMeterReading();
+                PrepareHomePage();
+                //PrepareBankAmount();
+                //PrepareMeterReading();
             });
         }
 
@@ -51,8 +52,9 @@ namespace App2.View
                 StaticMethods.NewRes = _newres = res;
                 PrepareView(res);
                 Task.Delay(500);
-                PrepareBankAmount();
-                PrepareMeterReading();
+                PrepareHomePage();
+                //PrepareBankAmount();
+                //PrepareMeterReading();
             });
         }
         
@@ -261,6 +263,13 @@ namespace App2.View
         {
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);
+            _objNav = new NavigationMdl();
+            NavigationMdl nav = _objNav.PrepareApiData();
+            var cashdetails = _api.CashFlowDetails(nav);
+            if (cashdetails.Error == "false")
+            {
+                StaticMethods.BankRes = cashdetails;
+            }
             await Navigation.PushAsync(new CashFlowSitePage());
             await PopupNavigation.RemovePageAsync(loadingPage);
         }
@@ -269,6 +278,13 @@ namespace App2.View
         {
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);
+            _objNav = new NavigationMdl();
+            NavigationMdl nav = _objNav.PrepareApiData();
+            var electrCons = _api.ElectricityCuns(nav);
+            if (electrCons.Error == false)
+            {
+                StaticMethods.ElectricityResp = electrCons;
+            }
             await Navigation.PushAsync(new Ele_CunsPageCont());
             await PopupNavigation.RemovePageAsync(loadingPage);
         }
@@ -438,6 +454,22 @@ namespace App2.View
                         cash.ListElectricityGroupMdl.OtherTotalConsumption.ToString();
 
             LblElecReading.Text = ss; //rs.NotCount;
+        }
+
+        private void PrepareHomePage()
+        {
+            //var hamedata = StaticMethods.StaticHome;
+            var rs = StaticMethods.GetLocalSavedData();
+            LblNotificationBadge.Text = rs.NotCount;
+            foreach (var item in StaticMethods.StaticHome.ListHomeDetails)
+            {
+                LblElecReading.Text = item.electric_consumption;
+                LblBankAmt.Text = item.bank;
+                LblReceiveble.Text = item.receivable;
+                LblPayable.Text = item.payable;
+                LblExpire.Text = item.expire.ToString();
+                LblInvoiceCancel.Text = item.cancellation.ToString();
+            }
         }
     }
 }

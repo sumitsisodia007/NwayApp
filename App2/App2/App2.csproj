@@ -58,6 +58,7 @@
     <Compile Include="Model\CashFlowMdl.cs" />
     <Compile Include="Model\CompanyTbl.cs" />
     <Compile Include="Model\ElectricityMdl.cs" />
+    <Compile Include="Model\HomeMdl.cs" />
     <Compile Include="Model\LoginMdl.cs" />
     <Compile Include="Model\LoginResponseMdl.cs" />
     <Compile Include="Model\MasterPageItem.cs" />

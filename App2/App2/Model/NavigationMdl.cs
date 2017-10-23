@@ -28,21 +28,21 @@ namespace App2.Model
         public string NotificationDayCount { get; set; }
         public string PageTitle { get; set; }
         public bool IsNotification{ get; set; }
+        public string Tokan { get; set; }
         public ObservableCollection<SiteIdMdl> SiteIdMdls { get; set; }
 
         public NavigationMdl PrepareApiData()
         {
             NavigationMdl nav = new NavigationMdl();
             ObservableCollection<SiteIdMdl> lst = new ObservableCollection<SiteIdMdl>();
-            UserModel res = StaticMethods.GetLocalSavedData();
+            var res = StaticMethods.GetLocalSavedData();
             try
             {
-                var umdl = StaticMethods.GetLocalSavedData();
                 foreach (var item in StaticMethods.NewRes._permissions)
                 {
                     if (StaticMethods.SetCompanyName == null)
                     {
-                        StaticMethods.SetCompanyName = umdl.CompanyName;
+                        StaticMethods.SetCompanyName = res.CompanyName;
                     }
                     if (StaticMethods.SetCompanyName == item.CompanyName)
                     {
@@ -80,18 +80,25 @@ namespace App2.Model
 
                 NavigationMdl nav = _objNav.PrepareApiData();
 
-                NotificationListMdl notificationModel = _api.PostNotification(nav);
-                var cashdetails = _api.CashFlowDetails(nav);
-                var electrCons = _api.ElectricityCuns(nav);
-                if (electrCons.Error== false)
-                {
-                    StaticMethods.ElectricityResp = electrCons;
-                }
-                if (cashdetails.Error == "false")
-                {
-                    StaticMethods.BankRes = cashdetails;
-                }
+                var notificationModel = _api.PostNotification(nav);
 
+                //var cashdetails = _api.CashFlowDetails(nav);
+                //var electrCons = _api.ElectricityCuns(nav);
+                //if (electrCons.Error== false)
+                //{
+                //    StaticMethods.ElectricityResp = electrCons;
+                //}
+                //if (cashdetails.Error == "false")
+                //{
+                //    StaticMethods.BankRes = cashdetails;
+                //}
+                nav.Tokan = StaticMethods.GetTokan();
+
+                var home = _api.MainHomeMdl(nav);
+                if (home.error == false)
+                {
+                      StaticMethods.StaticHome = home;
+                }
                 var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
                 string dateChk = null;
                 string notcount = "0";

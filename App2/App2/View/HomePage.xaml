@@ -118,7 +118,7 @@
                                         </Label.GestureRecognizers>
                                     </Label>
                                 </StackLayout>
-                                <Label Text="1120" HeightRequest="40" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  BackgroundColor="#C1D5ED"  VerticalOptions="EndAndExpand" FontSize="13" >
+                                <Label x:Name="LblReceiveble" Text="1120" HeightRequest="40" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  BackgroundColor="#C1D5ED"  VerticalOptions="EndAndExpand" FontSize="13" >
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="Receivable_Tapped"/>
                                     </Label.GestureRecognizers>
@@ -150,7 +150,7 @@
                                         <TapGestureRecognizer Tapped="Payable_Tapped"/>
                                     </StackLayout.GestureRecognizers>
                                 </StackLayout>
-                                <Label Text="1120" HeightRequest="40" BackgroundColor="#ED7D31"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                                <Label x:Name="LblPayable" Text="1120" HeightRequest="40" BackgroundColor="#ED7D31"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="Payable_Tapped"/>
                                     </Label.GestureRecognizers>
@@ -239,7 +239,7 @@
                                             <TapGestureRecognizer Tapped="Expired_Tapped" />
                                         </Image.GestureRecognizers>
                                     </Image>
-                                    <Label x:Name="LblExpir" Text="Expired Soon" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  VerticalOptions="StartAndExpand" FontSize="13">
+                                    <Label  Text="Expired Soon" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  VerticalOptions="StartAndExpand" FontSize="13">
                                         <Label.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="Expired_Tapped"/>
                                         </Label.GestureRecognizers>
@@ -248,7 +248,7 @@
                                         <TapGestureRecognizer Tapped="Expired_Tapped" />
                                     </StackLayout.GestureRecognizers>
                                 </StackLayout>
-                                <Label Text="1120" HeightRequest="40" BackgroundColor="#FFD993"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                                <Label x:Name="LblExpire" Text="1120" HeightRequest="40" BackgroundColor="#FFD993"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
 
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="Expired_Tapped"/>
@@ -271,7 +271,7 @@
                                             <TapGestureRecognizer Tapped="Canceled_Tapped" />
                                         </Image.GestureRecognizers>
                                     </Image>
-                                    <Label x:Name="LblInvoiceCancel" Text="Invoice Canceled" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"   VerticalOptions="StartAndExpand" FontSize="13">
+                                    <Label  Text="Invoice Canceled" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"   VerticalOptions="StartAndExpand" FontSize="13">
                                         <Label.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="Canceled_Tapped"/>
                                         </Label.GestureRecognizers>
@@ -280,7 +280,7 @@
                                         <TapGestureRecognizer Tapped="Canceled_Tapped" />
                                     </StackLayout.GestureRecognizers>
                                 </StackLayout>
-                                <Label Text="1120" HeightRequest="40" TextColor="White" BackgroundColor="Black"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                                <Label x:Name="LblInvoiceCancel" Text="1120" HeightRequest="40" TextColor="White" BackgroundColor="Black"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="Canceled_Tapped"/>
                                     </Label.GestureRecognizers>
