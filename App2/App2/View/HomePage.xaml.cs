@@ -37,6 +37,8 @@ namespace App2.View
                 UserModel rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
                 LblSetComName.Text = rs.CompanyName;
+                PrepareView(StaticMethods.NewRes);
+                Task.Delay(500);
                 PrepareHomePage();
                 //PrepareBankAmount();
                 //PrepareMeterReading();
