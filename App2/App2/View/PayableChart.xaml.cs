@@ -146,7 +146,7 @@ namespace App2.View
                     //
                     //navmdl.TagType = "partylist";
                     
-                    NavigationMdl nav = obj_nav.PrepareApiData();
+                    NavigationMdl nav =await obj_nav.PrepareApiData();
                     nav.PartyName = e.NewTextValue;
 
                     lstLoca = new PartysearchMdl();
@@ -252,7 +252,7 @@ namespace App2.View
 
                 //_payable = api.PayableTable(toady_notification);
                 obj_nav = new NavigationMdl();
-                NavigationMdl nav = obj_nav.PrepareApiData();
+                NavigationMdl nav =await obj_nav.PrepareApiData();
                 nav.PartyId = obj.Party_Id;
                 nav.PartyName = obj.Party_Name;
                 nav.TagType = this.Title == "Receivable Chart" ? EnumMaster.TagtypereceivableOutstanding : EnumMaster.TagtypepayableOutstanding;

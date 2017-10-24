@@ -33,6 +33,7 @@ namespace App2.Model
                 foreach (var itemSite in item.Sites)
                 {
                     tbl.CompanyName = item.CompanyName;
+                    tbl.CompanyID= item.CompanyId;
                     tbl.SiteName = itemSite.Site_name;
                     tbl.SiteId = itemSite.Site_id.ToString();
                     tbl.SiteShortName = itemSite.Site_short_name;

@@ -328,7 +328,7 @@ namespace App2
             navmdl.CompanyName = EnumMaster.C21Malhar;
             navmdl.PartyName = obj.ShowPartyNameCustomerName;
             NavigationMdl objNav=new NavigationMdl();
-            NavigationMdl nav = objNav.PrepareApiData();
+            NavigationMdl nav =await objNav.PrepareApiData();
             if (lblName.Text == "Receipt")
             {
                 nav.PageTitle = "Receivable";

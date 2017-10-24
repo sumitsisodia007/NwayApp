@@ -31,14 +31,31 @@ namespace App2.Model
         public string Tokan { get; set; }
         public ObservableCollection<SiteIdMdl> SiteIdMdls { get; set; }
 
-        public NavigationMdl PrepareApiData()
+        public async Task<NavigationMdl> PrepareApiData()
         {
             NavigationMdl nav = new NavigationMdl();
             ObservableCollection<SiteIdMdl> lst = new ObservableCollection<SiteIdMdl>();
+            var cmpTblTbl = await App.CmpDatabase.GetItemsAsync();
             var res = StaticMethods.GetLocalSavedData();
             try
             {
-                foreach (var item in StaticMethods.NewRes._permissions)
+                //foreach (var item in StaticMethods.NewRes._permissions)
+                //{
+                //    if (StaticMethods.SetCompanyName == null)
+                //    {
+                //        StaticMethods.SetCompanyName = res.CompanyName;
+                //    }
+                //    if (StaticMethods.SetCompanyName == item.CompanyName)
+                //    {
+                //        foreach (var item2 in item.Sites)
+                //        {
+
+                //            lst.Add(new SiteIdMdl { SiteId = item2.Site_id, SiteName = item2.Site_name ,ChkId = item2.Chk_id});
+                //        }
+                //        nav.CompanyId = item.CompanyId.ToString();
+                //    }
+                //}
+                foreach (var item in cmpTblTbl)
                 {
                     if (StaticMethods.SetCompanyName == null)
                     {
@@ -46,12 +63,10 @@ namespace App2.Model
                     }
                     if (StaticMethods.SetCompanyName == item.CompanyName)
                     {
-                        foreach (var item2 in item.Sites)
-                        {
-
-                            lst.Add(new SiteIdMdl { SiteId = item2.Site_id, SiteName = item2.Site_name ,ChkId = item2.Chk_id});
-                        }
-                        nav.CompanyId = item.CompanyId.ToString();
+                      
+                            lst.Add(new SiteIdMdl { SiteId =Convert.ToInt32(item.SiteId), SiteName = item.SiteName, ChkId = item.IsSiteSelected});
+                  
+                        nav.CompanyId = item.CompanyID.ToString();
                     }
                 }
                 nav.UserName = res.UserName;
@@ -70,18 +85,14 @@ namespace App2.Model
         }
         private NavigationMdl _objNav = null;
         readonly API _api = new API();
-        public  void SetBedge()
+        public async void SetBedge()
         {
             try
             {
-
                 UserModel rs = StaticMethods.GetLocalSavedData();
                 _objNav = new NavigationMdl();
-
-                NavigationMdl nav = _objNav.PrepareApiData();
-
-                var notificationModel = _api.PostNotification(nav);
-
+                NavigationMdl nav =await PrepareApiData();
+               // var notificationModel = _api.PostNotification(nav);
                 //var cashdetails = _api.CashFlowDetails(nav);
                 //var electrCons = _api.ElectricityCuns(nav);
                 //if (electrCons.Error== false)
@@ -93,23 +104,27 @@ namespace App2.Model
                 //    StaticMethods.BankRes = cashdetails;
                 //}
                 nav.Tokan = StaticMethods.GetTokan();
-
                 var home = _api.MainHomeMdl(nav);
                 if (home.error == false)
                 {
                       StaticMethods.StaticHome = home;
                 }
-                var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
-                string dateChk = null;
-                string notcount = "0";
-
-                foreach (var item in notificationModel.ListNotificationDate)
+                foreach (var item in home.ListHomeDetails)
                 {
-                    dateChk = item.Date;
-                    notcount = item.NotCount;
-                    break;
+                    rs.NotCount = item.notificationCount.ToString();
                 }
-                rs.NotCount = d2.ToString() == dateChk ? notcount : "0";
+                
+                //var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
+                //string dateChk = null;
+                //string notcount = "0";
+
+                //foreach (var item in notificationModel.ListNotificationDate)
+                //{
+                //    dateChk = item.Date;
+                //    notcount = item.NotCount;
+                //    break;
+                //}
+                //rs.NotCount = d2.ToString() == dateChk ? notcount : "0";
                 StaticMethods.SaveLocalData(rs);
 
             }
@@ -117,7 +132,6 @@ namespace App2.Model
             {
             }
         }
-
     }
 
     public class SiteIdMdl

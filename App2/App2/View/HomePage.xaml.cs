@@ -34,9 +34,10 @@ namespace App2.View
                 Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
                 //PrepareView();
                 Task.Delay(500);
-                UserModel rs = StaticMethods.GetLocalSavedData();
+                var rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
                 LblSetComName.Text = rs.CompanyName;
+                _newres = StaticMethods.NewRes;
                 PrepareView(StaticMethods.NewRes);
                 Task.Delay(500);
                 PrepareHomePage();
@@ -68,9 +69,9 @@ namespace App2.View
                 Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
                 StaticMethods.NewRes = _newres = res;
                 PrepareView(res);
-                UserModel rs = StaticMethods.GetLocalSavedData();
+                var rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
-
+                PrepareHomePage();
                 NavigatePageNotification(res, mdl);
             });
         }
@@ -102,11 +103,15 @@ namespace App2.View
         {
             try
             {
-                var rs = StaticMethods.GetLocalSavedData();
+               // var rs = StaticMethods.GetLocalSavedData();
                 //if (rs.DeviceToken == null)
                 //{
-                await Task.Delay(3000);
-                await MainTokanReg();
+                
+                //24 Oct for recalling ios tokan registeration
+               // await Task.Delay(3000);
+              //  await MainTokanReg();
+              //24 Oct
+                
                 //}
             }
             catch (Exception ex)
@@ -225,7 +230,7 @@ namespace App2.View
                 var loadingPage = new LoaderPage();
                 await PopupNavigation.PushAsync(loadingPage);
                 _objNav = new NavigationMdl();
-                NavigationMdl nav = _objNav.PrepareApiData();
+                NavigationMdl nav =await _objNav.PrepareApiData();
                 // PayableNotificationMdl _payable = await api.PayableTable(nav);
                 nav.PageTitle = LblReceive.Text;
                 nav.TagType = EnumMaster.TagtypereceivableOutstanding;
@@ -248,7 +253,7 @@ namespace App2.View
                 var loadingPage = new LoaderPage();
                 await PopupNavigation.PushAsync(loadingPage);
                 _objNav = new NavigationMdl();
-                NavigationMdl nav = _objNav.PrepareApiData();
+                NavigationMdl nav =await _objNav.PrepareApiData();
                 nav.PageTitle = LblPay.Text;
                 nav.TagType = EnumMaster.TagtypepayableOutstanding;
                 await Navigation.PushAsync(new PayablePage(nav));
@@ -266,7 +271,7 @@ namespace App2.View
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);
             _objNav = new NavigationMdl();
-            NavigationMdl nav = _objNav.PrepareApiData();
+            NavigationMdl nav =await _objNav.PrepareApiData();
             var cashdetails = _api.CashFlowDetails(nav);
             if (cashdetails.Error == "false")
             {
@@ -281,7 +286,7 @@ namespace App2.View
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);
             _objNav = new NavigationMdl();
-            NavigationMdl nav = _objNav.PrepareApiData();
+            NavigationMdl nav =await _objNav.PrepareApiData();
             var electrCons = _api.ElectricityCuns(nav);
             if (electrCons.Error == false)
             {
@@ -314,7 +319,7 @@ namespace App2.View
                 var loadingPage = new LoaderPage();
                 await PopupNavigation.PushAsync(loadingPage);
                 _objNav = new NavigationMdl();
-                NavigationMdl nav = _objNav.PrepareApiData();
+                NavigationMdl nav =await _objNav.PrepareApiData();
                 NotificationListMdl nmdl = null;
 
                 nmdl = _api.PostNotification(nav);
@@ -471,6 +476,7 @@ namespace App2.View
                 LblPayable.Text = item.payable;
                 LblExpire.Text = item.expire.ToString();
                 LblInvoiceCancel.Text = item.cancellation.ToString();
+                //LblNotificationBadge.Text = item.notificationCount.ToString();
             }
         }
     }

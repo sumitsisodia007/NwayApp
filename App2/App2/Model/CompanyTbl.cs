@@ -12,6 +12,7 @@ namespace App2.Model
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string CompanyName { get; set; }
+        public int CompanyID { get; set; }
         public string SiteName { get; set; }
         public string SiteId { get; set; }
         public string SiteShortName{ get; set; }

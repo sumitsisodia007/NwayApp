@@ -118,7 +118,15 @@
                                         </Label.GestureRecognizers>
                                     </Label>
                                 </StackLayout>
-                                <Label x:Name="LblReceiveble" Text="1120" HeightRequest="40" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  BackgroundColor="#C1D5ED"  VerticalOptions="EndAndExpand" FontSize="13" >
+                                <Label x:Name="LblReceiveble" 
+                                       Text="1120" 
+                                       HeightRequest="40" 
+                                       TextColor="Black" 
+                                       VerticalTextAlignment="Center" 
+                                       HorizontalTextAlignment="Center" 
+                                       BackgroundColor="#C1D5ED"  
+                                       VerticalOptions="EndAndExpand" 
+                                       FontSize="13" >
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="Receivable_Tapped"/>
                                     </Label.GestureRecognizers>
@@ -150,7 +158,13 @@
                                         <TapGestureRecognizer Tapped="Payable_Tapped"/>
                                     </StackLayout.GestureRecognizers>
                                 </StackLayout>
-                                <Label x:Name="LblPayable" Text="1120" HeightRequest="40" BackgroundColor="#ED7D31"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                                <Label x:Name="LblPayable" Text="1120" 
+                                       HeightRequest="40"
+                                       BackgroundColor="#ED7D31" 
+                                       VerticalOptions="EndAndExpand"
+                                       FontSize="13" 
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="Payable_Tapped"/>
                                     </Label.GestureRecognizers>

@@ -59,7 +59,6 @@
                            Aspect="AspectFit"
                            HeightRequest="180" />
                     <StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-
                         <Label x:Name="lblChart" Text="(Monthly Ledger)" HorizontalOptions="CenterAndExpand" 
                                TextColor="Black" HorizontalTextAlignment="Center" FontSize="18"/>
                         <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
@@ -95,17 +94,13 @@
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
-
                         </Frame>
                     </StackLayout>
-
-
                 </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="23">
                 <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="25"/>
                 <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
-
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

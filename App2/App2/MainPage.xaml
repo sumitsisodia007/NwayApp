@@ -116,18 +116,18 @@
                                             </StackLayout.Padding>
                                             <Label BackgroundColor="#E2F5F9" 
                                                    HorizontalOptions="Start" 
-                                                   FontSize="20"
+                                                   FontSize="18"
                                                    FontAttributes="Bold"
                                                    Text="{Binding ShowSohrtName}" 
                                                    TextColor="Black" 
                                                    HorizontalTextAlignment="Start" />
                                             <Label BackgroundColor="#E2F5F9" 
                                                    HorizontalOptions="StartAndExpand" 
-                                                   FontSize="17" 
+                                                   FontSize="16" 
                                                    Text="{Binding ShowPartyNameCustomerName}" 
                                                    TextColor="Black" HorizontalTextAlignment="Start" />
-                                            <Label  BackgroundColor="#E2F5F9" WidthRequest="105" 
-                                                    FontSize="17" Text="{Binding ShowAmountReceived, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
+                                            <Label  BackgroundColor="#E2F5F9" WidthRequest="115" 
+                                                    FontSize="16" Text="{Binding ShowAmountReceived, StringFormat='&#x20b9;{0:N}'}" TextColor="Black" HorizontalTextAlignment="End" />
 
                                         </StackLayout>
                                         <BoxView BackgroundColor="#BBBBBB" HeightRequest="1"/>

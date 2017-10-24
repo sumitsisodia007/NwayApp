@@ -350,6 +350,8 @@ namespace App2.APIService
                     new KeyValuePair<string, string>("user_id", nav.UserId),
                     new KeyValuePair<string, string>("device_id", nav.DeviceId),
                     new KeyValuePair<string, string>("company_id", nav.CompanyId),
+                    new KeyValuePair<string, string>("firebasetoken", nav.Tokan),
+                    new KeyValuePair<string, string>("iosdevicetoken", nav.Tokan),
                     new KeyValuePair<string, string>("tagtype", "homepage"),
 
                 };

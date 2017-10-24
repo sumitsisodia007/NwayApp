@@ -25,5 +25,7 @@ namespace App2.Model
         public string receivable { get; set; }
         public int expire { get; set; }
         public int cancellation { get; set; }
+        [JsonProperty("notification_count")]
+        public int notificationCount { get; set; }
     }
 }

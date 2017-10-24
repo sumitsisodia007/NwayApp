@@ -268,7 +268,7 @@ namespace App2.View
             list_totalpayble.ItemsSource = Showpayabletotalpayblelist;
         }
 
-        private void list_today_payble_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void list_today_payble_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             _navmdl = new NavigationMdl();
             var localToadyNotification = (ShowPayableTodayDetail)e.Item;
@@ -280,13 +280,13 @@ namespace App2.View
             //}
             //navmdl.CompanyName = EnumMaster.C21Malhar;
             _objNav = new NavigationMdl();
-            NavigationMdl nav = _objNav.PrepareApiData();
+            NavigationMdl nav =await _objNav.PrepareApiData();
             nav.PartyId = localToadyNotification.ShowPartyId;
             nav.PartyName = localToadyNotification.ShowPayParty;
             nav.TagType = this.Title == "Receivable" ? EnumMaster.TagtypereceivableOutstanding : EnumMaster.TagtypepayableOutstanding;
             if (Notflag != true)
             {
-                Navigation.PushAsync(new PayableChart(nav));
+              await  Navigation.PushAsync(new PayableChart(nav));
             }
         }
 
@@ -319,7 +319,7 @@ namespace App2.View
                     else
                     {
                         _objNav = new NavigationMdl();
-                        NavigationMdl nav = _objNav.PrepareApiData();
+                        NavigationMdl nav =await _objNav.PrepareApiData();
                         nav.PartyName = e.NewTextValue;
                         _lstLoca = new PartysearchMdl();
                         _lstLoca = await _api.GetParty(nav);
@@ -404,7 +404,7 @@ namespace App2.View
 
         }
 
-        private void AutoList_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void AutoList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             PartysearchlistMdl obj = null;
             _navmdl = new NavigationMdl();
@@ -423,7 +423,7 @@ namespace App2.View
                 //}
                 //navmdl.CompanyName = EnumMaster.C21Malhar;
                 _objNav = new NavigationMdl();
-                NavigationMdl nav = _objNav.PrepareApiData();
+                NavigationMdl nav =await _objNav.PrepareApiData();
                 nav.PartyName = obj.Party_Name;
                 nav.PartyId = obj.Party_Id;
                 nav.TagType = this.Title == "Receivable" ? EnumMaster.TagtypereceivableOutstanding : EnumMaster.TagtypepayableOutstanding;
