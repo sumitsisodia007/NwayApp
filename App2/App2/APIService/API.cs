@@ -370,7 +370,7 @@ namespace App2.APIService
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
                     JObject.Parse(jsonresult);
-                    jsonResponse = JsonConvert.DeserializeObject<HomeMdl>(jsonresult);
+                     jsonResponse = JsonConvert.DeserializeObject<HomeMdl>(jsonresult);
                 }
             }
             catch (Exception ex)

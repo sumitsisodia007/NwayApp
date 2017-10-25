@@ -463,11 +463,12 @@ namespace App2.View
             LblElecReading.Text = ss; //rs.NotCount;
         }
 
-        private void PrepareHomePage()
+        private async void PrepareHomePage()
         {
             //var hamedata = StaticMethods.StaticHome;
-            var rs = StaticMethods.GetLocalSavedData();
-            LblNotificationBadge.Text = rs.NotCount;
+            //var rs = StaticMethods.GetLocalSavedData();
+            //// LblNotificationBadge.Text = rs.NotCount;
+            await Task.Delay(500);
             foreach (var item in StaticMethods.StaticHome.ListHomeDetails)
             {
                 LblElecReading.Text = item.electric_consumption;
@@ -476,7 +477,7 @@ namespace App2.View
                 LblPayable.Text = item.payable;
                 LblExpire.Text = item.expire.ToString();
                 LblInvoiceCancel.Text = item.cancellation.ToString();
-                //LblNotificationBadge.Text = item.notificationCount.ToString();
+                LblNotificationBadge.Text = item.notificationCount.ToString();
             }
         }
     }

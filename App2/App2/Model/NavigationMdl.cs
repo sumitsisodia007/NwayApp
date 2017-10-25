@@ -105,13 +105,15 @@ namespace App2.Model
                 //}
                 nav.Tokan = StaticMethods.GetTokan();
                 var home = _api.MainHomeMdl(nav);
+              
                 if (home.error == false)
                 {
                       StaticMethods.StaticHome = home;
                 }
+               // await Task.Delay(700);
                 foreach (var item in home.ListHomeDetails)
                 {
-                    rs.NotCount = item.notificationCount.ToString();
+                  //  rs.NotCount = item.notificationCount.ToString();
                 }
                 
                 //var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
