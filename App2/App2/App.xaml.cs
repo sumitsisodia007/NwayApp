@@ -43,6 +43,7 @@ namespace App2
             {
                 MainPage = new LoginPage();
             }
+           
         }
         public App(NavigationMdl navmdl)
         {

@@ -25,9 +25,9 @@ namespace App2.View
                     LblSiteAmt.WidthRequest =
                         LblSiteBank.WidthRequest = _Width = calcScreenWidth / 4 - 20;
             }
-            TodayCollationList(item);
+            BankAccountList(item);
         }
-        public void TodayCollationList(CashFlowAccountTypeMdl cfAccountTypeMdl)
+        public void BankAccountList(CashFlowAccountTypeMdl cfAccountTypeMdl)
         {
             CashFlowDetailses = new List<CashFlowDetails>();
             try

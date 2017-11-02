@@ -38,11 +38,8 @@ namespace App2.View
                 LblNotificationBadge.Text = rs.NotCount;
                 LblSetComName.Text = rs.CompanyName;
                 _newres = StaticMethods.NewRes;
-                PrepareView(StaticMethods.NewRes);
-                Task.Delay(500);
-                PrepareHomePage();
-                //PrepareBankAmount();
-                //PrepareMeterReading();
+                PrepareHomePageData(StaticMethods.NewRes);
+                
             });
         }
 
@@ -53,11 +50,7 @@ namespace App2.View
                 InitializeComponent();
                 Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
                 StaticMethods.NewRes = _newres = res;
-                PrepareView(res);
-                Task.Delay(500);
-                PrepareHomePage();
-                //PrepareBankAmount();
-                //PrepareMeterReading();
+                PrepareHomePageData(res);
             });
         }
         
@@ -68,105 +61,13 @@ namespace App2.View
                 InitializeComponent();
                 Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
                 StaticMethods.NewRes = _newres = res;
-                PrepareView(res);
+                PrepareHomePageData(res);
                 var rs = StaticMethods.GetLocalSavedData();
                 LblNotificationBadge.Text = rs.NotCount;
-                PrepareHomePage();
                 NavigatePageNotification(res, mdl);
             });
         }
-
-        //public HomePage(LoginResponseMdl res, List<TempSiteIdMdl> tempchlst)
-        //{
-        //    Device.BeginInvokeOnMainThread(() =>
-        //    {
-        //        InitializeComponent();
-        //        Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-        //        StaticMethods.NewRes = _newres = res;
-        //        _newTempchlst = tempchlst;
-        //        PrepareView(res);
-        //        var rs = StaticMethods.GetLocalSavedData();
-        //        LblNotificationBadge.Text = rs.NotCount;
-        //        PrepareBankAmount();
-        //        PrepareMeterReading();
-        //    });
-        //}
-
-
-
-        protected override void OnAppearing()
-        {
-            HidePopup();
-        }
-
-        private async void HidePopup()
-        {
-            try
-            {
-               // var rs = StaticMethods.GetLocalSavedData();
-                //if (rs.DeviceToken == null)
-                //{
-                
-                //24 Oct for recalling ios tokan registeration
-               // await Task.Delay(3000);
-              //  await MainTokanReg();
-              //24 Oct
-                
-                //}
-            }
-            catch (Exception ex)
-            {
-               // StaticMethods.ShowToast("Error HidePopup Method(Home)" + ex.Message);
-            }
-        }
-
-        private Task<int> MainTokanReg()
-        {
-            try
-            {
-               // int unique = 1;
-                LoginResponseMdl login;
-                var lgnmdl = new LoginMdl();
-
-                var userModel = StaticMethods.GetLocalSavedData();
-                lgnmdl.Username = userModel.UserName;
-                lgnmdl.Password = userModel.Password;
-                lgnmdl.Tagtype = EnumMaster.TagtypeSignin;
-                lgnmdl.DeviceId = StaticMethods.GetDeviceidentifier();
-                if (lgnmdl.DeviceId == "unknown")
-                {
-                    lgnmdl.DeviceId = "123456";
-                }
-                if (Device.OS == TargetPlatform.iOS)
-                {
-                    lgnmdl.IosToken = DependencyService.Get<IIosMethods>().GetTokan();
-                    userModel.DeviceToken = lgnmdl.IosToken;
-                }
-                else
-                {
-                    lgnmdl.Firebasetoken = DependencyService.Get<IAndroidMethods>().GetTokan() ?? "";
-                }
-                login = _api.PostLogin(lgnmdl);
-
-
-                if (login.Error == "false")
-                {
-                    //_newres = res;
-                    StaticMethods.NewRes = _newres = login;
-                    if (userModel.DeviceToken == null)
-                    {
-
-                        StaticMethods.SaveLocalData(userModel);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                StaticMethods.ShowToast("Error MainTokanReg Method(Home)" + ex.Message);
-            }
-            return null;
-        }
-
+        
         #region Via Notification
         private async void NavigatePageNotification(LoginResponseMdl lgres, NavigationMdl nav)
         {
@@ -204,7 +105,6 @@ namespace App2.View
                 }
                 //nav.TagType = nav.TagType;
                 await Navigation.PushAsync(new PayablePage(nav));
-
             }
             catch (Exception ex)
             {
@@ -243,8 +143,7 @@ namespace App2.View
             {
                 StaticMethods.ShowToast("Error Receivable_Tapped Method(Home)" + ex.Message);
             }
-
-        }
+         }
 
         private async void Payable_Tapped(object sender, EventArgs e)
         {
@@ -258,7 +157,6 @@ namespace App2.View
                 nav.TagType = EnumMaster.TagtypepayableOutstanding;
                 await Navigation.PushAsync(new PayablePage(nav));
                 await PopupNavigation.RemovePageAsync(loadingPage);
-
             }
             catch (Exception ex)
             {
@@ -300,6 +198,14 @@ namespace App2.View
         {
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);
+
+            _objNav = new NavigationMdl();
+            NavigationMdl nav = await _objNav.PrepareApiData();
+            //var expiredSoon = _api.ExpiredSoon(nav);
+            //if (expiredSoon.Error == false)
+            //{
+            //    StaticMethods.ExpiredSoon= expiredSoon;
+            //}
             await Navigation.PushAsync(new ExpiredSoon());
             await PopupNavigation.RemovePageAsync(loadingPage);
         }
@@ -308,7 +214,15 @@ namespace App2.View
         {
             var loadingPage = new LoaderPage();
             await PopupNavigation.PushAsync(loadingPage);
-            await DisplayAlert("Message", "Comming Soon", "ok");
+
+            _objNav = new NavigationMdl();
+            NavigationMdl nav = await _objNav.PrepareApiData();
+            //var invoiceCancallation = _api.ElectricityCuns(nav);
+            //if (invoiceCancallation.Error == false)
+            //{
+            //    StaticMethods.Cancellation = invoiceCancallation;
+            //}
+            await Navigation.PushAsync(new InvoiceCancellationPage());
             await PopupNavigation.RemovePageAsync(loadingPage);
         }
 
@@ -383,7 +297,7 @@ namespace App2.View
             await PopupNavigation.RemovePageAsync(loadingPage);
         }
 
-        private void PrepareView(LoginResponseMdl res)
+        private async void PrepareHomePageData(LoginResponseMdl res)
         {
             try
             {
@@ -402,21 +316,17 @@ namespace App2.View
                     }
                 }
                 StaticMethods.SaveLocalData(res1);
-                if (!(App.ScreenWidth > 0) || !(App.ScreenHeight > 0)) return;
-                var calcScreenWidth = App.ScreenWidth;
-                var calcScreenHieght = App.ScreenHeight;
-                GridRec.HeightRequest =
-                    GridPay.HeightRequest =
-                        GridCas.HeightRequest =
-                            GridCon.HeightRequest =
-                                GridExp.HeightRequest =
-                                    GridInv.HeightRequest = calcScreenHieght / 4 + 20;
-                GridRec.WidthRequest =
-                    GridPay.WidthRequest =
-                        GridCas.WidthRequest =
-                            GridCon.WidthRequest =
-                                GridExp.WidthRequest =
-                                    GridInv.WidthRequest = calcScreenWidth / 3;
+                await Task.Delay(100);
+                foreach (var item in StaticMethods.StaticHome.ListHomeDetails)
+                {
+                    LblElecReading.Text = item.electric_consumption;
+                    LblBankAmt.Text = item.bank;
+                    LblReceiveble.Text = item.receivable;
+                    LblPayable.Text = item.payable;
+                    LblExpire.Text = item.expire.ToString();
+                    LblInvoiceCancel.Text = item.cancellation.ToString();
+                    LblNotificationBadge.Text = item.notificationCount.ToString();
+                }
             }
             catch (Exception ex)
             {
@@ -432,53 +342,24 @@ namespace App2.View
             await PopupNavigation.PushAsync(new LeftMenu(_newres));
             await PopupNavigation.RemovePageAsync(loadingPage);
         }
+        
 
-        private void PrepareBankAmount()
-        {
-            try
-            {
-                var rs = StaticMethods.GetLocalSavedData();
-                var cash = StaticMethods.BankRes;
-                foreach (var items in cash.ListCashFlowSite)
-                {
-                    if (rs.CompanyName == items.CompanyName)
-                    {
-                        LblBankAmt.Text = items.Amt + " " + items.AmtType;
-                    }
-                }
-                LblNotificationBadge.Text = rs.NotCount;
-            }
-            catch (Exception e)
-            {
-                StaticMethods.ShowToast("Error PrepareBankAmount Method(Home)" + e.Message);
-            }
-        }
-
-        private void PrepareMeterReading()
-        {
-            var cash = StaticMethods.ElectricityResp;
-            var ss = cash.ListElectricityGroupMdl.MpebTotalConsumption.ToString() + "/ " +
-                        cash.ListElectricityGroupMdl.OtherTotalConsumption.ToString();
-
-            LblElecReading.Text = ss; //rs.NotCount;
-        }
-
-        private async void PrepareHomePage()
-        {
-            //var hamedata = StaticMethods.StaticHome;
-            //var rs = StaticMethods.GetLocalSavedData();
-            //// LblNotificationBadge.Text = rs.NotCount;
-            await Task.Delay(500);
-            foreach (var item in StaticMethods.StaticHome.ListHomeDetails)
-            {
-                LblElecReading.Text = item.electric_consumption;
-                LblBankAmt.Text = item.bank;
-                LblReceiveble.Text = item.receivable;
-                LblPayable.Text = item.payable;
-                LblExpire.Text = item.expire.ToString();
-                LblInvoiceCancel.Text = item.cancellation.ToString();
-                LblNotificationBadge.Text = item.notificationCount.ToString();
-            }
-        }
+        //private async void PrepareHomePage()
+        //{
+        //    //var hamedata = StaticMethods.StaticHome;
+        //    //var rs = StaticMethods.GetLocalSavedData();
+        //    // LblNotificationBadge.Text = rs.NotCount;
+        //    await Task.Delay(500);
+        //    foreach (var item in StaticMethods.StaticHome.ListHomeDetails)
+        //    {
+        //        LblElecReading.Text = item.electric_consumption;
+        //        LblBankAmt.Text = item.bank;
+        //        LblReceiveble.Text = item.receivable;
+        //        LblPayable.Text = item.payable;
+        //        LblExpire.Text = item.expire.ToString();
+        //        LblInvoiceCancel.Text = item.cancellation.ToString();
+        //        LblNotificationBadge.Text = item.notificationCount.ToString();
+        //    }
+        //}
     }
 }

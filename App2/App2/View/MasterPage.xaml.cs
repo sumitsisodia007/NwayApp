@@ -35,8 +35,8 @@ namespace App2.View
 
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             DrawalMenu();
-            PickerData(res);
-            PreLayout();
+            //PickerData(res);
+            //PreLayout();
         }
 
         private void PickerData(LoginResponseMdl res)

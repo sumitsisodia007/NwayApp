@@ -4,7 +4,7 @@
              x:Class="App2.View.CashFlowAccountType"
              xmlns:local="clr-namespace:App2.CustomRenderer"
              Title="Account Type"
-             Padding="10,20">
+            >
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="ListHeaderLabelStyle" TargetType="Label">
@@ -30,7 +30,8 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="10,20">
             <local:CurvedCornersLabel x:Name="LblAccType" 
                                       FontSize="14.5"
                                       CurvedBackgroundColor="#6DB040"
@@ -75,6 +76,13 @@
                 <!--</ScrollView>-->
             </Frame>
         </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="23">
+                <Image Source="logo_Bottom" Aspect="AspectFit" HorizontalOptions="StartAndExpand" HeightRequest="25"/>
+                <Label Text="Product By: Nway ERP" TextColor="Gray" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+
+        </StackLayout>
+
     </ContentPage.Content>
 
 </ContentPage>

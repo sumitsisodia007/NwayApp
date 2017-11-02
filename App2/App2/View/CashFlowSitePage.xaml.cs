@@ -29,7 +29,7 @@ namespace App2.View
                     LblSiteBank.WidthRequest = _Width = calcScreenWidth / 2 - 20;
                     LblCashSite.Text = StaticMethods.SetCompanyName;
                 }
-                TodayCollationList();
+                BankList();
             }
             catch (Exception exception)
             {
@@ -37,7 +37,7 @@ namespace App2.View
             }
         }
 
-        public void TodayCollationList()
+        public void BankList()
         {
             CashFlowDetailses = new List<CashFlowSite>();
             try

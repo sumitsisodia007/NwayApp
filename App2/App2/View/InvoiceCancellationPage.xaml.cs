@@ -22,13 +22,16 @@ namespace App2.View
             {
                 var calcScreenWidth = Application.Current.MainPage.Width;
                 var calcScreenHieght = Application.Current.MainPage.Height;
-                _Width = calcScreenWidth / 4;
+                _Width =
+                    lblBookDate.WidthRequest =
+                    lblCustName.WidthRequest =
+                    lblSiteName.WidthRequest =
+                    lblTermDate.WidthRequest = calcScreenWidth / 4 - 30;
             }
-            TodayCollationList();
+            InvoiceCancellationList();
         }
-        public void TodayCollationList()
+        public void InvoiceCancellationList()
         {
-
             _receivablList = new List<PartyDetails>();
             try
             {
@@ -43,14 +46,10 @@ namespace App2.View
                 _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "for 30 seconds" });
                 _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
                 InvoceCancellation.ItemsSource = _receivablList;
-                
             }
             catch (Exception)
             {
-
-
             }
         }
-
     }
 }

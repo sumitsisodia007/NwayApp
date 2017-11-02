@@ -5,8 +5,9 @@
              x:Class="App2.View.HomePage"
              BackgroundColor="White"
              Title="Home">
+   
     <StackLayout>
-        <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="60" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+        <StackLayout x:Name="TitleBar" BackgroundColor="#2196F3" Orientation="Horizontal" HeightRequest="60" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <StackLayout VerticalOptions="CenterAndExpand" Padding="15">
                     <Image Source="manu_w" HeightRequest="30"  WidthRequest="30" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
@@ -220,7 +221,11 @@
                                             <TapGestureRecognizer Tapped="Elect_Tapped" />
                                         </Image.GestureRecognizers>
                                     </Image>
-                                    <Label x:Name="lblEleCun" Text="Elec. Cunsuption" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"    VerticalOptions="StartAndExpand" FontSize="13">
+                                    <Label x:Name="lblEleCun" Text="Elec. Cunsuption" TextColor="Black"
+                                           VerticalTextAlignment="Center" 
+                                           HorizontalTextAlignment="Center"
+                                           VerticalOptions="StartAndExpand"
+                                           FontSize="13">
                                         <Label.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="Elect_Tapped" />
                                         </Label.GestureRecognizers>
@@ -294,7 +299,14 @@
                                         <TapGestureRecognizer Tapped="Canceled_Tapped" />
                                     </StackLayout.GestureRecognizers>
                                 </StackLayout>
-                                <Label x:Name="LblInvoiceCancel" Text="1120" HeightRequest="40" TextColor="White" BackgroundColor="Black"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                                <Label x:Name="LblInvoiceCancel" 
+                                       Text="1120" HeightRequest="40"
+                                       TextColor="White" 
+                                       BackgroundColor="Black"  
+                                       VerticalOptions="EndAndExpand" 
+                                       FontSize="13" 
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="Canceled_Tapped"/>
                                     </Label.GestureRecognizers>

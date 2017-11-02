@@ -55,9 +55,11 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CancellationMdl.cs" />
     <Compile Include="Model\CashFlowMdl.cs" />
     <Compile Include="Model\CompanyTbl.cs" />
     <Compile Include="Model\ElectricityMdl.cs" />
+    <Compile Include="Model\ExpiredSoonMdl.cs" />
     <Compile Include="Model\HomeMdl.cs" />
     <Compile Include="Model\LoginMdl.cs" />
     <Compile Include="Model\LoginResponseMdl.cs" />

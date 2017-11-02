@@ -2,11 +2,46 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.View.ExpiredSoon"
+             xmlns:local="clr-namespace:App2.CustomRenderer"
              Title="Expired Soon"
              BackgroundColor="#FFF2CC">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ListHeaderLabelStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="#D2C86C"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="Margin" Value=".5"/>
+            </Style>
+
+            <Style x:Key="ListLabelStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="Margin" Value=".5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout >
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
             <StackLayout Padding="10,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <local:CurvedCornersLabel x:Name="LblExpireTitle" 
+                                      FontSize="14.5"
+                                      CurvedBackgroundColor="#D2C86C"
+                                      TextColor="White"
+                                      Text="CENTURY 21 TOWN PLANNERS PVT. LTD."
+                                      HorizontalOptions="FillAndExpand"
+                                      CurvedCornerRadius="12"
+                                      HeightRequest="40"
+                                      HorizontalTextAlignment="Center"
+                                      VerticalTextAlignment="Center"/>
                 <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                     <ScrollView Orientation="Horizontal" >
                         <ListView x:Name="ListViewMain"
@@ -20,48 +55,25 @@
                                 <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0"  BackgroundColor="Black">
-
-                                    <Label WidthRequest="80" BackgroundColor="#FFF2CC" HorizontalOptions="FillAndExpand"  FontSize="18" Text="S. No." Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                    <Label WidthRequest="{Binding txtWidth}" BackgroundColor="#FFF2CC" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Customer Name" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                    <Label WidthRequest="{Binding txtWidth}" BackgroundColor="#FFF2CC" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Unit No" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                    <Label WidthRequest="{Binding txtWidth}" BackgroundColor="#FFF2CC" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Termination Date" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                    <Label WidthRequest="{Binding txtWidth}" BackgroundColor="#FFF2CC" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Bookng Date" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                    <Label WidthRequest="{Binding txtWidth}" BackgroundColor="#FFF2CC" HorizontalOptions="FillAndExpand"  FontSize="18" Text="Site NameDate" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
+                                    <Label x:Name="lblCustName" Style="{StaticResource ListHeaderLabelStyle}" Text="Customer Name"   />
+                                    <Label x:Name="lblTermDate" Style="{StaticResource ListHeaderLabelStyle}" Text="Term. Date"/>
+                                    <Label x:Name="lblBookDate" Style="{StaticResource ListHeaderLabelStyle}" Text="Bookng Date"     />
+                                    <Label x:Name="lblSiteName" Style="{StaticResource ListHeaderLabelStyle}" Text="Brand Name"/>
+                                    <!--<Label x:Name="lblUnitno" Style="{StaticResource ListHeaderLabelStyle}" Text="Unit No"/>-->
                                 </StackLayout>
-
                             </ListView.Header>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
                                         <StackLayout Orientation="Horizontal"
-                                                 HorizontalOptions="FillAndExpand"
-                                                 Spacing="0" BackgroundColor="Black">
-
-                                            <Label WidthRequest="80" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Party}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                            <!--<Label.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="Row_Tapped" />
-                                            </Label.GestureRecognizers>
-                                        </Label>-->
-
-                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Pre_Outstanding}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  />
-                                            <!--<Label.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="Row_Tapped" />
-                                            </Label.GestureRecognizers>
-                                        </Label>-->
-
-                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Today_Receipt}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
-                                            <!--<Label.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="Row_Tapped" />
-                                            </Label.GestureRecognizers>
-                                        </Label>-->
-
-                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Cur_Outstanding}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
-                                            <Label WidthRequest="{Binding txtWidth}" BackgroundColor="White" HorizontalOptions="FillAndExpand"  FontSize="18" Text="{Binding Cur_Outstanding}" Margin="1" TextColor="Black" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" />
-                                            <!--<Label.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="Row_Tapped" />
-                                            </Label.GestureRecognizers>
-                                        </Label>-->
-
+                                                     HorizontalOptions="FillAndExpand"
+                                                     Spacing="0" 
+                                                     BackgroundColor="Black">
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Party}" />
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Pre_Outstanding}" />
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Cur_Outstanding}" />
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Today_Receipt}" />
+                                            <!--<Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Today_Receipt}" />-->
                                         </StackLayout>
                                     </ViewCell>
                                 </DataTemplate>
@@ -70,6 +82,20 @@
                     </ScrollView>
                 </Frame>
             </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="FillAndExpand" 
+                         VerticalOptions="EndAndExpand" 
+                         HeightRequest="23">
+                <Image Source="logo_Bottom"
+                       Aspect="AspectFit" 
+                       HorizontalOptions="StartAndExpand" 
+                       HeightRequest="25"/>
+                <Label Text="Product By: Nway ERP" 
+                       TextColor="Gray" 
+                       HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>
