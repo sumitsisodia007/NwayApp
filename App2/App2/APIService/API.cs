@@ -13,7 +13,7 @@ namespace App2.APIService
     public class API
     {
         public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
-        //public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
+      //  public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
        
         #region Login WebService
         public LoginResponseMdl PostLogin(LoginMdl lgmdl)
@@ -33,7 +33,7 @@ namespace App2.APIService
                         { "firebasetoken", lgmdl.Firebasetoken},
                         { "iosdevicetoken", lgmdl.IosToken},
                         { "device_id", lgmdl.DeviceId},
-                        { "tagtype", lgmdl.Tagtype}
+                        { "tagtype", "signin"}
                     };
 
                     var content = new FormUrlEncodedContent(values);
@@ -121,7 +121,7 @@ namespace App2.APIService
                             { "device_id", navigation.DeviceId},
                             { "min_receipt_amount", navigation.MinReceiptAmount},
                             { "notification_day_count", navigation.NotificationDayCount},
-                            { "tagtype", navigation.TagType}
+                            { "tagtype", "settings"}
                         };
 
 
@@ -381,10 +381,7 @@ namespace App2.APIService
         }
         #endregion
       
-
         // ExpiredSoon Page,InvoiceCancellation Page This is not used api
-       
-       
         #region ExpiredSoon Page
         public async Task<ExpiredSoonMdl> ExpiredSoon(NavigationMdl nav)
         {
@@ -400,9 +397,7 @@ namespace App2.APIService
                     new KeyValuePair<string, string>("user_id", nav.UserId),
                     new KeyValuePair<string, string>("device_id", nav.DeviceId),
                     new KeyValuePair<string, string>("company_id", nav.CompanyId),
-                    new KeyValuePair<string, string>("firebasetoken", nav.Tokan),
-                    new KeyValuePair<string, string>("iosdevicetoken", nav.Tokan),
-                    new KeyValuePair<string, string>("tagtype", "homepage"),
+                    new KeyValuePair<string, string>("tagtype", "booking_expiry_list"),
                 };
                 foreach (var dir in nav.SiteIdMdls)
                 {
@@ -414,7 +409,7 @@ namespace App2.APIService
                 }
 
                 var dataContent = new FormUrlEncodedContent(notificationProperties.ToArray());
-                var response = client.PostAsync(RestUrl, dataContent).Result;
+                var response =await client.PostAsync(RestUrl, dataContent);
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonresult = await response.Content.ReadAsStringAsync();
@@ -445,9 +440,7 @@ namespace App2.APIService
                     new KeyValuePair<string, string>("user_id", nav.UserId),
                     new KeyValuePair<string, string>("device_id", nav.DeviceId),
                     new KeyValuePair<string, string>("company_id", nav.CompanyId),
-                    new KeyValuePair<string, string>("firebasetoken", nav.Tokan),
-                    new KeyValuePair<string, string>("iosdevicetoken", nav.Tokan),
-                    new KeyValuePair<string, string>("tagtype", "homepage"),
+                    new KeyValuePair<string, string>("tagtype", "invoice_cancellation_list"),
                 };
 
                 foreach (var dir in nav.SiteIdMdls)
@@ -473,6 +466,22 @@ namespace App2.APIService
                 // StaticMethods.ShowToast(ex.Message);
             }
             return jsonResponse;
+        }
+        #endregion
+
+        #region DataDump to Server
+        public async Task<string>  DefaultCall()
+        {
+            string product = null;
+            var client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("http://c21.enway.co.in/android_app_schedular/android_app_schedular.php?data_type=all");
+            if (response.IsSuccessStatusCode)
+            {
+               var jsonresult = response.Content.ReadAsStringAsync().Result;
+               
+                product = jsonresult.ToString();
+            }
+            return product;
         }
         #endregion
     }

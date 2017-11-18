@@ -28,7 +28,11 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="iconexample" Icon="icon_setting.png" Priority="0" Order="Primary"  />
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         
         <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -43,6 +47,11 @@
                                       HeightRequest="40"
                                       HorizontalTextAlignment="Center"
                                       VerticalTextAlignment="Center"/>
+                <Image x:Name="CancelImg" 
+                       Source="icon_cancel" 
+                       Aspect="AspectFit" 
+                       HorizontalOptions="FillAndExpand" 
+                       VerticalOptions="FillAndExpand"/>
                 <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                     <ScrollView Orientation="Horizontal" >
                         <ListView x:Name="InvoceCancellation"
@@ -58,10 +67,10 @@
                                              Spacing="0"  
                                              BackgroundColor="Black">
                                     <Label x:Name="lblCustName" Style="{StaticResource ListHeaderLabelStyle}" Text="Customer Name"   />
-                                    <Label x:Name="lblTermDate" Style="{StaticResource ListHeaderLabelStyle}" Text="Cancel Date"/>
-                                    <Label x:Name="lblBookDate" Style="{StaticResource ListHeaderLabelStyle}" Text="Invoice Date"     />
-                                    <Label x:Name="lblSiteName" Style="{StaticResource ListHeaderLabelStyle}" Text="Invoice Code"/>
-                                    <!--<Label x:Name="lblSiteName" Style="{StaticResource ListHeaderLabelStyle}" Text="Invoice Code"/>-->
+                                    <Label x:Name="lblCancelDate" Style="{StaticResource ListHeaderLabelStyle}" Text="Cancel Date"/>
+                                    <Label x:Name="lblInvoiceDate" Style="{StaticResource ListHeaderLabelStyle}" Text="Invoice Date"     />
+                                    <Label x:Name="lblInvoiceCode" Style="{StaticResource ListHeaderLabelStyle}" Text="Invoice Code"/>
+                                    <Label x:Name="lblInvoiceType" Style="{StaticResource ListHeaderLabelStyle}" Text="Invoice Type"/>
                                 </StackLayout>
                             </ListView.Header>
                             <ListView.ItemTemplate>
@@ -70,11 +79,11 @@
                                         <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="FillAndExpand"
                                                  Spacing="0" BackgroundColor="Black">
-                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Party}" />
-                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Pre_Outstanding}" />
-                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Cur_Outstanding}" />
-                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Today_Receipt}" />
-                                            <!--<Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Today_Receipt}" />-->
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding CustomerName}" />
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding CancellationDate}" />
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding InvoiceDate}" />
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding InvoiceCode}" />
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding InvoiceType}" />
                                         </StackLayout>
                                     </ViewCell>
                                 </DataTemplate>

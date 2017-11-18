@@ -1,4 +1,7 @@
-﻿using App2.ShowModels;
+﻿using App2.NativeMathods;
+using App2.PopUpPages;
+using App2.ShowModels;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +16,7 @@ namespace App2.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class InvoiceCancellationPage : ContentPage
     {
-        public List<PartyDetails> _receivablList { get; set; }
+        public List<ShowInvoiceListMdl> ShowInvoiceList { get; set; }
         public double _Width = 0;
         public InvoiceCancellationPage()
         {
@@ -23,33 +26,61 @@ namespace App2.View
                 var calcScreenWidth = Application.Current.MainPage.Width;
                 var calcScreenHieght = Application.Current.MainPage.Height;
                 _Width =
-                    lblBookDate.WidthRequest =
+                    lblCancelDate.WidthRequest =
                     lblCustName.WidthRequest =
-                    lblSiteName.WidthRequest =
-                    lblTermDate.WidthRequest = calcScreenWidth / 4 - 30;
+                    lblInvoiceCode.WidthRequest = 
+                    lblInvoiceType.WidthRequest =
+                    lblInvoiceDate.WidthRequest = calcScreenWidth / 4 - 30;
+                LblInvoceTitle.Text = StaticMethods.SetCompanyName;
             }
-            InvoiceCancellationList();
+            InvoiceList();
         }
-        public void InvoiceCancellationList()
+        protected async override void OnAppearing()
         {
-            _receivablList = new List<PartyDetails>();
+            await CancelImg.ScaleTo(0, 10, Easing.CubicIn);
+            await CancelImg.ScaleTo(1, 1000, Easing.CubicOut);
+        }
+        public async void InvoiceList()
+        {
+            ShowInvoiceList = new List<ShowInvoiceListMdl>();
             try
             {
-                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold  30 seconds" });
-                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for  seconds" });
-                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 " });
-                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "for 30 seconds" });
-                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
-                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold  30 seconds" });
-                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for  seconds" });
-                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 " });
-                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "for 30 seconds" });
-                _receivablList.Add(new PartyDetails { TxtWidth = _Width, Party = "1111", Pre_Outstanding = "on_btn", Today_Receipt = "exercisepng", Cur_Outstanding = "Hold for 30 seconds" });
-                InvoceCancellation.ItemsSource = _receivablList;
+                var invoicecancel = StaticMethods.InvoiceCancel;
+                if (invoicecancel.CancellationList != null)
+                {
+                    foreach (var items in invoicecancel.CancellationList)
+                    {
+                        ShowInvoiceList.Add(new ShowInvoiceListMdl
+                        {
+                            TxtWidth = _Width,
+                            CustomerName = items.CustomerName,
+                            CancellationDate = items.CancellationDate,
+                            InvoiceCode = items.InvoiceCode,
+                            InvoiceDate = items.InvoiceDate,
+                            InvoiceType = items.InvoiceType
+                        });
+                    }
+                }
+                else
+                {
+                    await PopupNavigation.PushAsync(new LoginSuccessPopupPage("E", invoicecancel.Message));
+                }
+                InvoceCancellation.ItemsSource = ShowInvoiceList;
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                StaticMethods.ShowToast(exception.Message);
             }
         }
+    }
+
+    public class ShowInvoiceListMdl
+    {
+        public string CustomerName { get; set; }
+        public string CancellationDate { get; set; }
+        public string InvoiceDate { get; set; }
+        public string InvoiceCode { get; set; }
+        public string InvoiceType { get; set; }
+        public double TxtWidth { get; set; }
     }
 }

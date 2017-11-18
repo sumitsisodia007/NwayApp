@@ -45,6 +45,9 @@
     <Compile Include="CustomRenderer\BorderEntry.cs" />
     <Compile Include="CustomRenderer\CircleView.cs" />
     <Compile Include="CustomRenderer\CurvedCornersLabel.cs" />
+    <Compile Include="CustomRenderer\CustomEntry.xaml.cs">
+      <DependentUpon>CustomEntry.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomRenderer\MyButton.cs" />
     <Compile Include="CustomRenderer\MyEntry.cs" />
     <Compile Include="ExpandableListView\NotificationDetails.cs" />
@@ -73,6 +76,7 @@
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PopUpPages\InputAlertDialogBase.cs" />
     <Compile Include="PopUpPages\LeftMenu.xaml.cs">
       <DependentUpon>LeftMenu.xaml</DependentUpon>
     </Compile>
@@ -85,6 +89,10 @@
     <Compile Include="PopUpPages\LogOutPage.xaml.cs">
       <DependentUpon>LogOutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PopUpPages\PopupSettingView.xaml.cs">
+      <DependentUpon>PopupSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopUpPages\PopupTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowModels\NotificationShow.cs" />
     <Compile Include="ShowModels\PartyDetails.cs" />
@@ -387,6 +395,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\CashFlowAccountType.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PopUpPages\PopupSettingView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomRenderer\CustomEntry.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

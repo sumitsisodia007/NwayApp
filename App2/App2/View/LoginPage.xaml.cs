@@ -24,19 +24,19 @@ namespace App2.View
         private API api = new API();
         private LoginMdl _login = new LoginMdl();
 
-        public LoginPage(NavigationMdl mdl)
-        {
-            InitializeComponent();
-            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            if (mdl.TagType == "paid")
-            {
-                Navigation.PushModalAsync(new PayableChart());
-            }
-            else
-            {
-                Navigation.PushModalAsync(new MasterMainPage());
-            }
-        }
+        //public LoginPage(NavigationMdl mdl)
+        //{
+        //    InitializeComponent();
+        //    Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+        //    if (mdl.TagType == "paid")
+        //    {
+        //        Navigation.PushModalAsync(new PayableChart());
+        //    }
+        //    else
+        //    {
+        //        Navigation.PushModalAsync(new MasterMainPage());
+        //    }
+        //}
 
         public LoginPage()
         {
@@ -96,12 +96,6 @@ namespace App2.View
                     if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
                     {
                         res =  api.PostLogin(_login);
-                        //var cashdetails = await api.CashFlowDetails(nav);
-                        //if (cashdetails.Error == "false")
-                        //{
-                        //    StaticMethods.BankRes = cashdetails;
-                        //}
-                        // StaticMethods._login_response = res;
                         if (res.Error == "false")
                         {
                             StaticMethods.NewRes = res;

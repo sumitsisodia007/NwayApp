@@ -73,7 +73,6 @@ namespace App2.Model
                 nav.Password = res.Password;
                 nav.DeviceId = res.DeviceId;
                 nav.UserId = res.UserId;
-                nav.TagType = EnumMaster.Tagtypenotifications;
                 nav.SiteIdMdls = lst;
                 nav.PartyId = "1";
             }

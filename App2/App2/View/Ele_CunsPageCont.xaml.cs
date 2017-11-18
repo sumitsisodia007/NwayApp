@@ -66,6 +66,11 @@ namespace App2.View
 
             }
         }
+        protected async override void OnAppearing()
+        {
+            await Flash.ScaleTo(0, 10, Easing.CubicIn);
+            await Flash.ScaleTo(1, 1000, Easing.CubicOut);
+        }
     }
     public class ShowMpebMdl
     {

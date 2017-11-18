@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.CustomRenderer.CustomEntry"
+             xmlns:local="clr-namespace:App2.CustomRenderer">
+  <ContentView.Content>
+
+        <StackLayout >
+            <StackLayout Orientation="Horizontal" Spacing="0">
+               
+
+                <local:MyEntry x:Name="imgEntry" 
+                                       PlaceholderColor="Red" 
+                                       Text="{Binding Text, Mode=TwoWay}" 
+                                       HorizontalOptions="FillAndExpand"/>
+               
+            </StackLayout>
+            <BoxView x:Name="BottomBorder" 
+                     BackgroundColor="Gray"  
+                     HeightRequest="1" 
+                     Margin="0" 
+                     HorizontalOptions="FillAndExpand"/>
+            <BoxView x:Name="HiddenBottomBorder" 
+                     BackgroundColor="Gray" 
+                     HeightRequest="5" 
+                     Margin="0"
+                     WidthRequest="0"
+                     HorizontalOptions="Center"/>
+        </StackLayout>
+
+    </ContentView.Content>
+</ContentView>

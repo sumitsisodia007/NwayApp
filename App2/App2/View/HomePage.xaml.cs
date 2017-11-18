@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using App2.Interface;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.Connectivity;
 
 namespace App2.View
 {
@@ -127,17 +128,23 @@ namespace App2.View
             //nav.CompanyName = res.CompanyName;
             try
             {
-                var loadingPage = new LoaderPage();
-                await PopupNavigation.PushAsync(loadingPage);
-                _objNav = new NavigationMdl();
-                NavigationMdl nav =await _objNav.PrepareApiData();
-                // PayableNotificationMdl _payable = await api.PayableTable(nav);
-                nav.PageTitle = LblReceive.Text;
-                nav.TagType = EnumMaster.TagtypereceivableOutstanding;
-                await Task.Delay(200);
-                await Navigation.PushAsync(new PayablePage(nav));
-                await PopupNavigation.RemovePageAsync(loadingPage);
-
+                if (!CrossConnectivity.Current.IsConnected)
+                {
+                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+                }
+                else
+                {
+                    var loadingPage = new LoaderPage();
+                    await PopupNavigation.PushAsync(loadingPage);
+                    _objNav = new NavigationMdl();
+                    NavigationMdl nav = await _objNav.PrepareApiData();
+                    // PayableNotificationMdl _payable = await api.PayableTable(nav);
+                    nav.PageTitle = LblReceive.Text;
+                    nav.TagType = EnumMaster.TagtypereceivableOutstanding;
+                    await Task.Delay(200);
+                    await Navigation.PushAsync(new PayablePage(nav), true);
+                    await PopupNavigation.RemovePageAsync(loadingPage);
+                }
             }
             catch (Exception ex)
             {
@@ -149,14 +156,21 @@ namespace App2.View
         {
             try
             {
-                var loadingPage = new LoaderPage();
-                await PopupNavigation.PushAsync(loadingPage);
-                _objNav = new NavigationMdl();
-                NavigationMdl nav =await _objNav.PrepareApiData();
-                nav.PageTitle = LblPay.Text;
-                nav.TagType = EnumMaster.TagtypepayableOutstanding;
-                await Navigation.PushAsync(new PayablePage(nav));
-                await PopupNavigation.RemovePageAsync(loadingPage);
+                if (!CrossConnectivity.Current.IsConnected)
+                {
+                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+                }
+                else
+                {
+                    var loadingPage = new LoaderPage();
+                    await PopupNavigation.PushAsync(loadingPage);
+                    _objNav = new NavigationMdl();
+                    NavigationMdl nav = await _objNav.PrepareApiData();
+                    nav.PageTitle = LblPay.Text;
+                    nav.TagType = EnumMaster.TagtypepayableOutstanding;
+                    await Navigation.PushAsync(new PayablePage(nav));
+                    await PopupNavigation.RemovePageAsync(loadingPage);
+                }
             }
             catch (Exception ex)
             {
@@ -166,99 +180,138 @@ namespace App2.View
 
         private async void CashFlow_Tapped(object sender, EventArgs e)
         {
-            var loadingPage = new LoaderPage();
-            await PopupNavigation.PushAsync(loadingPage);
-            _objNav = new NavigationMdl();
-            NavigationMdl nav =await _objNav.PrepareApiData();
-            var cashdetails = _api.CashFlowDetails(nav);
-            if (cashdetails.Error == "false")
+            if (!CrossConnectivity.Current.IsConnected)
             {
-                StaticMethods.BankRes = cashdetails;
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
             }
-            await Navigation.PushAsync(new CashFlowSitePage());
-            await PopupNavigation.RemovePageAsync(loadingPage);
+            else
+            {
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
+                _objNav = new NavigationMdl();
+                NavigationMdl nav = await _objNav.PrepareApiData();
+                var cashdetails = _api.CashFlowDetails(nav);
+                if (cashdetails.Error == "false")
+                {
+                    StaticMethods.BankRes = cashdetails;
+                }
+                await Navigation.PushAsync(new CashFlowSitePage());
+                await PopupNavigation.RemovePageAsync(loadingPage);
+            }
         }
 
         private async void Elect_Tapped(object sender, EventArgs e)
         {
-            var loadingPage = new LoaderPage();
-            await PopupNavigation.PushAsync(loadingPage);
-            _objNav = new NavigationMdl();
-            NavigationMdl nav =await _objNav.PrepareApiData();
-            var electrCons = _api.ElectricityCuns(nav);
-            if (electrCons.Error == false)
+            if (!CrossConnectivity.Current.IsConnected)
             {
-                StaticMethods.ElectricityResp = electrCons;
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
             }
-            await Navigation.PushAsync(new Ele_CunsPageCont());
-            await PopupNavigation.RemovePageAsync(loadingPage);
+            else
+            {
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
+                _objNav = new NavigationMdl();
+                NavigationMdl nav = await _objNav.PrepareApiData();
+                var electrCons = _api.ElectricityCuns(nav);
+                if (electrCons.Error == false)
+                {
+                    StaticMethods.ElectricityResp = electrCons;
+                }
+                await Navigation.PushAsync(new Ele_CunsPageCont());
+                await PopupNavigation.RemovePageAsync(loadingPage);
+            }
         }
 
         private async void Expired_Tapped(object sender, EventArgs e)
         {
-            var loadingPage = new LoaderPage();
-            await PopupNavigation.PushAsync(loadingPage);
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+            }
+            else
+            {
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
 
-            _objNav = new NavigationMdl();
-            NavigationMdl nav = await _objNav.PrepareApiData();
-            //var expiredSoon = _api.ExpiredSoon(nav);
-            //if (expiredSoon.Error == false)
-            //{
-            //    StaticMethods.ExpiredSoon= expiredSoon;
-            //}
-            await Navigation.PushAsync(new ExpiredSoon());
-            await PopupNavigation.RemovePageAsync(loadingPage);
+                _objNav = new NavigationMdl();
+                NavigationMdl nav = await _objNav.PrepareApiData();
+                var expiredSoon = await _api.ExpiredSoon(nav);
+
+                if (expiredSoon.Error == false)
+                {
+                    if (StaticMethods.ExpiredSoon == null)
+                    {
+                        StaticMethods.ExpiredSoon = expiredSoon;
+                    }
+                }
+                await Navigation.PushAsync(new ExpiredSoon(), true);
+                await PopupNavigation.RemovePageAsync(loadingPage);
+            }
         }
 
         private async void Canceled_Tapped(object sender, EventArgs e)
         {
-            var loadingPage = new LoaderPage();
-            await PopupNavigation.PushAsync(loadingPage);
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+            }
+            else
+            {
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
 
-            _objNav = new NavigationMdl();
-            NavigationMdl nav = await _objNav.PrepareApiData();
-            //var invoiceCancallation = _api.ElectricityCuns(nav);
-            //if (invoiceCancallation.Error == false)
-            //{
-            //    StaticMethods.Cancellation = invoiceCancallation;
-            //}
-            await Navigation.PushAsync(new InvoiceCancellationPage());
-            await PopupNavigation.RemovePageAsync(loadingPage);
+                _objNav = new NavigationMdl();
+                NavigationMdl nav = await _objNav.PrepareApiData();
+                var invoiceCancal = await _api.InvoiceCancellation(nav);
+                if (invoiceCancal.Error == false)
+                {
+                    StaticMethods.InvoiceCancel = invoiceCancal;
+                }
+                await Navigation.PushAsync(new InvoiceCancellationPage());
+                await PopupNavigation.RemovePageAsync(loadingPage);
+            }
         }
 
         private async void Notification_Clicked(object sender, EventArgs e)
         {
             try
             {
-                var loadingPage = new LoaderPage();
-                await PopupNavigation.PushAsync(loadingPage);
-                _objNav = new NavigationMdl();
-                NavigationMdl nav =await _objNav.PrepareApiData();
-                NotificationListMdl nmdl = null;
-
-                nmdl = _api.PostNotification(nav);
-                if (nmdl.Error == "true")
+                if (!CrossConnectivity.Current.IsConnected)
                 {
-                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", nmdl.Message));
+                    await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
                 }
                 else
                 {
+                    var loadingPage = new LoaderPage();
+                    await PopupNavigation.PushAsync(loadingPage);
+                    _objNav = new NavigationMdl();
+                    NavigationMdl nav = await _objNav.PrepareApiData();
+                    NotificationListMdl nmdl = null;
 
-                    UserModel rs = StaticMethods.GetLocalSavedData();
-                    var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
-                    string dateChk = null;
-                    string notcount = "0";
-
-                    foreach (var item in nmdl.ListNotificationDate)
+                    nmdl = _api.PostNotification(nav);
+                    if (nmdl.Error == "true")
                     {
-                        dateChk = item.Date;
-                        notcount = item.NotCount;
-                        break;
+                        await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", nmdl.Message));
                     }
-                    rs.NotCount = d2.ToString() == dateChk ? notcount : "0";
-                    LblNotificationBadge.Text = rs.NotCount;
-                    StaticMethods.SaveLocalData(rs);
-                    await Navigation.PushAsync(new MainPage(nmdl));
+                    else
+                    {
+
+                        UserModel rs = StaticMethods.GetLocalSavedData();
+                        var d2 = DateTime.Now.ToString("dd-MMM-yyyy");
+                        string dateChk = null;
+                        string notcount = "0";
+
+                        foreach (var item in nmdl.ListNotificationDate)
+                        {
+                            dateChk = item.Date;
+                            notcount = item.NotCount;
+                            break;
+                        }
+                        rs.NotCount = d2.ToString() == dateChk ? notcount : "0";
+                        LblNotificationBadge.Text = rs.NotCount;
+                        StaticMethods.SaveLocalData(rs);
+                        await Navigation.PushAsync(new MainPage(nmdl));
+                    }
                     await Navigation.RemovePopupPageAsync(loadingPage);
                 }
             }
@@ -283,18 +336,32 @@ namespace App2.View
 
         private async void Alert_Tapped(object sender, EventArgs e)
         {
-            var loadingPage = new LoaderPage();
-            await PopupNavigation.PushAsync(loadingPage);
-            await DisplayAlert("Message", "Comming Soon, Alert", "ok");
-            await PopupNavigation.RemovePageAsync(loadingPage);
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+            }
+            else
+            {
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
+                await DisplayAlert("Message", "Comming Soon, Alert", "ok");
+                await PopupNavigation.RemovePageAsync(loadingPage);
+            }
         }
 
         private async void Approval_Clicked(object sender, EventArgs e)
         {
-            var loadingPage = new LoaderPage();
-            await PopupNavigation.PushAsync(loadingPage);
-            await DisplayAlert("Message", "Comming Soon, Approval", "ok");
-            await PopupNavigation.RemovePageAsync(loadingPage);
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+            }
+            else
+            {
+                var loadingPage = new LoaderPage();
+                await PopupNavigation.PushAsync(loadingPage);
+                await DisplayAlert("Message", "Comming Soon, Approval", "ok");
+                await PopupNavigation.RemovePageAsync(loadingPage);
+            }
         }
 
         private async void PrepareHomePageData(LoginResponseMdl res)
@@ -315,7 +382,6 @@ namespace App2.View
                         break;
                     }
                 }
-                StaticMethods.SaveLocalData(res1);
                 await Task.Delay(100);
                 foreach (var item in StaticMethods.StaticHome.ListHomeDetails)
                 {
@@ -326,6 +392,18 @@ namespace App2.View
                     LblExpire.Text = item.expire.ToString();
                     LblInvoiceCancel.Text = item.cancellation.ToString();
                     LblNotificationBadge.Text = item.notificationCount.ToString();
+                    //if (item.notificationCount.ToString()=="0")
+                    //{
+                    //}
+                    //else
+                    //{
+                    //}
+                    if (res1.NotCountDate != DateTime.Now.ToString("yyyy-MM-dd"))
+                    {
+                        res1.NotCountDate = DateTime.Now.ToString("yyyy-MM-dd");
+                        string ss = await _api.DefaultCall();
+                    }
+                    StaticMethods.SaveLocalData(res1);
                 }
             }
             catch (Exception ex)
@@ -342,7 +420,6 @@ namespace App2.View
             await PopupNavigation.PushAsync(new LeftMenu(_newres));
             await PopupNavigation.RemovePageAsync(loadingPage);
         }
-        
 
         //private async void PrepareHomePage()
         //{

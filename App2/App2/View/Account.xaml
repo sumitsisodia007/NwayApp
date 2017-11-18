@@ -6,30 +6,167 @@
              BackgroundColor="White"
              Title="Account">
     <ContentPage.Content>
-        <StackLayout  BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout  BackgroundColor="White" 
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand">
             <ScrollView>
-                <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
+                <Frame BackgroundColor="White" 
+                       Padding="10" 
+                       VerticalOptions="FillAndExpand">
                     <StackLayout BackgroundColor="White">
-                        <ScrollView Orientation="Horizontal" Padding="10">
-                            <StackLayout  Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                                <Frame x:Name="TotalGRN" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" OutlineColor="Black">
+                        <ScrollView Orientation="Horizontal" 
+                                    Padding="10">
+                            <StackLayout  Orientation="Horizontal"
+                                          VerticalOptions="FillAndExpand"
+                                          HorizontalOptions="FillAndExpand"
+                                          Spacing="5">
+                                <!--<Frame HasShadow="True"
+                                       OutlineColor="White"
+                                       BackgroundColor="Transparent"
+                                       Padding="0"
+                                       Margin="0">
+                                    <Grid RowSpacing="0" ColumnSpacing="0" >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="AUTO"/>
+                                        </Grid.RowDefinitions>
+                                       <Image Source="logo" Aspect="AspectFit" Grid.RowSpan="2" />
+                                        <Grid Margin="5" RowSpacing="5" ColumnSpacing="10" Grid.Row="1" VerticalOptions="End">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="AUTO"/>
+                                                <RowDefinition Height="25"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="25"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="AUTO"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Bank"  Grid.Row="0" Grid.ColumnSpan="3" 
+                                                   LineBreakMode="NoWrap"/>
+                                            <Image Source="inr"
+                                                          Aspect="AspectFill" 
+                                                          Grid.Row="1" 
+                                                          Grid.Column="0"
+                                                          WidthRequest="20"
+                                                          HeightRequest="20" />
+                                            <Label Text="@123" Grid.Row="1"
+                                                   Grid.Column="1" VerticalOptions="Center" 
+                                                   />
+                                            <StackLayout Orientation="Horizontal"  
+                                                         VerticalOptions="End" Grid.Column="2" Grid.Row="1" Spacing="5">
+                                                <Image Source="edit"/>
+                                                
+                                <Label Text="1235"  />
+                                                <Label Text="More Info" />
+                                            </StackLayout>
+                                        </Grid>
+                                    </Grid>
+                                </Frame>
+                                <Frame HasShadow="True" OutlineColor="White" BackgroundColor="Transparent" Padding="0" Margin="0">
+                                    <Grid RowSpacing="0" ColumnSpacing="0" >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="AUTO"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Source="logo" Aspect="AspectFit" Grid.RowSpan="2" />
+                                        <Grid Margin="5" RowSpacing="5" ColumnSpacing="10" Grid.Row="1" VerticalOptions="End">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="AUTO"/>
+                                                <RowDefinition Height="25"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="25"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="AUTO"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Bank"  Grid.Row="0" Grid.ColumnSpan="3" 
+                                                   LineBreakMode="NoWrap"/>
+                                            <Image Source="n3"
+                                                          Aspect="AspectFill" 
+                                                          Grid.Row="1" 
+                                                          Grid.Column="0"
+                                                          WidthRequest="25"
+                                                          HeightRequest="25" />
+                                            <Label Text="@123" Grid.Row="1"
+                                                   Grid.Column="1" VerticalOptions="Center" 
+                                                   />
+                                            <StackLayout Orientation="Horizontal"  
+                                                         VerticalOptions="End" Grid.Column="2" Grid.Row="1" Spacing="5">
+                                                <Image Source="edit"/>
+                                                <Label Text="1235"  />
+                                                <Label Text="More Info" />
+                                            </StackLayout>
+                                        </Grid>
+                                    </Grid>
+                                </Frame>
+
+                                <Frame HasShadow="True" OutlineColor="White" BackgroundColor="Transparent" Padding="0" Margin="0">
+                                    <Grid RowSpacing="0" ColumnSpacing="0" >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="AUTO"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Source="logo" Aspect="AspectFit" Grid.RowSpan="2" />
+                                        <Grid Margin="5" RowSpacing="5" ColumnSpacing="10" Grid.Row="1" VerticalOptions="End">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="AUTO"/>
+                                                <RowDefinition Height="25"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="25"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="AUTO"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Bank"  Grid.Row="0" Grid.ColumnSpan="3" 
+                                                   LineBreakMode="NoWrap"/>
+                                            <Image Source="edit"
+                                                          Aspect="AspectFill" 
+                                                          Grid.Row="1" 
+                                                          Grid.Column="0"
+                                                          WidthRequest="25"
+                                                          HeightRequest="25" />
+                                            <Label Text="@123" Grid.Row="1"
+                                                   Grid.Column="1" VerticalOptions="Center" 
+                                                   />
+                                            <StackLayout Orientation="Horizontal"  
+                                                         VerticalOptions="End" Grid.Column="2" Grid.Row="1" Spacing="5">
+                                                <Image Source="edit"/>
+                                                <Label Text="1235"  />
+                                                <Label Text="More Info" />
+                                            </StackLayout>
+                                        </Grid>
+                                    </Grid>
+                                </Frame>-->
+                                
+                                <Frame x:Name="TotalGRN" HasShadow="True"  BackgroundColor="White" HeightRequest="100" WidthRequest="150" Padding="0" OutlineColor="Black">
                                     <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                                        <Label Text="More Info" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13"/>
+                                        <Image Source="bank" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="Bank" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="20" BackgroundColor="#00C0EF"  VerticalOptions="EndAndExpand" FontSize="Micro"/>
+                                        <Label Text="More Info" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="20" BackgroundColor="#00C0EF"  VerticalOptions="EndAndExpand" FontSize="Default"/>
                                     </StackLayout>
                                 </Frame>
 
-                                <Frame x:Name="TotalPur" HasShadow="True" BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                                <Frame x:Name="TotalPur" HasShadow="True" BackgroundColor="White" HeightRequest="100" WidthRequest="150" Padding="0" >
                                     <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                                        <Label Text="More Info" HeightRequest="22" BackgroundColor="#ED7D31"  VerticalOptions="EndAndExpand" FontSize="13" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Image Source="bank" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="Cash" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="20" BackgroundColor="#00A65A"  VerticalOptions="EndAndExpand" FontSize="Micro"/>
+                                        <Label Text="More Info" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="20" BackgroundColor="#00A65A"  VerticalOptions="EndAndExpand" FontSize="Default"/>
                                     </StackLayout>
+                                    
                                 </Frame>
 
-                                <Frame x:Name="TotalStock" HasShadow="True"  BackgroundColor="White" HeightRequest="120" WidthRequest="90" Padding="0" >
+                                <Frame x:Name="TotalStock" HasShadow="True"  BackgroundColor="White" HeightRequest="100" WidthRequest="150" Padding="0" >
                                     <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                                        <Image Source="logo" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                                        <Label Text="More Info" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="22" BackgroundColor="#A3C1E5"  VerticalOptions="EndAndExpand" FontSize="13"/>
+                                        <Image Source="bank" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="Supplier" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="20" BackgroundColor="#F39C12"  VerticalOptions="EndAndExpand" FontSize="Micro"/>
+                                        <Label Text="More Info" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="20" BackgroundColor="#F39C12"  VerticalOptions="EndAndExpand" FontSize="Default"/>
+                                    </StackLayout>
+                                </Frame>
+                                <Frame x:Name="TotalCustomer" HasShadow="True"  BackgroundColor="White" HeightRequest="100" WidthRequest="150" Padding="0" >
+                                    <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                        <Image Source="bank" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="Customer" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="20" BackgroundColor="#DD4B39"  VerticalOptions="EndAndExpand" FontSize="Micro"/>
+                                        <Label Text="More Info" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="20" BackgroundColor="#DD4B39"  VerticalOptions="EndAndExpand" FontSize="Default"/>
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>

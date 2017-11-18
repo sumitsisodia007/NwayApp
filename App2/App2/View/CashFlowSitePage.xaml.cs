@@ -72,6 +72,11 @@ namespace App2.View
          //   var page = new CashFlowAccountType();
             await Navigation.PushAsync(new CashFlowAccountType(lstItems));
         }
+        protected async override void OnAppearing()
+        {
+            await Loading.ScaleTo(0, 10, Easing.CubicIn);
+            await Loading.ScaleTo(1, 1000, Easing.CubicOut);
+        }
     }
     public class CashFlowSite
     {

@@ -44,8 +44,13 @@
                                       HeightRequest="40"
                                       HorizontalTextAlignment="Center"
                                       VerticalTextAlignment="Center"/>
-           
-            <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
+                <Image x:Name="Loading" 
+                       Source="icon_cash" 
+                       Aspect="AspectFit" 
+                       HorizontalOptions="FillAndExpand" 
+                       VerticalOptions="FillAndExpand"/>
+            
+                <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                 <!--<ScrollView Orientation="Horizontal" >-->
                     <ListView x:Name="ListCashSite"
                                       HeightRequest="120"

@@ -5,18 +5,42 @@
              x:Class="App2.View.NotificationSetting"
              Title="Notification Setting"
              Padding="20,0">
+    
+    
     <ContentPage.Content>
 
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
-            <StackLayout HorizontalOptions="FillAndExpand"  Orientation="Horizontal" VerticalOptions="StartAndExpand">
-                <Label  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                                   Margin="0,0,1,0" TextColor="Black"
-                                   FontSize="17" BackgroundColor="White"
-                                   Text="Days :"   />
-                <StackLayout  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Vertical" >
-                    <local:MyEntry x:Name="txtDaysOfno" Placeholder="No Of Days"  Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+            <StackLayout HorizontalOptions="FillAndExpand"  
+                         Orientation="Horizontal"
+                         VerticalOptions="StartAndExpand">
+                <Label  HorizontalOptions="CenterAndExpand" 
+                        VerticalOptions="CenterAndExpand"
+                        Margin="0,0,1,0"
+                        TextColor="Black"
+                        FontSize="17" 
+                        BackgroundColor="White"
+                        Text="Days :"   />
+                <StackLayout  VerticalOptions="FillAndExpand"
+                              HorizontalOptions="FillAndExpand"
+                              Spacing="0" Orientation="Vertical" >
+                    <local:MyEntry x:Name="txtDaysOfno"
+                                   Placeholder="No Of Days" 
+                                   Keyboard="Numeric" 
+                                   HorizontalOptions="FillAndExpand"/>
                     <BoxView BackgroundColor="#D7D7D7" HeightRequest="1" />
                 </StackLayout>
+
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.iOS>
+                            0, 50, 0, 0
+                        </OnPlatform.iOS>
+                        <OnPlatform.Android>
+                            0, 0, 0, 0
+                        </OnPlatform.Android>
+                      
+                    </OnPlatform>
+                </StackLayout.Padding>
             </StackLayout>
             <StackLayout HorizontalOptions="FillAndExpand"  Orientation="Horizontal" VerticalOptions="StartAndExpand">
                 <Label  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"

@@ -28,7 +28,9 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="ExpireIcon" Icon="icon_setting.png" Priority="0" Order="Primary" Clicked="ExpireIcon_Clicked"  />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
             <StackLayout Padding="10,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -42,6 +44,11 @@
                                       HeightRequest="40"
                                       HorizontalTextAlignment="Center"
                                       VerticalTextAlignment="Center"/>
+                <Image x:Name="Loading" 
+                       Source="icon_loading" 
+                       Aspect="AspectFit" 
+                       HorizontalOptions="FillAndExpand" 
+                       VerticalOptions="FillAndExpand"/>
                 <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                     <ScrollView Orientation="Horizontal" >
                         <ListView x:Name="ListViewMain"
@@ -57,9 +64,9 @@
                                                  Spacing="0"  BackgroundColor="Black">
                                     <Label x:Name="lblCustName" Style="{StaticResource ListHeaderLabelStyle}" Text="Customer Name"   />
                                     <Label x:Name="lblTermDate" Style="{StaticResource ListHeaderLabelStyle}" Text="Term. Date"/>
-                                    <Label x:Name="lblBookDate" Style="{StaticResource ListHeaderLabelStyle}" Text="Bookng Date"     />
+                                    <Label x:Name="lblBookDate" Style="{StaticResource ListHeaderLabelStyle}" Text="Booking Date"     />
                                     <Label x:Name="lblSiteName" Style="{StaticResource ListHeaderLabelStyle}" Text="Brand Name"/>
-                                    <!--<Label x:Name="lblUnitno" Style="{StaticResource ListHeaderLabelStyle}" Text="Unit No"/>-->
+                                    <Label x:Name="lblUnitno" Style="{StaticResource ListHeaderLabelStyle}" Text="Unit No"/>
                                 </StackLayout>
                             </ListView.Header>
                             <ListView.ItemTemplate>
@@ -69,11 +76,11 @@
                                                      HorizontalOptions="FillAndExpand"
                                                      Spacing="0" 
                                                      BackgroundColor="Black">
-                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Party}" />
-                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Pre_Outstanding}" />
-                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Cur_Outstanding}" />
-                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Today_Receipt}" />
-                                            <!--<Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding Today_Receipt}" />-->
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding CustomerName}" />
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding TerminationDate}" />
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding BookngDate}" />
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding BrandName}" />
+                                            <Label WidthRequest="{Binding TxtWidth}" Style="{StaticResource ListLabelStyle}" Text="{Binding UnitNo}" />
                                         </StackLayout>
                                     </ViewCell>
                                 </DataTemplate>
