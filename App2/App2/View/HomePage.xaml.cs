@@ -239,10 +239,9 @@ namespace App2.View
 
                 if (expiredSoon.Error == false)
                 {
-                    if (StaticMethods.ExpiredSoon == null)
-                    {
+                   
                         StaticMethods.ExpiredSoon = expiredSoon;
-                    }
+                  
                 }
                 await Navigation.PushAsync(new ExpiredSoon(), true);
                 await PopupNavigation.RemovePageAsync(loadingPage);
@@ -389,9 +388,11 @@ namespace App2.View
                     LblBankAmt.Text = item.bank;
                     LblReceiveble.Text = item.receivable;
                     LblPayable.Text = item.payable;
+                    LblNotificationBadge.Text = item.notificationCount.ToString();
+
                     LblExpire.Text = item.expire.ToString();
                     LblInvoiceCancel.Text = item.cancellation.ToString();
-                    LblNotificationBadge.Text = item.notificationCount.ToString();
+                   
                     //if (item.notificationCount.ToString()=="0")
                     //{
                     //}

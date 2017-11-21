@@ -30,7 +30,7 @@
     </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="iconexample" Icon="icon_setting.png" Priority="0" Order="Primary"  />
+        <ToolbarItem Name="CancelIcon" Icon="icon_setting.png" Priority="0" Order="Primary" Clicked="CancelIcon_Clicked"  />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>

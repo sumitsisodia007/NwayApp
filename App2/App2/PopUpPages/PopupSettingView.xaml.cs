@@ -1,4 +1,10 @@
-﻿using System;
+﻿using App2.APIService;
+using App2.Model;
+using App2.NativeMathods;
+using Plugin.Connectivity;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,23 +17,28 @@ namespace App2.PopUpPages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PopupSettingView : ContentView
-	{
-		public PopupSettingView(string title1Text, string title2Text, string entry1PlaceholderValue, string entry2PlaceholderValue, double sliderMinValue, double sliderMaxValue, string saveButtonText, string cancelButtonText)
+    {
+        private readonly API _api = new API();
+        private NavigationMdl _objNav = null;
+        string tag = null;
+        public PopupSettingView(string title1Text,string cancel,string expire)//, string title2Text, string entry1PlaceholderValue, string entry2PlaceholderValue, double sliderMinValue, double sliderMaxValue, string saveButtonText, string cancelButtonText)
         {
 			InitializeComponent ();
+            tag = title1Text;
+
             //TitleLabel1.Text = title1Text;
             //TitleLabel2.Text = title2Text;
-            //TextEntry1.Placeholder = entry1PlaceholderValue;
-            //TextEntry2.Placeholder = entry2PlaceholderValue;
+            txtExpireDay.Placeholder = expire;
+            txtCancelDay.Placeholder = cancel;
             //AgeSlider.Minimum = sliderMinValue;
             //AgeSlider.Maximum = sliderMaxValue;
-            SaveButton.Text = saveButtonText;
-            CancelButton.Text = cancelButtonText;
+            //SaveButton.Text = saveButtonText;
+            //CancelButton.Text = cancelButtonText;
 
             SaveButton.Clicked += SaveButton_Clicked;
             CancelButton.Clicked += CancelButton_Clicked;
-            //TextEntry1.TextChanged += TextEntry1_TextChanged;
-            //TextEntry2.TextChanged += TextEntry2_TextChanged;
+            txtExpireDay.TextChanged += txtExpireDay_TextChanged;
+            txtCancelDay.TextChanged += txtCancelDay_TextChanged;
             //AgeSlider.ValueChanged += InputEntryOnValueChanged;
             MultipleDataResult = new MyDataModel();
         }
@@ -42,105 +53,99 @@ namespace App2.PopUpPages
         // public string to expose the 
         // text Entry input's value
         public MyDataModel MultipleDataResult { get; set; }
+        public static readonly BindableProperty ValidationLabelTextProperty =
+            BindableProperty.Create(
+                nameof(ValidationLabelText),
+                typeof(string),
+                typeof(PopupSettingView),
+                string.Empty, BindingMode.OneWay, null,
+                (bindable, value, newValue) =>
+                {
+                    ((PopupSettingView)bindable).ValidationLabel.Text = (string)newValue;
+                });
 
-
-
-        //public static readonly BindableProperty ValidationLabelTextProperty =
-        //    BindableProperty.Create(
-        //        nameof(ValidationLabelText),
-        //        typeof(string),
-        //        typeof(PopupSettingView),
-        //        string.Empty, BindingMode.OneWay, null,
-        //        (bindable, value, newValue) =>
-        //        {
-        //            ((PopupSettingView)bindable).ValidationLabel
-        //                .Text = (string)newValue;
-        //        });
-
-        ///// <summary>
-        ///// Gets or Sets the ValidationLabel Text
-        ///// </summary>
-        //public string ValidationLabelText
-        //{
-        //    get
-        //    {
-        //        return (string)GetValue(ValidationLabelTextProperty);
-        //    }
-        //    set
-        //    {
-        //        SetValue(ValidationLabelTextProperty, value);
-        //    }
-        //}
-
-
-
-        //public static readonly BindableProperty IsValidationLabelVisibleProperty =
-        //    BindableProperty.Create(
-        //        nameof(IsValidationLabelVisible),
-        //        typeof(bool),
-        //        typeof(PopupSettingView),
-        //        false, BindingMode.OneWay, null,
-        //        (bindable, value, newValue) =>
-        //        {
-        //            if ((bool)newValue)
-        //            {
-        //                ((PopupSettingView)bindable).ValidationLabel
-        //                    .IsVisible = true;
-        //            }
-        //            else
-        //            {
-        //                ((PopupSettingView)bindable).ValidationLabel
-        //                    .IsVisible = false;
-        //            }
-        //        });
-
-        ///// <summary>
-        ///// Gets or Sets if the ValidationLabel is visible
-        ///// </summary>
-        //public bool IsValidationLabelVisible
-        //{
-        //    get
-        //    {
-        //        return (bool)GetValue(IsValidationLabelVisibleProperty);
-        //    }
-        //    set
-        //    {
-        //        SetValue(IsValidationLabelVisibleProperty, value);
-        //    }
-        //}
-        private void SaveButton_Clicked(object sender, EventArgs e)
+        /// <summary>
+        /// Gets or Sets the ValidationLabel Text
+        /// </summary>
+        public string ValidationLabelText
         {
-            //MultipleDataResult.FirstName = TextEntry1.Text;
-            //MultipleDataResult.LastName = TextEntry2.Text;
-               // invoke the event handler if its being subscribed
-               SaveButtonEventHandler?.Invoke(this, e);
+            get
+            {
+                return (string)GetValue(ValidationLabelTextProperty);
+            }
+            set
+            {
+                SetValue(ValidationLabelTextProperty, value);
+            }
+        }
+
+
+
+        public static readonly BindableProperty IsValidationLabelVisibleProperty =
+            BindableProperty.Create(
+                nameof(IsValidationLabelVisible),
+                typeof(bool),
+                typeof(PopupSettingView),
+                false, BindingMode.OneWay, null,
+                (bindable, value, newValue) =>
+                {
+                    if ((bool)newValue)
+                    {
+                        ((PopupSettingView)bindable).ValidationLabel.IsVisible = true;
+                    }
+                    else
+                    {
+                        ((PopupSettingView)bindable).ValidationLabel.IsVisible = false;
+                    }
+                });
+
+        /// <summary>
+        /// Gets or Sets if the ValidationLabel is visible
+        /// </summary>
+        public bool IsValidationLabelVisible
+        {
+            get
+            {
+                return (bool)GetValue(IsValidationLabelVisibleProperty);
+            }
+            set
+            {
+                SetValue(IsValidationLabelVisibleProperty, value);
+            }
+        }
+
+        private async void SaveButton_Clicked(object sender, EventArgs e)
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", "No Internet Connection"));
+            }
+            else
+            {
+              SaveButtonEventHandler?.Invoke(this, e);
+            }
+
+
         }
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
-            // invoke the event handler if its being subscribed
             CancelButtonEventHandler?.Invoke(this, e);
         }
+        private void txtExpireDay_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            MultipleDataResult.DayExpire =txtExpireDay.Text;
+        }
 
-        //private void TextEntry1_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    MultipleDataResult.FirstName = TextEntry1.Text;
-        //}
+        private void txtCancelDay_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            MultipleDataResult.DayCancel = txtCancelDay.Text;
+        }
 
-        //private void TextEntry2_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    MultipleDataResult.LastName = TextEntry2.Text;
-        //}
-
-        //private void InputEntryOnValueChanged(object sender, ValueChangedEventArgs valueChangedEventArgs)
-        //{
-        //    InputSliderValueLabel.Text = $"[ { Math.Round(AgeSlider.Value).ToString()} ]";
-        //    MultipleDataResult.Age = (int)Math.Round(AgeSlider.Value);
-        //}
     }
     public class MyDataModel
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int Age { get; set; }
+        public string DayExpire{ get; set; }
+        public string DayCancel { get; set; }
+        
     }
 }

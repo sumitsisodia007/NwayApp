@@ -1,4 +1,7 @@
-﻿using App2.View;
+﻿using App2.APIService;
+using App2.Model;
+using App2.NativeMathods;
+using App2.View;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -8,223 +11,81 @@ using System.Threading.Tasks;
 
 namespace App2.PopUpPages
 {
-   public class PopupTask
+    public class PopupTask
     {
-        //public async Task<string> OpenTextInputAlertDialog()
-        //{
-        //    // create the TextInputView
-        //    var inputView = new TextInputView("What's your name?", "enter here...", "Ok", "Ops! Can't leave this empty!");
-
-        //    // create the Transparent Popup Page
-        //    // of type string since we need a string return
-        //    var popup = new InputAlertDialogBase<string>(inputView);
-
-        //    // subscribe to the TextInputView's Button click event
-        //    inputView.CloseButtonEventHandler +=
-        //        (sender, obj) =>
-        //        {
-        //            if (!string.IsNullOrEmpty(((TextInputView)sender).TextInputResult))
-        //            {
-        //                ((TextInputView)sender).IsValidationLabelVisible = false;
-        //                popup.PageClosedTaskCompletionSource.SetResult(((TextInputView)sender).TextInputResult);
-        //            }
-        //            else
-        //            {
-        //                ((TextInputView)sender).IsValidationLabelVisible = true;
-        //            }
-        //        };
-
-        //    // Push the page to Navigation Stack
-        //    await PopupNavigation.PushAsync(popup);
-
-        //    // await for the user to enter the text input
-        //    var result = await popup.PageClosedTask;
-
-        //    // Pop the page from Navigation Stack
-        //    await PopupNavigation.PopAsync();
-
-        //    // return user inserted text value
-        //    return result;
-        //}
-
-        //public async Task<string> OpenCancellableTextInputAlertDialog()
-        //{
-        //    // create the TextInputView
-        //    var inputView = new TextInputCancellableView(
-        //        "How's your day mate?", "enter here...", "Save", "Cancel", "Ops! Can't leave this empty!");
-
-        //    // create the Transparent Popup Page
-        //    // of type string since we need a string return
-        //    var popup = new InputAlertDialogBase<string>(inputView);
-
-        //    // subscribe to the TextInputView's Button click event
-        //    inputView.SaveButtonEventHandler +=
-        //        (sender, obj) =>
-        //        {
-        //            if (!string.IsNullOrEmpty(((TextInputCancellableView)sender).TextInputResult))
-        //            {
-        //                ((TextInputCancellableView)sender).IsValidationLabelVisible = false;
-        //                popup.PageClosedTaskCompletionSource.SetResult(((TextInputCancellableView)sender).TextInputResult);
-        //            }
-        //            else
-        //            {
-        //                ((TextInputCancellableView)sender).IsValidationLabelVisible = true;
-        //            }
-        //        };
-
-        //    // subscribe to the TextInputView's Button click event
-        //    inputView.CancelButtonEventHandler +=
-        //        (sender, obj) =>
-        //        {
-        //            popup.PageClosedTaskCompletionSource.SetResult(null);
-        //        };
-
-        //    // Push the page to Navigation Stack
-        //    await PopupNavigation.PushAsync(popup);
-
-        //    // await for the user to enter the text input
-        //    var result = await popup.PageClosedTask;
-
-        //    // Pop the page from Navigation Stack
-        //    await PopupNavigation.PopAsync();
-
-        //    // return user inserted text value
-        //    return result;
-        //}
-
-        //public async Task<string> OpenSelectableInputAlertDialog()
-        //{
-        //    // create the TextInputView
-        //    var inputView = new SelectableInputView(
-        //        "How's your day mate?",
-        //        new List<string>() { "Awesome!", "Great!", "Cool!", "Good!", "Not Bad!", "Meh!" },
-        //        "Save", "Cancel", "Ops! You can't leave without a selection!");
-
-        //    // create the Transparent Popup Page
-        //    // of type string since we need a string return
-        //    var popup = new InputAlertDialogBase<string>(inputView);
-
-        //    // subscribe to the TextInputView's Button click event
-        //    inputView.SaveButtonEventHandler +=
-        //        (sender, obj) =>
-        //        {
-        //            if (!string.IsNullOrEmpty(((SelectableInputView)sender).SelectionResult))
-        //            {
-        //                ((SelectableInputView)sender).IsValidationLabelVisible = false;
-        //                popup.PageClosedTaskCompletionSource.SetResult(((SelectableInputView)sender).SelectionResult);
-        //            }
-        //            else
-        //            {
-        //                ((SelectableInputView)sender).IsValidationLabelVisible = true;
-        //            }
-        //        };
-
-        //    // subscribe to the TextInputView's Button click event
-        //    inputView.CancelButtonEventHandler +=
-        //        (sender, obj) =>
-        //        {
-        //            popup.PageClosedTaskCompletionSource.SetResult(null);
-        //        };
-
-        //    // Push the page to Navigation Stack
-        //    await PopupNavigation.PushAsync(popup);
-
-        //    // await for the user to enter the text input
-        //    var result = await popup.PageClosedTask;
-
-        //    // Pop the page from Navigation Stack
-        //    await PopupNavigation.PopAsync();
-
-        //    // return user inserted text value
-        //    return result;
-        //}
-
-        //public async Task<double> OpenSliderInputAlertDialog()
-        //{
-        //    // create the TextInputView
-        //    var inputView = new SlidableInputView(
-        //        "How much would you rate it?", 0, 10,
-        //        "Save", "Cancel", "Ops! You can't leave with an empty value!");
-
-        //    // create the Transparent Popup Page
-        //    // of type string since we need a string return
-        //    var popup = new InputAlertDialogBase<double>(inputView);
-
-        //    // subscribe to the TextInputView's Button click event
-        //    inputView.SaveButtonEventHandler +=
-        //        (sender, obj) =>
-        //        {
-        //            if (((SlidableInputView)sender).SliderInputResult > 0)
-        //            {
-        //                ((SlidableInputView)sender).IsValidationLabelVisible = false;
-        //                popup.PageClosedTaskCompletionSource.SetResult(((SlidableInputView)sender).SliderInputResult);
-        //            }
-        //            else
-        //            {
-        //                ((SlidableInputView)sender).IsValidationLabelVisible = true;
-        //            }
-        //        };
-
-        //    // subscribe to the TextInputView's Button click event
-        //    inputView.CancelButtonEventHandler +=
-        //        (sender, obj) =>
-        //        {
-        //            popup.PageClosedTaskCompletionSource.SetResult(0);
-        //        };
-
-        //    // Push the page to Navigation Stack
-        //    await PopupNavigation.PushAsync(popup);
-
-        //    // await for the user to enter the text input
-        //    var result = await popup.PageClosedTask;
-
-        //    // Pop the page from Navigation Stack
-        //    await PopupNavigation.PopAsync();
-
-        //    // return user inserted text value
-        //    return result;
-        //}
-
-        public async Task<MyDataModel> OpenMultipleDataInputAlertDialog()
+        private readonly API _api = new API();
+        private NavigationMdl _objNav = null;
+        
+        public async Task<MyDataModel> OpenMultipleDataInputAlertDialog(string tag)
         {
-            // create the TextInputView
-            var inputView = new PopupSettingView(
-                "What's your Name?", "What's your Age?",
-                "First Name", "Last Name", 0, 40,
-                "Save", "Cancel");
+           var user= StaticMethods.GetLocalSavedData();
 
+           // create the TextInputView
+           var inputView = new PopupSettingView(tag,user.SetCancelDays,user.SetExpireDays);
+           
             // create the Transparent Popup Page
             // of type string since we need a string return
             var popup = new InputAlertDialogBase<MyDataModel>(inputView);
 
             // subscribe to the TextInputView's Button click event
             inputView.SaveButtonEventHandler +=
-                (sender, obj) =>
+                async (sender, obj) =>
                 {
                     // handle validations
-                    //if (string.IsNullOrEmpty(((PopupSettingView)sender).MultipleDataResult.FirstName))
-                    //{
-                    //    ((PopupSettingView)sender).ValidationLabelText = "Ops! You need to enter the First name!";
-                    //    ((PopupSettingView)sender).IsValidationLabelVisible = true;
-                    //    return;
-                    //}
+                    if (string.IsNullOrEmpty(((PopupSettingView)sender).MultipleDataResult.DayCancel))
+                    {
+                        ((PopupSettingView)sender).ValidationLabelText = "Ops! You need to enter the Cancellation Days!";
+                        ((PopupSettingView)sender).IsValidationLabelVisible = true;
+                        return;
+                    }
 
-                    //if (string.IsNullOrEmpty(((PopupSettingView)sender).MultipleDataResult.LastName))
-                    //{
-                    //    ((PopupSettingView)sender).ValidationLabelText = "Ops! You need to enter the Last name!";
-                    //    ((PopupSettingView)sender).IsValidationLabelVisible = true;
-                    //    return;
-                    //}
+                    if (string.IsNullOrEmpty(((PopupSettingView)sender).MultipleDataResult.DayExpire))
+                    {
+                        ((PopupSettingView)sender).ValidationLabelText = "Ops! You need to enter the Expire Days!";
+                        ((PopupSettingView)sender).IsValidationLabelVisible = true;
+                        return;
+                    }
+                    if (!string.IsNullOrEmpty(((PopupSettingView)sender).MultipleDataResult.DayCancel) && !string.IsNullOrEmpty(((PopupSettingView)sender).MultipleDataResult.DayExpire))
+                    {
+                        var loadingPage = new LoaderPage();
+                        await PopupNavigation.PushAsync(loadingPage);
+                        _objNav = new NavigationMdl();
+                        NavigationMdl nav = await _objNav.PrepareApiData();
 
-                    //if (((PopupSettingView)sender).MultipleDataResult.Age < 18)
-                    //{
-                    //    ((PopupSettingView)sender).ValidationLabelText = "Ops! You need to be over 18 years of Age!";
-                    //    ((PopupSettingView)sender).IsValidationLabelVisible = true;
-                    //    return;
-                    //}
+                        var userdata = StaticMethods.GetLocalSavedData();
+                        nav.CancelDayCount =Convert.ToInt32(((PopupSettingView)sender).MultipleDataResult.DayCancel);
+                        userdata.SetCancelDays = nav.CancelDayCount.ToString();
 
-                    // if all good then set the Result
-                   // ((PopupSettingView)sender).IsValidationLabelVisible = false;
+                        nav.ExpireDayCount= Convert.ToInt32(((PopupSettingView)sender).MultipleDataResult.DayExpire);
+                        userdata.SetExpireDays = nav.ExpireDayCount.ToString();
+
+                        StaticMethods.SaveLocalData(userdata);
+
+                        var msg = await _api.SaveExp_Cancel(nav);
+                        if (msg == "Setting Saved !")
+                        {
+                            await Task.Delay(500);
+                            if (tag != "Expire")
+                            {
+                                var invoiceCancal = await _api.InvoiceCancellation(nav);
+                                if (invoiceCancal.Error == false)
+                                {
+                                    StaticMethods.InvoiceCancel = invoiceCancal;
+                                }
+                            }
+                            else
+                            {
+                                var expiredSoon = await _api.ExpiredSoon(nav);
+                                if (expiredSoon.Error == false)
+                                {
+                                    StaticMethods.ExpiredSoon = expiredSoon;
+                                }
+                            }
+                        }
+                        await PopupNavigation.RemovePageAsync(loadingPage);
+                    }
+
+                    ((PopupSettingView)sender).IsValidationLabelVisible = false;
                     popup.PageClosedTaskCompletionSource.SetResult(((PopupSettingView)sender).MultipleDataResult);
                 };
 

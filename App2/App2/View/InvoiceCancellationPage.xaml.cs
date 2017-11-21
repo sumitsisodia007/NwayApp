@@ -40,7 +40,7 @@ namespace App2.View
             await CancelImg.ScaleTo(0, 10, Easing.CubicIn);
             await CancelImg.ScaleTo(1, 1000, Easing.CubicOut);
         }
-        public async void InvoiceList()
+        public async Task InvoiceList()
         {
             ShowInvoiceList = new List<ShowInvoiceListMdl>();
             try
@@ -71,6 +71,14 @@ namespace App2.View
             {
                 StaticMethods.ShowToast(exception.Message);
             }
+        }
+
+        private async void CancelIcon_Clicked(object sender, EventArgs e)
+        {
+            string tagtype = "Cancel";
+            PopupTask pt = new PopupTask();
+            var result = await pt.OpenMultipleDataInputAlertDialog(tagtype);
+           await InvoiceList();
         }
     }
 

@@ -35,7 +35,7 @@ namespace App2
         {
             InitializeComponent();
             var data = StaticMethods.GetLocalSavedData();
-            if (data.Error == "false")
+            if (data.Error == "False")
             {
                 MainPage = new MasterMainPage();
             }

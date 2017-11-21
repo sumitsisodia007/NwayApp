@@ -3,7 +3,7 @@ using App2.PopUpPages;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -39,7 +39,7 @@ namespace App2.View
             await Loading.ScaleTo(1, 1000, Easing.CubicOut);
         }
 
-        public async void ExpireSoonList()
+        public async Task  ExpireSoonList()
         {
             ShowInvoiceList = new List<ShowExpiredSoon>();
             try
@@ -47,6 +47,7 @@ namespace App2.View
                 var expireitems = StaticMethods.ExpiredSoon;
                 if (expireitems.ExpiredSoonList != null)
                 {
+                   //var itemsCount= expireitems.ExpiredSoonList.Count.ToString();
                     foreach (var items in expireitems.ExpiredSoonList)
                     {
                         ShowInvoiceList.Add(new ShowExpiredSoon
@@ -76,8 +77,10 @@ namespace App2.View
 
         private async void ExpireIcon_Clicked(object sender, EventArgs e)
         {
+            string ExpireTag = "Expire";
             PopupTask pt = new PopupTask();
-            var result = await pt.OpenMultipleDataInputAlertDialog();
+            var result = await pt.OpenMultipleDataInputAlertDialog(ExpireTag);
+           await ExpireSoonList();
         }
     }
 

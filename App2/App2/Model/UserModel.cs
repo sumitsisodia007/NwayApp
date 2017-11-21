@@ -11,7 +11,8 @@ namespace App2.Model
         public UserModel()
         { }
         public string TagType { get; set; }
-        public string Message { get; set; }
+        public string SetExpireDays{ get; set; }
+        public string SetCancelDays { get; set; }
         public string Error { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -22,9 +23,11 @@ namespace App2.Model
         public string DeviceToken { get; set; }
         public string NotCount { get; set; }
         public string NotCountDate { get; set; }
+        public string Message { get; set; }
         public string CompanyIndex { get; set; }
         public string CompanyName { get; set; }
-      
+
+        #region This is the method of saving company or company sites data in database
         public async Task<CompanyTbl>  SaveLocalCompanyData(LoginResponseMdl lgnResponseMdl)
         {
             CompanyTbl tbl = new CompanyTbl();
@@ -44,5 +47,6 @@ namespace App2.Model
             }
             return tbl;
         }
+        #endregion
     }
 }

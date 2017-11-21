@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:customcontrols="clr-namespace:App2.CustomRenderer"
+             x:Class="App2.PopUpPages.PopupSetting"
+                 WidthRequest="300">
+    <pages:PopupPage.Animation>
+        <animations:MoveAnimation
+                 PositionIn="Center"
+                 PositionOut="Center"/>
+    </pages:PopupPage.Animation>
+    <ContentPage.Content>
+        <Grid
+            Padding="10"
+            BackgroundColor="White"
+            HorizontalOptions="CenterAndExpand"
+            RowSpacing="5"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="Settings" />
+            <Label
+                    Grid.Row="1"
+                Grid.Column="0"
+                FontSize="Small"
+                    VerticalOptions="Center"
+                Text="Set Expire Days" />
+
+            <StackLayout   Grid.Row="1"
+                Grid.Column="1"
+                    VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Vertical" >
+                <customcontrols:MyEntry x:Name="txtExpire" Placeholder="No Of Days" FontSize="Small" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                <BoxView BackgroundColor="#D7D7D7" HeightRequest="1" />
+            </StackLayout>
+
+
+            <Label Grid.Row="2"
+                Grid.Column="0"
+               FontSize="Small"
+                   VerticalOptions="Center"
+                Text="Set Cancellation Days" />
+            <StackLayout  Grid.Row="2"
+                Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Vertical" >
+
+                <customcontrols:MyEntry x:Name="txtCancel" Placeholder="No Of Days" FontSize="Small" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                <BoxView BackgroundColor="#D7D7D7" HeightRequest="1" />
+            </StackLayout>
+            <Label
+                x:Name="ValidationLabel"
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                FontSize="Micro"
+                HorizontalOptions="Center"
+                IsVisible="False"
+                Text="Ops! Looks like you've missed something!"
+                TextColor="Red" />
+            <Grid
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2">
+                <Button
+                    x:Name="SaveButton"
+                    Grid.Column="0"
+                    BackgroundColor="DodgerBlue"
+                    Text="Save"
+                    TextColor="White">
+                    <Button.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="40" />
+                            <On Platform="iOS" Value="30" />
+                            <On Platform="Windows" Value="35" />
+                        </OnPlatform>
+                    </Button.HeightRequest>
+                </Button>
+                <Button
+                    x:Name="CancelButton"
+                    Grid.Column="1"
+                    BackgroundColor="Gray"
+                    Text="Cancel"
+                    TextColor="White">
+                    <Button.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="40" />
+                            <On Platform="iOS" Value="30" />
+                            <On Platform="Windows" Value="35" />
+                        </OnPlatform>
+                    </Button.HeightRequest>
+                </Button>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="0.5*" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Grid>
+
+    </ContentPage.Content>
+</pages:PopupPage>

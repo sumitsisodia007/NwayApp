@@ -2,9 +2,10 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.PopUpPages.PopupSettingView"
-             xmlns:customcontrols="clr-namespace:App2.CustomRenderer">
+             xmlns:customcontrols="clr-namespace:App2.CustomRenderer"
+             xmlns:local="clr-namespace:App2.CustomRenderer">
     <ContentView.Content>
-        <Grid
+        <!--<Grid
             Padding="10"
             BackgroundColor="White"
             HorizontalOptions="CenterAndExpand"
@@ -41,81 +42,20 @@
                 <customcontrols:MyEntry x:Name="txtMinimumAmt" Placeholder="Minimum Amount" FontSize="Medium" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
                 <BoxView BackgroundColor="#D7D7D7" HeightRequest="1" />
             </StackLayout>
-            <!--<customcontrols:CustomEntry
-                Grid.Row="1"
-                Grid.Column="1"
-                Text="Enter the values:"
-                AccentColor="Gray"/>-->
+            
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
                 FontSize="Medium"
                 Text="Enter the values:" />
-            <!--<customcontrols:CustomEntry
-                Grid.Row="2"
-                Grid.Column="1"
-                Text="Enter the values:" 
-                AccentColor="Gray"/>-->
+           
             <StackLayout  Grid.Row="2"
                 Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Vertical" >
 
                 <customcontrols:MyEntry  Placeholder="Minimum Amount" FontSize="Medium" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
                 <BoxView BackgroundColor="#D7D7D7" HeightRequest="1" />
             </StackLayout>
-            <!--<Label
-                x:Name="TitleLabel1"
-                Grid.Row="0"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                FontSize="Medium"
-                Text="Enter the values:" />
 
-            <Entry
-                x:Name="TextEntry1"
-                Grid.Row="1"
-                Grid.Column="0"
-                Placeholder="Value 1" />
-            <Entry
-                x:Name="TextEntry2"
-                Grid.Row="1"
-                Grid.Column="1"
-                Placeholder="Value 2" />
-
-            <Label
-                x:Name="TitleLabel2"
-                Grid.Row="2"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                FontSize="Medium"
-                Text="Enter the values:" />
-
-            <Label
-                x:Name="InputSliderValueLabel"
-                Grid.Row="3"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                FontSize="Medium"
-                HorizontalOptions="CenterAndExpand"
-                HorizontalTextAlignment="Center"
-                Text="[ slide to set a value ]" />
-            <Slider
-                x:Name="AgeSlider"
-                Grid.Row="4"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Maximum="10"
-                Minimum="0" />-->
-
-
-            <!--<Label
-                x:Name="ValidationLabel"
-                Grid.Row="5"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                FontSize="Micro"
-                IsVisible="False"
-                Text="Ops! Looks like you've missed something!"
-                TextColor="Red" />-->
 
             <Grid
                 Grid.Row="6"
@@ -154,8 +94,196 @@
                     <ColumnDefinition Width="0.5*" />
                 </Grid.ColumnDefinitions>
             </Grid>
-
+        </Grid>-->
+        <Grid
+            Padding="10"
+            BackgroundColor="White"
+            HorizontalOptions="CenterAndExpand"
+            RowSpacing="5"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
            
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="Settings" />
+               <Label
+                    Grid.Row="1"
+                Grid.Column="0"
+                FontSize="Small"
+                    VerticalOptions="Center"
+                Text="Set Expire Days" />
+
+            <StackLayout   Grid.Row="1"
+                Grid.Column="1"
+                    VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Vertical" >
+                    <customcontrols:MyEntry x:Name="txtExpireDay" Placeholder="No Of Days" FontSize="Small" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                    <BoxView BackgroundColor="#D7D7D7" HeightRequest="1" />
+                </StackLayout>
+
+
+            <Label Grid.Row="2"
+                Grid.Column="0"
+               FontSize="Small"
+                   VerticalOptions="Center"
+                Text="Set Cancellation Days" />
+            <StackLayout  Grid.Row="2"
+                Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Orientation="Vertical" >
+
+                <customcontrols:MyEntry x:Name="txtCancelDay" Placeholder="No Of Days" FontSize="Small" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                    <BoxView BackgroundColor="#D7D7D7" HeightRequest="1" />
+                </StackLayout>
+            <Label
+                x:Name="ValidationLabel"
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                FontSize="Micro"
+                HorizontalOptions="Center"
+                IsVisible="False"
+                Text="Ops! Looks like you've missed something!"
+                TextColor="Red" />
+            <Grid
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2">
+                <Button
+                    x:Name="SaveButton"
+                    Grid.Column="0"
+                    BackgroundColor="DodgerBlue"
+                    Text="Save"
+                    TextColor="White">
+                    <Button.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="40" />
+                            <On Platform="iOS" Value="30" />
+                            <On Platform="Windows" Value="35" />
+                        </OnPlatform>
+                    </Button.HeightRequest>
+                </Button>
+                <Button
+                    x:Name="CancelButton"
+                    Grid.Column="1"
+                    BackgroundColor="Gray"
+                    Text="Cancel"
+                    TextColor="White">
+                    <Button.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="40" />
+                            <On Platform="iOS" Value="30" />
+                            <On Platform="Windows" Value="35" />
+                        </OnPlatform>
+                    </Button.HeightRequest>
+                </Button>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="0.5*" />
+                </Grid.ColumnDefinitions>
+            </Grid>
         </Grid>
+        <!--<StackLayout HeightRequest="300" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand"  
+                         Orientation="Horizontal"
+                         VerticalOptions="StartAndExpand">
+                <Label  HorizontalOptions="CenterAndExpand" 
+                        VerticalOptions="CenterAndExpand"
+                        Margin="0,0,1,0"
+                        TextColor="Black"
+                        FontSize="17" 
+                        BackgroundColor="White"
+                        Text="Days :"   />
+                <StackLayout  VerticalOptions="FillAndExpand"
+                              HorizontalOptions="FillAndExpand"
+                              Spacing="0" Orientation="Vertical" >
+                    <local:MyEntry x:Name="txtDaysOfno"
+                                   Placeholder="No Of Days" 
+                                   Keyboard="Numeric" 
+                                   HorizontalOptions="FillAndExpand"/>
+                    <BoxView BackgroundColor="#D7D7D7" HeightRequest="1" />
+                </StackLayout>
+
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.iOS>
+                            0, 50, 0, 0
+                        </OnPlatform.iOS>
+                        <OnPlatform.Android>
+                            0, 0, 0, 0
+                        </OnPlatform.Android>
+
+                    </OnPlatform>
+                </StackLayout.Padding>
+            </StackLayout>
+            <StackLayout HorizontalOptions="FillAndExpand"  
+                         Orientation="Horizontal"
+                         VerticalOptions="StartAndExpand">
+                <Label  HorizontalOptions="CenterAndExpand" 
+                        VerticalOptions="CenterAndExpand"
+                        Margin="0,0,1,0"
+                        TextColor="Black"
+                        FontSize="17" 
+                        BackgroundColor="White"
+                        Text="Days :"   />
+                <StackLayout  VerticalOptions="FillAndExpand"
+                              HorizontalOptions="FillAndExpand"
+                              Spacing="0" Orientation="Vertical" >
+                    <local:MyEntry x:Name="no"
+                                   Placeholder="No Of Days" 
+                                   Keyboard="Numeric" 
+                                   HorizontalOptions="FillAndExpand"/>
+                    <BoxView BackgroundColor="#D7D7D7" HeightRequest="1" />
+                </StackLayout>
+
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.iOS>
+                            0, 50, 0, 0
+                        </OnPlatform.iOS>
+                        <OnPlatform.Android>
+                            0, 0, 0, 0
+                        </OnPlatform.Android>
+
+                    </OnPlatform>
+                </StackLayout.Padding>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="SaveButton"
+                        BackgroundColor="DodgerBlue"
+                        Text="Save"
+                        TextColor="White">
+                    <Button.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="40" />
+                            <On Platform="iOS" Value="30" />
+                            <On Platform="Windows" Value="35" />
+                        </OnPlatform>
+                    </Button.HeightRequest>
+                </Button>
+                <Button x:Name="CancelButton"
+                        BackgroundColor="Gray"
+                        Text="Cancel"
+                        TextColor="White">
+                    <Button.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="40" />
+                            <On Platform="iOS" Value="30" />
+                            <On Platform="Windows" Value="35" />
+                        </OnPlatform>
+                    </Button.HeightRequest>
+                </Button>
+            </StackLayout>
+        </StackLayout>-->
     </ContentView.Content>
 </ContentView>

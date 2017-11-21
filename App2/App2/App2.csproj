@@ -45,9 +45,6 @@
     <Compile Include="CustomRenderer\BorderEntry.cs" />
     <Compile Include="CustomRenderer\CircleView.cs" />
     <Compile Include="CustomRenderer\CurvedCornersLabel.cs" />
-    <Compile Include="CustomRenderer\CustomEntry.xaml.cs">
-      <DependentUpon>CustomEntry.xaml</DependentUpon>
-    </Compile>
     <Compile Include="CustomRenderer\MyButton.cs" />
     <Compile Include="CustomRenderer\MyEntry.cs" />
     <Compile Include="ExpandableListView\NotificationDetails.cs" />
@@ -88,6 +85,9 @@
     </Compile>
     <Compile Include="PopUpPages\LogOutPage.xaml.cs">
       <DependentUpon>LogOutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopUpPages\PopupSetting.xaml.cs">
+      <DependentUpon>PopupSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="PopUpPages\PopupSettingView.xaml.cs">
       <DependentUpon>PopupSettingView.xaml</DependentUpon>
@@ -406,7 +406,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CustomRenderer\CustomEntry.xaml">
+    <EmbeddedResource Include="PopUpPages\PopupSetting.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -54,6 +54,9 @@ namespace App2.iOS.DependencyService
                 storage.Put("Password", um.Password);
                 storage.Put("CompanyName", um.CompanyName);
                 storage.Put("CompanyIndex", um.CompanyIndex);
+
+                storage.Put("SetExpireDays", um.SetExpireDays);
+                storage.Put("SetCancelDays", um.SetCancelDays);
             }
             catch (Exception exception)
             {
@@ -81,6 +84,8 @@ namespace App2.iOS.DependencyService
                 um.Password = storage.Get("Password", null);
                 um.CompanyIndex = storage.Get("CompanyIndex", null);
                 um.CompanyName= storage.Get("CompanyName", null);
+                um.SetCancelDays = storage.Get("SetCancelDays", null);
+                um.SetExpireDays = storage.Get("SetExpireDays", null);
                 return um;
             }
             catch (Exception)

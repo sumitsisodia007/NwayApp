@@ -38,9 +38,7 @@ namespace App2.SQLite
 
         public Task<int> SaveItemAsync(CompanyTbl item)
         {
-            
                 return _database.InsertAsync(item);
-            
         }
 
         public Task<int> DeleteItemAsync(CompanyTbl item)

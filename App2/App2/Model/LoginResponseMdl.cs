@@ -10,15 +10,31 @@ namespace App2.Model
 {
    public class LoginResponseMdl
     {
+        [JsonProperty("tagtype")]
         public string Tagtype { get; set; }
-        public string Error { get; set; }
+        [JsonProperty("error")]
+        public bool Error { get; set; }
+        [JsonProperty("user_id")]
         public int UserId { get; set; }
+        [JsonProperty("user_name")]
         public string UserName { get; set; }
+        [JsonProperty("user_type")]
         public string UserType { get; set; }
+        [JsonProperty("employee_id")]
         public int EmployeeId { get; set; }
+        [JsonProperty("message")]
         public string Message { get; set; }
+        [JsonProperty("min_receipt_amount")]
         public float MinReceiptAmount { get; set; }
+        [JsonProperty("notification_day_count")]
         public  int NotificationDayCount { get; set; }
+
+        [JsonProperty("expire_day_count")]
+        public string ExpireDayCount { get; set; }
+        [JsonProperty("invoice_cancel_day_count")]
+        public string InvoiceCancelDayCount { get; set; }
+
+
         [JsonProperty("permissions")]
         public ObservableCollection<Permissions> _permissions { get; set; }
     }

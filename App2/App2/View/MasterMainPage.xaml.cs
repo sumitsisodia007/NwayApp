@@ -109,7 +109,7 @@ namespace App2.View
                 }
             }
             res = _api.PostLogin(_login);
-            if (res.Error == "false")
+            if (res.Error == false)
             {
                 //_newres = res;
                  StaticMethods.NewRes = _newres = res;

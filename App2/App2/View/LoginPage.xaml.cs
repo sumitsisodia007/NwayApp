@@ -96,13 +96,13 @@ namespace App2.View
                     if (txtFName.Text != string.Empty && txtPass.Text != string.Empty)
                     {
                         res =  api.PostLogin(_login);
-                        if (res.Error == "false")
+                        if (res.Error == false)
                         {
                             StaticMethods.NewRes = res;
                             rs.DeviceId = _login.DeviceId;
                             rs.MinReceiptAmt = res.MinReceiptAmount.ToString();
                             rs.NotificationDayCount = res.NotificationDayCount.ToString();
-                            rs.Error = res.Error;
+                            rs.Error = res.Error.ToString();
                             foreach (var permission in res._permissions)
                             {
                                rs.CompanyName= permission.CompanyName;
@@ -110,12 +110,12 @@ namespace App2.View
                             }
                             rs.UserId = res.UserId.ToString();
                             StaticMethods.SaveLocalData(rs);
-                           await userModel.SaveLocalCompanyData(res);
+                            await userModel.SaveLocalCompanyData(res);
                             await Navigation.PushPopupAsync(new LoginSuccessPopupPage("S", res.Message));
                             await Navigation.PushModalAsync(new MasterMainPage(res));
                             txtFName.Text = txtPass.Text = string.Empty;
                         }
-                        else if (res.Error == "true")
+                        else if (res.Error == true)
                         {
                             await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", res.Message));
                         }
@@ -140,6 +140,7 @@ namespace App2.View
             catch (Exception ex)
             {
                 await Navigation.PushPopupAsync(new LoginSuccessPopupPage("E", ex.Message));
+                await PopupNavigation.RemovePageAsync(loadingPage);
             }
             
         }

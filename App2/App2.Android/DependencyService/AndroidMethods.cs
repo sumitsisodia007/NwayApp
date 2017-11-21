@@ -50,6 +50,9 @@ namespace App2.Droid.DependencyService
                 storage.PutString("Password", um.Password);
                 storage.PutString("CompanyIndex", um.CompanyIndex);
                 storage.PutString("CompanyName", um.CompanyName);
+
+                storage.PutString("SetCancelDays", um.SetCancelDays);
+                storage.PutString("SetExpireDays", um.SetExpireDays);
                 storage.Commit();
             }
             catch (Exception exception)
@@ -78,6 +81,8 @@ namespace App2.Droid.DependencyService
                 storage.PutString("Password", "");
                 storage.PutString("CompanyIndex", "");
                 storage.PutString("CompanyName", "");
+                storage.PutString("SetCancelDays", "");
+                storage.PutString("SetExpireDays", "");
                 storage.Commit();
             }
             catch (Exception exception)
@@ -106,6 +111,8 @@ namespace App2.Droid.DependencyService
                 um.Password = storage.GetString("Password", null);
                 um.CompanyIndex = storage.GetString("CompanyIndex", null);
                 um.CompanyName = storage.GetString("CompanyName", null);
+                um.SetExpireDays = storage.GetString("SetExpireDays", null);
+                um.SetCancelDays = storage.GetString("SetCancelDays", null);
                 return um;
             }
             catch (Exception)

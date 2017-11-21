@@ -13,7 +13,7 @@ namespace App2.APIService
     public class API
     {
         public readonly string RestUrl = @"http://c21.enway.co.in//webservice/index.php";
-      //  public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
+      // public readonly string RestUrl = @"http://192.168.1.2/enway_real/webservice/index.php";
        
         #region Login WebService
         public LoginResponseMdl PostLogin(LoginMdl lgmdl)
@@ -62,7 +62,7 @@ namespace App2.APIService
             {
                 HttpClient client = new HttpClient {BaseAddress = new Uri(RestUrl)};
 
-                UserModel res = StaticMethods.GetLocalSavedData();
+               
                 
                 //Create List of KeyValuePairs
                 List<KeyValuePair<string, string>> notificationProperties = new List<KeyValuePair<string, string>>
@@ -108,7 +108,6 @@ namespace App2.APIService
         #endregion
 
         #region Notification Setting WebService
-
         public async Task<string> NotificationSetting(NavigationMdl navigation)
         {
             string msg=null;
@@ -248,9 +247,6 @@ namespace App2.APIService
             try
             {
                 var client = new HttpClient { BaseAddress = new Uri(RestUrl) };
-
-                var res = StaticMethods.GetLocalSavedData();
-
                 var notificationProperties = new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("username", nav.UserName),
@@ -296,8 +292,6 @@ namespace App2.APIService
             try
             {
                 var client = new HttpClient { BaseAddress = new Uri(RestUrl) };
-
-                var res = StaticMethods.GetLocalSavedData();
                 var notificationProperties = new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("username", nav.UserName),
@@ -341,8 +335,6 @@ namespace App2.APIService
             try
             {
                 var client = new HttpClient { BaseAddress = new Uri(RestUrl) };
-
-                var res = StaticMethods.GetLocalSavedData();
                 var notificationProperties = new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("username", nav.UserName),
@@ -389,7 +381,6 @@ namespace App2.APIService
             try
             {
                 var client = new HttpClient { BaseAddress = new Uri(RestUrl) };
-                var res = StaticMethods.GetLocalSavedData();
                 var notificationProperties = new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("username", nav.UserName),
@@ -432,7 +423,6 @@ namespace App2.APIService
             try
             {
                 var client = new HttpClient { BaseAddress = new Uri(RestUrl) };
-                var res = StaticMethods.GetLocalSavedData();
                 var notificationProperties = new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("username", nav.UserName),
@@ -482,6 +472,50 @@ namespace App2.APIService
                 product = jsonresult.ToString();
             }
             return product;
+        }
+        #endregion
+
+        #region GetParty AutoComplete WebService
+        public async Task<string> SaveExp_Cancel(NavigationMdl nav)
+        {
+           string responcereturn = null;
+            try
+            {
+                HttpClient client = new HttpClient { BaseAddress = new Uri(RestUrl) };
+                List<KeyValuePair<string, string>> partyProp = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("username", nav.UserName),
+                    new KeyValuePair<string, string>("password", nav.Password),
+                    new KeyValuePair<string, string>("user_id", nav.UserId),
+                    new KeyValuePair<string, string>("device_id", nav.DeviceId),
+                    new KeyValuePair<string, string>("expire_day_count", nav.ExpireDayCount.ToString()),
+                    new KeyValuePair<string, string>("invoice_cancel_day_count", nav.CancelDayCount.ToString()),
+                    new KeyValuePair<string, string>("tagtype", "exp_settings")
+                };
+
+                //foreach (var dir in nav.SiteIdMdls)
+                //{
+                //    if (dir.ChkId == true)
+                //    {
+                //        partyProp.Add(
+                //            new KeyValuePair<string, string>("site_id[]", dir.SiteId.ToString()));
+                //    }
+                //}
+
+                var content = new FormUrlEncodedContent(partyProp);
+                var response = await client.PostAsync(RestUrl, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonresult = response.Content.ReadAsStringAsync().Result;
+                    JObject jObj = JObject.Parse(jsonresult);
+                    responcereturn = jObj["message"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                StaticMethods.ShowToast(ex.Message);
+            }
+            return responcereturn;
         }
         #endregion
     }

@@ -29,6 +29,8 @@ namespace App2.Model
         public string PageTitle { get; set; }
         public bool IsNotification{ get; set; }
         public string Tokan { get; set; }
+        public int CancelDayCount{ get; set; }
+        public int ExpireDayCount { get; set; }
         public ObservableCollection<SiteIdMdl> SiteIdMdls { get; set; }
 
         public async Task<NavigationMdl> PrepareApiData()
