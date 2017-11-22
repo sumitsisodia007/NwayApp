@@ -49,6 +49,7 @@
                        Aspect="AspectFit" 
                        HorizontalOptions="FillAndExpand" 
                        VerticalOptions="FillAndExpand"/>
+                <Label x:Name="LblSetDays" HorizontalOptions="Center" Text="Default 90 Days Set." Font="Default,Bold" TextColor="Black"/>
                 <Frame Padding="2" Margin="0" HasShadow="True" OutlineColor="Black" BackgroundColor="Black">
                     <ScrollView Orientation="Horizontal" >
                         <ListView x:Name="ListViewMain"

@@ -30,6 +30,8 @@ namespace App2.View
                     lblTermDate.WidthRequest = calcScreenWidth / 4 - 30;
                 LblExpireTitle.Text =StaticMethods.SetCompanyName;
             }
+            var user = StaticMethods.GetLocalSavedData();
+            LblSetDays.Text = "Default "+user.SetExpireDays+" Days Set.";
             ExpireSoonList();
         }
 
@@ -80,7 +82,9 @@ namespace App2.View
             string ExpireTag = "Expire";
             PopupTask pt = new PopupTask();
             var result = await pt.OpenMultipleDataInputAlertDialog(ExpireTag);
-           await ExpireSoonList();
+            var user = StaticMethods.GetLocalSavedData();
+            LblSetDays.Text = "Default " + user.SetExpireDays + " Days Set.";
+            await ExpireSoonList();
         }
     }
 

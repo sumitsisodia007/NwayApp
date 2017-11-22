@@ -40,7 +40,6 @@ namespace App2.View
                 LblSetComName.Text = rs.CompanyName;
                 _newres = StaticMethods.NewRes;
                 PrepareHomePageData(StaticMethods.NewRes);
-                
             });
         }
 

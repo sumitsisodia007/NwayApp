@@ -33,12 +33,15 @@ namespace App2.View
                     lblInvoiceDate.WidthRequest = calcScreenWidth / 4 - 30;
                 LblInvoceTitle.Text = StaticMethods.SetCompanyName;
             }
+            var user = StaticMethods.GetLocalSavedData();
+            LblSetCancelDays.Text = "Default " + user.SetCancelDays + " Days Set.";
             InvoiceList();
         }
         protected async override void OnAppearing()
         {
             await CancelImg.ScaleTo(0, 10, Easing.CubicIn);
             await CancelImg.ScaleTo(1, 1000, Easing.CubicOut);
+            
         }
         public async Task InvoiceList()
         {
@@ -78,7 +81,9 @@ namespace App2.View
             string tagtype = "Cancel";
             PopupTask pt = new PopupTask();
             var result = await pt.OpenMultipleDataInputAlertDialog(tagtype);
-           await InvoiceList();
+            var user = StaticMethods.GetLocalSavedData();
+            LblSetCancelDays.Text = "Default " + user.SetCancelDays + " Days Set.";
+            await InvoiceList();
         }
     }
 
